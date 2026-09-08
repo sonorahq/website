@@ -1,27 +1,21 @@
 <script>
-	import { languages, strings } from '$lib/data/languages.js';
 	import { discord, matrix, repo } from '$lib/data/links.js';
 	import Flag from './Flag.svelte';
 
-	const rows = languages.map((entry) => ({
-		...entry,
-		share: Math.round((entry.translated / strings) * 100)
-	}));
-
-	const done = rows.filter((entry) => entry.share === 100).length;
+	let { languages, strings, done } = $props();
 </script>
 
 <section class="section">
 	<div class="page community">
 		<div class="panel">
-			<h2>Speaks 11 languages</h2>
+			<h2>Speaks {languages.length} languages</h2>
 			<p>
 				{strings} strings, translated by the community and tracked in the repo. {done} are complete —
 				the rest are a pull request away.
 			</p>
 
 			<ul>
-				{#each rows as language (language.code)}
+				{#each languages as language (language.code)}
 					<li>
 						<Flag code={language.flag} />
 						<span class="name">{language.name}</span>
