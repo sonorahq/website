@@ -77,17 +77,17 @@
 		<p class="fine">Free and open source · macOS, Linux, Windows · No account required</p>
 	</div>
 
-	<div class="shot">
-		<figure>
+	<figure class="shot">
+		<div class="frame">
 			<img
 				src="/app-playlist.webp"
 				width="1400"
 				height="867"
 				alt="Sonora playing an album with the lyrics panel open"
 			/>
-		</figure>
+		</div>
 		<figcaption>Adaptive theming, switchable in Appearance</figcaption>
-	</div>
+	</figure>
 </section>
 
 <section class="providers">
@@ -366,13 +366,13 @@
 	.shot {
 		flex-grow: 1;
 		min-width: 0;
+		margin: 0;
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
 	}
 
-	.shot figure {
-		margin: 0;
+	.frame {
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		overflow: hidden;
