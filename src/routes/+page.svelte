@@ -315,6 +315,7 @@
 
 	.command {
 		width: 100%;
+		text-align: left;
 		height: 46px;
 		display: flex;
 		align-items: center;
