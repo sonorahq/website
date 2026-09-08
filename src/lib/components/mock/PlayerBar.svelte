@@ -169,7 +169,6 @@
 	.clock {
 		flex: none;
 		font-size: 10.8px;
-		font-variant-numeric: tabular-nums;
 		color: var(--m-muted-foreground);
 	}
 

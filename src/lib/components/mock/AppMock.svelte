@@ -64,6 +64,7 @@
 		overflow: hidden;
 		font-size: 14px;
 		line-height: 1.25;
+		letter-spacing: normal;
 		color: var(--m-foreground);
 		background: var(--m-background);
 		user-select: none;
