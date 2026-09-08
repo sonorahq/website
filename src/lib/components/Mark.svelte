@@ -1,6 +1,12 @@
 <script>
 	let { name, size = 15 } = $props();
 
+	// The Matrix mark is two thin brackets around a small letter, so it carries far
+	// less ink than the others and reads as undersized at a shared box size.
+	const optical = new Map([['matrix', 1.25]]);
+
+	const box = $derived(Math.round(size * (optical.get(name) ?? 1)));
+
 	// Discord and Matrix marks from simple-icons (CC0); the GitHub mark is the one
 	// the site header already used.
 	const marks = new Map([
