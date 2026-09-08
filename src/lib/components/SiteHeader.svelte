@@ -60,7 +60,7 @@
 		position: sticky;
 		top: 0;
 		z-index: 10;
-		height: 64px;
+		height: calc(var(--header) - 1px);
 		border-bottom: 1px solid var(--border);
 		background: var(--header-bg);
 		backdrop-filter: blur(12px);

@@ -24,6 +24,7 @@
 	--control: 32px;
 
 	--page: 1280px;
+	--header: 65px;
 	--mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
 }
 
