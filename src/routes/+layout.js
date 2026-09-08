@@ -5,8 +5,8 @@ export async function load({ fetch }) {
 		const res = await fetch('https://api.github.com/repos/sonorahq/sonora');
 		if (!res.ok) return { stars: null };
 
-		const repo = await res.json();
-		return { stars: repo.stargazers_count };
+		const data = await res.json();
+		return { stars: data.stargazers_count };
 	} catch {
 		return { stars: null };
 	}

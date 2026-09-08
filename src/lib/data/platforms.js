@@ -86,19 +86,7 @@ export const platforms = [
 	}
 ];
 
-export const languages = [
-	'en-US',
-	'de',
-	'es',
-	'fr',
-	'it',
-	'id',
-	'ja',
-	'ru',
-	'uk',
-	'pl',
-	'pt-BR'
-];
+export const languages = ['en-US', 'de', 'es', 'fr', 'it', 'id', 'ja', 'ru', 'uk', 'pl', 'pt-BR'];
 
 export function detectPlatform() {
 	const ua = navigator.userAgent;
