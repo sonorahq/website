@@ -1,6 +1,7 @@
 <script>
 	import { discord, matrix, repo } from '$lib/data/links.js';
 	import Flag from './Flag.svelte';
+	import Mark from './Mark.svelte';
 
 	let { languages, strings, done } = $props();
 </script>
@@ -35,8 +36,14 @@
 			<h2>Come hang out</h2>
 			<p>Discord is where most of it happens, bridged to Matrix.</p>
 			<div class="panel-cta">
-				<a class="btn btn-primary" href={discord}>Join Discord</a>
-				<a class="btn btn-secondary" href={matrix}>Matrix space</a>
+				<a class="btn btn-primary" href={discord}>
+					<Mark name="discord" size={16} />
+					Join Discord
+				</a>
+				<a class="btn btn-secondary" href={matrix}>
+					<Mark name="matrix" size={16} />
+					Matrix space
+				</a>
 			</div>
 		</div>
 	</div>
