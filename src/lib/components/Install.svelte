@@ -94,8 +94,6 @@
 		margin: 0;
 		flex-grow: 1;
 		min-width: 0;
-		/* Matches the copy button, so a one-line command sits level with it instead
-		   of hugging the top of the box. */
 		min-height: 34px;
 		display: flex;
 		align-items: center;

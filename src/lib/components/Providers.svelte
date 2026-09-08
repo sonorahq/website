@@ -12,9 +12,11 @@
 
 <style>
 	.providers {
+		display: flex;
+		height: var(--band-height);
+		align-items: center;
 		border-top: 1px solid var(--border);
 		border-bottom: 1px solid var(--border);
-		padding: 44px 0;
 		text-align: center;
 	}
 
@@ -23,6 +25,10 @@
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--dim);
+	}
+
+	.page {
+		width: 100%;
 	}
 
 	.names {
@@ -34,5 +40,12 @@
 		font-size: 17px;
 		font-weight: 500;
 		color: var(--muted-fg);
+	}
+
+	@media (max-width: 900px) {
+		.providers {
+			height: auto;
+			padding: 44px 0;
+		}
 	}
 </style>

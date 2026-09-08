@@ -3,6 +3,7 @@
 	import { detectPlatform } from '$lib/data/platforms.js';
 	import { platform } from '$lib/platform.svelte.js';
 	import CopyButton from './CopyButton.svelte';
+	import Mark from './Mark.svelte';
 	import PlatformTabs from './PlatformTabs.svelte';
 
 	onMount(() => {
@@ -37,7 +38,10 @@
 				</svg>
 				{platform.current.download}
 			</a>
-			<a class="btn btn-secondary" href="https://github.com/sonorahq/sonora">Source</a>
+			<a class="btn btn-secondary" href="https://github.com/sonorahq/sonora">
+				<Mark name="github" size={16} />
+				Source
+			</a>
 		</div>
 
 		<div class="picker">
@@ -85,10 +89,13 @@
 		gap: 48px;
 		padding-top: 72px;
 		padding-bottom: 80px;
+		min-height: calc(100vh - var(--header) - var(--band-height));
+		min-height: calc(100svh - var(--header) - var(--band-height));
 	}
 
 	.pitch {
-		width: 400px;
+		width: 31.25%;
+		min-width: 380px;
 		flex-shrink: 0;
 	}
 
@@ -185,8 +192,16 @@
 		object-fit: cover;
 	}
 
+	@media (max-height: 920px) and (min-width: 901px) {
+		.hero {
+			padding-top: 48px;
+			padding-bottom: 56px;
+		}
+	}
+
 	@media (max-width: 900px) {
 		.hero {
+			min-height: 0;
 			flex-direction: column;
 			align-items: stretch;
 			gap: 24px;
@@ -197,6 +212,7 @@
 
 		.pitch {
 			width: auto;
+			min-width: 0;
 		}
 
 		.cta {
