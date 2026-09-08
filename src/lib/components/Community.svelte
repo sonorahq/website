@@ -1,6 +1,7 @@
 <script>
 	import { discord, matrix, repo } from '$lib/data/links.js';
 	import Flag from './Flag.svelte';
+	import Mark from './Mark.svelte';
 
 	let { languages, strings, done } = $props();
 </script>
@@ -10,8 +11,8 @@
 		<div class="panel">
 			<h2>Speaks {languages.length} languages</h2>
 			<p>
-				{strings} strings, translated by the community and tracked in the repo. {done} are complete —
-				the rest are a pull request away.
+				{strings} strings, translated by the community and tracked in the repo. {done}
+				{done === 1 ? 'is' : 'are'} complete — the rest are a pull request away.
 			</p>
 
 			<ul>
@@ -35,8 +36,14 @@
 			<h2>Come hang out</h2>
 			<p>Discord is where most of it happens, bridged to Matrix.</p>
 			<div class="panel-cta">
-				<a class="btn btn-primary" href={discord}>Join Discord</a>
-				<a class="btn btn-secondary" href={matrix}>Matrix space</a>
+				<a class="btn btn-primary" href={discord}>
+					<Mark name="discord" size={16} />
+					Join Discord
+				</a>
+				<a class="btn btn-secondary" href={matrix}>
+					<Mark name="matrix" size={16} />
+					Matrix space
+				</a>
 			</div>
 		</div>
 	</div>
@@ -45,6 +52,7 @@
 <style>
 	.community {
 		display: grid;
+		align-items: start;
 		grid-template-columns: 2fr 1fr;
 		gap: 20px;
 	}
@@ -142,7 +150,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
-		margin-top: auto;
+		margin-top: 4px;
 	}
 
 	@media (max-width: 900px) {
