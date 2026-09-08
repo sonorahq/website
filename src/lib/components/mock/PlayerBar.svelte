@@ -1,7 +1,9 @@
 <script>
-	import { album, clock } from '$lib/mock/album.js';
+	import { clock } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import Control from './Control.svelte';
+	import Cover from './Cover.svelte';
+	import Like from './Like.svelte';
 	import Scrubber from './Scrubber.svelte';
 
 	let { tab = $bindable() } = $props();
@@ -19,12 +21,12 @@
 
 <div class="bar">
 	<div class="now">
-		<img src={album.cover} width="42" height="42" alt="" />
+		<Cover src={player.track.cover} size={42} />
 		<span class="text">
 			<span class="title">{player.track.title}</span>
-			<span class="caption">{album.artist}</span>
+			<span class="caption">{player.track.artist}</span>
 		</span>
-		<Control icon="heart" title="Add to favorites" small muted />
+		<Like id={player.id} small />
 	</div>
 
 	<div class="center">
@@ -113,12 +115,6 @@
 		min-width: 0;
 		align-items: center;
 		gap: 12px;
-	}
-
-	img {
-		flex: none;
-		border-radius: var(--m-radius);
-		object-fit: cover;
 	}
 
 	.text {

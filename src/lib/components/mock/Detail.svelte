@@ -3,8 +3,13 @@
 	import { player } from '$lib/mock/player.svelte.js';
 	import Control from './Control.svelte';
 	import Icon from './Icon.svelte';
+	import Like from './Like.svelte';
 
 	const template = columns.map((column) => column.width).join(' ');
+	// The hero button only reflects playback that belongs to this listing, the way
+	// HeroPlayButton checks listing.holds(current) in shared/hero.rs.
+	const mine = $derived(tracks.some((track) => track.id === player.id));
+	const holding = $derived(mine && player.playing);
 	const meta = `${album.artist} • ${album.released} • ${tracks.length} songs • ${clock(total)}`;
 </script>
 
@@ -18,11 +23,21 @@
 			<div class="actions">
 				<Control
 					variant="primary"
-					icon={player.playing ? 'pause' : 'play'}
-					label={player.playing ? 'Pause' : 'Play'}
-					onclick={() => player.toggle()}
+					icon={holding ? 'pause' : 'play'}
+					label={holding ? 'Pause' : 'Play'}
+					onclick={() => {
+						if (holding) player.pause();
+						else if (mine) player.resume();
+						else player.select(tracks[0].id);
+					}}
 				/>
-				<Control variant="outline" icon="heart" title="Add to library" />
+				<Control
+					variant="outline"
+					icon={player.saved ? 'heart-filled' : 'heart'}
+					title={player.saved ? 'Remove from library' : 'Add to library'}
+					selected={player.saved}
+					onclick={() => player.toggleSaved()}
+				/>
 				<Control variant="outline" icon="ellipsis" title="More" />
 			</div>
 		</div>
@@ -38,9 +53,21 @@
 			{/each}
 		</div>
 
-		{#each tracks as track, row (track.title)}
-			{@const active = row === player.index}
-			<button type="button" class="row" class:active onclick={() => player.select(row)}>
+		{#each tracks as track, row (track.id)}
+			{@const active = track.id === player.id}
+			<div
+				class="row"
+				class:active
+				role="button"
+				tabindex="0"
+				onclick={() => player.select(track.id)}
+				onkeydown={(event) => {
+					if (event.key === 'Enter' || event.key === ' ') {
+						event.preventDefault();
+						player.select(track.id);
+					}
+				}}
+			>
 				<span class="cell center index">
 					<span class="resting" class:muted={!(active && player.playing)}>
 						{#if active}
@@ -51,11 +78,14 @@
 					</span>
 					<span class="hit"><Icon name="play" size={10} /></span>
 				</span>
-				<span class="cell title">{track.title}</span>
+				<span class="cell title">
+					<span class="name">{track.title}</span>
+					<span class="like" class:kept={player.likes(track.id)}><Like id={track.id} small /></span>
+				</span>
 				<span class="cell muted">{album.artist}</span>
 				<span class="cell muted">{track.plays}</span>
 				<span class="cell right muted">{clock(track.length)}</span>
-			</button>
+			</div>
 		{/each}
 	</div>
 </div>
@@ -192,6 +222,29 @@
 
 	.index {
 		position: relative;
+	}
+
+	.title {
+		gap: 6px;
+	}
+
+	.name {
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	/* The app keeps the heart out of sight until the row is hovered or the track is
+	   already saved. */
+	.like {
+		display: flex;
+		visibility: hidden;
+	}
+
+	.row:hover .like,
+	.like.kept {
+		visibility: visible;
 	}
 
 	.resting,

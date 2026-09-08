@@ -1,19 +1,20 @@
 <script>
-	import { album, tracks } from '$lib/mock/album.js';
+	import { catalogue } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import Control from './Control.svelte';
+	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
 
 	let { tab } = $props();
 
-	let radio = $state(true);
+	/** @param {string[]} ids */
+	const look = (ids) => ids.map((id) => catalogue.get(id)).filter((track) => track !== undefined);
 
-	const upcoming = $derived(
-		tracks.slice(player.index + 1, player.index + 6).map((track, offset) => ({
-			track,
-			row: player.index + 1 + offset
-		}))
-	);
+	// One now-playing card plus however many rows are left in the panel.
+	const ROOM = 6;
+
+	const upcoming = $derived(look(player.queued).slice(0, ROOM));
+	const suggested = $derived(look(player.suggested).slice(0, ROOM - upcoming.length));
 </script>
 
 <aside class="aside">
@@ -25,10 +26,11 @@
 					icon="radio"
 					title="Autoplay similar tracks"
 					small
-					muted={!radio}
-					onclick={() => (radio = !radio)}
+					muted={!player.radio}
+					selected={player.radio}
+					onclick={() => player.toggleRadio()}
 				/>
-				<Control label="Clear" title="Clear" small muted />
+				<Control label="Clear" title="Clear" small muted onclick={() => player.clearQueue()} />
 			</div>
 		{/if}
 	</header>
@@ -42,23 +44,38 @@
 		<div class="list">
 			<span class="group">Now playing</span>
 			<div class="card chosen">
-				<img src={album.cover} width="36" height="36" alt="" />
+				<Cover src={player.track.cover} />
 				<span class="text">
 					<span class="title">{player.track.title}</span>
-					<span class="caption">{album.artist}</span>
+					<span class="caption">{player.track.artist}</span>
 				</span>
 			</div>
 
-			<span class="group">Up next</span>
-			{#each upcoming as { track, row } (track.title)}
-				<button type="button" class="card" onclick={() => player.select(row)}>
-					<img src={album.cover} width="36" height="36" alt="" />
-					<span class="text">
-						<span class="title">{track.title}</span>
-						<span class="caption">{album.artist}</span>
-					</span>
-				</button>
-			{/each}
+			{#if upcoming.length}
+				<span class="group">Up next</span>
+				{#each upcoming as track (track.id)}
+					<button type="button" class="card" onclick={() => player.select(track.id)}>
+						<Cover src={track.cover} />
+						<span class="text">
+							<span class="title">{track.title}</span>
+							<span class="caption">{track.artist}</span>
+						</span>
+					</button>
+				{/each}
+			{/if}
+
+			{#if suggested.length}
+				<span class="group">Similar tracks</span>
+				{#each suggested as track (track.id)}
+					<button type="button" class="card" onclick={() => player.select(track.id)}>
+						<Cover src={track.cover} />
+						<span class="text">
+							<span class="title">{track.title}</span>
+							<span class="caption">{track.artist}</span>
+						</span>
+					</button>
+				{/each}
+			{/if}
 		</div>
 	{/if}
 </aside>
@@ -160,12 +177,6 @@
 
 	.chosen {
 		background: var(--m-table-active);
-	}
-
-	img {
-		flex: none;
-		border-radius: var(--m-radius);
-		object-fit: cover;
 	}
 
 	.text {
