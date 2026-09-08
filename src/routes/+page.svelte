@@ -5,6 +5,8 @@
 	import Install from '$lib/components/Install.svelte';
 	import Providers from '$lib/components/Providers.svelte';
 	import Themes from '$lib/components/Themes.svelte';
+
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -20,4 +22,4 @@
 <Install />
 <Features />
 <Themes />
-<Community />
+<Community languages={data.languages} strings={data.strings} done={data.done} />
