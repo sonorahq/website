@@ -23,7 +23,11 @@
 	--radius-lg: 10px;
 	--control: 32px;
 
-	--page: 1280px;
+	/* The design is drawn at 1440, where its gutters are 80px and the column is
+	   1280. The gutter tracks the viewport so that size still lands on 1280 while
+	   wider monitors get a wider column instead of bigger margins. */
+	--page: 1520px;
+	--gutter: clamp(24px, 5.5vw, 96px);
 	--header: 65px;
 	--mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
 }
@@ -157,9 +161,9 @@ button {
 
 .page {
 	width: 100%;
-	max-width: calc(var(--page) + 48px);
+	max-width: calc(var(--page) + var(--gutter) * 2);
 	margin: 0 auto;
-	padding: 0 24px;
+	padding-inline: var(--gutter);
 }
 
 .section {
