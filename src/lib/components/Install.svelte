@@ -21,6 +21,9 @@
 						<pre class="mono">{step.command}</pre>
 						<CopyButton text={step.command} />
 					</div>
+					{#if step.hint}
+						<span class="hint">{step.hint}</span>
+					{/if}
 				</div>
 			{/each}
 
@@ -69,6 +72,12 @@
 	.caption {
 		font-size: 13px;
 		color: var(--muted-fg);
+	}
+
+	.hint {
+		font-size: 12px;
+		line-height: 1.5;
+		color: var(--dim);
 	}
 
 	.block {

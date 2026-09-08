@@ -65,12 +65,14 @@
 	@media (max-width: 900px) {
 		.tabs {
 			width: 100%;
+			flex-wrap: wrap;
 		}
 
 		button {
-			flex-grow: 1;
+			flex: 1 1 auto;
+			min-width: 0;
 			height: 44px;
-			padding: 0 8px;
+			padding: 0 12px;
 		}
 	}
 </style>

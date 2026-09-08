@@ -27,7 +27,8 @@ export const platforms = [
 			{ caption: 'Install from the AUR', command: 'yay -S sonora-bin' },
 			{
 				caption: 'Audio backend — match your sound server',
-				command: 'pacman -S pipewire-alsa   # or pulseaudio-alsa'
+				command: 'pacman -S pipewire-alsa',
+				hint: 'On PulseAudio, install pulseaudio-alsa instead.'
 			}
 		],
 		note: 'sonora-bin pulls the prebuilt release. sonora builds the same version from source against your own system libraries, which takes a while on a Rust and GPUI tree.'
