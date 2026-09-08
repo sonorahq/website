@@ -2,9 +2,16 @@
 	import '../app.css';
 	import Logo from '$lib/Logo.svelte';
 
-	let { children } = $props();
+	let { children, data } = $props();
 
 	const repo = 'https://github.com/sonorahq/sonora';
+
+	const stars =
+		data.stars === null
+			? null
+			: data.stars >= 1000
+				? (data.stars / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
+				: String(data.stars);
 </script>
 
 <header>
@@ -29,6 +36,9 @@
 					/>
 				</svg>
 				Star
+				{#if stars}
+					<span class="count">{stars}</span>
+				{/if}
 			</a>
 			<a href="#install" class="download">Download</a>
 		</div>
@@ -132,6 +142,16 @@
 		border-radius: var(--radius);
 		font-size: 13px;
 		color: #a3a3a3;
+	}
+
+	.count {
+		padding-left: 8px;
+		border-left: 1px solid var(--border);
+		color: var(--dim);
+	}
+
+	.star:hover .count {
+		color: var(--muted-fg);
 	}
 
 	.download {
