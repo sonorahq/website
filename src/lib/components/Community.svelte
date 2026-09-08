@@ -23,15 +23,10 @@
 			<ul>
 				{#each rows as language (language.code)}
 					<li>
-						<div class="row">
-							<Flag code={language.flag} />
-							<span class="name">{language.name}</span>
-							<span class="code mono">{language.code}</span>
-							<span class="percent" class:full={language.share === 100}>{language.share}%</span>
-						</div>
-						<div class="track">
-							<span class:full={language.share === 100} style="width: {language.share}%"></span>
-						</div>
+						<Flag code={language.flag} />
+						<span class="name">{language.name}</span>
+						<span class="code mono">{language.code}</span>
+						<span class="share" class:full={language.share === 100}>{language.share}%</span>
 					</li>
 				{/each}
 			</ul>
@@ -86,17 +81,17 @@
 	ul {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 6px 32px;
+		gap: 4px 40px;
 		margin: 10px 0 0;
 		padding: 0;
 		list-style: none;
 	}
 
-	.row {
+	li {
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		height: 24px;
+		height: 26px;
 		font-size: 13px;
 	}
 
@@ -113,34 +108,16 @@
 		color: var(--dim);
 	}
 
-	.percent {
+	.share {
 		width: 34px;
 		text-align: right;
 		font-size: 12px;
 		font-variant-numeric: tabular-nums;
+		color: var(--dim);
+	}
+
+	.share.full {
 		color: var(--muted-fg);
-	}
-
-	.percent.full {
-		color: var(--fg);
-	}
-
-	.track {
-		height: 2px;
-		border-radius: 1px;
-		background: var(--secondary-hover);
-		overflow: hidden;
-	}
-
-	.track span {
-		display: block;
-		height: 100%;
-		border-radius: 1px;
-		background: var(--dim);
-	}
-
-	.track span.full {
-		background: var(--fg);
 	}
 
 	.more {

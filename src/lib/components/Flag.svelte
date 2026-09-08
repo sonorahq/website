@@ -50,8 +50,8 @@
 
 <style>
 	svg {
-		width: 16px;
-		height: 12px;
+		width: 14px;
+		height: 11px;
 		flex-shrink: 0;
 		border-radius: 2px;
 		box-shadow: 0 0 0 1px rgb(128 128 128 / 0.35) inset;
