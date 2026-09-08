@@ -3,6 +3,7 @@
 	import { detectPlatform } from '$lib/data/platforms.js';
 	import { platform } from '$lib/platform.svelte.js';
 	import CopyButton from './CopyButton.svelte';
+	import Mark from './Mark.svelte';
 	import PlatformTabs from './PlatformTabs.svelte';
 
 	onMount(() => {
@@ -37,7 +38,10 @@
 				</svg>
 				{platform.current.download}
 			</a>
-			<a class="btn btn-secondary" href="https://github.com/sonorahq/sonora">Source</a>
+			<a class="btn btn-secondary" href="https://github.com/sonorahq/sonora">
+				<Mark name="github" size={16} />
+				Source
+			</a>
 		</div>
 
 		<div class="picker">
