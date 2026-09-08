@@ -24,8 +24,6 @@ export const tracks = [
 	{ id: 'a12', title: 'My Immortal (Band Version)', plays: '31,204,558', length: 273 }
 ].map((track) => ({ ...track, artist, cover }));
 
-// What the radio suggests once the album runs out. No artwork, so these render
-// through the app's blank-cover placeholder, exactly as an unloaded cover does.
 export const similar = [
 	{ id: 's1', title: "Heaven's a Lie", artist: 'Lacuna Coil', length: 233 },
 	{ id: 's2', title: 'Ice Queen', artist: 'Within Temptation', length: 306 },

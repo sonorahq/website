@@ -9,7 +9,6 @@ function after(id) {
 	return at < 0 ? [...order] : order.slice(at + 1);
 }
 
-/** Fisher-Yates, matching what `scramble` does to the queued half in queue.rs. */
 /** @param {string[]} ids */
 function scramble(ids) {
 	const out = [...ids];
@@ -34,7 +33,6 @@ let saved = $state(false);
 const liked = new SvelteSet(['a2']);
 let ticker = 0;
 
-/** Radio never runs dry in the app, so the pool cycles rather than emptying. */
 function replenish() {
 	if (!radio || suggested.length >= 3) return;
 	const more = [];

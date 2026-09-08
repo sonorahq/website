@@ -6,8 +6,6 @@
 	import Like from './Like.svelte';
 
 	const template = columns.map((column) => column.width).join(' ');
-	// The hero button only reflects playback that belongs to this listing, the way
-	// HeroPlayButton checks listing.holds(current) in shared/hero.rs.
 	const mine = $derived(tracks.some((track) => track.id === player.id));
 	const holding = $derived(mine && player.playing);
 	const meta = `${album.artist} • ${album.released} • ${tracks.length} songs • ${clock(total)}`;
@@ -128,7 +126,6 @@
 	.eyebrow {
 		font-size: 11.9px;
 		font-weight: 600;
-		letter-spacing: 0.02em;
 		text-transform: uppercase;
 		color: var(--m-muted-foreground);
 	}
@@ -137,7 +134,7 @@
 		margin: 0;
 		font-size: 30px;
 		font-weight: 700;
-		letter-spacing: -0.02em;
+		letter-spacing: normal;
 	}
 
 	.meta {
@@ -235,8 +232,6 @@
 		white-space: nowrap;
 	}
 
-	/* The app keeps the heart out of sight until the row is hovered or the track is
-	   already saved. */
 	.like {
 		display: flex;
 		visibility: hidden;

@@ -9,7 +9,6 @@
 
 	const WIDTH = 1180;
 	const HEIGHT = 730;
-	// Below this the interface stops being readable; the stage scrolls sideways instead.
 	const FLOOR = 0.62;
 
 	let left = $state(true);
@@ -48,8 +47,6 @@
 		overscroll-behavior-x: contain;
 	}
 
-	/* A transform leaves the layout box at full size, so the sizer is what the
-	   stage actually scrolls over. */
 	.sizer {
 		margin: 0 auto;
 		overflow: hidden;
@@ -64,14 +61,13 @@
 		overflow: hidden;
 		font-size: 14px;
 		line-height: 1.25;
+		letter-spacing: normal;
 		color: var(--m-foreground);
 		background: var(--m-background);
 		user-select: none;
 
 		--m-radius: 6px;
 
-		/* Theme::dark() and Theme::light() from crates/ui/src/theme.rs, tinted by the
-		   cover through the same wash the app runs in crates/ui/src/palette.rs. */
 		--m-background: hsl(202.9 29.6% 3.9%);
 		--m-foreground: hsl(202.9 7.1% 98%);
 		--m-border: hsl(202.9 23.7% 14.9%);
