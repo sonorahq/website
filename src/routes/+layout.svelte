@@ -1,6 +1,7 @@
 <script>
 	import '../app.css';
 	import Logo from '$lib/Logo.svelte';
+	import { base } from '$app/paths';
 
 	let { children, data } = $props();
 
@@ -17,7 +18,7 @@
 <header>
 	<div class="page bar">
 		<div class="left">
-			<a href="/" class="brand">
+			<a href="{base}/" class="brand">
 				<Logo />
 				<span>Sonora</span>
 			</a>
@@ -51,7 +52,7 @@
 	<div class="page">
 		<div class="cols">
 			<div class="about">
-				<a href="/" class="brand"><Logo size={20} /><span>Sonora</span></a>
+				<a href="{base}/" class="brand"><Logo size={20} /><span>Sonora</span></a>
 				<p>A native music streaming client, built with Rust and GPUI.</p>
 			</div>
 			<div class="links">

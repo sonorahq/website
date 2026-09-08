@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
 	import { platforms, languages, detectPlatform } from '$lib/platforms.js';
 
 	let selected = $state('macos');
@@ -80,7 +81,7 @@
 	<figure class="shot">
 		<div class="frame">
 			<img
-				src="/app-playlist.webp"
+				src="{base}/app-playlist.webp"
 				width="1400"
 				height="867"
 				alt="Sonora playing an album with the lyrics panel open"
@@ -223,7 +224,7 @@
 			<figure>
 				<div class="inset">
 					<img
-						src="/app-lyrics.webp"
+						src="{base}/app-lyrics.webp"
 						width="1100"
 						height="660"
 						alt="Sonora in its light theme showing full-screen synced lyrics"
@@ -237,7 +238,7 @@
 			<figure>
 				<div class="inset">
 					<img
-						src="/app-artist.webp"
+						src="{base}/app-artist.webp"
 						width="1100"
 						height="660"
 						alt="An artist page in Sonora with the play queue open"
