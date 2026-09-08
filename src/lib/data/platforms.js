@@ -80,9 +80,14 @@ export const platforms = [
 		id: 'windows',
 		label: 'Windows',
 		download: 'Download for Windows',
-		prompt: '>',
-		hero: 'winget install Sonora',
-		steps: [{ caption: 'Download and run the installer', command: 'Sonora-Setup.exe' }],
+		prompt: '',
+		hero: '',
+		steps: [
+			{
+				caption: 'Download and run the installer',
+				command: 'https://github.com/sonorahq/sonora/releases/latest/download/Sonora-Setup.exe'
+			}
+		],
 		note: 'Prefer no installer? Grab the latest windows-msvc.exe for your architecture from Releases and run it as-is.'
 	}
 ];
