@@ -157,7 +157,7 @@ button {
 
 .page {
 	width: 100%;
-	max-width: var(--page);
+	max-width: calc(var(--page) + 48px);
 	margin: 0 auto;
 	padding: 0 24px;
 }
