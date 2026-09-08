@@ -10,11 +10,6 @@
 			metrics and icon set the app itself ships. Nothing here is a video.
 		</p>
 
-		<p class="hint">
-			<span class="dot"></span>
-			Live — click a track, drag the seek bar, collapse a panel
-		</p>
-
 		<div class="frame">
 			<AppMock />
 		</div>
@@ -33,47 +28,12 @@
 	}
 
 	.frame {
-		margin-top: 12px;
+		margin-top: 40px;
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		overflow: hidden;
 		background: var(--card);
 		box-shadow: var(--shadow);
-	}
-
-	.hint {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 8px;
-		width: fit-content;
-		margin: 40px auto 0;
-		padding: 7px 14px;
-		border: 1px solid var(--border);
-		border-radius: 999px;
-		background: var(--popover);
-		font-size: 12px;
-		color: var(--fg);
-	}
-
-	.dot {
-		width: 7px;
-		height: 7px;
-		border-radius: 999px;
-		background: #22c55e;
-		animation: pulse 2s ease-in-out infinite;
-	}
-
-	@keyframes pulse {
-		50% {
-			opacity: 0.25;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.dot {
-			animation: none;
-		}
 	}
 
 	.fine {
