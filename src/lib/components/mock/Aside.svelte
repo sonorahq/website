@@ -105,7 +105,6 @@
 	.eyebrow {
 		font-size: 11.9px;
 		font-weight: 600;
-		letter-spacing: 0.02em;
 		text-transform: uppercase;
 		color: var(--m-muted-foreground);
 	}
@@ -149,7 +148,6 @@
 		padding: 8px 8px 4px;
 		font-size: 11.9px;
 		font-weight: 600;
-		letter-spacing: 0.02em;
 		text-transform: uppercase;
 		color: var(--m-muted-foreground);
 	}

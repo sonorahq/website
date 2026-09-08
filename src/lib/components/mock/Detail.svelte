@@ -128,7 +128,6 @@
 	.eyebrow {
 		font-size: 11.9px;
 		font-weight: 600;
-		letter-spacing: 0.02em;
 		text-transform: uppercase;
 		color: var(--m-muted-foreground);
 	}
@@ -137,7 +136,8 @@
 		margin: 0;
 		font-size: 30px;
 		font-weight: 700;
-		letter-spacing: -0.02em;
+		/* app.css tracks its own headings; the app tracks none. */
+		letter-spacing: normal;
 	}
 
 	.meta {
