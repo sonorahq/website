@@ -1,18 +1,30 @@
 <script>
 	import '../app.css';
+	import { onMount } from 'svelte';
 	import Logo from '$lib/Logo.svelte';
 
 	let { children, data } = $props();
 
 	const repo = 'https://github.com/sonorahq/sonora';
 
+	let count = $state(data.stars);
+
 	const stars = $derived(
-		data.stars === null
+		count === null
 			? null
-			: data.stars >= 1000
-				? (data.stars / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
-				: String(data.stars)
+			: count >= 1000
+				? (count / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
+				: String(count)
 	);
+
+	onMount(async () => {
+		try {
+			const res = await fetch('https://api.github.com/repos/sonorahq/sonora');
+			if (res.ok) count = (await res.json()).stargazers_count;
+		} catch {
+			count = data.stars;
+		}
+	});
 </script>
 
 <header>
