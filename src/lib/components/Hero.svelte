@@ -85,6 +85,10 @@
 		gap: 48px;
 		padding-top: 72px;
 		padding-bottom: 80px;
+		/* Owns the first screen on tall displays instead of letting the next
+		   section ride up into it. */
+		min-height: calc(100vh - var(--header));
+		min-height: calc(100svh - var(--header));
 	}
 
 	.pitch {
@@ -187,6 +191,7 @@
 
 	@media (max-width: 900px) {
 		.hero {
+			min-height: 0;
 			flex-direction: column;
 			align-items: stretch;
 			gap: 24px;
