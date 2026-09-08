@@ -89,7 +89,7 @@
 		flex-direction: column;
 		gap: 12px;
 		font-size: 13px;
-		color: #a3a3a3;
+		color: var(--chip-fg);
 	}
 
 	.links a:hover {

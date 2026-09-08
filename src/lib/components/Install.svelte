@@ -51,7 +51,7 @@
 
 <style>
 	.install {
-		background: #080808;
+		background: var(--band);
 	}
 
 	.steps {

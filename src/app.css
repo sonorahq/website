@@ -1,4 +1,6 @@
 :root {
+	color-scheme: dark;
+
 	--bg: #0a0a0a;
 	--fg: #fafafa;
 	--border: #262626;
@@ -6,21 +8,113 @@
 	--dim: #525252;
 	--secondary: #171717;
 	--secondary-hover: #232323;
-	--secondary-active: #303030;
+	--secondary-active: #262626;
 	--primary: #fafafa;
 	--primary-fg: #171717;
 	--primary-hover: #e5e5e5;
 	--popover: #141414;
 	--card: #0d0d0d;
+	--band: #080808;
+	--chip-fg: #a3a3a3;
+	--shadow: 0 50px 130px -30px rgb(0 0 0 / 0.95);
+	--header-bg: rgb(10 10 10 / 0.86);
 
 	--radius: 6px;
 	--radius-lg: 10px;
-	--radius-full: 20px;
 	--control: 32px;
-	--field: 40px;
 
 	--page: 1280px;
 	--mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
+}
+
+:root[data-theme='light'] {
+	color-scheme: light;
+
+	--bg: #fafafa;
+	--fg: #171717;
+	--border: #d4d4d4;
+	--muted-fg: #737373;
+	--dim: #a3a3a3;
+	--secondary: #f5f5f5;
+	--secondary-hover: #e5e5e5;
+	--secondary-active: #e5e5e5;
+	--primary: #171717;
+	--primary-fg: #fafafa;
+	--primary-hover: #262626;
+	--popover: #ffffff;
+	--card: #ffffff;
+	--band: #f5f5f5;
+	--chip-fg: #525252;
+	--shadow: 0 32px 70px -28px rgb(23 23 23 / 0.28);
+	--header-bg: rgb(250 250 250 / 0.86);
+}
+
+@media (prefers-color-scheme: light) {
+	:root:not([data-theme='dark']) {
+		color-scheme: light;
+
+		--bg: #fafafa;
+		--fg: #171717;
+		--border: #d4d4d4;
+		--muted-fg: #737373;
+		--dim: #a3a3a3;
+		--secondary: #f5f5f5;
+		--secondary-hover: #e5e5e5;
+		--secondary-active: #e5e5e5;
+		--primary: #171717;
+		--primary-fg: #fafafa;
+		--primary-hover: #262626;
+		--popover: #ffffff;
+		--card: #ffffff;
+		--band: #f5f5f5;
+		--chip-fg: #525252;
+		--shadow: 0 32px 70px -28px rgb(23 23 23 / 0.28);
+		--header-bg: rgb(250 250 250 / 0.86);
+	}
+}
+
+.on-dark {
+	display: block;
+}
+
+.on-light {
+	display: none;
+}
+
+.on-dark-row {
+	display: flex;
+}
+
+.on-light-row {
+	display: none;
+}
+
+:root[data-theme='light'] .on-dark,
+:root[data-theme='light'] .on-dark-row {
+	display: none;
+}
+
+:root[data-theme='light'] .on-light {
+	display: block;
+}
+
+:root[data-theme='light'] .on-light-row {
+	display: flex;
+}
+
+@media (prefers-color-scheme: light) {
+	:root:not([data-theme='dark']) .on-dark,
+	:root:not([data-theme='dark']) .on-dark-row {
+		display: none;
+	}
+
+	:root:not([data-theme='dark']) .on-light {
+		display: block;
+	}
+
+	:root:not([data-theme='dark']) .on-light-row {
+		display: flex;
+	}
 }
 
 * {
