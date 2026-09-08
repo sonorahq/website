@@ -10,8 +10,8 @@
 		<div class="panel">
 			<h2>Speaks {languages.length} languages</h2>
 			<p>
-				{strings} strings, translated by the community and tracked in the repo. {done} are complete —
-				the rest are a pull request away.
+				{strings} strings, translated by the community and tracked in the repo. {done}
+				{done === 1 ? 'is' : 'are'} complete — the rest are a pull request away.
 			</p>
 
 			<ul>
@@ -45,6 +45,9 @@
 <style>
 	.community {
 		display: grid;
+		/* Each panel sizes to its own content; stretching the short one left a hole
+		   between its text and its buttons. */
+		align-items: start;
 		grid-template-columns: 2fr 1fr;
 		gap: 20px;
 	}
@@ -142,7 +145,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 8px;
-		margin-top: auto;
+		margin-top: 4px;
 	}
 
 	@media (max-width: 900px) {
