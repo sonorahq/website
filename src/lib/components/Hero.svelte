@@ -89,11 +89,10 @@
 		gap: 48px;
 		padding-top: 72px;
 		padding-bottom: 80px;
-		/* Fills the first screen, but stops growing once the air around the content
-		   would read as a hole: the row is a fixed 514px because --page caps how
-		   wide, and so how tall, the screenshot can get. */
-		min-height: min(calc(100vh - var(--header)), 760px);
-		min-height: min(calc(100svh - var(--header)), 760px);
+		/* Owns the first screen outright, so no part of the next section shows
+		   above the fold. */
+		min-height: calc(100vh - var(--header));
+		min-height: calc(100svh - var(--header));
 	}
 
 	.pitch {
