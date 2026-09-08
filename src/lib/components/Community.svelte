@@ -1,5 +1,14 @@
 <script>
-	import { languages } from '$lib/data/platforms.js';
+	import { languages, strings } from '$lib/data/languages.js';
+	import { discord, matrix, repo } from '$lib/data/links.js';
+	import Flag from './Flag.svelte';
+
+	const rows = languages.map((entry) => ({
+		...entry,
+		share: Math.round((entry.translated / strings) * 100)
+	}));
+
+	const done = rows.filter((entry) => entry.share === 100).length;
 </script>
 
 <section class="section">
@@ -7,22 +16,38 @@
 		<div class="panel">
 			<h2>Speaks 11 languages</h2>
 			<p>
-				Translated by the community and tracked in the repo, from English and Deutsch through
-				日本語, Русский and Português.
+				{strings} strings, translated by the community and tracked in the repo. {done} are complete —
+				the rest are a pull request away.
 			</p>
-			<div class="chips">
-				{#each languages as code (code)}
-					<span>{code}</span>
+
+			<ul>
+				{#each rows as language (language.code)}
+					<li>
+						<div class="row">
+							<Flag code={language.flag} />
+							<span class="name">{language.name}</span>
+							<span class="code mono">{language.code}</span>
+							<span class="percent" class:full={language.share === 100}>{language.share}%</span>
+						</div>
+						<div class="track">
+							<span class:full={language.share === 100} style="width: {language.share}%"></span>
+						</div>
+					</li>
 				{/each}
-			</div>
+			</ul>
+
+			<a class="more" href="{repo}/blob/main/README.md#translations">
+				Add a language
+				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
+			</a>
 		</div>
 
 		<div class="panel">
 			<h2>Come hang out</h2>
 			<p>Discord is where most of it happens, bridged to Matrix.</p>
 			<div class="panel-cta">
-				<a class="btn btn-primary" href="https://discord.gg/a8N8Tx23rV">Join Discord</a>
-				<a class="btn btn-secondary" href="https://matrix.to/#/#sonora:nolight.dev">Matrix space</a>
+				<a class="btn btn-primary" href={discord}>Join Discord</a>
+				<a class="btn btn-secondary" href={matrix}>Matrix space</a>
 			</div>
 		</div>
 	</div>
@@ -58,22 +83,88 @@
 		max-width: 460px;
 	}
 
-	.chips {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
-		margin-top: 8px;
+	ul {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 6px 32px;
+		margin: 10px 0 0;
+		padding: 0;
+		list-style: none;
 	}
 
-	.chips span {
-		height: 26px;
+	.row {
 		display: flex;
 		align-items: center;
-		padding: 0 10px;
-		border: 1px solid var(--border);
-		border-radius: var(--radius);
+		gap: 10px;
+		height: 24px;
+		font-size: 13px;
+	}
+
+	.name {
+		flex-grow: 1;
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.code {
+		font-size: 11px;
+		color: var(--dim);
+	}
+
+	.percent {
+		width: 34px;
+		text-align: right;
 		font-size: 12px;
-		color: var(--chip-fg);
+		font-variant-numeric: tabular-nums;
+		color: var(--muted-fg);
+	}
+
+	.percent.full {
+		color: var(--fg);
+	}
+
+	.track {
+		height: 2px;
+		border-radius: 1px;
+		background: var(--secondary-hover);
+		overflow: hidden;
+	}
+
+	.track span {
+		display: block;
+		height: 100%;
+		border-radius: 1px;
+		background: var(--dim);
+	}
+
+	.track span.full {
+		background: var(--fg);
+	}
+
+	.more {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin-top: auto;
+		padding-top: 10px;
+		font-size: 13px;
+		color: var(--muted-fg);
+	}
+
+	.more:hover {
+		color: var(--fg);
+	}
+
+	.more svg {
+		width: 11px;
+		height: 11px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
 	}
 
 	.panel-cta {
@@ -85,6 +176,10 @@
 
 	@media (max-width: 900px) {
 		.community {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		ul {
 			grid-template-columns: minmax(0, 1fr);
 		}
 	}
