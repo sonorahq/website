@@ -7,12 +7,13 @@
 
 	const repo = 'https://github.com/sonorahq/sonora';
 
-	const stars =
+	const stars = $derived(
 		data.stars === null
 			? null
 			: data.stars >= 1000
 				? (data.stars / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
-				: String(data.stars);
+				: String(data.stars)
+	);
 </script>
 
 <header>
