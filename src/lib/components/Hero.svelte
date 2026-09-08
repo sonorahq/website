@@ -43,11 +43,15 @@
 		<div class="picker">
 			<PlatformTabs />
 
-			<div class="command">
-				<span class="mono prompt">{platform.current.prompt}</span>
-				<span class="mono line">{platform.current.hero}</span>
-				<CopyButton text={platform.current.hero} />
-			</div>
+			{#if platform.current.hero}
+				<div class="command">
+					<span class="mono prompt">{platform.current.prompt}</span>
+					<span class="mono line">{platform.current.hero}</span>
+					<CopyButton text={platform.current.hero} />
+				</div>
+			{:else}
+				<p class="no-command">No package manager on Windows — grab the installer above.</p>
+			{/if}
 		</div>
 
 		<p class="fine">Free and open source · macOS, Linux, Windows · No account required</p>
@@ -134,6 +138,14 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	.no-command {
+		height: 46px;
+		display: flex;
+		align-items: center;
+		font-size: 13px;
+		color: var(--muted-fg);
 	}
 
 	.fine {
