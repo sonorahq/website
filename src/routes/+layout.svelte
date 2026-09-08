@@ -7,22 +7,20 @@
 
 	const repo = 'https://github.com/sonorahq/sonora';
 
-	let count = $state(data.stars);
+	let live = $state(null);
 
-	const stars = $derived(
-		count === null
-			? null
-			: count >= 1000
-				? (count / 1000).toFixed(1).replace(/\.0$/, '') + 'k'
-				: String(count)
-	);
+	const stars = $derived.by(() => {
+		const n = live ?? data.stars;
+		if (n === null) return null;
+		return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n);
+	});
 
 	onMount(async () => {
 		try {
 			const res = await fetch('https://api.github.com/repos/sonorahq/sonora');
-			if (res.ok) count = (await res.json()).stargazers_count;
+			if (res.ok) live = (await res.json()).stargazers_count;
 		} catch {
-			count = data.stars;
+			live = null;
 		}
 	});
 </script>
