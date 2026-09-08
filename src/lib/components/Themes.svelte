@@ -10,14 +10,6 @@
 			<figure>
 				<div class="inset">
 					<img
-						class="on-dark"
-						src="/app-artist.webp"
-						width="1100"
-						height="660"
-						alt="An artist page in Sonora with the play queue open"
-					/>
-					<img
-						class="on-light"
 						src="/app-playlist.webp"
 						width="1400"
 						height="867"
@@ -25,14 +17,8 @@
 					/>
 				</div>
 				<figcaption>
-					<span class="on-dark-row">
-						<span class="swatch violet"></span>
-						Artists, releases, queue
-					</span>
-					<span class="on-light-row">
-						<span class="swatch ink"></span>
-						Dark, tinted by the record
-					</span>
+					<span class="swatch ink"></span>
+					Dark, tinted by the record
 				</figcaption>
 			</figure>
 
@@ -46,10 +32,8 @@
 					/>
 				</div>
 				<figcaption>
-					<span class="row">
-						<span class="swatch paper"></span>
-						Light, full-screen lyrics
-					</span>
+					<span class="swatch paper"></span>
+					Light, full-screen lyrics
 				</figcaption>
 			</figure>
 		</div>
@@ -87,19 +71,13 @@
 	}
 
 	figcaption {
+		display: flex;
+		align-items: center;
+		gap: 9px;
 		padding: 18px 6px 6px;
 		font-size: 15px;
 		font-weight: 600;
 		letter-spacing: -0.01em;
-	}
-
-	figcaption span {
-		align-items: center;
-		gap: 9px;
-	}
-
-	.row {
-		display: flex;
 	}
 
 	.swatch {
@@ -108,11 +86,6 @@
 		border-radius: 5px;
 		border: 1px solid;
 		flex-shrink: 0;
-	}
-
-	.violet {
-		background: #a855f7;
-		border-color: #6b21a8;
 	}
 
 	.ink {
