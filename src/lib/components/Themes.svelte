@@ -73,6 +73,7 @@
 	}
 
 	.inset {
+		aspect-ratio: 1602 / 992;
 		border: 1px solid var(--border);
 		border-radius: 8px;
 		overflow: hidden;
@@ -81,7 +82,8 @@
 
 	img {
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	figcaption {

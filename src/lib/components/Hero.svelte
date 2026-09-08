@@ -153,6 +153,7 @@
 	}
 
 	.frame {
+		aspect-ratio: 1602 / 992;
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		overflow: hidden;
@@ -168,7 +169,8 @@
 
 	img {
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	@media (max-width: 900px) {
