@@ -57,7 +57,7 @@
 		justify-content: center;
 		border-radius: var(--radius);
 		background: var(--border);
-		color: #a3a3a3;
+		color: var(--chip-fg);
 	}
 
 	button:hover {

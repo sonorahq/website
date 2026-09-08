@@ -73,7 +73,7 @@
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		font-size: 12px;
-		color: #a3a3a3;
+		color: var(--chip-fg);
 	}
 
 	.panel-cta {

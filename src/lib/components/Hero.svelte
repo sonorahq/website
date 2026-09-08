@@ -56,10 +56,18 @@
 	<figure class="shot">
 		<div class="frame">
 			<img
+				class="on-dark"
 				src="/app-playlist.webp"
 				width="1400"
 				height="867"
 				alt="Sonora playing an album with the lyrics panel open"
+			/>
+			<img
+				class="on-light"
+				src="/app-artist.webp"
+				width="1100"
+				height="660"
+				alt="An artist page in Sonora with the play queue open"
 			/>
 		</div>
 		<figcaption>Adaptive theming, switchable in Appearance</figcaption>
@@ -145,11 +153,12 @@
 	}
 
 	.frame {
+		aspect-ratio: 1602 / 992;
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		overflow: hidden;
 		background: var(--card);
-		box-shadow: 0 50px 130px -30px rgb(0 0 0 / 0.95);
+		box-shadow: var(--shadow);
 	}
 
 	figcaption {
@@ -159,9 +168,9 @@
 	}
 
 	img {
-		display: block;
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	@media (max-width: 900px) {

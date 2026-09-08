@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { repo } from '$lib/data/links.js';
 	import Logo from './Logo.svelte';
+	import ThemeSwitch from './ThemeSwitch.svelte';
 
 	let { stars = null } = $props();
 
@@ -40,6 +41,7 @@
 		</div>
 
 		<div class="right">
+			<ThemeSwitch />
 			<a href={repo} class="star">
 				<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
 					<path
@@ -63,7 +65,7 @@
 		z-index: 10;
 		height: 64px;
 		border-bottom: 1px solid var(--border);
-		background: rgb(10 10 10 / 0.86);
+		background: var(--header-bg);
 		backdrop-filter: blur(12px);
 	}
 
@@ -116,7 +118,7 @@
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		font-size: 13px;
-		color: #a3a3a3;
+		color: var(--chip-fg);
 	}
 
 	.count {
