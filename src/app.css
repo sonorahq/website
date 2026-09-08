@@ -26,7 +26,7 @@
 	--page: 1520px;
 	--gutter: clamp(24px, 5.5vw, 96px);
 	--header: 65px;
-	--band: 155px;
+	--band-height: 155px;
 	--mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
 }
 

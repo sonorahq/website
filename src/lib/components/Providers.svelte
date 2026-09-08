@@ -13,7 +13,7 @@
 <style>
 	.providers {
 		display: flex;
-		height: var(--band);
+		height: var(--band-height);
 		align-items: center;
 		border-top: 1px solid var(--border);
 		border-bottom: 1px solid var(--border);

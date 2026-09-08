@@ -89,8 +89,8 @@
 		gap: 48px;
 		padding-top: 72px;
 		padding-bottom: 80px;
-		min-height: calc(100vh - var(--header) - var(--band));
-		min-height: calc(100svh - var(--header) - var(--band));
+		min-height: calc(100vh - var(--header) - var(--band-height));
+		min-height: calc(100svh - var(--header) - var(--band-height));
 	}
 
 	.pitch {
@@ -190,6 +190,13 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+
+	@media (max-height: 920px) and (min-width: 901px) {
+		.hero {
+			padding-top: 48px;
+			padding-bottom: 56px;
+		}
 	}
 
 	@media (max-width: 900px) {
