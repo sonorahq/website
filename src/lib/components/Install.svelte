@@ -84,7 +84,7 @@
 		display: flex;
 		align-items: flex-start;
 		gap: 16px;
-		padding: 16px 8px 16px 18px;
+		padding: 8px 8px 8px 18px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
 		background: var(--bg);
@@ -94,6 +94,11 @@
 		margin: 0;
 		flex-grow: 1;
 		min-width: 0;
+		/* Matches the copy button, so a one-line command sits level with it instead
+		   of hugging the top of the box. */
+		min-height: 34px;
+		display: flex;
+		align-items: center;
 		font-size: 13.5px;
 		line-height: 1.5;
 		white-space: pre-wrap;
