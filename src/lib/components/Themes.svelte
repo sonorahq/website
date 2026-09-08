@@ -10,21 +10,6 @@
 			<figure>
 				<div class="inset">
 					<img
-						src="/app-playlist.webp"
-						width="1400"
-						height="867"
-						alt="Sonora in its dark theme with the lyrics panel open"
-					/>
-				</div>
-				<figcaption>
-					<span class="swatch ink"></span>
-					Dark, tinted by the record
-				</figcaption>
-			</figure>
-
-			<figure>
-				<div class="inset">
-					<img
 						src="/app-lyrics.webp"
 						width="1100"
 						height="660"
@@ -32,8 +17,34 @@
 					/>
 				</div>
 				<figcaption>
-					<span class="swatch paper"></span>
-					Light, full-screen lyrics
+					<span class="label">
+						<span class="swatch paper"></span>
+						Light, tinted by the record
+					</span>
+					<span class="note">
+						Full-screen lyrics, synced line by line, with word timing when the track carries it.
+					</span>
+				</figcaption>
+			</figure>
+
+			<figure>
+				<div class="inset">
+					<img
+						src="/app-artist.webp"
+						width="1100"
+						height="660"
+						alt="An artist page in Sonora with the play queue open"
+					/>
+				</div>
+				<figcaption>
+					<span class="label">
+						<span class="swatch violet"></span>
+						Artists, releases, queue
+					</span>
+					<span class="note">
+						Top tracks and every release, with the queue beside them and the page tinted by what is
+						playing.
+					</span>
 				</figcaption>
 			</figure>
 		</div>
@@ -49,6 +60,9 @@
 	}
 
 	figure {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
 		margin: 0;
 		padding: 18px;
 		border: 1px solid var(--border);
@@ -72,30 +86,42 @@
 
 	figcaption {
 		display: flex;
+		flex-direction: column;
+		gap: 7px;
+		padding: 0 6px 6px;
+	}
+
+	.label {
+		display: flex;
 		align-items: center;
 		gap: 9px;
-		padding: 18px 6px 6px;
 		font-size: 15px;
 		font-weight: 600;
 		letter-spacing: -0.01em;
 	}
 
+	.note {
+		font-size: 13px;
+		line-height: 1.55;
+		color: var(--muted-fg);
+	}
+
 	.swatch {
 		width: 10px;
 		height: 10px;
-		border-radius: 5px;
-		border: 1px solid;
 		flex-shrink: 0;
-	}
-
-	.ink {
-		background: #171717;
-		border-color: #404040;
+		border: 1px solid;
+		border-radius: 5px;
 	}
 
 	.paper {
-		background: #e5e5e5;
-		border-color: #a3a3a3;
+		background: #d4d4d4;
+		border-color: #404040;
+	}
+
+	.violet {
+		background: #a855f7;
+		border-color: #6b21a8;
 	}
 
 	@media (max-width: 900px) {
