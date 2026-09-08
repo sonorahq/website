@@ -8,7 +8,7 @@
 	const meta = `${album.artist} • ${album.released} • ${tracks.length} songs • ${clock(total)}`;
 </script>
 
-<div class="page">
+<div class="screen">
 	<header class="hero">
 		<img class="cover" src={album.cover} width="140" height="140" alt="" />
 		<div class="text">
@@ -61,7 +61,7 @@
 </div>
 
 <style>
-	.page {
+	.screen {
 		flex: 1;
 		min-width: 0;
 		padding: 24px 0;

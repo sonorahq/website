@@ -5,7 +5,7 @@
 </script>
 
 <div class="bar">
-	<div class="lead">
+	<div class="leading">
 		<Control
 			icon={left ? 'panel-left-close' : 'panel-left-open'}
 			title="Toggle sidebar"
@@ -45,7 +45,7 @@
 		border-bottom: 1px solid var(--m-title-bar-border);
 	}
 
-	.lead {
+	.leading {
 		display: flex;
 		flex: none;
 		align-items: center;

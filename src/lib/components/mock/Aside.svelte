@@ -2,6 +2,9 @@
 	import { album, tracks } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import Control from './Control.svelte';
+	import Icon from './Icon.svelte';
+
+	let { tab } = $props();
 
 	let radio = $state(true);
 
@@ -15,40 +18,49 @@
 
 <aside class="aside">
 	<header class="head">
-		<span class="eyebrow">Queue</span>
-		<div class="tools">
-			<Control
-				icon="radio"
-				title="Autoplay similar tracks"
-				small
-				muted={!radio}
-				onclick={() => (radio = !radio)}
-			/>
-			<Control label="Clear" title="Clear" small muted />
-		</div>
+		<span class="eyebrow">{tab === 'lyrics' ? 'Lyrics' : 'Queue'}</span>
+		{#if tab === 'queue'}
+			<div class="tools">
+				<Control
+					icon="radio"
+					title="Autoplay similar tracks"
+					small
+					muted={!radio}
+					onclick={() => (radio = !radio)}
+				/>
+				<Control label="Clear" title="Clear" small muted />
+			</div>
+		{/if}
 	</header>
 
-	<div class="list">
-		<span class="section">Now playing</span>
-		<div class="card chosen">
-			<img src={album.cover} width="36" height="36" alt="" />
-			<span class="text">
-				<span class="title">{player.track.title}</span>
-				<span class="caption">{album.artist}</span>
-			</span>
+	{#if tab === 'lyrics'}
+		<div class="vacancy">
+			<Icon name="mic-off" size={70} />
+			<p>Could not reach the lyrics service</p>
 		</div>
-
-		<span class="section">Up next</span>
-		{#each upcoming as { track, row } (track.title)}
-			<button type="button" class="card" onclick={() => player.select(row)}>
+	{:else}
+		<div class="list">
+			<span class="group">Now playing</span>
+			<div class="card chosen">
 				<img src={album.cover} width="36" height="36" alt="" />
 				<span class="text">
-					<span class="title">{track.title}</span>
+					<span class="title">{player.track.title}</span>
 					<span class="caption">{album.artist}</span>
 				</span>
-			</button>
-		{/each}
-	</div>
+			</div>
+
+			<span class="group">Up next</span>
+			{#each upcoming as { track, row } (track.title)}
+				<button type="button" class="card" onclick={() => player.select(row)}>
+					<img src={album.cover} width="36" height="36" alt="" />
+					<span class="text">
+						<span class="title">{track.title}</span>
+						<span class="caption">{album.artist}</span>
+					</span>
+				</button>
+			{/each}
+		</div>
+	{/if}
 </aside>
 
 <style>
@@ -87,6 +99,27 @@
 		gap: 4px;
 	}
 
+	.vacancy {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 16px;
+		text-align: center;
+		color: var(--m-muted-foreground);
+	}
+
+	.vacancy :global(svg) {
+		margin-top: 24px;
+		opacity: 0.35;
+	}
+
+	.vacancy p {
+		margin: 0;
+		padding: 16px;
+	}
+
 	.list {
 		display: flex;
 		flex-direction: column;
@@ -95,7 +128,7 @@
 		overflow: hidden;
 	}
 
-	.section {
+	.group {
 		padding: 8px 8px 4px;
 		font-size: 11.9px;
 		font-weight: 600;

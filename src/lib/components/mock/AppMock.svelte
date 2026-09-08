@@ -15,8 +15,9 @@
 	let left = $state(true);
 	let right = $state(true);
 	let room = $state(WIDTH);
+	let tab = $state('queue');
 
-	const scale = $derived(Math.min(Math.max(room / WIDTH, FLOOR), 1));
+	const scale = $derived(Math.max(room / WIDTH, FLOOR));
 
 	onDestroy(() => player.release());
 </script>
@@ -31,10 +32,10 @@
 				{/if}
 				<Detail />
 				{#if right}
-					<Aside />
+					<Aside {tab} />
 				{/if}
 			</div>
-			<PlayerBar />
+			<PlayerBar bind:tab />
 		</div>
 	</div>
 </div>

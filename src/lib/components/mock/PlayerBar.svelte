@@ -4,6 +4,8 @@
 	import Control from './Control.svelte';
 	import Scrubber from './Scrubber.svelte';
 
+	let { tab = $bindable() } = $props();
+
 	const level = $derived(
 		player.volume <= 0.0001
 			? 'volume-x'
@@ -65,8 +67,22 @@
 	</div>
 
 	<div class="side">
-		<Control icon="mic-vocal" title="Lyrics" small muted />
-		<Control icon="list-music" title="Queue" small selected />
+		<Control
+			icon="mic-vocal"
+			title="Lyrics"
+			small
+			muted={tab !== 'lyrics'}
+			selected={tab === 'lyrics'}
+			onclick={() => (tab = 'lyrics')}
+		/>
+		<Control
+			icon="list-music"
+			title="Queue"
+			small
+			muted={tab !== 'queue'}
+			selected={tab === 'queue'}
+			onclick={() => (tab = 'queue')}
+		/>
 		<Control icon={level} title="Volume" small muted />
 		<div class="volume">
 			<Scrubber
