@@ -16,7 +16,7 @@
 	let room = $state(WIDTH);
 	let tab = $state('queue');
 
-	const scale = $derived(Math.max(room / WIDTH, FLOOR));
+	const scale = $derived(Math.min(Math.max(room / WIDTH, FLOOR), 1));
 
 	onDestroy(() => player.release());
 </script>

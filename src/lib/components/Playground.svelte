@@ -28,7 +28,8 @@
 	}
 
 	.frame {
-		margin-top: 40px;
+		max-width: 1180px;
+		margin: 40px auto 0;
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		overflow: hidden;
