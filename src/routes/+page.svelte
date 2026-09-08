@@ -2,21 +2,15 @@
 	import { onMount } from 'svelte';
 	import { base } from '$app/paths';
 	import { platforms, languages, detectPlatform } from '$lib/platforms.js';
+	import CopyButton from '$lib/CopyButton.svelte';
 
 	let selected = $state('macos');
-	let copied = $state(false);
 
 	let current = $derived(platforms.find((p) => p.id === selected));
 
 	onMount(() => {
 		selected = detectPlatform();
 	});
-
-	async function copy(text) {
-		await navigator.clipboard.writeText(text);
-		copied = true;
-		setTimeout(() => (copied = false), 1600);
-	}
 </script>
 
 <svelte:head>
@@ -60,18 +54,7 @@
 			<div class="command">
 				<span class="mono prompt">{current.prompt}</span>
 				<span class="mono line">{current.hero}</span>
-				<button class="copy" onclick={() => copy(current.hero)} aria-label="Copy command">
-					{#if copied}
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-							<path d="M4 12.5l5 5L20 6.5" />
-						</svg>
-					{:else}
-						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-							<rect x="9" y="9" width="11" height="11" rx="2" />
-							<path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
-						</svg>
-					{/if}
-				</button>
+				<CopyButton text={current.hero} />
 			</div>
 		</div>
 
@@ -124,12 +107,7 @@
 					<span class="caption">{step.caption}</span>
 					<div class="block">
 						<pre class="mono">{step.command}</pre>
-						<button class="copy" onclick={() => copy(step.command)} aria-label="Copy command">
-							<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-								<rect x="9" y="9" width="11" height="11" rx="2" />
-								<path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" />
-							</svg>
-						</button>
+						<CopyButton text={step.command} />
 					</div>
 				</div>
 			{/each}
@@ -340,22 +318,6 @@
 		white-space: nowrap;
 	}
 
-	.copy {
-		width: 34px;
-		height: 34px;
-		flex-shrink: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: var(--radius);
-		background: var(--border);
-		color: #a3a3a3;
-	}
-
-	.copy:hover {
-		background: var(--secondary-active);
-		color: var(--fg);
-	}
 
 	.fine {
 		margin-top: 18px;
