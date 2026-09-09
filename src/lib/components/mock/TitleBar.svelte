@@ -1,7 +1,18 @@
 <script>
+	import { route } from '$lib/mock/route.svelte.js';
 	import Control from './Control.svelte';
 
 	let { left = $bindable(), right = $bindable() } = $props();
+
+	const at = $derived(route.now);
+	const listing = $derived(
+		at.screen === 'album' ||
+			at.screen === 'playlist' ||
+			at.screen === 'history' ||
+			((at.screen === 'library' || at.screen === 'local') && at.tab === 'Songs')
+	);
+	const carded = $derived((at.screen === 'library' || at.screen === 'local') && at.tab !== 'Songs');
+	const filed = $derived(listing || carded);
 </script>
 
 <div class="bar">
@@ -16,15 +27,39 @@
 
 	<div class="middle">
 		<div class="history">
-			<Control icon="chevron-left" title="Back" size={28} disabled />
-			<Control icon="chevron-right" title="Forward" size={28} disabled />
+			<Control
+				icon="chevron-left"
+				title="Back"
+				size={28}
+				disabled={!route.behind}
+				onclick={() => route.back()}
+			/>
+			<Control
+				icon="chevron-right"
+				title="Forward"
+				size={28}
+				disabled={!route.ahead}
+				onclick={() => route.forward()}
+			/>
 		</div>
 
 		<div class="tools">
-			<Control icon="columns-3" title="Columns" small />
-			<Control icon="funnel" title="Filters" small tint="muted" />
-			<Control icon="arrow-up-down" title="Sort" small tint="muted" />
-			<Control icon="search" title="Search" small />
+			{#if carded && at.tab === 'Playlists'}
+				<Control icon="plus" title="New playlist" small />
+			{/if}
+			{#if listing}
+				<Control icon="columns-3" title="Columns" small />
+			{/if}
+			{#if filed}
+				<Control icon="funnel" title="Filters" small tint="muted" />
+				<Control icon="arrow-up-down" title="Sort" small tint="muted" />
+			{/if}
+			{#if carded}
+				<Control icon="list" title="List view" small />
+			{/if}
+			{#if filed}
+				<Control icon="search" title="Search" small />
+			{/if}
 		</div>
 	</div>
 

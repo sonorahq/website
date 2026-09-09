@@ -3,8 +3,17 @@
 	import { shelf } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import { palette } from '$lib/mock/theme.js';
+	import { route } from '$lib/mock/route.svelte.js';
+	import { settings } from '$lib/mock/settings.svelte.js';
 	import Aside from './Aside.svelte';
 	import Detail from './Detail.svelte';
+	import Artist from './screens/Artist.svelte';
+	import History from './screens/History.svelte';
+	import Home from './screens/Home.svelte';
+	import Library from './screens/Library.svelte';
+	import Playlist from './screens/Playlist.svelte';
+	import Search from './screens/Search.svelte';
+	import Settings from './screens/Settings.svelte';
 	import PlayerBar from './PlayerBar.svelte';
 	import Sidebar from './Sidebar.svelte';
 	import TitleBar from './TitleBar.svelte';
@@ -18,6 +27,8 @@
 	let right = $state(true);
 	let room = $state(WIDTH);
 	let tab = $state('queue');
+
+	const at = $derived(route.now);
 
 	const scale = $derived(Math.min(Math.max(room / WIDTH, FLOOR), 1));
 
@@ -45,13 +56,37 @@
 
 <div class="stage" bind:clientWidth={room} style:height="{HEIGHT * scale}px">
 	<div class="sizer" style:width="{WIDTH * scale}px" style:height="{HEIGHT * scale}px">
-		<div class="app" class:fading {style} style:transform="scale({scale})">
+		<div
+			class="app"
+			class:fading
+			{style}
+			style:--m-radius="{settings.radius}px"
+			style:transform="scale({scale})"
+		>
 			<TitleBar bind:left bind:right />
 			<div class="body">
 				{#if left}
 					<Sidebar />
 				{/if}
-				<Detail />
+				{#if at.screen === 'home'}
+					<Home />
+				{:else if at.screen === 'search'}
+					<Search />
+				{:else if at.screen === 'library'}
+					<Library shelf="library" tab={at.tab ?? 'Songs'} />
+				{:else if at.screen === 'local'}
+					<Library shelf="local" tab={at.tab ?? 'Songs'} />
+				{:else if at.screen === 'history'}
+					<History />
+				{:else if at.screen === 'settings'}
+					<Settings tab={at.tab ?? 'General'} />
+				{:else if at.screen === 'artist'}
+					<Artist id={at.id ?? 'chopin'} />
+				{:else if at.screen === 'playlist'}
+					<Playlist id={at.id ?? 'quiet-hours'} />
+				{:else}
+					<Detail id={at.id ?? 'airs'} />
+				{/if}
 				{#if right}
 					<Aside {tab} />
 				{/if}
@@ -87,8 +122,6 @@
 		color: var(--m-foreground);
 		background: var(--m-background);
 		user-select: none;
-
-		--m-radius: 10px;
 	}
 
 	.body {

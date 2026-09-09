@@ -11,6 +11,7 @@ const surfaces = {
 	'secondary-hover': [89.8, 13.7],
 	'secondary-active': [83.1, 18.8],
 	muted: [89.8, 14.9],
+	popover: [100, 7.8],
 	sidebar: [96.1, 3.9],
 	'sidebar-accent': [89.8, 14.9],
 	'table-hover': [94.1, 14.9]
@@ -25,6 +26,7 @@ const borders = {
 const texts = {
 	foreground: [9, 98],
 	'muted-foreground': [45.1, 45.1],
+	'popover-foreground': [9, 98],
 	'table-head-foreground': [45.1, 32.2]
 };
 
