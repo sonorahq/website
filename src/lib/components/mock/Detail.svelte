@@ -22,7 +22,7 @@
 				<Control
 					variant="filled"
 					icon={holding ? 'pause' : 'play'}
-					label={holding ? 'Pause' : 'Play'}
+					label={holding ? 'Pause' : mine ? 'Resume' : 'Play album'}
 					onclick={() => {
 						if (holding) player.pause();
 						else if (mine) player.resume();

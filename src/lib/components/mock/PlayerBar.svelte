@@ -1,6 +1,7 @@
 <script>
 	import { clock } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
+	import { settings } from '$lib/mock/settings.svelte.js';
 	import Control from './Control.svelte';
 	import Cover from './Cover.svelte';
 	import Like from './Like.svelte';
@@ -88,6 +89,9 @@
 				selected={tab === 'queue'}
 				onclick={() => (tab = 'queue')}
 			/>
+			{#if settings.sleep}
+				<Control icon="moon" title="Sleep timer" small tint="muted" />
+			{/if}
 		</div>
 
 		<div class="sound">

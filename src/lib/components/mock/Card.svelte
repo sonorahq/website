@@ -21,7 +21,8 @@
 		surface = false,
 		playing = false,
 		onplay = undefined,
-		onpress = undefined
+		onpress = undefined,
+		action = undefined
 	} = $props();
 
 	const ROW = 52;
@@ -104,6 +105,7 @@
 	</span>
 
 	{#if trailing}<span class="trailing">{trailing}</span>{/if}
+	{#if action}<span class="action">{@render action()}</span>{/if}
 </div>
 
 <style>
@@ -229,6 +231,16 @@
 	.meta {
 		font-size: 12px;
 		color: var(--m-muted-foreground);
+	}
+
+	.action {
+		display: flex;
+		flex: none;
+		visibility: hidden;
+	}
+
+	.card:hover .action {
+		visibility: visible;
 	}
 
 	.trailing {
