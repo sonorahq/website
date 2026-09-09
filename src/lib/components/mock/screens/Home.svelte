@@ -49,7 +49,7 @@
 				/>
 			</div>
 		</div>
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#each shown as track (track.id)}
 				<Card
 					tile={CARD}

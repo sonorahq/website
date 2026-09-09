@@ -22,7 +22,7 @@
 				<Control
 					variant="filled"
 					icon={holding ? 'pause' : 'play'}
-					label={holding ? 'Pause' : 'Play'}
+					label={holding ? 'Pause' : mine ? 'Resume' : 'Play album'}
 					onclick={() => {
 						if (holding) player.pause();
 						else if (mine) player.resume();
@@ -58,6 +58,7 @@
 		flex-direction: column;
 		padding: 24px 0;
 		background: var(--m-background);
+		overflow-x: hidden;
 		overflow-y: auto;
 		scrollbar-width: thin;
 		scrollbar-color: color-mix(in srgb, var(--m-muted-foreground) 45%, transparent) transparent;

@@ -27,7 +27,7 @@ let from = $state(origin);
 let suggested = $state(similar.map((track) => track.id));
 let playing = $state(false);
 let elapsed = $state(56);
-let volume = $state(0.72);
+let volume = $state(0.7);
 let shuffle = $state(false);
 let repeat = $state(0);
 let radio = $state(true);

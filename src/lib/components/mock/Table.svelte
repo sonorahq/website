@@ -1,12 +1,13 @@
 <script>
-	import { TRAIL, clock } from '$lib/mock/album.js';
+	import { TRAIL, clock, shelf } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
 	import Like from './Like.svelte';
 
-	let { columns = [], rows = [] } = $props();
+	let { columns = [], rows = [], framed = false } = $props();
 
+	const span = $derived(columns.reduce((sum, column) => sum + column.width, 0));
 	const head = $derived(columns.map((column) => `${column.width}px`).join(' '));
 	const body = $derived(
 		columns
@@ -15,7 +16,7 @@
 	);
 </script>
 
-<div class="table">
+<div class="table" class:framed style:width={framed ? `${span + 2}px` : undefined}>
 	<div class="head" style:grid-template-columns={head}>
 		{#each columns as column (column.key)}
 			<span class="cell">
@@ -51,7 +52,9 @@
 								{at + 1}
 							{/if}
 						</span>
-						<span class="hit"><Icon name="play" size={10} /></span>
+						<span class="hit"
+							><Icon name={active && player.playing ? 'pause' : 'play'} size={10} /></span
+						>
 					</span>
 				{:else if column.key === 'cover'}
 					<span class="cell"><Cover src={row.cover} size={34} /></span>
@@ -60,6 +63,8 @@
 						<span class="name">{row.title}</span>
 						<span class="like" class:kept={player.likes(row.id)}><Like id={row.id} small /></span>
 					</span>
+				{:else if column.key === 'album'}
+					<span class="cell muted">{shelf.get(row.album)?.title ?? ''}</span>
 				{:else if column.key === 'length'}
 					<span class="cell right muted">{clock(row.length)}</span>
 				{:else}
@@ -73,6 +78,17 @@
 <style>
 	.table {
 		flex: none;
+	}
+
+	.table.framed {
+		box-sizing: border-box;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+		overflow: hidden;
+	}
+
+	.table.framed .row:last-child {
+		border-bottom: 0;
 	}
 
 	.head,

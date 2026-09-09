@@ -10,7 +10,7 @@
 <div class="picker">
 	<button type="button" class="face" onclick={() => (open = !open)} aria-expanded={open}>
 		<span class="label">{value}</span>
-		<Icon name="chevron-down" size={14} />
+		<Icon name="chevron-down" />
 	</button>
 
 	{#if open}
@@ -66,12 +66,27 @@
 		z-index: 5;
 		display: flex;
 		flex-direction: column;
-		gap: 3.5px;
+		gap: 2px;
 		padding: 3.5px;
 		border: 1px solid var(--m-border);
 		border-radius: var(--m-radius);
 		background: var(--m-popover);
 		color: var(--m-popover-foreground);
+		animation: rise 250ms cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: scale(0.99);
+			filter: blur(1.5px);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.menu {
+			animation: none;
+		}
 	}
 
 	.item {
