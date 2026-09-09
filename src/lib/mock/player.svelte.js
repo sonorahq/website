@@ -35,7 +35,8 @@ let rotation = 0;
 let saved = $state(false);
 const liked = new SvelteSet(['t2']);
 let ticker = 0;
-let last = 0;
+let anchor = 0;
+let base = 0;
 
 function replenish() {
 	if (!radio || suggested.length >= 3) return;
@@ -52,10 +53,21 @@ function stop() {
 	ticker = 0;
 }
 
+function wind() {
+	anchor = performance.now();
+	base = elapsed;
+}
+
+/** @param {number} value */
+function land(value) {
+	elapsed = value;
+	wind();
+}
+
 /** @param {string} id */
 function start(id) {
 	current = id;
-	elapsed = 0;
+	land(0);
 	source = after(id);
 	queued = shuffle ? scramble(source) : [...source];
 	from = { name: album.title, kind: 'Album' };
@@ -66,14 +78,14 @@ function advance() {
 		const [next, ...rest] = queued;
 		current = next;
 		queued = rest;
-		elapsed = 0;
+		land(0);
 		return true;
 	}
 	if (suggested.length) {
 		const [next, ...rest] = suggested;
 		current = next;
 		suggested = rest;
-		elapsed = 0;
+		land(0);
 		replenish();
 		return true;
 	}
@@ -82,17 +94,16 @@ function advance() {
 
 /** @param {number} now */
 function tick(now) {
-	const step = Math.min((now - last) / 1000, 0.25);
-	last = now;
 	ticker = requestAnimationFrame(tick);
 
 	const span = catalogue.get(current)?.length ?? 0;
-	if (elapsed + step < span) {
-		elapsed += step;
+	const along = base + (now - anchor) / 1000;
+	if (along < span) {
+		elapsed = along;
 		return;
 	}
 	if (repeat === 2) {
-		elapsed = 0;
+		land(0);
 		return;
 	}
 	if (advance()) return;
@@ -100,7 +111,7 @@ function tick(now) {
 		start(albumOrder[0]);
 		return;
 	}
-	elapsed = span;
+	land(span);
 	playing = false;
 	stop();
 }
@@ -165,10 +176,8 @@ export const player = {
 	resume() {
 		if (playing) return;
 		playing = true;
-		if (!ticker) {
-			last = performance.now();
-			ticker = requestAnimationFrame(tick);
-		}
+		wind();
+		if (!ticker) ticker = requestAnimationFrame(tick);
 	},
 	pause() {
 		playing = false;
@@ -187,14 +196,14 @@ export const player = {
 		const at = queued.indexOf(id);
 		if (at >= 0) {
 			current = id;
-			elapsed = 0;
+			land(0);
 			queued = queued.slice(at + 1);
 			this.resume();
 			return;
 		}
 		if (suggested.includes(id)) {
 			current = id;
-			elapsed = 0;
+			land(0);
 			suggested = suggested.slice(suggested.indexOf(id) + 1);
 			replenish();
 			this.resume();
@@ -205,7 +214,7 @@ export const player = {
 	},
 	previous() {
 		if (elapsed > 3) {
-			elapsed = 0;
+			land(0);
 			return;
 		}
 		const at = albumOrder.indexOf(current);
@@ -220,7 +229,7 @@ export const player = {
 	},
 	/** @param {number} fraction */
 	seek(fraction) {
-		elapsed = fraction * this.track.length;
+		land(fraction * this.track.length);
 	},
 	/** @param {number} level */
 	setVolume(level) {
@@ -231,7 +240,7 @@ export const player = {
 		const rest = scramble(albumOrder);
 		const [first, ...tail] = rest;
 		current = first;
-		elapsed = 0;
+		land(0);
 		source = after(first);
 		queued = tail;
 		from = { name: album.title, kind: 'Album' };
