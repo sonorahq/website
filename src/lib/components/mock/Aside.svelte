@@ -25,11 +25,25 @@
 					icon="radio"
 					title="Autoplay similar tracks"
 					small
-					muted={!player.radio}
-					selected={player.radio}
+					tint={player.radio ? 'primary' : 'muted'}
 					onclick={() => player.toggleRadio()}
 				/>
-				<Control label="Clear" title="Clear" small muted onclick={() => player.clearQueue()} />
+				<Control
+					label="Reset"
+					title="Reset"
+					small
+					tint="muted"
+					disabled={!player.reordered}
+					onclick={() => player.resetQueue()}
+				/>
+				<Control
+					label="Clear"
+					title="Clear"
+					small
+					tint="muted"
+					disabled={upcoming.length === 0}
+					onclick={() => player.clearQueue()}
+				/>
 			</div>
 		{/if}
 	</header>
@@ -37,7 +51,7 @@
 	{#if tab === 'lyrics'}
 		<div class="vacancy">
 			<Icon name="mic-off" size={70} />
-			<p>Could not reach the lyrics service</p>
+			<p>No lyrics found, sorry!</p>
 		</div>
 	{:else}
 		<div class="list">
@@ -45,7 +59,7 @@
 			<div class="card chosen">
 				<Cover src={player.track.cover} />
 				<span class="text">
-					<span class="title">{player.track.title}</span>
+					<span class="title playing">{player.track.title}</span>
 					<span class="caption">{player.track.artist}</span>
 				</span>
 			</div>
@@ -95,14 +109,14 @@
 		flex: none;
 		align-items: center;
 		justify-content: space-between;
-		gap: 8px;
+		gap: 7px;
 		height: 32px;
-		padding: 0 8px;
+		padding: 0 7px;
 		border-bottom: 1px solid var(--m-border);
 	}
 
 	.eyebrow {
-		font-size: 11.9px;
+		font-size: 12px;
 		font-weight: 600;
 		text-transform: uppercase;
 		color: var(--m-muted-foreground);
@@ -111,7 +125,7 @@
 	.tools {
 		display: flex;
 		align-items: center;
-		gap: 4px;
+		gap: 3.5px;
 	}
 
 	.vacancy {
@@ -120,7 +134,6 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		padding: 16px;
 		text-align: center;
 		color: var(--m-muted-foreground);
 	}
@@ -138,14 +151,17 @@
 	.list {
 		display: flex;
 		flex-direction: column;
-		gap: 2px;
-		padding: 8px;
+		padding: 48px 7px 0;
 		overflow: hidden;
 	}
 
 	.group {
-		padding: 8px 8px 4px;
-		font-size: 11.9px;
+		display: flex;
+		flex: none;
+		align-items: flex-end;
+		height: 52px;
+		padding: 0 7px 3.5px;
+		font-size: 12px;
 		font-weight: 600;
 		text-transform: uppercase;
 		color: var(--m-muted-foreground);
@@ -155,7 +171,7 @@
 		display: flex;
 		flex: none;
 		align-items: center;
-		gap: 12px;
+		gap: 10.5px;
 		width: 100%;
 		height: 52px;
 		padding: 8px;
@@ -181,7 +197,7 @@
 		flex: 1;
 		min-width: 0;
 		flex-direction: column;
-		gap: 1px;
+		gap: 2px;
 		line-height: 1.25;
 	}
 
@@ -193,8 +209,12 @@
 		white-space: nowrap;
 	}
 
+	.playing {
+		color: var(--m-primary);
+	}
+
 	.caption {
-		font-size: 11.9px;
+		font-size: 12px;
 		color: var(--m-muted-foreground);
 	}
 </style>
