@@ -110,6 +110,25 @@ export const catalogue = new Map(
 	[...tracks, ...upcoming, ...similar].map((track) => [track.id, track])
 );
 
+export const pinned = [
+	{ id: 'quiet-hours', title: 'Quiet Hours', kind: 'Playlist', icon: 'list', cover: '' },
+	{
+		id: 'bergamasque',
+		title: 'Suite bergamasque',
+		kind: 'Album',
+		icon: 'disc-3',
+		cover: '/cover-bergamasque.webp'
+	},
+	{ id: 'chopin', title: 'Frédéric Chopin', kind: 'Artist', icon: 'user', cover: '', round: true },
+	{
+		id: 'seasons',
+		title: 'The Four Seasons',
+		kind: 'Album',
+		icon: 'disc-3',
+		cover: '/cover-seasons.webp'
+	}
+];
+
 export const nav = [
 	{ id: 'home', label: 'Home', icon: 'house' },
 	{ id: 'search', label: 'Search', icon: 'search' },

@@ -1,14 +1,16 @@
 <script>
 	import Icon from './Icon.svelte';
 
-	let { src = '', size = 36, radius = '4px' } = $props();
+	let { src = '', size = 36, radius = '4px', fallback = 'music', circle = false } = $props();
+
+	const corner = $derived(circle ? '50%' : radius);
 </script>
 
 {#if src}
-	<img {src} width={size} height={size} style:border-radius={radius} alt="" />
+	<img {src} width={size} height={size} style:border-radius={corner} alt="" />
 {:else}
-	<span class="blank" style:width="{size}px" style:height="{size}px" style:border-radius={radius}>
-		<Icon name="music" size={size * 0.46} />
+	<span class="blank" style:width="{size}px" style:height="{size}px" style:border-radius={corner}>
+		<Icon name={fallback} size={size * 0.46} />
 	</span>
 {/if}
 

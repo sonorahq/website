@@ -1,5 +1,6 @@
 <script>
-	import { nav } from '$lib/mock/album.js';
+	import { nav, pinned } from '$lib/mock/album.js';
+	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
 
 	let section = $state('');
@@ -56,6 +57,18 @@
 				{/each}
 			</div>
 		{/if}
+	{/each}
+
+	<span class="group"><span class="eyebrow">Pinned</span></span>
+
+	{#each pinned as entry (entry.id)}
+		<button type="button" class="card">
+			<Cover src={entry.cover} fallback={entry.icon} circle={entry.round ?? false} />
+			<span class="text">
+				<span class="title">{entry.title}</span>
+				<span class="caption">{entry.kind}</span>
+			</span>
+		</button>
 	{/each}
 </nav>
 
@@ -125,5 +138,62 @@
 
 	.tab {
 		margin-left: 12px;
+	}
+
+	.group {
+		display: flex;
+		flex: none;
+		align-items: flex-end;
+		height: 52px;
+		padding: 0 7px 3.5px;
+		font-size: 12px;
+		font-weight: 600;
+		color: var(--m-muted-foreground);
+	}
+
+	.group .eyebrow {
+		text-transform: uppercase;
+	}
+
+	.card {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: 10.5px;
+		width: 100%;
+		height: 52px;
+		padding: 8px;
+		border: 0;
+		border-radius: var(--m-radius);
+		background: none;
+		color: var(--m-muted-foreground);
+		font: inherit;
+		text-align: left;
+		cursor: pointer;
+	}
+
+	.card:hover {
+		background: var(--m-sidebar-accent);
+	}
+
+	.text {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		flex-direction: column;
+		gap: 2px;
+		line-height: 1.25;
+	}
+
+	.title,
+	.caption {
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.caption {
+		font-size: 12px;
 	}
 </style>
