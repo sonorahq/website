@@ -15,6 +15,7 @@
 		art = 0,
 		size = 14,
 		weight = 400,
+		tint = '',
 		flat = false,
 		filled = false,
 		surface = false,
@@ -91,7 +92,12 @@
 			<span class="eyebrow">{eyebrow}</span>
 		{/if}
 		<span class="stack">
-			<span class="title" style:font-size="{size}px" style:font-weight={weight}>{title}</span>
+			<span
+				class="title"
+				style:font-size="{size}px"
+				style:font-weight={weight}
+				style:color={tint || undefined}>{title}</span
+			>
 			{#if meta}<span class="meta">{meta}</span>{/if}
 		</span>
 	</span>

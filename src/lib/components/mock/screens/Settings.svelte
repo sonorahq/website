@@ -1,12 +1,20 @@
 <script>
 	import { settings } from '$lib/mock/settings.svelte.js';
 	import Control from '../Control.svelte';
+	import Icon from '../Icon.svelte';
 	import Picker from '../Picker.svelte';
 	import SettingGroup from '../SettingGroup.svelte';
 	import SettingRow from '../SettingRow.svelte';
 	import Switch from '../Switch.svelte';
 
 	let { tab = 'General' } = $props();
+
+	const listener = { name: 'Alex Rivera', id: '31mfqtv7xk2dwrbn4hpz8ecajlyu' };
+
+	const accounts = [
+		{ slug: 'spotify', name: 'Spotify', status: 'Playing from this service', stored: true },
+		{ slug: 'youtubemusic', name: 'YouTube Music', status: 'Not connected', stored: false }
+	];
 
 	const team = [
 		{ login: 'nolight132', role: 'Lead Maintainer' },
@@ -24,10 +32,10 @@
 	<div class="sheet">
 		{#if tab === 'General'}
 			<div class="profile">
-				<span class="face"></span>
+				<span class="face">{listener.name.slice(0, 1)}</span>
 				<div class="who">
-					<span class="bar wide"></span>
-					<span class="bar narrow"></span>
+					<span class="display">{listener.name}</span>
+					<span class="handle">{listener.id}</span>
 				</div>
 			</div>
 			<hr />
@@ -56,11 +64,32 @@
 					control={trayToggle}
 				/>
 				<SettingGroup label="Accounts" />
-				<SettingRow
-					title="Manage accounts"
-					detail="The services this device can play from"
-					control={accountsAction}
-				/>
+				<div class="accounts">
+					<div class="text">
+						<span>Manage accounts</span>
+						<span class="detail">The services this device can play from</span>
+					</div>
+					{#each accounts as account (account.slug)}
+						<div class="account">
+							<div class="head">
+								<Icon name={account.slug} size={26} />
+								<div class="ident">
+									<span class="name">{account.name}</span>
+									<span class="hint">{account.status}</span>
+								</div>
+								{#if account.stored}
+									<Control icon="log-out" label="Sign out" small />
+								{/if}
+							</div>
+							{#if !account.stored}
+								<div class="methods">
+									<Control variant="outline" small label="Use Guest mode" />
+									<Control variant="outline" small label="Paste cookies manually" />
+								</div>
+							{/if}
+						</div>
+					{/each}
+				</div>
 				<SettingGroup label="Library" />
 				<SettingRow title="Music folders" detail="Not configured" control={folderAction} />
 			</div>
@@ -255,10 +284,6 @@
 		label="Keep playing when closed"
 		onchange={(value) => (settings.tray = value)}
 	/>
-{/snippet}
-
-{#snippet accountsAction()}
-	<Control variant="outline" small label="Not connected" />
 {/snippet}
 
 {#snippet folderAction()}
@@ -479,11 +504,67 @@
 	}
 
 	.face {
+		display: flex;
 		width: 64px;
 		height: 64px;
 		flex: none;
+		align-items: center;
+		justify-content: center;
 		border-radius: 50%;
-		background: var(--m-muted);
+		background: var(--m-secondary);
+		color: var(--m-muted-foreground);
+		font-size: 21.76px;
+	}
+
+	.display {
+		font-size: 19px;
+		font-weight: 600;
+	}
+
+	.handle {
+		font-size: 12px;
+		color: var(--m-muted-foreground);
+	}
+
+	.accounts {
+		display: flex;
+		flex-direction: column;
+		gap: 10.5px;
+		padding: 10.5px 0;
+	}
+
+	.accounts .text {
+		display: flex;
+		flex-direction: column;
+		gap: 3.5px;
+	}
+
+	.detail {
+		font-size: 12px;
+		color: var(--m-muted-foreground);
+	}
+
+	.account {
+		display: flex;
+		flex-direction: column;
+		gap: 10.5px;
+		padding: 8px;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+	}
+
+	.head {
+		display: flex;
+		align-items: center;
+		gap: 10.5px;
+		padding-left: 7px;
+	}
+
+	.methods {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		gap: 7px;
 	}
 
 	.who {
@@ -492,22 +573,6 @@
 		min-width: 0;
 		flex-direction: column;
 		gap: 3.5px;
-	}
-
-	.bar {
-		display: block;
-		border-radius: 4px;
-		background: var(--m-muted);
-	}
-
-	.bar.wide {
-		width: 140px;
-		height: 14px;
-	}
-
-	.bar.narrow {
-		width: 90px;
-		height: 10px;
 	}
 
 	.card {

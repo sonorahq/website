@@ -33,12 +33,17 @@
 	const scale = $derived(Math.min(Math.max(room / WIDTH, FLOOR), 1));
 
 	const tint = $derived(shelf.get(player.track.album)?.tint ?? shelf.get('nocturnes')?.tint);
-	const tokens = $derived(tint ? palette(tint) : {});
+	const tokens = $derived(tint ? palette(tint, settings.adaptive) : {});
+	const scheme = $derived(
+		settings.theme === 'Dark' ? 'dark' : settings.theme === 'Light' ? 'light' : undefined
+	);
 	const style = $derived(
 		Object.entries(tokens)
 			.map(([name, value]) => `${name}:${value}`)
 			.join(';')
 	);
+
+	const still = $derived(settings.motion === 'Never');
 
 	let fading = $state(false);
 	let settle = 0;
@@ -58,8 +63,10 @@
 	<div class="sizer" style:width="{WIDTH * scale}px" style:height="{HEIGHT * scale}px">
 		<div
 			class="app"
-			class:fading
+			class:fading={fading && !still}
+			class:still
 			{style}
+			style:color-scheme={scheme}
 			style:--m-radius="{settings.radius}px"
 			style:transform="scale({scale})"
 		>
@@ -136,6 +143,12 @@
 			background-color 320ms cubic-bezier(0.33, 1, 0.68, 1),
 			border-color 320ms cubic-bezier(0.33, 1, 0.68, 1),
 			color 320ms cubic-bezier(0.33, 1, 0.68, 1);
+	}
+
+	.still,
+	.still :global(*) {
+		transition: none !important;
+		animation: none !important;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
