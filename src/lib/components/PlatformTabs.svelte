@@ -48,7 +48,13 @@
 		color: var(--fg);
 	}
 
+	.sm {
+		width: 100%;
+	}
+
 	.sm button {
+		flex: 1 1 auto;
+		min-width: 0;
 		height: 28px;
 		padding: 0 11px;
 		font-size: 12px;

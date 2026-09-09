@@ -130,7 +130,7 @@
 		scroll-margin-top: calc(var(--header) + 24px);
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: stretch;
 		gap: 8px;
 		margin-top: 26px;
 	}
