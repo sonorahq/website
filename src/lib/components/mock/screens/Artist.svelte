@@ -1,9 +1,17 @@
 <script>
-	import { albumsOf, artistColumns, artists, popularOf } from '$lib/mock/screens.js';
+	import {
+		ABOUT_FALLBACK,
+		albumsOf,
+		artistColumns,
+		artists,
+		popularOf
+	} from '$lib/mock/screens.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import { route } from '$lib/mock/route.svelte.js';
+	import About from '../About.svelte';
 	import Card from '../Card.svelte';
 	import Control from '../Control.svelte';
+	import Modal from '../Modal.svelte';
 	import PageHero from '../PageHero.svelte';
 	import Table from '../Table.svelte';
 
@@ -23,9 +31,12 @@
 
 	let { id = 'chopin' } = $props();
 
+	const DIALOG = 630;
+
 	let expanded = $state(false);
 	let spread = $state(false);
 	let filter = $state('All');
+	let telling = $state(false);
 
 	const artist = $derived(artists.find((one) => one.id === id) ?? artists[0]);
 	const popular = $derived(popularOf(artist.id));
@@ -63,93 +74,123 @@
 		expanded = false;
 		spread = false;
 		filter = 'All';
+		telling = false;
 	});
 </script>
 
-<div class="page">
-	<PageHero
-		title={artist.name}
-		eyebrow="Artist"
-		fallback="user-round"
-		circle
-		meta={[`${artist.listeners} monthly listeners`]}
-	>
-		{#snippet actions()}
-			<Control
-				variant="filled"
-				icon={holding ? 'pause' : 'play'}
-				label={holding ? 'Pause' : mine ? 'Resume' : 'Play now'}
-				onclick={() => {
-					if (holding) player.pause();
-					else if (mine) player.resume();
-					else if (popular.length) player.select(popular[0].id);
-				}}
-			/>
-			<Control variant="outline" icon="shuffle" title="Shuffle" />
-			<Control variant="outline" icon="heart" title="Add to library" />
-			<Control icon="ellipsis" title="More" />
-		{/snippet}
-	</PageHero>
-
-	<h2>Popular</h2>
-	<div class="listed">
-		<Table framed columns={artistColumns} rows={listed} />
-		{#if popular.length > LISTED}
-			<span class="toggle">
+<div class="frame">
+	<div class="page">
+		<PageHero
+			title={artist.name}
+			eyebrow="Artist"
+			fallback="user-round"
+			circle
+			meta={[`${artist.listeners} monthly listeners`]}
+		>
+			{#snippet actions()}
 				<Control
-					small
-					label={expanded ? 'Show less' : 'Show all'}
-					trailing={expanded ? 'chevron-up' : 'chevron-down'}
-					onclick={() => (expanded = !expanded)}
+					variant="filled"
+					icon={holding ? 'pause' : 'play'}
+					label={holding ? 'Pause' : mine ? 'Resume' : 'Play now'}
+					onclick={() => {
+						if (holding) player.pause();
+						else if (mine) player.resume();
+						else if (popular.length) player.select(popular[0].id);
+					}}
 				/>
-			</span>
-		{/if}
-	</div>
+				<Control variant="outline" icon="shuffle" title="Shuffle" />
+				<Control variant="outline" icon="heart" title="Add to library" />
+				<Control icon="ellipsis" title="More" />
+			{/snippet}
+		</PageHero>
 
-	{#if releases.length}
-		<section class="releases">
-			<h2 class="flush">Releases</h2>
-			{#if filters.length}
-				<div class="filters">
-					{#each filters as one (one)}
-						<Control
-							small
-							variant="outline"
-							label={one}
-							selected={filter === one}
-							onclick={() => narrow(one)}
-						/>
-					{/each}
-				</div>
-			{/if}
-			<div class="grid" style:gap="21px {GAP}px">
-				{#each shown as entry (entry.id)}
-					<Card
-						tile={CARD}
-						flat
-						weight={600}
-						title={entry.title}
-						meta="{entry.released} · {entry.artist}"
-						cover={entry.cover}
-						onpress={() => route.go({ screen: 'album', id: entry.id })}
-					/>
-				{/each}
-			</div>
-			{#if matching.length > COLUMNS * RELEASE_ROWS}
+		<h2>Popular</h2>
+		<div class="listed">
+			<Table framed columns={artistColumns} rows={listed} />
+			{#if popular.length > LISTED}
 				<span class="toggle">
 					<Control
 						small
-						label={spread ? 'Show less' : 'Show all'}
-						trailing={spread ? 'chevron-up' : 'chevron-down'}
-						onclick={() => (spread = !spread)}
+						label={expanded ? 'Show less' : 'Show all'}
+						trailing={expanded ? 'chevron-up' : 'chevron-down'}
+						onclick={() => (expanded = !expanded)}
 					/>
 				</span>
 			{/if}
-		</section>
+		</div>
+
+		{#if releases.length}
+			<section class="releases">
+				<h2 class="flush">Releases</h2>
+				{#if filters.length}
+					<div class="filters">
+						{#each filters as one (one)}
+							<Control
+								small
+								variant="outline"
+								label={one}
+								selected={filter === one}
+								onclick={() => narrow(one)}
+							/>
+						{/each}
+					</div>
+				{/if}
+				<div class="grid" style:gap="21px {GAP}px">
+					{#each shown as entry (entry.id)}
+						<Card
+							tile={CARD}
+							flat
+							weight={600}
+							title={entry.title}
+							meta="{entry.released} · {entry.artist}"
+							cover={entry.cover}
+							onpress={() => route.go({ screen: 'album', id: entry.id })}
+						/>
+					{/each}
+				</div>
+				{#if matching.length > COLUMNS * RELEASE_ROWS}
+					<span class="toggle">
+						<Control
+							small
+							label={spread ? 'Show less' : 'Show all'}
+							trailing={spread ? 'chevron-up' : 'chevron-down'}
+							onclick={() => (spread = !spread)}
+						/>
+					</span>
+				{/if}
+			</section>
+		{/if}
+
+		<div class="about">
+			<About name={artist.name} biography={artist.biography} onpress={() => (telling = true)} />
+		</div>
+	</div>
+
+	{#if telling}
+		<Modal
+			title="About the artist"
+			detail={artist.name}
+			width={DIALOG}
+			ondismiss={() => (telling = false)}
+		>
+			{#snippet body()}
+				{artist.biography || ABOUT_FALLBACK}
+			{/snippet}
+			{#snippet actions()}
+				<Control variant="filled" label="Dismiss" onclick={() => (telling = false)} />
+			{/snippet}
+		</Modal>
 	{/if}
 </div>
 
 <style>
+	.frame {
+		position: relative;
+		display: flex;
+		flex: 1;
+		min-width: 0;
+	}
+
 	.page {
 		display: flex;
 		flex: 1;
@@ -208,5 +249,10 @@
 		width: 100%;
 		flex-wrap: wrap;
 		flex: none;
+	}
+	.about {
+		display: flex;
+		flex: none;
+		padding-top: 21px;
 	}
 </style>
