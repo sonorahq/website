@@ -141,11 +141,15 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		padding: 0 6px 0 14px;
+		padding: 0 7px 0 14px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
 		background: var(--card);
 		text-align: left;
+	}
+
+	.command:hover {
+		border-color: var(--secondary-active);
 	}
 
 	.prompt {

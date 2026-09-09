@@ -1,6 +1,7 @@
 <script>
 	import { platforms } from '$lib/data/platforms.js';
 	import { platform } from '$lib/platform.svelte.js';
+	import Mark from './Mark.svelte';
 
 	let { size = 'sm' } = $props();
 </script>
@@ -12,7 +13,8 @@
 			class:on={platform.id === entry.id}
 			onclick={() => (platform.id = entry.id)}
 		>
-			{entry.label}
+			<Mark name={entry.mark} size={size === 'lg' ? 15 : 13} />
+			<span>{entry.label}</span>
 		</button>
 	{/each}
 </div>
@@ -28,6 +30,10 @@
 	}
 
 	button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 7px;
 		border-radius: var(--radius);
 		font-weight: 500;
 		color: var(--muted-fg);
@@ -44,7 +50,7 @@
 
 	.sm button {
 		height: 28px;
-		padding: 0 12px;
+		padding: 0 11px;
 		font-size: 12px;
 	}
 
@@ -58,7 +64,7 @@
 
 	.lg button {
 		height: 36px;
-		padding: 0 20px;
+		padding: 0 18px;
 		font-size: 14px;
 	}
 

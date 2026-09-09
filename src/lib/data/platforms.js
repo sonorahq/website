@@ -1,6 +1,7 @@
 export const platforms = [
 	{
 		id: 'macos',
+		mark: 'apple',
 		label: 'macOS',
 		download: 'Download for macOS',
 		prompt: '$',
@@ -19,6 +20,7 @@ export const platforms = [
 	},
 	{
 		id: 'arch',
+		mark: 'arch',
 		label: 'Arch',
 		download: 'Download for Arch',
 		prompt: '$',
@@ -35,6 +37,7 @@ export const platforms = [
 	},
 	{
 		id: 'flatpak',
+		mark: 'flatpak',
 		label: 'Flatpak',
 		download: 'Download the .flatpak',
 		prompt: '$',
@@ -54,6 +57,7 @@ export const platforms = [
 	},
 	{
 		id: 'nix',
+		mark: 'nix',
 		label: 'Nix',
 		download: 'Download for Nix',
 		prompt: '$',
@@ -78,6 +82,7 @@ export const platforms = [
 	},
 	{
 		id: 'windows',
+		mark: 'windows',
 		label: 'Windows',
 		download: 'Download for Windows',
 		prompt: '',

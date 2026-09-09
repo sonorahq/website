@@ -14,7 +14,7 @@
 	}
 </script>
 
-<button onclick={copy} aria-label={copied ? 'Copied' : 'Copy command'}>
+<button class:done={copied} onclick={copy} aria-label={copied ? 'Copied' : 'Copy command'}>
 	{#if copied}
 		<svg
 			width="14"
@@ -49,19 +49,23 @@
 
 <style>
 	button {
-		width: 34px;
-		height: 34px;
+		width: 32px;
+		height: 32px;
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		border-radius: var(--radius);
-		background: var(--border);
-		color: var(--chip-fg);
+		background: none;
+		color: var(--dim);
 	}
 
 	button:hover {
-		background: var(--secondary-active);
+		background: var(--secondary-hover);
+		color: var(--fg);
+	}
+
+	button.done {
 		color: var(--fg);
 	}
 </style>
