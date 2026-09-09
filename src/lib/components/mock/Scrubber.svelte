@@ -1,5 +1,10 @@
 <script>
-	let { fraction, label, onseek } = $props();
+	let {
+		fraction,
+		label,
+		onseek,
+		empty = 'color-mix(in srgb, var(--m-muted-foreground) 30%, transparent)'
+	} = $props();
 
 	let bar = $state(/** @type {HTMLElement | null} */ (null));
 	let held = $state(false);
@@ -46,7 +51,7 @@
 	onpointerup={release}
 	onpointercancel={release}
 >
-	<div bind:this={bar} class="bar">
+	<div bind:this={bar} class="bar" style:background={empty}>
 		<div class="filled" style:width="calc(6px + (100% - 12px) * {fraction})"></div>
 		<div class="thumb" style:left="calc((100% - 12px) * {fraction})"></div>
 	</div>
@@ -68,7 +73,6 @@
 		width: 100%;
 		height: 4px;
 		border-radius: 999px;
-		background: color-mix(in srgb, var(--m-muted-foreground) 30%, transparent);
 	}
 
 	.filled {
