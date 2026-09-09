@@ -207,12 +207,12 @@
 									{#if edges[slot] > 0}
 										<span
 											class="lit"
-											class:soft={trail(slot) > 0}
 											style:left="{row.left}px"
 											style:top="{row.top}px"
-											style:width="{edges[slot]}px"
+											style:width="{row.width}px"
 											style:height="{row.height}px"
-											style:--m-reveal="{trail(slot)}px"
+											style:--m-solid="{Math.max(edges[slot] - trail(slot), 0)}px"
+											style:--m-edge="{edges[slot]}px"
 										>
 											<span
 												class="copy"
@@ -404,17 +404,18 @@
 
 	.lit {
 		position: absolute;
-		overflow: hidden;
 		color: var(--m-foreground);
+		mask-image: linear-gradient(
+			to right,
+			#000 var(--m-solid),
+			transparent var(--m-edge),
+			transparent 100%
+		);
 	}
 
 	.copy {
 		position: absolute;
 		display: block;
-	}
-
-	.soft {
-		mask-image: linear-gradient(to right, #000 calc(100% - var(--m-reveal)), transparent 100%);
 	}
 
 	.credit {
