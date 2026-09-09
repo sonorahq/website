@@ -6,6 +6,7 @@ export const albums = [
 		released: '1912',
 		eyebrow: 'Album',
 		cover: '/cover-airs.webp',
+		release: 'Album',
 		tint: { hue: 171.89, saturation: 0.371 }
 	},
 	{
@@ -14,6 +15,7 @@ export const albums = [
 		artist: 'Frédéric Chopin',
 		released: '1846',
 		cover: '/cover-nocturnes.webp',
+		release: 'Album',
 		tint: { hue: 218.72, saturation: 0.368 }
 	},
 	{
@@ -22,6 +24,7 @@ export const albums = [
 		artist: 'Claude Debussy',
 		released: '1905',
 		cover: '/cover-bergamasque.webp',
+		release: 'Album',
 		tint: { hue: 202.07, saturation: 0.299 }
 	},
 	{
@@ -30,6 +33,7 @@ export const albums = [
 		artist: 'Erik Satie',
 		released: '1888',
 		cover: '/cover-gymnopedies.webp',
+		release: 'Album',
 		tint: { hue: 94.64, saturation: 0.307 }
 	},
 	{
@@ -38,6 +42,7 @@ export const albums = [
 		artist: 'Antonio Vivaldi',
 		released: '1725',
 		cover: '/cover-seasons.webp',
+		release: 'Album',
 		tint: { hue: 48.64, saturation: 0.722 }
 	},
 	{
@@ -46,6 +51,7 @@ export const albums = [
 		artist: 'Edvard Grieg',
 		released: '1875',
 		cover: '/cover-peer-gynt.webp',
+		release: 'Album',
 		tint: { hue: 22.62, saturation: 0.368 }
 	},
 	{
@@ -54,6 +60,7 @@ export const albums = [
 		artist: 'Modest Mussorgsky',
 		released: '1874',
 		cover: '/cover-pictures.webp',
+		release: 'Album',
 		tint: { hue: 9.28, saturation: 0.622 }
 	}
 ];
@@ -217,6 +224,7 @@ export const pinned = [
 		kind: 'Album',
 		icon: 'disc-3',
 		cover: '/cover-bergamasque.webp',
+		release: 'Album',
 		to: { screen: 'album', id: 'bergamasque' }
 	},
 	{
@@ -234,6 +242,7 @@ export const pinned = [
 		kind: 'Album',
 		icon: 'disc-3',
 		cover: '/cover-seasons.webp',
+		release: 'Album',
 		to: { screen: 'album', id: 'seasons' }
 	}
 ];

@@ -18,8 +18,8 @@
 
 	let { shelf = 'library', tab = 'Songs' } = $props();
 
-	const CARD = 146;
-	const GAP = 32;
+	const CARD = 145;
+	const GAP = 33;
 
 	const local = $derived(shelf === 'local');
 	const songs = $derived(local ? localTracks : favorites);
@@ -63,7 +63,7 @@
 		</div>
 		<Table columns={libraryColumns} rows={songs} />
 	{:else if tab === 'Albums'}
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#each shown as entry (entry.id)}
 				<Card
 					tile={CARD}
@@ -78,7 +78,7 @@
 			{/each}
 		</div>
 	{:else if tab === 'Artists'}
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#each people as artist (artist.id)}
 				<Card
 					tile={CARD}
@@ -93,7 +93,7 @@
 			{/each}
 		</div>
 	{:else}
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#if !lists.length}
 				<span class="vacant">No local playlists yet</span>
 			{/if}
