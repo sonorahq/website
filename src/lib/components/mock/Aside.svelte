@@ -3,6 +3,7 @@
 	import { catalogue } from '$lib/mock/album.js';
 	import { lyrics, writers } from '$lib/mock/lyrics.js';
 	import { player } from '$lib/mock/player.svelte.js';
+	import { settings } from '$lib/mock/settings.svelte.js';
 	import Control from './Control.svelte';
 	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
@@ -22,8 +23,16 @@
 	const SWEEP_STRETCH = 1.4;
 	const SWEEP_LEAST = 0.18;
 	const SWEPT = 0.98;
+	const BLUR = 0.13;
+	const HAZE = 0.45;
+	const VEIL = 0.3;
+	const VERSE = 21;
+	const HAZE_LEAST = 0.05;
 
 	const verses = $derived(lyrics.get(player.id) ?? []);
+
+	/** @param {{ words?: unknown[] }} line */
+	const sung = (line) => settings.karaoke && !!line.words;
 	const at = $derived(player.elapsed);
 	const active = $derived(
 		verses.reduce((found, line, index) => (at >= line.start ? index : found), -1)
@@ -32,13 +41,32 @@
 	let roll = $state(/** @type {HTMLElement | null} */ (null));
 	let sheet = $state(/** @type {HTMLElement | null} */ (null));
 	let lift = $state(0);
+	let veils = $state(/** @type {number[]} */ ([]));
 
 	$effect(() => {
 		void active;
+		void settings.blur;
 		if (!roll || !sheet) return;
 		const line = sheet.children[Math.max(active, 0)];
 		if (!(line instanceof HTMLElement)) return;
-		lift = roll.clientHeight * PIN - line.offsetTop;
+		const height = roll.clientHeight;
+		const rise = height * PIN - line.offsetTop;
+		lift = rise;
+
+		/** @type {number[]} */
+		const hazed = [];
+		for (let index = 0; index < verses.length; index += 1) {
+			const row = sheet.children[index];
+			if (!settings.blur || index === active || !(row instanceof HTMLElement)) {
+				hazed.push(0);
+				continue;
+			}
+			const travel = row.offsetTop + rise - height * PIN;
+			const span = height * (travel >= 0 ? 1 - PIN : PIN);
+			const along = Math.min(Math.max(travel / Math.max(span, 1), -1), 1);
+			hazed.push(Math.abs(along) ** HAZE);
+		}
+		veils = hazed;
 	});
 
 	let spans = $state(/** @type {(HTMLElement | null)[]} */ ([]));
@@ -194,11 +222,15 @@
 					<p
 						class="verse"
 						class:sung={index === active}
-						class:karaoke={index === active && !!line.words}
+						class:karaoke={index === active && sung(line)}
 						class:past={index < active}
 						class:ahead={index > active}
+						style:opacity={1 - VEIL * (veils[index] ?? 0)}
+						style:filter={VERSE * BLUR * (veils[index] ?? 0) > HAZE_LEAST
+							? `blur(${VERSE * BLUR * (veils[index] ?? 0)}px)`
+							: undefined}
 					>
-						{#if index === active && line.words}
+						{#if index === active && sung(line)}
 							<span class="body" bind:this={body}>
 								{#each line.words as word, spot (spot)}<span class="word" bind:this={spans[spot]}
 										>{word.word}</span
