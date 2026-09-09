@@ -91,8 +91,9 @@
 		const front = rows.map(() => 0);
 		words.forEach((word, spot) => {
 			const seat = plan[spot];
-			if (!seat) return;
-			const reach = seat.x + seat.width * swept(word, spot + 1 === words.length);
+			const part = seat ? swept(word, spot + 1 === words.length) : 0;
+			if (!seat || part <= 0) return;
+			const reach = seat.x + seat.width * part;
 			if (reach > front[seat.row]) front[seat.row] = reach;
 		});
 		return front;
