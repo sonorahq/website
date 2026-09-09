@@ -1,11 +1,12 @@
 <script>
 	import { nav, pinned } from '$lib/mock/album.js';
-	import Cover from './Cover.svelte';
+	import { route } from '$lib/mock/route.svelte.js';
+	import Card from './Card.svelte';
 	import Icon from './Icon.svelte';
 
-	let section = $state('');
-	let current = $state('');
 	let open = $state('library');
+
+	const at = $derived(route.now);
 
 	/** @param {{ id: string, tabs?: string[] }} entry */
 	function pick(entry) {
@@ -13,16 +14,17 @@
 			open = open === entry.id ? '' : entry.id;
 			return;
 		}
-		section = entry.id;
-		current = entry.id;
-		open = '';
+		route.go({ screen: entry.id });
 	}
 
-	/** @param {string} id @param {string} tab */
-	function choose(id, tab) {
-		section = id;
-		current = `${id}/${tab}`;
-	}
+	/** @param {{ id: string }} entry */
+	const inside = (entry) => at.screen === entry.id;
+
+	/** @param {{ id: string }} entry @param {string} tab */
+	const chosen = (entry, tab) => at.screen === entry.id && at.tab === tab;
+
+	/** @param {{ to: { screen: string, id: string } }} entry */
+	const here = (entry) => at.screen === entry.to.screen && at.id === entry.to.id;
 </script>
 
 <nav class="sidebar">
@@ -30,8 +32,8 @@
 		<button
 			type="button"
 			class="row"
-			class:lit={section === entry.id}
-			class:on={!entry.tabs && current === entry.id}
+			class:lit={inside(entry)}
+			class:on={!entry.tabs && inside(entry)}
 			onclick={() => pick(entry)}
 		>
 			<Icon name={entry.icon} />
@@ -44,16 +46,17 @@
 		{#if entry.tabs && open === entry.id}
 			<div class="tabs">
 				{#each entry.tabs as tab (tab)}
-					{@const chosen = current === `${entry.id}/${tab}`}
-					<button
-						type="button"
-						class="row tab"
-						class:lit={chosen}
-						class:on={chosen}
-						onclick={() => choose(entry.id, tab)}
-					>
-						<span class="label">{tab}</span>
-					</button>
+					<span class="seat">
+						<button
+							type="button"
+							class="row tab"
+							class:lit={chosen(entry, tab)}
+							class:on={chosen(entry, tab)}
+							onclick={() => route.go({ screen: entry.id, tab })}
+						>
+							<span class="label">{tab}</span>
+						</button>
+					</span>
 				{/each}
 			</div>
 		{/if}
@@ -62,13 +65,19 @@
 	<span class="group"><span class="eyebrow">Pinned</span></span>
 
 	{#each pinned as entry (entry.id)}
-		<button type="button" class="card">
-			<Cover src={entry.cover} fallback={entry.icon} circle={entry.round ?? false} />
-			<span class="text">
-				<span class="title">{entry.title}</span>
-				<span class="caption">{entry.kind}</span>
-			</span>
-		</button>
+		<span class="pin" class:here={here(entry)}>
+			<Card
+				flat
+				title={entry.title}
+				meta={entry.kind}
+				cover={entry.cover}
+				fallback={entry.icon}
+				tint={here(entry) ? 'var(--m-foreground)' : 'var(--m-muted-foreground)'}
+				circle={entry.round ?? false}
+				onplay={() => route.go(entry.to)}
+				onpress={() => route.go(entry.to)}
+			/>
+		</span>
 	{/each}
 </nav>
 
@@ -80,7 +89,9 @@
 		gap: 3.5px;
 		width: 195px;
 		padding: 10.5px;
-		overflow: hidden;
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: color-mix(in srgb, var(--m-muted-foreground) 45%, transparent) transparent;
 		background: var(--m-sidebar);
 		border-right: 1px solid var(--m-sidebar-border);
 	}
@@ -136,8 +147,16 @@
 		background: var(--m-sidebar-border);
 	}
 
+	.seat {
+		display: flex;
+		align-items: center;
+		height: 32px;
+		padding-left: 10.5px;
+	}
+
 	.tab {
-		margin-left: 12px;
+		flex: 1;
+		min-width: 0;
 	}
 
 	.group {
@@ -155,45 +174,19 @@
 		text-transform: uppercase;
 	}
 
-	.card {
+	.pin {
 		display: flex;
 		flex: none;
-		align-items: center;
-		gap: 10.5px;
-		width: 100%;
-		height: 52px;
-		padding: 8px;
-		border: 0;
 		border-radius: var(--m-radius);
-		background: none;
 		color: var(--m-muted-foreground);
-		font: inherit;
-		text-align: left;
-		cursor: pointer;
 	}
 
-	.card:hover {
+	.pin.here {
 		background: var(--m-sidebar-accent);
+		color: var(--m-foreground);
 	}
 
-	.text {
-		display: flex;
-		flex: 1;
-		min-width: 0;
-		flex-direction: column;
-		gap: 2px;
-		line-height: 1.25;
-	}
-
-	.title,
-	.caption {
-		min-width: 0;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	.caption {
-		font-size: 12px;
+	.pin:hover {
+		background: var(--m-sidebar-accent);
 	}
 </style>

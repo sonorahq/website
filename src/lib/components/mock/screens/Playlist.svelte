@@ -1,23 +1,29 @@
 <script>
-	import { album as first, clock, columns, records, shelf } from '$lib/mock/album.js';
+	import { clock } from '$lib/mock/album.js';
+	import { libraryColumns, playlists, favorites } from '$lib/mock/screens.js';
 	import { player } from '$lib/mock/player.svelte.js';
-	import Control from './Control.svelte';
-	import PageHero from './PageHero.svelte';
-	import Table from './Table.svelte';
+	import Control from '../Control.svelte';
+	import PageHero from '../PageHero.svelte';
+	import Table from '../Table.svelte';
 
-	let { id = 'airs' } = $props();
+	let { id = 'quiet-hours' } = $props();
 
-	const album = $derived(shelf.get(id) ?? first);
-	const rows = $derived(records.get(id) ?? []);
-	const total = $derived(rows.reduce((sum, track) => sum + track.length, 0));
+	const list = $derived(playlists.find((one) => one.id === id) ?? playlists[0]);
+	const rows = favorites;
+	const total = rows.reduce((sum, track) => sum + track.length, 0);
 	const mine = $derived(rows.some((track) => track.id === player.id));
 	const holding = $derived(mine && player.playing);
-	const meta = $derived([album.artist, album.released, `${rows.length} songs`, clock(total)]);
 </script>
 
-<div class="screen">
+<div class="page">
 	<div class="gutter">
-		<PageHero title={album.title} eyebrow={album.eyebrow ?? 'Album'} cover={album.cover} {meta}>
+		<PageHero
+			title={list.name}
+			eyebrow="Playlist"
+			fallback="list-music"
+			accent
+			meta={[list.owner, `${rows.length} songs`, clock(total)]}
+		>
 			{#snippet actions()}
 				<Control
 					variant="filled"
@@ -35,23 +41,15 @@
 					title="Shuffle"
 					onclick={() => player.playShuffled()}
 				/>
-				<Control
-					variant="outline"
-					icon={player.saved ? 'heart-filled' : 'heart'}
-					title={player.saved ? 'Remove from library' : 'Add to library'}
-					tint={player.saved ? 'primary' : ''}
-					onclick={() => player.toggleSaved()}
-				/>
 				<Control icon="ellipsis" title="More" />
 			{/snippet}
 		</PageHero>
 	</div>
-
-	<Table {columns} {rows} />
+	<Table columns={libraryColumns} {rows} />
 </div>
 
 <style>
-	.screen {
+	.page {
 		display: flex;
 		flex: 1;
 		min-width: 0;

@@ -11,6 +11,7 @@ const surfaces = {
 	'secondary-hover': [89.8, 13.7],
 	'secondary-active': [83.1, 18.8],
 	muted: [89.8, 14.9],
+	popover: [100, 7.8],
 	sidebar: [96.1, 3.9],
 	'sidebar-accent': [89.8, 14.9],
 	'table-hover': [94.1, 14.9]
@@ -25,6 +26,7 @@ const borders = {
 const texts = {
 	foreground: [9, 98],
 	'muted-foreground': [45.1, 45.1],
+	'popover-foreground': [9, 98],
 	'table-head-foreground': [45.1, 32.2]
 };
 
@@ -57,11 +59,12 @@ const wash = (hue, saturation, strength, lightness, alpha = 1) =>
 
 /**
  * @param {{ hue: number, saturation: number }} tint
+ * @param {boolean} adaptive
  * @returns {Record<string, string>}
  */
-export function palette(tint) {
-	const { hue } = tint;
-	const saturation = tint.saturation;
+export function palette(tint, adaptive = true) {
+	const hue = adaptive ? tint.hue : 0;
+	const saturation = adaptive ? tint.saturation : 0;
 	const accent = clamp(saturation, MIN_ACCENT_SATURATION, MAX_ACCENT_SATURATION);
 
 	/** @type {Record<string, string>} */
@@ -90,6 +93,16 @@ export function palette(tint) {
 			wash(hue, saturation, strength, light, alpha[0]),
 			wash(hue, saturation, strength, dark, alpha[1])
 		);
+	}
+
+	if (!adaptive) {
+		put('primary', hsl(0, 0, 9), hsl(0, 0, 98));
+		put('primary-hover', hsl(0, 0, 14.9), hsl(0, 0, 89.8));
+		put('primary-foreground', hsl(0, 0, 98), hsl(0, 0, 9));
+		put('progress-bar', hsl(0, 0, 14.9), hsl(0, 0, 96.1));
+		put('table-active', hsl(221.2, 0.832, 53.3, 0.122), hsl(226.2, 0.707, 40.2, 0.2));
+
+		return tokens;
 	}
 
 	put('primary', hsl(hue, accent, 42), hsl(hue, accent, 72));
