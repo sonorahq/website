@@ -60,13 +60,13 @@
 		transform-origin: top left;
 		overflow: hidden;
 		font-size: 14px;
-		line-height: 1.25;
+		line-height: 1.618;
 		letter-spacing: normal;
 		color: var(--m-foreground);
 		background: var(--m-background);
 		user-select: none;
 
-		--m-radius: 6px;
+		--m-radius: 10px;
 
 		--m-background: hsl(202.9 29.6% 3.9%);
 		--m-foreground: hsl(202.9 7.1% 98%);

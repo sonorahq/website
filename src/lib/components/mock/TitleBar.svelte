@@ -5,30 +5,34 @@
 </script>
 
 <div class="bar">
-	<div class="leading">
+	<div class="leading" style:width={left ? '195px' : undefined}>
 		<Control
 			icon={left ? 'panel-left-close' : 'panel-left-open'}
 			title="Toggle sidebar"
+			small
 			onclick={() => (left = !left)}
 		/>
 	</div>
 
 	<div class="middle">
-		<Control icon="chevron-left" title="Back" muted />
-		<Control icon="chevron-right" title="Forward" muted />
-	</div>
+		<div class="history">
+			<Control icon="chevron-left" title="Back" size={28} disabled />
+			<Control icon="chevron-right" title="Forward" size={28} disabled />
+		</div>
 
-	<div class="tools">
-		<Control icon="columns-3" title="Columns" muted />
-		<Control icon="funnel" title="Filters" muted />
-		<Control icon="arrow-up-down" title="Sort" muted />
-		<Control icon="search" title="Search" muted />
+		<div class="tools">
+			<Control icon="columns-3" title="Columns" small />
+			<Control icon="funnel" title="Filters" small tint="muted" />
+			<Control icon="arrow-up-down" title="Sort" small tint="muted" />
+			<Control icon="search" title="Search" small />
+		</div>
 	</div>
 
 	<div class="trail">
 		<Control
 			icon={right ? 'panel-right-close' : 'panel-right-open'}
 			title="Show or hide lyrics and queue"
+			small
 			selected={right}
 			onclick={() => (right = !right)}
 		/>
@@ -49,9 +53,9 @@
 		display: flex;
 		flex: none;
 		align-items: center;
-		gap: 4px;
+		gap: 3.5px;
 		padding-left: 12px;
-		padding-right: 12px;
+		padding-right: 10.5px;
 	}
 
 	.middle {
@@ -59,15 +63,27 @@
 		flex: 1;
 		min-width: 0;
 		align-items: center;
-		gap: 4px;
+		gap: 3.5px;
+		padding-right: 10.5px;
 	}
 
-	.tools,
+	.history,
+	.tools {
+		display: flex;
+		align-items: center;
+		gap: 3.5px;
+	}
+
+	.tools {
+		flex: 1;
+		min-width: 0;
+		justify-content: flex-end;
+	}
+
 	.trail {
 		display: flex;
 		flex: none;
 		align-items: center;
-		gap: 4px;
-		padding-right: 12px;
+		padding-right: 10.5px;
 	}
 </style>

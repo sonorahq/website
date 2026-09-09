@@ -61,12 +61,14 @@ export const nav = [
 ];
 
 export const columns = [
-	{ key: 'index', label: '#', width: '44px', align: 'center' },
-	{ key: 'title', label: 'Title', width: 'minmax(0, 2fr)', sortable: true },
-	{ key: 'artist', label: 'Artist', width: 'minmax(0, 1.35fr)', sortable: true },
-	{ key: 'plays', label: 'Plays', width: '124px', sortable: true },
-	{ key: 'length', label: 'Length', width: '84px', align: 'right', sortable: true }
+	{ key: 'index', label: '#', width: 44, align: 'center' },
+	{ key: 'title', label: 'Title', width: 303.905, sortable: true },
+	{ key: 'artist', label: 'Artist', width: 153.095, sortable: true },
+	{ key: 'plays', label: 'Plays', width: 108, sortable: true },
+	{ key: 'length', label: 'Length', width: 120, align: 'right', sortable: true }
 ];
+
+export const TRAIL = 4;
 
 export const total = tracks.reduce((sum, track) => sum + track.length, 0);
 
