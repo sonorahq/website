@@ -7,8 +7,18 @@
 	import Mark from './Mark.svelte';
 	import PlatformTabs from './PlatformTabs.svelte';
 
+	const NARROW = '(max-width: 900px)';
+
+	let small = $state(false);
+
 	onMount(() => {
 		platform.id = detectPlatform();
+
+		const narrow = window.matchMedia(NARROW);
+		small = narrow.matches;
+		const follow = () => (small = narrow.matches);
+		narrow.addEventListener('change', follow);
+		return () => narrow.removeEventListener('change', follow);
 	});
 </script>
 
@@ -64,9 +74,24 @@
 
 	<figure class="shot">
 		<div class="frame">
-			<AppMock />
+			{#if small}
+				<img
+					src="/app-artist.webp"
+					width="1100"
+					height="660"
+					alt="An artist page in Sonora with the play queue open"
+				/>
+			{:else}
+				<AppMock />
+			{/if}
 		</div>
-		<figcaption>A first look — a working rebuild of the app, not a video. Try it.</figcaption>
+		<figcaption>
+			{#if small}
+				Sonora on a desktop — open this page there to try the live rebuild.
+			{:else}
+				A first look — a working rebuild of the app, not a video. Try it.
+			{/if}
+		</figcaption>
 	</figure>
 </section>
 
@@ -168,13 +193,35 @@
 		box-shadow: var(--shadow);
 	}
 
+	.frame img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
 	figcaption {
 		align-self: flex-end;
 		font-size: 12px;
 		color: var(--dim);
 	}
 
-	@media (max-height: 920px) and (min-width: 901px) {
+	@media (max-width: 1303px) and (min-width: 901px) {
+		.hero {
+			min-height: 0;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 32px;
+			padding-bottom: 64px;
+		}
+
+		.pitch {
+			width: auto;
+			min-width: 0;
+			max-width: 720px;
+		}
+	}
+
+	@media (max-height: 920px) and (min-width: 1304px) {
 		.hero {
 			padding-top: 48px;
 			padding-bottom: 56px;
