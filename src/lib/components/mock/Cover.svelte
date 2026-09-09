@@ -1,7 +1,7 @@
 <script>
 	import Icon from './Icon.svelte';
 
-	let { src = '', size = 36, radius = 'var(--m-radius)' } = $props();
+	let { src = '', size = 36, radius = '4px' } = $props();
 </script>
 
 {#if src}

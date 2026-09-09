@@ -53,12 +53,11 @@
 	}
 
 	.squared {
-		width: 32px;
-		padding: 0;
+		width: 40px;
 	}
 
 	.small.squared {
-		width: 26px;
+		width: 32px;
 	}
 
 	.muted {

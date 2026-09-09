@@ -2,8 +2,26 @@
 	import { nav } from '$lib/mock/album.js';
 	import Icon from './Icon.svelte';
 
+	let section = $state('library');
+	let current = $state('library/Albums');
 	let open = $state('library');
-	let current = $state('Albums');
+
+	/** @param {{ id: string, tabs?: string[] }} entry */
+	function pick(entry) {
+		if (entry.tabs) {
+			open = open === entry.id ? '' : entry.id;
+			return;
+		}
+		section = entry.id;
+		current = entry.id;
+		open = '';
+	}
+
+	/** @param {string} id @param {string} tab */
+	function choose(id, tab) {
+		section = id;
+		current = `${id}/${tab}`;
+	}
 </script>
 
 <nav class="sidebar">
@@ -11,8 +29,9 @@
 		<button
 			type="button"
 			class="row"
-			class:on={entry.tabs && open === entry.id}
-			onclick={() => (open = open === entry.id ? '' : entry.id)}
+			class:lit={section === entry.id}
+			class:on={!entry.tabs && current === entry.id}
+			onclick={() => pick(entry)}
 		>
 			<Icon name={entry.icon} />
 			<span class="label">{entry.label}</span>
@@ -24,11 +43,13 @@
 		{#if entry.tabs && open === entry.id}
 			<div class="tabs">
 				{#each entry.tabs as tab (tab)}
+					{@const chosen = current === `${entry.id}/${tab}`}
 					<button
 						type="button"
 						class="row tab"
-						class:on={current === tab}
-						onclick={() => (current = tab)}
+						class:lit={chosen}
+						class:on={chosen}
+						onclick={() => choose(entry.id, tab)}
 					>
 						<span class="label">{tab}</span>
 					</button>
@@ -61,10 +82,14 @@
 		border: 0;
 		border-radius: var(--m-radius);
 		background: none;
-		color: var(--m-foreground);
+		color: var(--m-muted-foreground);
 		font: inherit;
 		text-align: left;
 		cursor: pointer;
+	}
+
+	.row.lit {
+		color: var(--m-foreground);
 	}
 
 	.row:hover,
@@ -81,20 +106,24 @@
 	}
 
 	.tabs {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
-		margin-left: 19px;
-		padding-left: 12px;
-		border-left: 1px solid var(--m-sidebar-border);
+		margin-left: 16px;
+	}
+
+	.tabs::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		bottom: 16px;
+		left: 4px;
+		width: 1px;
+		background: var(--m-sidebar-border);
 	}
 
 	.tab {
-		height: 30px;
-		color: var(--m-muted-foreground);
-	}
-
-	.tab.on {
-		color: var(--m-foreground);
+		margin-left: 12px;
 	}
 </style>

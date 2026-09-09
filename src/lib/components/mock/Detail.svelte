@@ -31,12 +31,18 @@
 				/>
 				<Control
 					variant="outline"
+					icon="shuffle"
+					title="Shuffle"
+					onclick={() => player.playShuffled()}
+				/>
+				<Control
+					variant="outline"
 					icon={player.saved ? 'heart-filled' : 'heart'}
 					title={player.saved ? 'Remove from library' : 'Add to library'}
 					selected={player.saved}
 					onclick={() => player.toggleSaved()}
 				/>
-				<Control variant="outline" icon="ellipsis" title="More" />
+				<Control icon="ellipsis" title="More" />
 			</div>
 		</div>
 	</header>
@@ -108,7 +114,7 @@
 		flex: none;
 		width: 140px;
 		height: 140px;
-		border-radius: 9px;
+		border-radius: 15px;
 		object-fit: cover;
 	}
 

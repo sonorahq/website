@@ -198,6 +198,15 @@ export const player = {
 	setVolume(level) {
 		volume = level;
 	},
+	playShuffled() {
+		shuffle = true;
+		const rest = scramble(order);
+		const [first, ...tail] = rest;
+		current = first;
+		queued = tail;
+		elapsed = 0;
+		this.resume();
+	},
 	toggleShuffle() {
 		shuffle = !shuffle;
 		queued = shuffle ? scramble(queued) : after(current);
