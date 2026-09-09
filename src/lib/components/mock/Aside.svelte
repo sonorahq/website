@@ -100,8 +100,9 @@
 									{#if filled > 0}
 										<span
 											class="lit"
+											class:soft={filled < 1}
 											style:width="{filled * 100}%"
-											style:--m-reveal={filled < 1 ? `${EDGE_FADE}px` : '0px'}
+											style:--m-reveal="{EDGE_FADE}px"
 										>
 											<span>{word.word}</span>
 										</span>
@@ -240,6 +241,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
+		will-change: transform;
 		transition: transform 520ms cubic-bezier(0.33, 1, 0.68, 1);
 	}
 
@@ -247,9 +249,12 @@
 		margin: 0;
 		padding: 3.5px 7px;
 		border-radius: var(--m-radius);
-		font-size: 19px;
+		font-size: 21px;
 		font-weight: 600;
 		line-height: 26.25px;
+		transform: scale(0.904762);
+		transform-origin: left center;
+		transition: transform 200ms cubic-bezier(0.45, 0, 0.55, 1);
 	}
 
 	.verse:hover {
@@ -265,7 +270,7 @@
 	}
 
 	.sung {
-		font-size: 21px;
+		transform: none;
 		color: var(--m-muted-foreground);
 	}
 
@@ -282,6 +287,9 @@
 		bottom: 0;
 		overflow: hidden;
 		color: var(--m-foreground);
+	}
+
+	.soft {
 		mask-image: linear-gradient(to right, #000 calc(100% - var(--m-reveal)), transparent 100%);
 	}
 
@@ -300,7 +308,8 @@
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.sheet {
+		.sheet,
+		.verse {
 			transition: none;
 		}
 	}
