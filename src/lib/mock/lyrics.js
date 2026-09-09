@@ -26,21 +26,8 @@ const parting = [
 	[193.5, 201, 'Good night and joy be with you all']
 ];
 
-/** @param {[number, number, string][]} lines */
-const timed = (lines) =>
-	lines.map(([start, end, text]) => {
-		const parts = text.split(' ');
-		const weight = parts.reduce((sum, word) => sum + word.length + 1, 0);
-		let cursor = start;
-		const words = parts.map((word) => {
-			const span = ((word.length + 1) / weight) * (end - start);
-			const at = cursor;
-			cursor += span;
-			return { word, start: at, end: cursor };
-		});
-		return { start, end, text, words };
-	});
-
-export const lyrics = new Map([['t2', timed(parting)]]);
+export const lyrics = new Map([
+	['t2', parting.map(([start, end, text]) => ({ start, end, text }))]
+]);
 
 export const writers = { source: 'LRCLIB', by: 'Traditional' };

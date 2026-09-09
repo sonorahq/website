@@ -18,10 +18,6 @@
 	const suggested = $derived(look(player.suggested).slice(0, ROOM - upcoming.length));
 
 	const PIN = 0.3;
-	const EDGE_FADE = 11.4;
-	const SWEEP_STRETCH = 1.4;
-	const SWEEP_LEAST = 0.18;
-	const SWEPT = 0.98;
 
 	const verses = $derived(lyrics.get(player.id) ?? []);
 	const at = $derived(player.elapsed);
@@ -40,119 +36,6 @@
 		if (!(line instanceof HTMLElement)) return;
 		lift = roll.clientHeight * PIN - line.offsetTop;
 	});
-
-	let spans = $state(/** @type {(HTMLElement | null)[]} */ ([]));
-	let body = $state(/** @type {HTMLElement | null} */ (null));
-	let plan = $state(
-		/** @type {{ word: number, row: number, x: number, width: number, before: number, whole: number, evenly: boolean }[]} */ ([])
-	);
-	let rows = $state(
-		/** @type {{ top: number, left: number, height: number, width: number }[]} */ ([])
-	);
-	let reach = $state(0);
-
-	function measure() {
-		const words = verses[active]?.words ?? [];
-		const boxes = words.map((_, spot) => spans[spot]).filter((span) => span !== null);
-		if (!body || boxes.length !== words.length || !boxes.length) return;
-
-		const frame = body.getBoundingClientRect();
-		const zoom = body.clientWidth ? frame.width / body.clientWidth : 1;
-		if (!zoom) return;
-
-		/** @param {DOMRect} rect */
-		const box = (rect) => ({
-			top: (rect.top - frame.top) / zoom,
-			left: (rect.left - frame.left) / zoom,
-			width: rect.width / zoom,
-			height: rect.height / zoom
-		});
-
-		const pieces = boxes.map((span) => [...span.getClientRects()].map(box));
-		const tops = [...new Set(pieces.flat().map((rect) => Math.round(rect.top)))].sort(
-			(a, b) => a - b
-		);
-		const seats = tops.map((top) => pieces.flat().filter((rect) => Math.round(rect.top) === top));
-		const shape = tops.map((top, row) => {
-			const left = Math.min(...seats[row].map((rect) => rect.left));
-			return {
-				top,
-				left,
-				height: Math.max(...seats[row].map((rect) => rect.height)),
-				width: Math.max(...seats[row].map((rect) => rect.left + rect.width)) - left
-			};
-		});
-
-		/** @type {{ word: number, row: number, x: number, width: number, before: number, whole: number, evenly: boolean }[]} */
-		const cut = [];
-		pieces.forEach((rects, word) => {
-			const whole = rects.reduce((sum, rect) => sum + rect.width, 0);
-			let before = 0;
-			for (const rect of rects) {
-				const row = tops.indexOf(Math.round(rect.top));
-				cut.push({
-					word,
-					row,
-					x: rect.left - shape[row].left,
-					width: rect.width,
-					before,
-					whole,
-					evenly: rects.length > 1
-				});
-				before += rect.width;
-			}
-		});
-
-		reach = body.clientWidth;
-		rows = shape;
-		plan = cut;
-	}
-
-	let settled = false;
-
-	$effect(() => {
-		void active;
-		void tab;
-		untrack(measure);
-		if (settled) return;
-		settled = true;
-		document.fonts?.ready.then(() => untrack(measure));
-	});
-
-	/** @param {{ start: number, end: number }} word @param {boolean} last */
-	const swept = (word, last) => {
-		const span = word.end - word.start;
-		const travel = Math.max(last ? span : span * SWEEP_STRETCH, SWEEP_LEAST);
-		const along = Math.min(Math.max((at - word.start) / travel, 0), 1);
-		const eased = 1 - (1 - along) ** 3;
-		return eased >= SWEPT ? 1 : eased;
-	};
-
-	/** @param {{ start: number, end: number }} word */
-	const evenly = (word) => {
-		const span = word.end - word.start;
-		if (span <= 0) return at >= word.end ? 1 : 0;
-		return Math.min(Math.max((at - word.start) / span, 0), 1);
-	};
-
-	const edges = $derived.by(() => {
-		const words = verses[active]?.words ?? [];
-		const front = rows.map(() => 0);
-		for (const piece of plan) {
-			const word = words[piece.word];
-			if (!word) continue;
-			const share = piece.evenly ? evenly(word) : swept(word, piece.word + 1 === words.length);
-			if (share <= 0) continue;
-			const part = piece.width > 0 ? (piece.whole * share - piece.before) / piece.width : 0;
-			if (part <= 0) continue;
-			const front_ = piece.x + piece.width * Math.min(part, 1);
-			if (front_ > front[piece.row]) front[piece.row] = front_;
-		}
-		return front;
-	});
-
-	/** @param {number} row */
-	const trail = (row) => Math.min(Math.max(rows[row].width - edges[row], 0), EDGE_FADE);
 </script>
 
 <aside class="aside">
@@ -197,40 +80,7 @@
 						class:past={index < active}
 						class:ahead={index > active}
 					>
-						{#if index === active}
-							<span class="body" bind:this={body}>
-								{#each line.words as word, spot (spot)}<span class="word" bind:this={spans[spot]}
-										>{word.word}{' '}</span
-									>{/each}
-
-								{#each rows as row, slot (slot)}
-									{#if edges[slot] > 0}
-										<span
-											class="lit"
-											style:left="{row.left}px"
-											style:top="{row.top}px"
-											style:width="{row.width}px"
-											style:height="{row.height}px"
-											style:--m-solid="{Math.max(edges[slot] - trail(slot), 0)}px"
-											style:--m-edge="{edges[slot]}px"
-										>
-											<span
-												class="copy"
-												style:left="{-row.left}px"
-												style:top="{-row.top}px"
-												style:width="{reach}px"
-											>
-												{#each line.words as word, spot (spot)}<span class="word"
-														>{word.word}{' '}</span
-													>{/each}
-											</span>
-										</span>
-									{/if}
-								{/each}
-							</span>
-						{:else}
-							{line.text}
-						{/if}
+						{line.text}
 					</p>
 				{/each}
 
@@ -390,32 +240,7 @@
 
 	.sung {
 		transform: none;
-		color: var(--m-muted-foreground);
-	}
-
-	.body {
-		position: relative;
-		display: block;
-	}
-
-	.word {
-		white-space: pre-wrap;
-	}
-
-	.lit {
-		position: absolute;
 		color: var(--m-foreground);
-		mask-image: linear-gradient(
-			to right,
-			#000 var(--m-solid),
-			transparent var(--m-edge),
-			transparent 100%
-		);
-	}
-
-	.copy {
-		position: absolute;
-		display: block;
 	}
 
 	.credit {
