@@ -5,8 +5,8 @@
 	import Card from '../Card.svelte';
 	import Control from '../Control.svelte';
 
-	const CARD = 146;
-	const GAP = 32;
+	const CARD = 145;
+	const GAP = 33;
 	const LANES = 4;
 	const COLUMNS = 2;
 	const ROWS = 5;
@@ -49,7 +49,7 @@
 				/>
 			</div>
 		</div>
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#each shown as track (track.id)}
 				<Card
 					tile={CARD}

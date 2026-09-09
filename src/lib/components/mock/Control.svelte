@@ -11,6 +11,7 @@
 		selected = false,
 		disabled = false,
 		size = 0,
+		trailing = '',
 		onclick = undefined
 	} = $props();
 </script>
@@ -30,6 +31,7 @@
 >
 	{#if icon}<Icon name={icon} />{/if}
 	{#if label}<span>{label}</span>{/if}
+	{#if trailing}<Icon name={trailing} size={small ? 13 : 15} />{/if}
 </button>
 
 <style>

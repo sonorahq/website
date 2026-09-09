@@ -106,6 +106,15 @@ export const libraryColumns = [
 	{ key: 'length', label: 'Length', width: 84, align: 'right', sortable: true }
 ];
 
+export const artistColumns = [
+	{ key: 'index', label: '#', width: 44, align: 'center' },
+	{ key: 'cover', label: '', width: 50 },
+	{ key: 'title', label: 'Title', width: 252.925, sortable: true },
+	{ key: 'album', label: 'Album', width: 134.075, sortable: true },
+	{ key: 'plays', label: 'Plays', width: 112, sortable: true },
+	{ key: 'length', label: 'Length', width: 84, align: 'right', sortable: true }
+];
+
 export const historyColumns = [
 	{ key: 'index', label: '#', width: 44, align: 'center' },
 	{ key: 'cover', label: '', width: 50 },
