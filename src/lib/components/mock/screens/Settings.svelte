@@ -3,6 +3,7 @@
 	import Control from '../Control.svelte';
 	import Icon from '../Icon.svelte';
 	import Picker from '../Picker.svelte';
+	import Scrubber from '../Scrubber.svelte';
 	import SettingGroup from '../SettingGroup.svelte';
 	import SettingRow from '../SettingRow.svelte';
 	import Switch from '../Switch.svelte';
@@ -120,6 +121,12 @@
 				/>
 				<hr />
 				<SettingRow
+					title="Opacity"
+					detail="Adjust the app background opacity"
+					control={opacityScrub}
+				/>
+				<hr />
+				<SettingRow
 					title="Backdrop"
 					detail="The material drawn behind the app window"
 					control={backdropPick}
@@ -132,11 +139,29 @@
 				/>
 				<SettingGroup label="Lyrics" />
 				<SettingRow
+					title="Lyrics size (panel)"
+					detail="Size of the lyrics text in the side panel, on top of the base font size"
+					control={panelLyricsStep}
+				/>
+				<hr />
+				<SettingRow
+					title="Lyrics size (fullscreen)"
+					detail="Size of the lyrics text on the fullscreen player, on top of the base font size"
+					control={fullscreenLyricsStep}
+				/>
+				<hr />
+				<SettingRow
 					title="Blur inactive lyrics"
 					detail="Blur upcoming and previous lines in the lyrics panel"
 					control={blurToggle}
 				/>
 				<SettingGroup label="Text" />
+				<SettingRow
+					title="Font size"
+					detail="Base text size, everything else scales with it"
+					control={fontStep}
+				/>
+				<hr />
 				<SettingRow
 					title="Font"
 					detail="The typeface Sonora uses across the interface"
@@ -213,6 +238,12 @@
 					title="Version"
 					detail="The build of sonora you are running"
 					control={versionText}
+				/>
+				<hr />
+				<SettingRow
+					title="Check for updates"
+					detail="Ask GitHub once at startup whether a newer version is out. Sonora installs the update itself on Windows only; elsewhere it points you at what changed"
+					control={updatesToggle}
 				/>
 				<SettingGroup label="Project" />
 				<SettingRow
@@ -380,7 +411,7 @@
 {#snippet saverPick()}
 	<Picker
 		value={settings.saver}
-		options={['Off', 'Light (30 FPS)', 'Medium (20 FPS)', 'Strong (10 FPS)']}
+		options={['Off', 'Light (90 FPS)', 'Medium (60 FPS)', 'Strong (30 FPS)']}
 		width={170}
 		onpick={(value) => (settings.saver = value)}
 	/>
@@ -442,6 +473,94 @@
 	/>
 {/snippet}
 
+{#snippet opacityScrub()}
+	<span class="stepper">
+		<span class="dial">
+			<Scrubber
+				fraction={settings.opacity}
+				label="Opacity"
+				empty="var(--m-muted)"
+				onseek={(/** @type {number} */ to) => (settings.opacity = to)}
+			/>
+		</span>
+		<span class="value">{Math.round(settings.opacity * 100)}%</span>
+	</span>
+{/snippet}
+
+{#snippet fontStep()}
+	<span class="stepper">
+		<Control
+			small
+			variant="outline"
+			label="−"
+			title="Smaller"
+			disabled={settings.fontSize <= 10}
+			onclick={() => (settings.fontSize -= 1)}
+		/>
+		<span class="value">{settings.fontSize} px</span>
+		<Control
+			small
+			variant="outline"
+			label="+"
+			title="Larger"
+			disabled={settings.fontSize >= 24}
+			onclick={() => (settings.fontSize += 1)}
+		/>
+	</span>
+{/snippet}
+
+{#snippet panelLyricsStep()}
+	<span class="stepper">
+		<Control
+			small
+			variant="outline"
+			label="−"
+			title="Smaller"
+			disabled={settings.panelLyrics <= 0.6}
+			onclick={() => (settings.panelLyrics -= 0.1)}
+		/>
+		<span class="value">{Math.round(settings.panelLyrics * 100)}%</span>
+		<Control
+			small
+			variant="outline"
+			label="+"
+			title="Larger"
+			disabled={settings.panelLyrics >= 2}
+			onclick={() => (settings.panelLyrics += 0.1)}
+		/>
+	</span>
+{/snippet}
+
+{#snippet fullscreenLyricsStep()}
+	<span class="stepper">
+		<Control
+			small
+			variant="outline"
+			label="−"
+			title="Smaller"
+			disabled={settings.fullscreenLyrics <= 0.6}
+			onclick={() => (settings.fullscreenLyrics -= 0.1)}
+		/>
+		<span class="value">{Math.round(settings.fullscreenLyrics * 100)}%</span>
+		<Control
+			small
+			variant="outline"
+			label="+"
+			title="Larger"
+			disabled={settings.fullscreenLyrics >= 2}
+			onclick={() => (settings.fullscreenLyrics += 0.1)}
+		/>
+	</span>
+{/snippet}
+
+{#snippet updatesToggle()}
+	<Switch
+		checked={settings.updates}
+		label="Check for updates"
+		onchange={(value) => (settings.updates = value)}
+	/>
+{/snippet}
+
 {#snippet versionText()}
 	<span class="value">0.32.0</span>
 {/snippet}
@@ -480,6 +599,17 @@
 	.panel {
 		display: flex;
 		flex-direction: column;
+	}
+
+	.stepper {
+		display: flex;
+		align-items: center;
+		gap: 7px;
+	}
+
+	.dial {
+		display: flex;
+		width: 140px;
 	}
 
 	hr {

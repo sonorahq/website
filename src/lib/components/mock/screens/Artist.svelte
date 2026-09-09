@@ -1,79 +1,196 @@
 <script>
-	import { albumsOf, artists, popularOf } from '$lib/mock/screens.js';
+	import {
+		ABOUT_FALLBACK,
+		albumsOf,
+		artistColumns,
+		artists,
+		popularOf
+	} from '$lib/mock/screens.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import { route } from '$lib/mock/route.svelte.js';
+	import About from '../About.svelte';
 	import Card from '../Card.svelte';
 	import Control from '../Control.svelte';
+	import Modal from '../Modal.svelte';
 	import PageHero from '../PageHero.svelte';
+	import Table from '../Table.svelte';
+
+	const CARD = 145;
+	const GAP = 33;
+	const COLUMNS = 4;
+	const RELEASE_ROWS = 2;
+	const LISTED = 5;
+	const LISTED_MAX = 10;
+
+	const FILTERS = [
+		{ id: 'All', kinds: [] },
+		{ id: 'Singles', kinds: ['Single'] },
+		{ id: 'Albums', kinds: ['Album'] },
+		{ id: 'EPs', kinds: ['Ep'] }
+	];
 
 	let { id = 'chopin' } = $props();
 
-	const CARD = 146;
-	const GAP = 32;
+	const DIALOG = 630;
+
+	let expanded = $state(false);
+	let spread = $state(false);
+	let filter = $state('All');
+	let telling = $state(false);
 
 	const artist = $derived(artists.find((one) => one.id === id) ?? artists[0]);
 	const popular = $derived(popularOf(artist.id));
 	const releases = $derived(albumsOf(artist.id));
 	const mine = $derived(popular.some((track) => track.id === player.id));
 	const holding = $derived(mine && player.playing);
+
+	const listed = $derived(popular.slice(0, expanded ? LISTED_MAX : LISTED));
+
+	const filters = $derived(
+		FILTERS.filter(
+			(one) => !one.kinds.length || releases.some((entry) => one.kinds.includes(entry.release))
+		).map((one) => one.id)
+	);
+
+	const matching = $derived(
+		filter === 'All'
+			? releases
+			: releases.filter((entry) =>
+					(FILTERS.find((one) => one.id === filter)?.kinds ?? []).includes(entry.release)
+				)
+	);
+
+	const shown = $derived(spread ? matching : matching.slice(0, COLUMNS * RELEASE_ROWS));
+
+	/** @param {string} next */
+	function narrow(next) {
+		if (filter === next) return;
+		filter = next;
+		spread = false;
+	}
+
+	$effect(() => {
+		void artist;
+		expanded = false;
+		spread = false;
+		filter = 'All';
+		telling = false;
+	});
 </script>
 
-<div class="page">
-	<PageHero
-		title={artist.name}
-		eyebrow="Artist"
-		fallback="user-round"
-		circle
-		meta={[`${artist.listeners} monthly listeners`]}
-	>
-		{#snippet actions()}
-			<Control
-				variant="filled"
-				icon={holding ? 'pause' : 'play'}
-				label={holding ? 'Pause' : 'Play'}
-				onclick={() => {
-					if (holding) player.pause();
-					else if (mine) player.resume();
-					else if (popular.length) player.select(popular[0].id);
-				}}
-			/>
-			<Control variant="outline" icon="shuffle" title="Shuffle" />
-			<Control variant="outline" icon="heart" title="Add to library" />
-			<Control icon="ellipsis" title="More" />
-		{/snippet}
-	</PageHero>
+<div class="frame">
+	<div class="page">
+		<PageHero
+			title={artist.name}
+			eyebrow="Artist"
+			fallback="user-round"
+			circle
+			meta={[`${artist.listeners} monthly listeners`]}
+		>
+			{#snippet actions()}
+				<Control
+					variant="filled"
+					icon={holding ? 'pause' : 'play'}
+					label={holding ? 'Pause' : mine ? 'Resume' : 'Play now'}
+					onclick={() => {
+						if (holding) player.pause();
+						else if (mine) player.resume();
+						else if (popular.length) player.select(popular[0].id);
+					}}
+				/>
+				<Control variant="outline" icon="shuffle" title="Shuffle" />
+				<Control variant="outline" icon="heart" title="Add to library" />
+				<Control icon="ellipsis" title="More" />
+			{/snippet}
+		</PageHero>
 
-	<h2>Popular</h2>
-	<div class="rows">
-		{#each popular as track (track.id)}
-			<Card
-				title={track.title}
-				meta={track.artist}
-				cover={track.cover}
-				playing={player.id === track.id && player.playing}
-				onplay={() => player.select(track.id)}
-				onpress={() => player.select(track.id)}
-			/>
-		{/each}
+		<h2>Popular</h2>
+		<div class="listed">
+			<Table framed columns={artistColumns} rows={listed} />
+			{#if popular.length > LISTED}
+				<span class="toggle">
+					<Control
+						small
+						label={expanded ? 'Show less' : 'Show all'}
+						trailing={expanded ? 'chevron-up' : 'chevron-down'}
+						onclick={() => (expanded = !expanded)}
+					/>
+				</span>
+			{/if}
+		</div>
+
+		{#if releases.length}
+			<section class="releases">
+				<h2 class="flush">Releases</h2>
+				{#if filters.length}
+					<div class="filters">
+						{#each filters as one (one)}
+							<Control
+								small
+								variant="outline"
+								label={one}
+								selected={filter === one}
+								onclick={() => narrow(one)}
+							/>
+						{/each}
+					</div>
+				{/if}
+				<div class="grid" style:gap="21px {GAP}px">
+					{#each shown as entry (entry.id)}
+						<Card
+							tile={CARD}
+							flat
+							weight={600}
+							title={entry.title}
+							meta="{entry.released} · {entry.artist}"
+							cover={entry.cover}
+							onpress={() => route.go({ screen: 'album', id: entry.id })}
+						/>
+					{/each}
+				</div>
+				{#if matching.length > COLUMNS * RELEASE_ROWS}
+					<span class="toggle">
+						<Control
+							small
+							label={spread ? 'Show less' : 'Show all'}
+							trailing={spread ? 'chevron-up' : 'chevron-down'}
+							onclick={() => (spread = !spread)}
+						/>
+					</span>
+				{/if}
+			</section>
+		{/if}
+
+		<div class="about">
+			<About name={artist.name} biography={artist.biography} onpress={() => (telling = true)} />
+		</div>
 	</div>
 
-	<h2>Releases</h2>
-	<div class="grid" style:gap="{GAP}px">
-		{#each releases as entry (entry.id)}
-			<Card
-				tile={CARD}
-				flat
-				weight={600}
-				title={entry.title}
-				meta="{entry.released} · {entry.artist}"
-				cover={entry.cover}
-				onpress={() => route.go({ screen: 'album', id: entry.id })}
-			/>
-		{/each}
-	</div>
+	{#if telling}
+		<Modal
+			title="About the artist"
+			detail={artist.name}
+			width={DIALOG}
+			ondismiss={() => (telling = false)}
+		>
+			{#snippet body()}
+				{artist.biography || ABOUT_FALLBACK}
+			{/snippet}
+			{#snippet actions()}
+				<Control variant="filled" label="Dismiss" onclick={() => (telling = false)} />
+			{/snippet}
+		</Modal>
+	{/if}
 </div>
 
 <style>
+	.frame {
+		position: relative;
+		display: flex;
+		flex: 1;
+		min-width: 0;
+	}
+
 	.page {
 		display: flex;
 		flex: 1;
@@ -95,11 +212,35 @@
 		text-align: left;
 	}
 
-	.rows {
+	h2.flush {
+		padding-bottom: 0;
+	}
+
+	.listed {
 		display: flex;
+		flex: none;
 		flex-direction: column;
+		align-items: flex-start;
+		gap: 7px;
+	}
+
+	.releases {
+		display: flex;
+		flex: none;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10.5px;
+		padding-top: 21px;
+	}
+
+	.filters {
+		display: flex;
+		flex: none;
 		gap: 3.5px;
-		padding-bottom: 21px;
+	}
+
+	.toggle {
+		display: flex;
 		flex: none;
 	}
 
@@ -107,7 +248,11 @@
 		display: flex;
 		width: 100%;
 		flex-wrap: wrap;
-		row-gap: 21px;
 		flex: none;
+	}
+	.about {
+		display: flex;
+		flex: none;
+		padding-top: 21px;
 	}
 </style>

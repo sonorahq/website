@@ -1,17 +1,23 @@
 <script>
+	import { SvelteSet } from 'svelte/reactivity';
 	import { nav, pinned } from '$lib/mock/album.js';
 	import { route } from '$lib/mock/route.svelte.js';
 	import Card from './Card.svelte';
 	import Icon from './Icon.svelte';
 
-	let open = $state('library');
+	const opened = new SvelteSet(['library']);
 
 	const at = $derived(route.now);
+
+	$effect(() => {
+		if (nav.some((entry) => entry.tabs && entry.id === at.screen)) opened.add(at.screen);
+	});
 
 	/** @param {{ id: string, tabs?: string[] }} entry */
 	function pick(entry) {
 		if (entry.tabs) {
-			open = open === entry.id ? '' : entry.id;
+			if (opened.has(entry.id)) opened.delete(entry.id);
+			else opened.add(entry.id);
 			return;
 		}
 		route.go({ screen: entry.id });
@@ -39,11 +45,11 @@
 			<Icon name={entry.icon} />
 			<span class="label">{entry.label}</span>
 			{#if entry.tabs}
-				<Icon name={open === entry.id ? 'chevron-down' : 'chevron-right'} />
+				<Icon name={opened.has(entry.id) ? 'chevron-down' : 'chevron-right'} />
 			{/if}
 		</button>
 
-		{#if entry.tabs && open === entry.id}
+		{#if entry.tabs && opened.has(entry.id)}
 			<div class="tabs">
 				{#each entry.tabs as tab (tab)}
 					<span class="seat">

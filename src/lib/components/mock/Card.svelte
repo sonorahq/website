@@ -20,15 +20,17 @@
 		filled = false,
 		surface = false,
 		playing = false,
+		underline = false,
 		onplay = undefined,
-		onpress = undefined
+		onpress = undefined,
+		action = undefined
 	} = $props();
 
 	const ROW = 52;
 	const PAD = 8;
 	const listed = $derived(!art && !tile);
 	const edge = $derived(tile || art || ROW - PAD * 2);
-	const radius = $derived(circle ? '50%' : tile ? '10px' : '4px');
+	const radius = $derived(circle ? '50%' : tile ? 'var(--m-radius)' : 'min(var(--m-radius), 4px)');
 	const knob = $derived(Math.min(Math.max(Math.round(edge * 0.24), 20), 40));
 	const glyph = $derived(Math.max(Math.round(edge * 0.45), 14));
 </script>
@@ -95,6 +97,7 @@
 		<span class="stack">
 			<span
 				class="title"
+				class:underline
 				style:font-size="{size}px"
 				style:font-weight={weight}
 				style:color={tint || undefined}>{title}</span
@@ -104,6 +107,7 @@
 	</span>
 
 	{#if trailing}<span class="trailing">{trailing}</span>{/if}
+	{#if action}<span class="action">{@render action()}</span>{/if}
 </div>
 
 <style>
@@ -200,7 +204,7 @@
 		flex: none;
 	}
 
-	.text.eyebrowed {
+	.card.tile .text.eyebrowed {
 		gap: 3.5px;
 	}
 
@@ -226,9 +230,23 @@
 		white-space: nowrap;
 	}
 
+	.card:hover .title.underline {
+		text-decoration: underline;
+	}
+
 	.meta {
 		font-size: 12px;
 		color: var(--m-muted-foreground);
+	}
+
+	.action {
+		display: flex;
+		flex: none;
+		visibility: hidden;
+	}
+
+	.card:hover .action {
+		visibility: visible;
 	}
 
 	.trailing {
