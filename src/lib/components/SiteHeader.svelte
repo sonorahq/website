@@ -27,7 +27,7 @@
 </script>
 
 <header>
-	<div class="page bar">
+	<div class="bar">
 		<div class="left">
 			<a href="/" class="brand">
 				<Logo />
@@ -71,6 +71,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		padding-inline: var(--gutter);
 	}
 
 	.left {
