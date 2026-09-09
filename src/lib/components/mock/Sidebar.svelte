@@ -2,8 +2,8 @@
 	import { nav } from '$lib/mock/album.js';
 	import Icon from './Icon.svelte';
 
-	let section = $state('library');
-	let current = $state('library/Albums');
+	let section = $state('');
+	let current = $state('');
 	let open = $state('library');
 
 	/** @param {{ id: string, tabs?: string[] }} entry */
@@ -64,9 +64,9 @@
 		display: flex;
 		flex: none;
 		flex-direction: column;
-		gap: 4px;
+		gap: 3.5px;
 		width: 195px;
-		padding: 12px;
+		padding: 10.5px;
 		overflow: hidden;
 		background: var(--m-sidebar);
 		border-right: 1px solid var(--m-sidebar-border);
@@ -76,7 +76,7 @@
 		display: flex;
 		flex: none;
 		align-items: center;
-		gap: 10px;
+		gap: 8.75px;
 		height: 32px;
 		padding: 0 12px;
 		border: 0;
@@ -109,7 +109,7 @@
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		gap: 4px;
+		gap: 3.5px;
 		margin-left: 16px;
 	}
 

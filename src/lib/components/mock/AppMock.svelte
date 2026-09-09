@@ -60,7 +60,7 @@
 		transform-origin: top left;
 		overflow: hidden;
 		font-size: 14px;
-		line-height: 1.25;
+		line-height: 1.618;
 		letter-spacing: normal;
 		color: var(--m-foreground);
 		background: var(--m-background);

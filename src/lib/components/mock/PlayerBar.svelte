@@ -23,10 +23,12 @@
 	<div class="now">
 		<Cover src={player.track.cover} size={42} />
 		<span class="text">
-			<span class="title">{player.track.title}</span>
+			<span class="line">
+				<span class="title">{player.track.title}</span>
+				<Like id={player.id} small />
+			</span>
 			<span class="caption">{player.track.artist}</span>
 		</span>
-		<Like id={player.id} small />
 	</div>
 
 	<div class="center">
@@ -35,7 +37,7 @@
 				icon="shuffle"
 				title="Shuffle"
 				small
-				muted={!player.shuffle}
+				tint={player.shuffle ? 'primary' : 'muted'}
 				onclick={() => player.toggleShuffle()}
 			/>
 			<Control icon="skip-back" title="Previous track" small onclick={() => player.previous()} />
@@ -50,13 +52,13 @@
 				icon={player.repeat === 2 ? 'repeat-one' : 'repeat'}
 				title="Repeat"
 				small
-				muted={player.repeat === 0}
+				tint={player.repeat === 0 ? 'muted' : 'primary'}
 				onclick={() => player.cycleRepeat()}
 			/>
 		</div>
 
 		<div class="seek">
-			<span class="clock">{clock(player.elapsed)}</span>
+			<span class="clock end">{clock(player.elapsed)}</span>
 			<div class="rail">
 				<Scrubber
 					fraction={player.progress}
@@ -69,31 +71,37 @@
 	</div>
 
 	<div class="side">
-		<Control
-			icon="mic-vocal"
-			title="Lyrics"
-			small
-			muted={tab !== 'lyrics'}
-			selected={tab === 'lyrics'}
-			onclick={() => (tab = 'lyrics')}
-		/>
-		<Control
-			icon="list-music"
-			title="Queue"
-			small
-			muted={tab !== 'queue'}
-			selected={tab === 'queue'}
-			onclick={() => (tab = 'queue')}
-		/>
-		<Control icon={level} title="Volume" small muted />
-		<div class="volume">
-			<Scrubber
-				fraction={player.volume}
-				label="Volume"
-				onseek={(/** @type {number} */ to) => player.setVolume(to)}
+		<div class="tabs">
+			<Control
+				icon="mic-vocal"
+				title="Lyrics"
+				small
+				tint={tab === 'lyrics' ? '' : 'muted'}
+				selected={tab === 'lyrics'}
+				onclick={() => (tab = 'lyrics')}
+			/>
+			<Control
+				icon="list-music"
+				title="Queue"
+				small
+				tint={tab === 'queue' ? '' : 'muted'}
+				selected={tab === 'queue'}
+				onclick={() => (tab = 'queue')}
 			/>
 		</div>
-		<Control icon="maximize" title="Fullscreen" small muted />
+
+		<div class="sound">
+			<Control icon={level} title="Volume" small tint="muted" />
+			<div class="volume">
+				<Scrubber
+					fraction={player.volume}
+					label="Volume"
+					onseek={(/** @type {number} */ to) => player.setVolume(to)}
+				/>
+			</div>
+		</div>
+
+		<Control icon="maximize" title="Fullscreen" small />
 	</div>
 </div>
 
@@ -102,9 +110,9 @@
 		display: flex;
 		flex: none;
 		align-items: center;
-		gap: 16px;
+		gap: 14px;
 		height: 76px;
-		padding: 0 20px;
+		padding: 0 17.5px;
 		background: var(--m-secondary);
 		border-top: 1px solid var(--m-border);
 	}
@@ -114,15 +122,22 @@
 		flex: 1;
 		min-width: 0;
 		align-items: center;
-		gap: 12px;
+		gap: 10.5px;
 	}
 
 	.text {
 		display: flex;
+		flex: 1;
 		min-width: 0;
 		flex-direction: column;
-		gap: 1px;
-		line-height: 1.25;
+		justify-content: center;
+	}
+
+	.line {
+		display: flex;
+		min-width: 0;
+		align-items: center;
+		gap: 3.5px;
 	}
 
 	.title,
@@ -134,7 +149,7 @@
 	}
 
 	.caption {
-		font-size: 11.9px;
+		font-size: 12px;
 		color: var(--m-muted-foreground);
 	}
 
@@ -145,20 +160,20 @@
 		max-width: 560px;
 		flex-direction: column;
 		align-items: center;
-		gap: 4px;
+		gap: 3.5px;
 	}
 
 	.transport {
 		display: flex;
 		align-items: center;
-		gap: 8px;
+		gap: 7px;
 	}
 
 	.seek {
 		display: flex;
 		width: 100%;
 		align-items: center;
-		gap: 8px;
+		gap: 7px;
 	}
 
 	.rail {
@@ -168,8 +183,14 @@
 
 	.clock {
 		flex: none;
-		font-size: 10.8px;
+		width: 37.4px;
+		font-size: 11px;
 		color: var(--m-muted-foreground);
+		white-space: nowrap;
+	}
+
+	.end {
+		text-align: right;
 	}
 
 	.side {
@@ -178,7 +199,15 @@
 		min-width: 0;
 		align-items: center;
 		justify-content: flex-end;
-		gap: 8px;
+		gap: 7px;
+	}
+
+	.tabs,
+	.sound {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: 3.5px;
 	}
 
 	.volume {

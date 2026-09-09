@@ -1,14 +1,17 @@
 <script>
-	import { album, clock, columns, total, tracks } from '$lib/mock/album.js';
+	import { TRAIL, album, clock, columns, total, tracks } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import Control from './Control.svelte';
 	import Icon from './Icon.svelte';
 	import Like from './Like.svelte';
 
-	const template = columns.map((column) => column.width).join(' ');
+	const head = columns.map((column) => `${column.width}px`).join(' ');
+	const body = columns
+		.map((column, at) => `${column.width - (at + 1 === columns.length ? TRAIL : 0)}px`)
+		.join(' ');
 	const mine = $derived(tracks.some((track) => track.id === player.id));
 	const holding = $derived(mine && player.playing);
-	const meta = `${album.artist} • ${album.released} • ${tracks.length} songs • ${clock(total)}`;
+	const meta = [album.artist, album.released, `${tracks.length} songs`, clock(total)];
 </script>
 
 <div class="screen">
@@ -17,10 +20,17 @@
 		<div class="text">
 			<span class="eyebrow">{album.eyebrow}</span>
 			<h1>{album.title}</h1>
-			<p class="meta">{meta}</p>
+			<p class="meta">
+				{#each meta as item, at (item)}
+					<span class="part">
+						{#if at > 0}<span>&bull;</span>{/if}
+						<span>{item}</span>
+					</span>
+				{/each}
+			</p>
 			<div class="actions">
 				<Control
-					variant="primary"
+					variant="filled"
 					icon={holding ? 'pause' : 'play'}
 					label={holding ? 'Pause' : 'Play'}
 					onclick={() => {
@@ -39,7 +49,7 @@
 					variant="outline"
 					icon={player.saved ? 'heart-filled' : 'heart'}
 					title={player.saved ? 'Remove from library' : 'Add to library'}
-					selected={player.saved}
+					tint={player.saved ? 'primary' : ''}
 					onclick={() => player.toggleSaved()}
 				/>
 				<Control icon="ellipsis" title="More" />
@@ -47,8 +57,8 @@
 		</div>
 	</header>
 
-	<div class="table" style:--m-template={template}>
-		<div class="head">
+	<div class="table">
+		<div class="head" style:grid-template-columns={head}>
 			{#each columns as column (column.key)}
 				<span class="cell">
 					<span class="frame {column.align ?? ''}">{column.label}</span>
@@ -62,6 +72,7 @@
 			<div
 				class="row"
 				class:active
+				style:grid-template-columns={body}
 				role="button"
 				tabindex="0"
 				onclick={() => player.select(track.id)}
@@ -106,8 +117,8 @@
 	.hero {
 		display: flex;
 		align-items: flex-end;
-		gap: 20px;
-		padding: 0 24px 24px;
+		gap: 17.5px;
+		padding: 0 24px 21px;
 	}
 
 	.cover {
@@ -125,12 +136,12 @@
 		height: 140px;
 		flex-direction: column;
 		justify-content: flex-end;
-		gap: 8px;
+		gap: 7px;
 		line-height: 1.25;
 	}
 
 	.eyebrow {
-		font-size: 11.9px;
+		font-size: 12px;
 		font-weight: 600;
 		text-transform: uppercase;
 		color: var(--m-muted-foreground);
@@ -144,22 +155,33 @@
 	}
 
 	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		min-width: 0;
+		gap: 3.5px;
 		margin: 0;
-		font-size: 11.9px;
+		font-size: 12px;
 		color: var(--m-muted-foreground);
+	}
+
+	.part {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: 3.5px;
 	}
 
 	.actions {
 		display: flex;
 		align-items: center;
-		gap: 8px;
-		padding-top: 4px;
+		gap: 7px;
+		padding-top: 3.5px;
 	}
 
 	.head,
 	.row {
 		display: grid;
-		grid-template-columns: var(--m-template);
 		align-items: center;
 		width: 100%;
 		border: 0;
@@ -192,7 +214,7 @@
 	.cell {
 		display: flex;
 		align-items: center;
-		gap: 4px;
+		gap: 3.5px;
 		min-width: 0;
 		padding: 0 8px;
 		overflow: hidden;
@@ -228,7 +250,7 @@
 	}
 
 	.title {
-		gap: 6px;
+		gap: 5.25px;
 	}
 
 	.name {
@@ -252,6 +274,9 @@
 	.hit {
 		display: flex;
 		align-items: center;
+		justify-content: center;
+		width: 18px;
+		height: 18px;
 	}
 
 	.hit {

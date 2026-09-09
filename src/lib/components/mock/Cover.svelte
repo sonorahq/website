@@ -8,7 +8,7 @@
 	<img {src} width={size} height={size} style:border-radius={radius} alt="" />
 {:else}
 	<span class="blank" style:width="{size}px" style:height="{size}px" style:border-radius={radius}>
-		<Icon name="music" size={Math.round(size * 0.46)} />
+		<Icon name="music" size={size * 0.46} />
 	</span>
 {/if}
 

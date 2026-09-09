@@ -128,6 +128,10 @@ export const player = {
 	get radio() {
 		return radio;
 	},
+	get reordered() {
+		const natural = after(current);
+		return queued.length !== natural.length || queued.some((id, at) => id !== natural[at]);
+	},
 	get saved() {
 		return saved;
 	},
@@ -217,6 +221,10 @@ export const player = {
 	toggleRadio() {
 		radio = !radio;
 		if (radio) replenish();
+	},
+	resetQueue() {
+		queued = after(current);
+		shuffle = false;
 	},
 	clearQueue() {
 		queued = [];

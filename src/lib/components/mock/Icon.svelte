@@ -1,5 +1,5 @@
 <script>
-	import { icons } from '$lib/mock/icons.js';
+	import { filled, icons } from '$lib/mock/icons.js';
 
 	let { name, size = 16 } = $props();
 </script>
@@ -8,7 +8,7 @@
 	width={size}
 	height={size}
 	viewBox="0 0 24 24"
-	fill="none"
+	fill={filled.has(name) ? 'currentColor' : 'none'}
 	stroke="currentColor"
 	stroke-width="2"
 	stroke-linecap="round"

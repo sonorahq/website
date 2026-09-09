@@ -7,21 +7,25 @@
 		title = '',
 		variant = 'ghost',
 		small = false,
-		muted = false,
+		tint = '',
 		selected = false,
+		disabled = false,
+		size = 0,
 		onclick = undefined
 	} = $props();
 </script>
 
 <button
 	type="button"
-	class={variant}
+	class="{variant} {tint}"
 	class:small
-	class:muted
 	class:selected
 	class:squared={!label}
+	style:width={size ? `${size}px` : undefined}
+	style:padding={size ? '0' : undefined}
 	aria-label={title}
 	aria-pressed={selected || undefined}
+	{disabled}
 	{onclick}
 >
 	{#if icon}<Icon name={icon} />{/if}
@@ -49,7 +53,7 @@
 		height: 26px;
 		gap: 4px;
 		padding: 0 8px;
-		font-size: 12.9px;
+		font-size: 13px;
 	}
 
 	.squared {
@@ -64,31 +68,39 @@
 		color: var(--m-muted-foreground);
 	}
 
-	.ghost:hover,
-	.outline:hover {
+	.primary {
+		color: var(--m-primary);
+	}
+
+	button:disabled {
+		color: color-mix(in srgb, var(--m-muted-foreground) 55%, transparent);
+		cursor: default;
+	}
+
+	.ghost:hover:not(:disabled),
+	.outline:hover:not(:disabled) {
 		background: var(--m-secondary-hover);
 	}
 
-	.ghost:active,
-	.outline:active {
+	.ghost:active:not(:disabled),
+	.outline:active:not(:disabled) {
 		background: var(--m-secondary-active);
 	}
 
 	.selected {
 		background: var(--m-secondary-active);
-		color: var(--m-foreground);
 	}
 
 	.outline {
 		border: 1px solid var(--m-border);
 	}
 
-	.primary {
+	.filled {
 		background: var(--m-primary);
 		color: var(--m-primary-foreground);
 	}
 
-	.primary:hover {
+	.filled:hover {
 		background: var(--m-primary-hover);
 	}
 </style>
