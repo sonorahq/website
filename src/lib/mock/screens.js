@@ -32,14 +32,57 @@ export const favorites = [
 	added: ['Sep 4, 2026', 'Sep 2, 2026', 'Aug 29, 2026', 'Aug 24, 2026', 'Aug 20, 2026'][at % 5]
 }));
 
+export const ABOUT_FALLBACK = "Explore the artist's popular songs and releases.";
+
 export const artists = [
-	{ id: 'traditional', name: 'Traditional', listeners: '2,410,338' },
-	{ id: 'chopin', name: 'Frédéric Chopin', listeners: '8,924,715' },
-	{ id: 'debussy', name: 'Claude Debussy', listeners: '6,142,908' },
-	{ id: 'satie', name: 'Erik Satie', listeners: '5,308,441' },
-	{ id: 'vivaldi', name: 'Antonio Vivaldi', listeners: '9,776,120' },
-	{ id: 'grieg', name: 'Edvard Grieg', listeners: '4,015,663' },
-	{ id: 'mussorgsky', name: 'Modest Mussorgsky', listeners: '3,229,504' }
+	{
+		id: 'traditional',
+		name: 'Traditional',
+		listeners: '2,410,338',
+		biography: ''
+	},
+	{
+		id: 'chopin',
+		name: 'Frédéric Chopin',
+		listeners: '8,924,715',
+		biography:
+			'Frédéric Chopin (1810-1849) was a Polish composer and pianist of the Romantic period, and one of the very few major composers to write almost exclusively for his own instrument. He left Warsaw at twenty and spent the rest of his life in Paris, where he taught, published, and played mostly in salons rather than concert halls. The nocturnes, ballades, mazurkas and preludes he wrote there treat the piano as a singing instrument, and the rubato they ask for is still the hardest thing about them.'
+	},
+	{
+		id: 'debussy',
+		name: 'Claude Debussy',
+		listeners: '6,142,908',
+		biography:
+			'Claude Debussy (1862-1918) trained at the Paris Conservatoire and spent a decade pulling away from what he had been taught there. Whole-tone scales, unresolved sevenths and modes borrowed from the Javanese gamelan he heard at the 1889 Exposition gave his music a sense of colour standing in for harmonic argument. He disliked the label Impressionist, but Suite bergamasque and La mer have carried it ever since.'
+	},
+	{
+		id: 'satie',
+		name: 'Erik Satie',
+		listeners: '5,308,441',
+		biography:
+			"Erik Satie (1866-1925) worked as a cabaret pianist in Montmartre and wrote music that refused almost everything the conservatoire valued: development, climax, weight. The three Gymnopédies of 1888 are built from a handful of chords and a melody that never raises its voice. Late in life he coined the term musique d'ameublement, furniture music meant to be present without being listened to."
+	},
+	{
+		id: 'vivaldi',
+		name: 'Antonio Vivaldi',
+		listeners: '9,776,120',
+		biography:
+			'Antonio Vivaldi (1678-1741) was a Venetian priest and violinist who spent most of his career teaching at the Ospedale della Pietà, an orphanage whose all-female orchestra premiered much of his work. He wrote around five hundred concertos, and The Four Seasons, published in 1725 with a sonnet attached to each concerto, is among the earliest programme music to survive in the repertoire.'
+	},
+	{
+		id: 'grieg',
+		name: 'Edvard Grieg',
+		listeners: '4,015,663',
+		biography:
+			"Edvard Grieg (1843-1907) studied in Leipzig and returned to Norway determined to write music that sounded like the country he came from, drawing on folk dance rhythms and the sharp intervals of the Hardanger fiddle. The incidental music he wrote for Ibsen's Peer Gynt in 1875 outlived the play in the concert hall, largely on the strength of two orchestral suites he assembled from it."
+	},
+	{
+		id: 'mussorgsky',
+		name: 'Modest Mussorgsky',
+		listeners: '3,229,504',
+		biography:
+			"Modest Mussorgsky (1839-1881) was a member of The Five, the circle of Russian composers who set out to write without German models. He kept a civil service post for most of his life and left much of his music unfinished or unorchestrated. Pictures at an Exhibition, written for piano in 1874 after a memorial show of his friend Viktor Hartmann's drawings, is now heard mostly in Ravel's orchestration."
+	}
 ];
 
 export const playlists = [
