@@ -15,7 +15,8 @@
 	/** @param {PointerEvent} event */
 	function grab(event) {
 		held = true;
-		bar?.setPointerCapture(event.pointerId);
+		if (event.currentTarget instanceof Element)
+			event.currentTarget.setPointerCapture(event.pointerId);
 		onseek(at(event.clientX));
 	}
 
@@ -27,13 +28,13 @@
 	/** @param {PointerEvent} event */
 	function release(event) {
 		held = false;
-		bar?.releasePointerCapture(event.pointerId);
+		if (event.currentTarget instanceof Element)
+			event.currentTarget.releasePointerCapture(event.pointerId);
 	}
 </script>
 
 <div
-	bind:this={bar}
-	class="bar"
+	class="scrub"
 	role="slider"
 	tabindex="-1"
 	aria-label={label}
@@ -45,19 +46,29 @@
 	onpointerup={release}
 	onpointercancel={release}
 >
-	<div class="filled" style:width="calc(6px + (100% - 12px) * {fraction})"></div>
-	<div class="thumb" style:left="calc((100% - 12px) * {fraction})"></div>
+	<div bind:this={bar} class="bar">
+		<div class="filled" style:width="calc(6px + (100% - 12px) * {fraction})"></div>
+		<div class="thumb" style:left="calc((100% - 12px) * {fraction})"></div>
+	</div>
 </div>
 
 <style>
+	.scrub {
+		position: relative;
+		display: flex;
+		width: 100%;
+		height: 24px;
+		align-items: center;
+		cursor: pointer;
+		touch-action: none;
+	}
+
 	.bar {
 		position: relative;
 		width: 100%;
 		height: 4px;
 		border-radius: 999px;
 		background: color-mix(in srgb, var(--m-muted-foreground) 30%, transparent);
-		cursor: pointer;
-		touch-action: none;
 	}
 
 	.filled {

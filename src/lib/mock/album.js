@@ -273,8 +273,8 @@ export const nav = [
 
 export const columns = [
 	{ key: 'index', label: '#', width: 44, align: 'center' },
-	{ key: 'title', label: 'Title', width: 303.905, sortable: true },
-	{ key: 'artist', label: 'Artist', width: 153.095, sortable: true },
+	{ key: 'title', label: 'Title', width: 302.575, sortable: true },
+	{ key: 'artist', label: 'Artist', width: 152.425, sortable: true },
 	{ key: 'plays', label: 'Plays', width: 108, sortable: true },
 	{ key: 'length', label: 'Length', width: 120, align: 'right', sortable: true }
 ];
