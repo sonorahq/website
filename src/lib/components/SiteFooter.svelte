@@ -42,8 +42,8 @@
 		</div>
 
 		<p class="credit">
-			The preview plays public domain recordings. Its covers are public domain paintings from
-			Wikimedia Commons — van Gogh, Monet, Hokusai and Munch.
+			The preview plays public domain music and public domain lyrics. Its covers are public domain
+			paintings from Wikimedia Commons — Whistler, van Gogh, Monet, Hokusai and Munch.
 		</p>
 	</div>
 </footer>
