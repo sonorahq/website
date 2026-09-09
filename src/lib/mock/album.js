@@ -1,10 +1,18 @@
 export const albums = [
 	{
+		id: 'airs',
+		title: 'Airs and Ballads',
+		artist: 'Traditional',
+		released: '1912',
+		eyebrow: 'Album',
+		cover: '/cover-airs.webp',
+		tint: { hue: 171.89, saturation: 0.371 }
+	},
+	{
 		id: 'nocturnes',
 		title: 'Nocturnes',
 		artist: 'Frédéric Chopin',
 		released: '1846',
-		eyebrow: 'Album',
 		cover: '/cover-nocturnes.webp',
 		tint: { hue: 218.72, saturation: 0.368 }
 	},
@@ -68,22 +76,23 @@ const listing = (id, rows) =>
 		cover: shelf.get(id)?.cover ?? ''
 	}));
 
-export const tracks = listing('nocturnes', [
-	['n1', 'Nocturne in B-flat minor, Op. 9 No. 1', 338, '48,207,614'],
-	['n2', 'Nocturne in E-flat major, Op. 9 No. 2', 273, '312,884,905'],
-	['n3', 'Nocturne in B major, Op. 9 No. 3', 412, '19,663,208'],
-	['n4', 'Nocturne in F major, Op. 15 No. 1', 291, '27,410,771'],
-	['n5', 'Nocturne in F-sharp major, Op. 15 No. 2', 219, '61,995,340'],
-	['n6', 'Nocturne in G minor, Op. 15 No. 3', 266, '14,238,506'],
-	['n7', 'Nocturne in C-sharp minor, Op. 27 No. 1', 324, '22,807,193'],
-	['n8', 'Nocturne in D-flat major, Op. 27 No. 2', 371, '73,516,882'],
-	['n9', 'Nocturne in B major, Op. 32 No. 1', 287, '11,904,455'],
-	['n10', 'Nocturne in A-flat major, Op. 32 No. 2', 329, '16,382,027'],
-	['n11', 'Nocturne in G minor, Op. 37 No. 1', 363, '9,745,613'],
-	['n12', 'Nocturne in C minor, Op. 48 No. 1', 389, '20,118,349']
+export const tracks = listing('airs', [
+	['t1', 'The Water Is Wide', 224, '38,914,207'],
+	['t2', 'The Parting Glass', 203, '164,772,530'],
+	['t3', 'Wild Mountain Thyme', 241, '21,608,449'],
+	['t4', 'She Moved Through the Fair', 267, '46,330,915'],
+	['t5', 'Loch Lomond', 198, '29,447,186'],
+	['t6', 'Down by the Sally Gardens', 212, '18,905,344'],
+	['t7', 'The Lark in the Clear Air', 176, '9,662,801'],
+	['t8', 'Black Is the Colour', 254, '24,118,673'],
+	['t9', 'Scarborough Fair', 231, '87,504,962'],
+	['t10', 'The Ash Grove', 189, '11,236,058'],
+	['t11', 'Shenandoah', 246, '33,870,412'],
+	['t12', 'The Snowy-Breasted Pearl', 208, '7,491,325']
 ]);
 
 export const upcoming = [
+	...listing('nocturnes', [['n2', 'Nocturne in E-flat major, Op. 9 No. 2', 273, '312,884,905']]),
 	...listing('bergamasque', [['b3', 'Clair de Lune', 303, '204,338,061']]),
 	...listing('gymnopedies', [['g1', 'Gymnopédie No. 1', 201, '188,470,552']]),
 	...listing('peer-gynt', [['p1', 'Morning Mood', 227, '96,215,884']]),

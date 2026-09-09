@@ -1,5 +1,6 @@
 <script>
 	import { catalogue } from '$lib/mock/album.js';
+	import { lyrics, writers } from '$lib/mock/lyrics.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import Control from './Control.svelte';
 	import Cover from './Cover.svelte';
@@ -14,6 +15,34 @@
 
 	const upcoming = $derived(look(player.queued).slice(0, ROOM));
 	const suggested = $derived(look(player.suggested).slice(0, ROOM - upcoming.length));
+
+	const PINNED_SHARE = 0.25;
+	const EDGE_FADE = 11.4;
+
+	const verses = $derived(lyrics.get(player.id) ?? []);
+	const at = $derived(player.elapsed);
+	const active = $derived(
+		verses.reduce((found, line, index) => (at >= line.start ? index : found), -1)
+	);
+
+	let roll = $state(/** @type {HTMLElement | null} */ (null));
+	let sheet = $state(/** @type {HTMLElement | null} */ (null));
+	let lift = $state(0);
+
+	$effect(() => {
+		void active;
+		if (!roll || !sheet) return;
+		const line = sheet.children[Math.max(active, 0)];
+		if (!(line instanceof HTMLElement)) return;
+		lift = roll.clientHeight * PINNED_SHARE - line.offsetTop;
+	});
+
+	/** @param {{ start: number, end: number }} word */
+	const share = (word) => {
+		const span = word.end - word.start;
+		if (span <= 0) return at >= word.end ? 1 : 0;
+		return Math.min(Math.max((at - word.start) / span, 0), 1);
+	};
 </script>
 
 <aside class="aside">
@@ -48,7 +77,45 @@
 		{/if}
 	</header>
 
-	{#if tab === 'lyrics'}
+	{#if tab === 'lyrics' && verses.length}
+		<div class="verses" bind:this={roll}>
+			<div class="sheet" bind:this={sheet} style:transform="translateY({lift}px)">
+				{#each verses as line, index (line.start)}
+					<p
+						class="verse"
+						class:sung={index === active}
+						class:past={index < active}
+						class:ahead={index > active}
+					>
+						{#if index === active}
+							{#each line.words as word, spot (spot)}
+								{@const filled = share(word)}
+								<span class="word">
+									<span>{word.word}</span>
+									{#if filled > 0}
+										<span
+											class="lit"
+											style:width="{filled * 100}%"
+											style:--m-reveal={filled < 1 ? `${EDGE_FADE}px` : '0px'}
+										>
+											<span>{word.word}</span>
+										</span>
+									{/if}
+								</span>{' '}
+							{/each}
+						{:else}
+							{line.text}
+						{/if}
+					</p>
+				{/each}
+
+				<div class="credit">
+					<span>Lyrics from {writers.source}</span>
+					<span>Written by {writers.by}</span>
+				</div>
+			</div>
+		</div>
+	{:else if tab === 'lyrics'}
 		<div class="vacancy">
 			<Icon name="mic-off" size={70} />
 			<p>No lyrics found, sorry!</p>
@@ -143,6 +210,85 @@
 		justify-content: center;
 		text-align: center;
 		color: var(--m-muted-foreground);
+	}
+
+	.verses {
+		position: relative;
+		flex: 1;
+		min-height: 0;
+		overflow: hidden;
+		padding: 0 21px;
+	}
+
+	.sheet {
+		position: absolute;
+		left: 21px;
+		right: 21px;
+		top: 0;
+		transition: transform 520ms cubic-bezier(0.33, 1, 0.68, 1);
+	}
+
+	.verse {
+		margin: 0;
+		padding: 3.5px 7px;
+		border-radius: var(--m-radius);
+		font-size: 19px;
+		font-weight: 600;
+		line-height: 26.25px;
+		text-wrap: pretty;
+	}
+
+	.verse:hover {
+		background: var(--m-table-hover);
+	}
+
+	.past {
+		color: color-mix(in srgb, var(--m-muted-foreground) 40%, transparent);
+	}
+
+	.ahead {
+		color: color-mix(in srgb, var(--m-muted-foreground) 60%, transparent);
+	}
+
+	.sung {
+		font-size: 21px;
+		color: var(--m-muted-foreground);
+	}
+
+	.word {
+		position: relative;
+		display: inline-block;
+		white-space: nowrap;
+	}
+
+	.lit {
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		overflow: hidden;
+		color: var(--m-foreground);
+		mask-image: linear-gradient(to right, #000 calc(100% - var(--m-reveal)), transparent 100%);
+	}
+
+	.lit > span {
+		display: block;
+		white-space: nowrap;
+	}
+
+	.credit {
+		display: flex;
+		flex-direction: column;
+		padding: 7px 7px 0;
+		font-size: 12px;
+		font-weight: 400;
+		color: var(--m-muted-foreground);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.sheet {
+			transition: none;
+		}
 	}
 
 	.vacancy :global(svg) {

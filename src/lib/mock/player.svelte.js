@@ -20,21 +20,22 @@ function scramble(ids) {
 	return out;
 }
 
-let current = $state('n2');
+let current = $state('t2');
 let source = $state(playlistOrder);
 let queued = $state([...playlistOrder]);
 let from = $state(origin);
 let suggested = $state(similar.map((track) => track.id));
 let playing = $state(false);
-let elapsed = $state(92);
+let elapsed = $state(56);
 let volume = $state(0.72);
 let shuffle = $state(false);
 let repeat = $state(0);
 let radio = $state(true);
 let rotation = 0;
 let saved = $state(false);
-const liked = new SvelteSet(['n2']);
+const liked = new SvelteSet(['t2']);
 let ticker = 0;
+let last = 0;
 
 function replenish() {
 	if (!radio || suggested.length >= 3) return;
@@ -47,7 +48,7 @@ function replenish() {
 }
 
 function stop() {
-	clearInterval(ticker);
+	if (ticker) cancelAnimationFrame(ticker);
 	ticker = 0;
 }
 
@@ -79,10 +80,15 @@ function advance() {
 	return false;
 }
 
-function tick() {
+/** @param {number} now */
+function tick(now) {
+	const step = Math.min((now - last) / 1000, 0.25);
+	last = now;
+	ticker = requestAnimationFrame(tick);
+
 	const span = catalogue.get(current)?.length ?? 0;
-	if (elapsed + 0.25 < span) {
-		elapsed += 0.25;
+	if (elapsed + step < span) {
+		elapsed += step;
 		return;
 	}
 	if (repeat === 2) {
@@ -159,7 +165,10 @@ export const player = {
 	resume() {
 		if (playing) return;
 		playing = true;
-		if (!ticker) ticker = setInterval(tick, 250);
+		if (!ticker) {
+			last = performance.now();
+			ticker = requestAnimationFrame(tick);
+		}
 	},
 	pause() {
 		playing = false;
