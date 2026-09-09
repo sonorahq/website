@@ -78,7 +78,7 @@ const listing = (id, rows) =>
 
 export const tracks = listing('airs', [
 	['t1', 'The Water Is Wide', 224, '38,914,207'],
-	['t2', 'The Parting Glass', 203, '164,772,530'],
+	['t2', 'The Wild Rover', 192, '164,772,530'],
 	['t3', 'Wild Mountain Thyme', 241, '21,608,449'],
 	['t4', 'She Moved Through the Fair', 267, '46,330,915'],
 	['t5', 'Loch Lomond', 198, '29,447,186'],
