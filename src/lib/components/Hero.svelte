@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { detectPlatform } from '$lib/data/platforms.js';
 	import { platform } from '$lib/platform.svelte.js';
+	import AppMock from './mock/AppMock.svelte';
 	import CopyButton from './CopyButton.svelte';
 	import Mark from './Mark.svelte';
 	import PlatformTabs from './PlatformTabs.svelte';
@@ -63,22 +64,9 @@
 
 	<figure class="shot">
 		<div class="frame">
-			<img
-				class="on-dark"
-				src="/app-playlist.webp"
-				width="1400"
-				height="867"
-				alt="Sonora playing an album with the lyrics panel open"
-			/>
-			<img
-				class="on-light"
-				src="/app-artist.webp"
-				width="1100"
-				height="660"
-				alt="An artist page in Sonora with the play queue open"
-			/>
+			<AppMock />
 		</div>
-		<figcaption>Adaptive theming, switchable in Appearance</figcaption>
+		<figcaption>A first look — a working rebuild of the app, not a video. Try it.</figcaption>
 	</figure>
 </section>
 
@@ -172,7 +160,6 @@
 	}
 
 	.frame {
-		aspect-ratio: 1602 / 992;
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		overflow: hidden;
@@ -184,12 +171,6 @@
 		align-self: flex-end;
 		font-size: 12px;
 		color: var(--dim);
-	}
-
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
 	}
 
 	@media (max-height: 920px) and (min-width: 901px) {
