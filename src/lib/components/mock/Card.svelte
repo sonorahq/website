@@ -30,7 +30,7 @@
 	const PAD = 8;
 	const listed = $derived(!art && !tile);
 	const edge = $derived(tile || art || ROW - PAD * 2);
-	const radius = $derived(circle ? '50%' : tile ? '10px' : '4px');
+	const radius = $derived(circle ? '50%' : tile ? 'var(--m-radius)' : 'min(var(--m-radius), 4px)');
 	const knob = $derived(Math.min(Math.max(Math.round(edge * 0.24), 20), 40));
 	const glyph = $derived(Math.max(Math.round(edge * 0.45), 14));
 </script>

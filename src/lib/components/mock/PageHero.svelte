@@ -15,7 +15,14 @@
 
 <header class="hero">
 	<div class="art">
-		<Cover src={cover} size={140} radius="15px" {fallback} {circle} {accent} />
+		<Cover
+			src={cover}
+			size={140}
+			radius="calc(var(--m-radius) * 1.5)"
+			{fallback}
+			{circle}
+			{accent}
+		/>
 	</div>
 	<div class="text">
 		{#if eyebrow}<span class="eyebrow">{eyebrow}</span>{/if}

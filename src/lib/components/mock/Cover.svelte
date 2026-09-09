@@ -4,7 +4,7 @@
 	let {
 		src = '',
 		size = 36,
-		radius = '4px',
+		radius = 'min(var(--m-radius), 4px)',
 		fallback = 'music',
 		circle = false,
 		accent = false
