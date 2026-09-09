@@ -26,6 +26,8 @@ const parting = [
 	[193.5, 201, 'Good night and joy be with you all']
 ];
 
+const SUNG = 0.98;
+
 /** @param {[number, number, string][]} lines */
 const timed = (lines) =>
 	lines.map(([start, end, text]) => {
@@ -36,7 +38,7 @@ const timed = (lines) =>
 			const span = ((word.length + 1) / weight) * (end - start);
 			const at = cursor;
 			cursor += span;
-			return { word, start: at, end: cursor };
+			return { word, start: at, end: at + span * SUNG };
 		});
 		return { start, end, text, words };
 	});

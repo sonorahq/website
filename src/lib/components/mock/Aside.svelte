@@ -40,13 +40,76 @@
 		lift = roll.clientHeight * PIN - line.offsetTop;
 	});
 
+	let spans = $state(/** @type {(HTMLElement | null)[]} */ ([]));
+	let plan = $state(/** @type {{ row: number, x: number, width: number }[]} */ ([]));
+	let rows = $state(/** @type {number[]} */ ([]));
+
+	function measure() {
+		const words = verses[active]?.words ?? [];
+		const boxes = words.map((_, spot) => spans[spot]).filter((span) => span !== null);
+		if (boxes.length !== words.length) return;
+		const tops = [...new Set(boxes.map((span) => span.offsetTop))].sort((a, b) => a - b);
+		const lefts = tops.map((top) =>
+			Math.min(...boxes.filter((span) => span.offsetTop === top).map((span) => span.offsetLeft))
+		);
+		plan = boxes.map((span) => {
+			const row = tops.indexOf(span.offsetTop);
+			return { row, x: span.offsetLeft - lefts[row], width: span.offsetWidth };
+		});
+		rows = tops.map(
+			(top, row) =>
+				Math.max(
+					...boxes
+						.filter((span) => span.offsetTop === top)
+						.map((span) => span.offsetLeft + span.offsetWidth)
+				) - lefts[row]
+		);
+	}
+
+	let settled = false;
+
+	$effect(() => {
+		void active;
+		void tab;
+		measure();
+		if (settled) return;
+		settled = true;
+		document.fonts?.ready.then(measure);
+	});
+
 	/** @param {{ start: number, end: number }} word @param {boolean} last */
-	const share = (word, last) => {
+	const swept = (word, last) => {
 		const span = word.end - word.start;
 		const travel = Math.max(last ? span : span * SWEEP_STRETCH, SWEEP_LEAST);
 		const along = Math.min(Math.max((at - word.start) / travel, 0), 1);
 		const eased = 1 - (1 - along) ** 3;
 		return eased >= SWEPT ? 1 : eased;
+	};
+
+	const edges = $derived.by(() => {
+		const words = verses[active]?.words ?? [];
+		const front = rows.map(() => 0);
+		words.forEach((word, spot) => {
+			const seat = plan[spot];
+			if (!seat) return;
+			const reach = seat.x + seat.width * swept(word, spot + 1 === words.length);
+			if (reach > front[seat.row]) front[seat.row] = reach;
+		});
+		return front;
+	});
+
+	/** @param {number} spot */
+	const fill = (spot) => {
+		const seat = plan[spot];
+		if (!seat || !seat.width) return 0;
+		return Math.min(Math.max((edges[seat.row] - seat.x) / seat.width, 0), 1);
+	};
+
+	/** @param {number} spot */
+	const trail = (spot) => {
+		const seat = plan[spot];
+		if (!seat) return 0;
+		return Math.min(Math.max(rows[seat.row] - edges[seat.row], 0), EDGE_FADE);
 	};
 </script>
 
@@ -94,15 +157,15 @@
 					>
 						{#if index === active}
 							{#each line.words as word, spot (spot)}
-								{@const filled = share(word, spot + 1 === line.words.length)}
-								<span class="word">
+								{@const filled = fill(spot)}
+								<span class="word" bind:this={spans[spot]}>
 									<span>{word.word}</span>
 									{#if filled > 0}
 										<span
 											class="lit"
 											class:soft={filled < 1}
 											style:width="{filled * 100}%"
-											style:--m-reveal="{EDGE_FADE}px"
+											style:--m-reveal="{trail(spot)}px"
 										>
 											<span>{word.word}</span>
 										</span>
