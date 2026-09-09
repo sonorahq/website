@@ -2,7 +2,7 @@
 const rounding = { Square: 0, Subtle: 6, Rounded: 10, Round: 20 };
 
 let corners = $state('Rounded');
-let theme = $state('System');
+let theme = $state('Dark');
 let adaptive = $state(true);
 let visualizer = $state(true);
 let icons = $state('Lucide');
@@ -13,17 +13,52 @@ let saver = $state('Off');
 let language = $state('System');
 let typeface = $state('Default');
 let startup = $state('Home');
-let tray = $state(false);
-let normalisation = $state(true);
+let tray = $state(true);
+let normalisation = $state(false);
 let gapless = $state(true);
 let sleep = $state(false);
 let karaoke = $state(true);
-let romanized = $state(false);
+let romanized = $state(true);
 let blur = $state(true);
-let localLyrics = $state(false);
-let menus = $state(true);
+let localLyrics = $state(true);
+let menus = $state(false);
+let updates = $state(false);
+let opacity = $state(1);
+let fontSize = $state(14);
+let panelLyrics = $state(1);
+let fullscreenLyrics = $state(1);
 
 export const settings = {
+	get updates() {
+		return updates;
+	},
+	set updates(value) {
+		updates = value;
+	},
+	get opacity() {
+		return opacity;
+	},
+	set opacity(value) {
+		opacity = value;
+	},
+	get fontSize() {
+		return fontSize;
+	},
+	set fontSize(value) {
+		fontSize = Math.min(Math.max(value, 10), 24);
+	},
+	get panelLyrics() {
+		return panelLyrics;
+	},
+	set panelLyrics(value) {
+		panelLyrics = Math.min(Math.max(value, 0.6), 2);
+	},
+	get fullscreenLyrics() {
+		return fullscreenLyrics;
+	},
+	set fullscreenLyrics(value) {
+		fullscreenLyrics = Math.min(Math.max(value, 0.6), 2);
+	},
 	get corners() {
 		return corners;
 	},

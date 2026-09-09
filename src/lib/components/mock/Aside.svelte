@@ -26,7 +26,7 @@
 	const BLUR = 0.13;
 	const HAZE = 0.45;
 	const VEIL = 0.3;
-	const VERSE = 21;
+	const VERSE = 19;
 	const HAZE_LEAST = 0.05;
 
 	const verses = $derived(lyrics.get(player.id) ?? []);
