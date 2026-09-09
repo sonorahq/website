@@ -31,7 +31,7 @@
 >
 	{#if icon}<Icon name={icon} />{/if}
 	{#if label}<span>{label}</span>{/if}
-	{#if trailing}<Icon name={trailing} size={small ? 13 : 15} />{/if}
+	{#if trailing}<Icon name={trailing} />{/if}
 </button>
 
 <style>

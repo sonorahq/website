@@ -52,7 +52,9 @@
 								{at + 1}
 							{/if}
 						</span>
-						<span class="hit"><Icon name="play" size={10} /></span>
+						<span class="hit"
+							><Icon name={active && player.playing ? 'pause' : 'play'} size={10} /></span
+						>
 					</span>
 				{:else if column.key === 'cover'}
 					<span class="cell"><Cover src={row.cover} size={34} /></span>

@@ -200,7 +200,7 @@
 		flex: none;
 	}
 
-	.text.eyebrowed {
+	.card.tile .text.eyebrowed {
 		gap: 3.5px;
 	}
 
