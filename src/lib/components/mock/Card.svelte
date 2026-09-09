@@ -20,6 +20,7 @@
 		filled = false,
 		surface = false,
 		playing = false,
+		underline = false,
 		onplay = undefined,
 		onpress = undefined,
 		action = undefined
@@ -96,6 +97,7 @@
 		<span class="stack">
 			<span
 				class="title"
+				class:underline
 				style:font-size="{size}px"
 				style:font-weight={weight}
 				style:color={tint || undefined}>{title}</span
@@ -226,6 +228,10 @@
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	.card:hover .title.underline {
+		text-decoration: underline;
 	}
 
 	.meta {
