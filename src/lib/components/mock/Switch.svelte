@@ -49,8 +49,8 @@
 		border-radius: 8px;
 		background: var(--m-muted-foreground);
 		transition:
-			margin-left 180ms cubic-bezier(0.33, 1, 0.68, 1),
-			background-color 180ms cubic-bezier(0.33, 1, 0.68, 1);
+			margin-left 110ms cubic-bezier(0.455, 0.03, 0.515, 0.955),
+			background-color 110ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 	}
 
 	.switch.on .knob {
