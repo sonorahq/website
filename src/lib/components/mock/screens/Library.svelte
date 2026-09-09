@@ -70,6 +70,7 @@
 					flat
 					weight={600}
 					title={entry.title}
+					underline
 					meta="{entry.released} · {entry.artist}"
 					cover={entry.cover}
 					onplay={() => player.select((records.get(entry.id) ?? [])[0]?.id ?? player.id)}

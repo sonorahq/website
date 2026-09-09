@@ -5,8 +5,8 @@
 	import Card from '../Card.svelte';
 	import Control from '../Control.svelte';
 
-	const CARD = 145;
-	const GAP = 33;
+	const CARD = 146;
+	const GAP = 32;
 	const LANES = 4;
 	const COLUMNS = 2;
 	const ROWS = 5;
