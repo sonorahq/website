@@ -217,7 +217,23 @@
 		.pitch {
 			width: auto;
 			min-width: 0;
-			max-width: 720px;
+			max-width: 680px;
+			margin-inline: auto;
+			text-align: center;
+		}
+
+		.cta,
+		.picker {
+			align-items: center;
+			justify-content: center;
+		}
+
+		.command {
+			text-align: left;
+		}
+
+		figcaption {
+			align-self: center;
 		}
 	}
 
