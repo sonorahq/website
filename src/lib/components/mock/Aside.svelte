@@ -1,4 +1,5 @@
 <script>
+	import { untrack } from 'svelte';
 	import { catalogue } from '$lib/mock/album.js';
 	import { lyrics, writers } from '$lib/mock/lyrics.js';
 	import { player } from '$lib/mock/player.svelte.js';
@@ -41,29 +42,37 @@
 	});
 
 	let spans = $state(/** @type {(HTMLElement | null)[]} */ ([]));
+	let body = $state(/** @type {HTMLElement | null} */ (null));
 	let plan = $state(/** @type {{ row: number, x: number, width: number }[]} */ ([]));
-	let rows = $state(/** @type {number[]} */ ([]));
+	let rows = $state(
+		/** @type {{ top: number, left: number, height: number, width: number }[]} */ ([])
+	);
+	let reach = $state(0);
 
 	function measure() {
 		const words = verses[active]?.words ?? [];
 		const boxes = words.map((_, spot) => spans[spot]).filter((span) => span !== null);
-		if (boxes.length !== words.length) return;
+		if (!body || boxes.length !== words.length || !boxes.length) return;
+
 		const tops = [...new Set(boxes.map((span) => span.offsetTop))].sort((a, b) => a - b);
-		const lefts = tops.map((top) =>
-			Math.min(...boxes.filter((span) => span.offsetTop === top).map((span) => span.offsetLeft))
-		);
-		plan = boxes.map((span) => {
-			const row = tops.indexOf(span.offsetTop);
-			return { row, x: span.offsetLeft - lefts[row], width: span.offsetWidth };
+		const seats = tops.map((top) => boxes.filter((span) => span.offsetTop === top));
+		const shape = tops.map((top, row) => {
+			const left = Math.min(...seats[row].map((span) => span.offsetLeft));
+			return {
+				top,
+				left,
+				height: Math.max(...seats[row].map((span) => span.offsetHeight)),
+				width: Math.max(...seats[row].map((span) => span.offsetLeft + span.offsetWidth)) - left
+			};
 		});
-		rows = tops.map(
-			(top, row) =>
-				Math.max(
-					...boxes
-						.filter((span) => span.offsetTop === top)
-						.map((span) => span.offsetLeft + span.offsetWidth)
-				) - lefts[row]
-		);
+		const seating = boxes.map((span) => {
+			const row = tops.indexOf(span.offsetTop);
+			return { row, x: span.offsetLeft - shape[row].left, width: span.offsetWidth };
+		});
+
+		reach = body.clientWidth;
+		rows = shape;
+		plan = seating;
 	}
 
 	let settled = false;
@@ -71,10 +80,10 @@
 	$effect(() => {
 		void active;
 		void tab;
-		measure();
+		untrack(measure);
 		if (settled) return;
 		settled = true;
-		document.fonts?.ready.then(measure);
+		document.fonts?.ready.then(() => untrack(measure));
 	});
 
 	/** @param {{ start: number, end: number }} word @param {boolean} last */
@@ -93,25 +102,14 @@
 			const seat = plan[spot];
 			const part = seat ? swept(word, spot + 1 === words.length) : 0;
 			if (!seat || part <= 0) return;
-			const reach = seat.x + seat.width * part;
-			if (reach > front[seat.row]) front[seat.row] = reach;
+			const front_ = seat.x + seat.width * part;
+			if (front_ > front[seat.row]) front[seat.row] = front_;
 		});
 		return front;
 	});
 
-	/** @param {number} spot */
-	const fill = (spot) => {
-		const seat = plan[spot];
-		if (!seat || !seat.width) return 0;
-		return Math.min(Math.max((edges[seat.row] - seat.x) / seat.width, 0), 1);
-	};
-
-	/** @param {number} spot */
-	const trail = (spot) => {
-		const seat = plan[spot];
-		if (!seat) return 0;
-		return Math.min(Math.max(rows[seat.row] - edges[seat.row], 0), EDGE_FADE);
-	};
+	/** @param {number} row */
+	const trail = (row) => Math.min(Math.max(rows[row].width - edges[row], 0), EDGE_FADE);
 </script>
 
 <aside class="aside">
@@ -157,22 +155,36 @@
 						class:ahead={index > active}
 					>
 						{#if index === active}
-							{#each line.words as word, spot (spot)}
-								{@const filled = fill(spot)}
-								<span class="word" bind:this={spans[spot]}>
-									<span>{word.word}</span>
-									{#if filled > 0}
+							<span class="body" bind:this={body}>
+								{#each line.words as word, spot (spot)}
+									<span class="word" bind:this={spans[spot]}>{word.word}</span>{' '}
+								{/each}
+
+								{#each rows as row, slot (slot)}
+									{#if edges[slot] > 0}
 										<span
 											class="lit"
-											class:soft={filled < 1}
-											style:width="{filled * 100}%"
-											style:--m-reveal="{trail(spot)}px"
+											class:soft={trail(slot) > 0}
+											style:left="{row.left}px"
+											style:top="{row.top}px"
+											style:width="{edges[slot]}px"
+											style:height="{row.height}px"
+											style:--m-reveal="{trail(slot)}px"
 										>
-											<span>{word.word}</span>
+											<span
+												class="copy"
+												style:left="{-row.left}px"
+												style:top="{-row.top}px"
+												style:width="{reach}px"
+											>
+												{#each line.words as word, spot (spot)}
+													<span class="word">{word.word}</span>{' '}
+												{/each}
+											</span>
 										</span>
 									{/if}
-								</span>{' '}
-							{/each}
+								{/each}
+							</span>
 						{:else}
 							{line.text}
 						{/if}
@@ -338,28 +350,29 @@
 		color: var(--m-muted-foreground);
 	}
 
-	.word {
+	.body {
 		position: relative;
+		display: block;
+	}
+
+	.word {
 		display: inline-block;
 		white-space: nowrap;
 	}
 
 	.lit {
 		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
 		overflow: hidden;
 		color: var(--m-foreground);
 	}
 
-	.soft {
-		mask-image: linear-gradient(to right, #000 calc(100% - var(--m-reveal)), transparent 100%);
+	.copy {
+		position: absolute;
+		display: block;
 	}
 
-	.lit > span {
-		display: block;
-		white-space: nowrap;
+	.soft {
+		mask-image: linear-gradient(to right, #000 calc(100% - var(--m-reveal)), transparent 100%);
 	}
 
 	.credit {
