@@ -40,6 +40,7 @@
 	class:flat
 	class:filled
 	class:surface
+	style:width={tile ? `${tile}px` : undefined}
 	role="button"
 	tabindex="0"
 	onclick={onpress}
@@ -124,6 +125,7 @@
 	}
 
 	.card.tile {
+		flex: none;
 		flex-direction: column;
 		align-items: stretch;
 		gap: 7px;
