@@ -1,12 +1,13 @@
 import { SvelteSet } from 'svelte/reactivity';
-import { catalogue, similar, tracks } from '$lib/mock/album.js';
+import { album, catalogue, origin, similar, tracks, upcoming } from '$lib/mock/album.js';
 
-const order = tracks.map((track) => track.id);
+const albumOrder = tracks.map((track) => track.id);
+const playlistOrder = upcoming.map((track) => track.id);
 
 /** @param {string} id */
 function after(id) {
-	const at = order.indexOf(id);
-	return at < 0 ? [...order] : order.slice(at + 1);
+	const at = albumOrder.indexOf(id);
+	return at < 0 ? [...albumOrder] : albumOrder.slice(at + 1);
 }
 
 /** @param {string[]} ids */
@@ -19,8 +20,10 @@ function scramble(ids) {
 	return out;
 }
 
-let current = $state('a2');
-let queued = $state(after('a2'));
+let current = $state('n2');
+let source = $state(playlistOrder);
+let queued = $state([...playlistOrder]);
+let from = $state(origin);
 let suggested = $state(similar.map((track) => track.id));
 let playing = $state(false);
 let elapsed = $state(92);
@@ -30,7 +33,7 @@ let repeat = $state(0);
 let radio = $state(true);
 let rotation = 0;
 let saved = $state(false);
-const liked = new SvelteSet(['a2']);
+const liked = new SvelteSet(['n2']);
 let ticker = 0;
 
 function replenish() {
@@ -52,7 +55,9 @@ function stop() {
 function start(id) {
 	current = id;
 	elapsed = 0;
-	queued = shuffle ? scramble(after(id)) : after(id);
+	source = after(id);
+	queued = shuffle ? scramble(source) : [...source];
+	from = { name: album.title, kind: 'Album' };
 }
 
 function advance() {
@@ -86,7 +91,7 @@ function tick() {
 	}
 	if (advance()) return;
 	if (repeat === 1) {
-		start(order[0]);
+		start(albumOrder[0]);
 		return;
 	}
 	elapsed = span;
@@ -100,6 +105,9 @@ export const player = {
 	},
 	get track() {
 		return catalogue.get(current) ?? tracks[0];
+	},
+	get from() {
+		return from;
 	},
 	get queued() {
 		return queued;
@@ -129,8 +137,7 @@ export const player = {
 		return radio;
 	},
 	get reordered() {
-		const natural = after(current);
-		return queued.length !== natural.length || queued.some((id, at) => id !== natural[at]);
+		return queued.length !== source.length || queued.some((id, at) => id !== source[at]);
 	},
 	get saved() {
 		return saved;
@@ -168,6 +175,14 @@ export const player = {
 			this.toggle();
 			return;
 		}
+		const at = queued.indexOf(id);
+		if (at >= 0) {
+			current = id;
+			elapsed = 0;
+			queued = queued.slice(at + 1);
+			this.resume();
+			return;
+		}
 		if (suggested.includes(id)) {
 			current = id;
 			elapsed = 0;
@@ -184,15 +199,15 @@ export const player = {
 			elapsed = 0;
 			return;
 		}
-		const at = order.indexOf(current);
-		this.select(order[at <= 0 ? order.length - 1 : at - 1]);
+		const at = albumOrder.indexOf(current);
+		this.select(albumOrder[at <= 0 ? albumOrder.length - 1 : at - 1]);
 	},
 	next() {
 		if (advance()) {
 			this.resume();
 			return;
 		}
-		this.select(order[0]);
+		this.select(albumOrder[0]);
 	},
 	/** @param {number} fraction */
 	seek(fraction) {
@@ -204,16 +219,18 @@ export const player = {
 	},
 	playShuffled() {
 		shuffle = true;
-		const rest = scramble(order);
+		const rest = scramble(albumOrder);
 		const [first, ...tail] = rest;
 		current = first;
-		queued = tail;
 		elapsed = 0;
+		source = after(first);
+		queued = tail;
+		from = { name: album.title, kind: 'Album' };
 		this.resume();
 	},
 	toggleShuffle() {
 		shuffle = !shuffle;
-		queued = shuffle ? scramble(queued) : after(current);
+		queued = shuffle ? scramble(queued) : [...source];
 	},
 	cycleRepeat() {
 		repeat = (repeat + 1) % 3;
@@ -223,7 +240,7 @@ export const player = {
 		if (radio) replenish();
 	},
 	resetQueue() {
-		queued = after(current);
+		queued = [...source];
 		shuffle = false;
 	},
 	clearQueue() {

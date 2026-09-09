@@ -40,6 +40,11 @@
 			<span>Licensed under the GPL. Built with Zed's GPUI, librespot and yt-dlp.</span>
 			<span>sonorahq/sonora</span>
 		</div>
+
+		<p class="credit">
+			The preview plays public domain recordings. Its covers are public domain paintings from
+			Wikimedia Commons — van Gogh, Monet, Hokusai and Munch.
+		</p>
 	</div>
 </footer>
 
@@ -114,6 +119,14 @@
 		gap: 16px;
 		flex-wrap: wrap;
 		font-size: 12px;
+		color: var(--dim);
+	}
+
+	.credit {
+		margin: 12px 0 0;
+		max-width: 640px;
+		font-size: 12px;
+		line-height: 1.5;
 		color: var(--dim);
 	}
 

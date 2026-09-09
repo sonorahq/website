@@ -55,7 +55,14 @@
 		</div>
 	{:else}
 		<div class="list">
-			<span class="group">Now playing</span>
+			<span class="group">
+				<span class="eyebrow">Now playing</span>
+				{#if player.from}
+					<span class="dot">&middot;</span>
+					<span class="faint">From</span>
+					<span class="source">{player.from.name}</span>
+				{/if}
+			</span>
 			<div class="card chosen">
 				<Cover src={player.track.cover} />
 				<span class="text">
@@ -65,7 +72,7 @@
 			</div>
 
 			{#if upcoming.length}
-				<span class="group">Up next</span>
+				<span class="group"><span class="eyebrow">Up next</span></span>
 				{#each upcoming as track (track.id)}
 					<button type="button" class="card" onclick={() => player.select(track.id)}>
 						<Cover src={track.cover} />
@@ -78,7 +85,7 @@
 			{/if}
 
 			{#if suggested.length}
-				<span class="group">Similar tracks</span>
+				<span class="group"><span class="eyebrow">Similar tracks</span></span>
 				{#each suggested as track (track.id)}
 					<button type="button" class="card" onclick={() => player.select(track.id)}>
 						<Cover src={track.cover} />
@@ -159,12 +166,37 @@
 		display: flex;
 		flex: none;
 		align-items: flex-end;
+		gap: 3.5px;
 		height: 52px;
+		min-width: 0;
 		padding: 0 7px 3.5px;
+		overflow: hidden;
 		font-size: 12px;
 		font-weight: 600;
-		text-transform: uppercase;
 		color: var(--m-muted-foreground);
+	}
+
+	.group .eyebrow {
+		text-transform: uppercase;
+	}
+
+	.dot,
+	.faint {
+		flex: none;
+	}
+
+	.source {
+		min-width: 0;
+		flex-shrink: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		cursor: pointer;
+	}
+
+	.source:hover {
+		color: var(--m-foreground);
+		text-decoration: underline;
 	}
 
 	.card {
