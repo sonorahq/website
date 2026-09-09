@@ -412,7 +412,7 @@
 		line-height: 26.25px;
 		transform: scale(0.904762);
 		transform-origin: left center;
-		transition: transform 200ms cubic-bezier(0.45, 0, 0.55, 1);
+		transition: transform 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 	}
 
 	.verse:hover {
