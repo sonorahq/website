@@ -98,15 +98,23 @@
 <style>
 	.hero {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 48px;
 		padding-top: 72px;
 		padding-bottom: 80px;
-		min-height: calc(100vh - var(--header) - var(--band-height));
-		min-height: calc(100svh - var(--header) - var(--band-height));
+		min-height: min(calc(100vh - var(--header) - var(--band-height)), 760px);
+		min-height: min(calc(100svh - var(--header) - var(--band-height)), 760px);
+	}
+
+	.pitch,
+	.shot {
+		align-self: stretch;
 	}
 
 	.pitch {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		width: 31.25%;
 		min-width: 380px;
 		flex-shrink: 0;
@@ -186,6 +194,7 @@
 		margin: 0;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		gap: 14px;
 	}
 
