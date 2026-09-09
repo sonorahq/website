@@ -16,8 +16,11 @@
 	const upcoming = $derived(look(player.queued).slice(0, ROOM));
 	const suggested = $derived(look(player.suggested).slice(0, ROOM - upcoming.length));
 
-	const PINNED_SHARE = 0.25;
+	const PIN = 0.3;
 	const EDGE_FADE = 11.4;
+	const SWEEP_STRETCH = 1.4;
+	const SWEEP_LEAST = 0.18;
+	const SWEPT = 0.98;
 
 	const verses = $derived(lyrics.get(player.id) ?? []);
 	const at = $derived(player.elapsed);
@@ -34,14 +37,16 @@
 		if (!roll || !sheet) return;
 		const line = sheet.children[Math.max(active, 0)];
 		if (!(line instanceof HTMLElement)) return;
-		lift = roll.clientHeight * PINNED_SHARE - line.offsetTop;
+		lift = roll.clientHeight * PIN - line.offsetTop;
 	});
 
-	/** @param {{ start: number, end: number }} word */
-	const share = (word) => {
+	/** @param {{ start: number, end: number }} word @param {boolean} last */
+	const share = (word, last) => {
 		const span = word.end - word.start;
-		if (span <= 0) return at >= word.end ? 1 : 0;
-		return Math.min(Math.max((at - word.start) / span, 0), 1);
+		const travel = Math.max(last ? span : span * SWEEP_STRETCH, SWEEP_LEAST);
+		const along = Math.min(Math.max((at - word.start) / travel, 0), 1);
+		const eased = 1 - (1 - along) ** 3;
+		return eased >= SWEPT ? 1 : eased;
 	};
 </script>
 
@@ -89,7 +94,7 @@
 					>
 						{#if index === active}
 							{#each line.words as word, spot (spot)}
-								{@const filled = share(word)}
+								{@const filled = share(word, spot + 1 === line.words.length)}
 								<span class="word">
 									<span>{word.word}</span>
 									{#if filled > 0}
@@ -217,14 +222,24 @@
 		flex: 1;
 		min-height: 0;
 		overflow: hidden;
-		padding: 0 21px;
+		padding: 0 3.5px;
+		mask-image: linear-gradient(
+			to bottom,
+			transparent 0,
+			#000 23.75px,
+			#000 calc(100% - 23.75px),
+			transparent 100%
+		);
 	}
 
 	.sheet {
 		position: absolute;
-		left: 21px;
-		right: 21px;
+		left: 3.5px;
+		right: 3.5px;
 		top: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
 		transition: transform 520ms cubic-bezier(0.33, 1, 0.68, 1);
 	}
 
@@ -235,7 +250,6 @@
 		font-size: 19px;
 		font-weight: 600;
 		line-height: 26.25px;
-		text-wrap: pretty;
 	}
 
 	.verse:hover {
