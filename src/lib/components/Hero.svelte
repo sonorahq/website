@@ -2,12 +2,23 @@
 	import { onMount } from 'svelte';
 	import { detectPlatform } from '$lib/data/platforms.js';
 	import { platform } from '$lib/platform.svelte.js';
+	import AppMock from './mock/AppMock.svelte';
 	import CopyButton from './CopyButton.svelte';
 	import Mark from './Mark.svelte';
 	import PlatformTabs from './PlatformTabs.svelte';
 
+	const NARROW = '(max-width: 900px)';
+
+	let small = $state(false);
+
 	onMount(() => {
 		platform.id = detectPlatform();
+
+		const narrow = window.matchMedia(NARROW);
+		small = narrow.matches;
+		const follow = () => (small = narrow.matches);
+		narrow.addEventListener('change', follow);
+		return () => narrow.removeEventListener('change', follow);
 	});
 </script>
 
@@ -44,7 +55,7 @@
 			</a>
 		</div>
 
-		<div class="picker">
+		<div id="install" class="picker">
 			<PlatformTabs />
 
 			{#if platform.current.hero}
@@ -63,22 +74,24 @@
 
 	<figure class="shot">
 		<div class="frame">
-			<img
-				class="on-dark"
-				src="/app-playlist.webp"
-				width="1400"
-				height="867"
-				alt="Sonora playing an album with the lyrics panel open"
-			/>
-			<img
-				class="on-light"
-				src="/app-artist.webp"
-				width="1100"
-				height="660"
-				alt="An artist page in Sonora with the play queue open"
-			/>
+			{#if small}
+				<img
+					src="/app-artist.webp"
+					width="1100"
+					height="660"
+					alt="An artist page in Sonora with the play queue open"
+				/>
+			{:else}
+				<AppMock />
+			{/if}
 		</div>
-		<figcaption>Adaptive theming, switchable in Appearance</figcaption>
+		<figcaption>
+			{#if small}
+				Sonora on a desktop — open this page there to try the live rebuild.
+			{:else}
+				A first look — a working rebuild of the app, not a video. Try it.
+			{/if}
+		</figcaption>
 	</figure>
 </section>
 
@@ -114,6 +127,7 @@
 	}
 
 	.picker {
+		scroll-margin-top: calc(var(--header) + 24px);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
@@ -172,12 +186,17 @@
 	}
 
 	.frame {
-		aspect-ratio: 1602 / 992;
 		border: 1px solid var(--border);
 		border-radius: 14px;
 		overflow: hidden;
 		background: var(--card);
 		box-shadow: var(--shadow);
+	}
+
+	.frame img {
+		display: block;
+		width: 100%;
+		height: auto;
 	}
 
 	figcaption {
@@ -186,13 +205,39 @@
 		color: var(--dim);
 	}
 
-	img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
+	@media (max-width: 1303px) and (min-width: 901px) {
+		.hero {
+			min-height: 0;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 32px;
+			padding-bottom: 64px;
+		}
+
+		.pitch {
+			width: auto;
+			min-width: 0;
+			max-width: 680px;
+			margin-inline: auto;
+			text-align: center;
+		}
+
+		.cta,
+		.picker {
+			align-items: center;
+			justify-content: center;
+		}
+
+		.command {
+			text-align: left;
+		}
+
+		figcaption {
+			align-self: center;
+		}
 	}
 
-	@media (max-height: 920px) and (min-width: 901px) {
+	@media (max-height: 920px) and (min-width: 1304px) {
 		.hero {
 			padding-top: 48px;
 			padding-bottom: 56px;
