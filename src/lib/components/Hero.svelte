@@ -98,15 +98,23 @@
 <style>
 	.hero {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 48px;
 		padding-top: 72px;
 		padding-bottom: 80px;
-		min-height: calc(100vh - var(--header) - var(--band-height));
-		min-height: calc(100svh - var(--header) - var(--band-height));
+		min-height: min(calc(100vh - var(--header) - var(--band-height)), 760px);
+		min-height: min(calc(100svh - var(--header) - var(--band-height)), 760px);
+	}
+
+	.pitch,
+	.shot {
+		align-self: stretch;
 	}
 
 	.pitch {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 		width: 31.25%;
 		min-width: 380px;
 		flex-shrink: 0;
@@ -130,7 +138,7 @@
 		scroll-margin-top: calc(var(--header) + 24px);
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: stretch;
 		gap: 8px;
 		margin-top: 26px;
 	}
@@ -141,11 +149,15 @@
 		display: flex;
 		align-items: center;
 		gap: 10px;
-		padding: 0 6px 0 14px;
+		padding: 0 7px 0 14px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius-lg);
 		background: var(--card);
 		text-align: left;
+	}
+
+	.command:hover {
+		border-color: var(--secondary-active);
 	}
 
 	.prompt {
@@ -182,6 +194,7 @@
 		margin: 0;
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		gap: 14px;
 	}
 
