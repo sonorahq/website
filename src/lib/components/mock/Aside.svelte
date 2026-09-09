@@ -43,7 +43,9 @@
 
 	let spans = $state(/** @type {(HTMLElement | null)[]} */ ([]));
 	let body = $state(/** @type {HTMLElement | null} */ (null));
-	let plan = $state(/** @type {{ row: number, x: number, width: number }[]} */ ([]));
+	let plan = $state(
+		/** @type {{ word: number, row: number, x: number, width: number, before: number, whole: number, evenly: boolean }[]} */ ([])
+	);
 	let rows = $state(
 		/** @type {{ top: number, left: number, height: number, width: number }[]} */ ([])
 	);
@@ -54,25 +56,56 @@
 		const boxes = words.map((_, spot) => spans[spot]).filter((span) => span !== null);
 		if (!body || boxes.length !== words.length || !boxes.length) return;
 
-		const tops = [...new Set(boxes.map((span) => span.offsetTop))].sort((a, b) => a - b);
-		const seats = tops.map((top) => boxes.filter((span) => span.offsetTop === top));
+		const frame = body.getBoundingClientRect();
+		const zoom = body.clientWidth ? frame.width / body.clientWidth : 1;
+		if (!zoom) return;
+
+		/** @param {DOMRect} rect */
+		const box = (rect) => ({
+			top: (rect.top - frame.top) / zoom,
+			left: (rect.left - frame.left) / zoom,
+			width: rect.width / zoom,
+			height: rect.height / zoom
+		});
+
+		const pieces = boxes.map((span) => [...span.getClientRects()].map(box));
+		const tops = [...new Set(pieces.flat().map((rect) => Math.round(rect.top)))].sort(
+			(a, b) => a - b
+		);
+		const seats = tops.map((top) => pieces.flat().filter((rect) => Math.round(rect.top) === top));
 		const shape = tops.map((top, row) => {
-			const left = Math.min(...seats[row].map((span) => span.offsetLeft));
+			const left = Math.min(...seats[row].map((rect) => rect.left));
 			return {
 				top,
 				left,
-				height: Math.max(...seats[row].map((span) => span.offsetHeight)),
-				width: Math.max(...seats[row].map((span) => span.offsetLeft + span.offsetWidth)) - left
+				height: Math.max(...seats[row].map((rect) => rect.height)),
+				width: Math.max(...seats[row].map((rect) => rect.left + rect.width)) - left
 			};
 		});
-		const seating = boxes.map((span) => {
-			const row = tops.indexOf(span.offsetTop);
-			return { row, x: span.offsetLeft - shape[row].left, width: span.offsetWidth };
+
+		/** @type {{ word: number, row: number, x: number, width: number, before: number, whole: number, evenly: boolean }[]} */
+		const cut = [];
+		pieces.forEach((rects, word) => {
+			const whole = rects.reduce((sum, rect) => sum + rect.width, 0);
+			let before = 0;
+			for (const rect of rects) {
+				const row = tops.indexOf(Math.round(rect.top));
+				cut.push({
+					word,
+					row,
+					x: rect.left - shape[row].left,
+					width: rect.width,
+					before,
+					whole,
+					evenly: rects.length > 1
+				});
+				before += rect.width;
+			}
 		});
 
 		reach = body.clientWidth;
 		rows = shape;
-		plan = seating;
+		plan = cut;
 	}
 
 	let settled = false;
@@ -95,16 +128,26 @@
 		return eased >= SWEPT ? 1 : eased;
 	};
 
+	/** @param {{ start: number, end: number }} word */
+	const evenly = (word) => {
+		const span = word.end - word.start;
+		if (span <= 0) return at >= word.end ? 1 : 0;
+		return Math.min(Math.max((at - word.start) / span, 0), 1);
+	};
+
 	const edges = $derived.by(() => {
 		const words = verses[active]?.words ?? [];
 		const front = rows.map(() => 0);
-		words.forEach((word, spot) => {
-			const seat = plan[spot];
-			const part = seat ? swept(word, spot + 1 === words.length) : 0;
-			if (!seat || part <= 0) return;
-			const front_ = seat.x + seat.width * part;
-			if (front_ > front[seat.row]) front[seat.row] = front_;
-		});
+		for (const piece of plan) {
+			const word = words[piece.word];
+			if (!word) continue;
+			const share = piece.evenly ? evenly(word) : swept(word, piece.word + 1 === words.length);
+			if (share <= 0) continue;
+			const part = piece.width > 0 ? (piece.whole * share - piece.before) / piece.width : 0;
+			if (part <= 0) continue;
+			const front_ = piece.x + piece.width * Math.min(part, 1);
+			if (front_ > front[piece.row]) front[piece.row] = front_;
+		}
 		return front;
 	});
 
@@ -156,9 +199,9 @@
 					>
 						{#if index === active}
 							<span class="body" bind:this={body}>
-								{#each line.words as word, spot (spot)}
-									<span class="word" bind:this={spans[spot]}>{word.word}</span>{' '}
-								{/each}
+								{#each line.words as word, spot (spot)}<span class="word" bind:this={spans[spot]}
+										>{word.word}{' '}</span
+									>{/each}
 
 								{#each rows as row, slot (slot)}
 									{#if edges[slot] > 0}
@@ -177,9 +220,9 @@
 												style:top="{-row.top}px"
 												style:width="{reach}px"
 											>
-												{#each line.words as word, spot (spot)}
-													<span class="word">{word.word}</span>{' '}
-												{/each}
+												{#each line.words as word, spot (spot)}<span class="word"
+														>{word.word}{' '}</span
+													>{/each}
 											</span>
 										</span>
 									{/if}
@@ -356,8 +399,7 @@
 	}
 
 	.word {
-		display: inline-block;
-		white-space: nowrap;
+		white-space: pre-wrap;
 	}
 
 	.lit {
