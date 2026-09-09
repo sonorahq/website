@@ -45,7 +45,7 @@
 			</a>
 		</div>
 
-		<div class="picker">
+		<div id="install" class="picker">
 			<PlatformTabs />
 
 			{#if platform.current.hero}
@@ -102,6 +102,7 @@
 	}
 
 	.picker {
+		scroll-margin-top: calc(var(--header) + 24px);
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;
