@@ -99,6 +99,26 @@
 	const plates = (lane) => genres.filter((_, at) => at % LANES === lane);
 </script>
 
+{#snippet spotlight()}
+	<div class="best">
+		<span class="eyebrow pad">Best match</span>
+		<Card
+			filled
+			flat
+			art={63}
+			size={24}
+			weight={700}
+			circle={best.circle}
+			eyebrow={best.kind}
+			title={best.title}
+			meta={best.meta}
+			cover={best.cover}
+			fallback={best.fallback}
+			onpress={() => open(best)}
+		/>
+	</div>
+{/snippet}
+
 <div class="screen">
 	<div class="gutter">
 		<div class="field">
@@ -138,6 +158,9 @@
 			</div>
 		</div>
 	{:else if wide}
+		{#if best}
+			<div class="gutter">{@render spotlight()}</div>
+		{/if}
 		<div class="columns">
 			{#each COLUMNS as column, at (column.title)}
 				{#if at > 0}
@@ -161,24 +184,8 @@
 	{:else}
 		<div class="scroll results">
 			{#if best}
-				<div class="lead">
-					<div class="best">
-						<span class="eyebrow pad">Best match</span>
-						<Card
-							filled
-							flat
-							art={63}
-							size={24}
-							weight={700}
-							circle={best.circle}
-							eyebrow={best.kind}
-							title={best.title}
-							meta={best.meta}
-							cover={best.cover}
-							fallback={best.fallback}
-							onpress={() => open(best)}
-						/>
-					</div>
+				<div class="prelude">
+					{@render spotlight()}
 					<span class="eyebrow pad">Results</span>
 				</div>
 			{/if}
@@ -333,7 +340,7 @@
 		gap: 3.5px;
 	}
 
-	.lead {
+	.prelude {
 		display: flex;
 		flex-direction: column;
 		gap: 21px;
