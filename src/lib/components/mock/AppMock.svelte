@@ -20,19 +20,14 @@
 	import TitleBar from './TitleBar.svelte';
 
 	const WIDTH = 1180;
-	const HEIGHT = 730;
-	const FLOOR = 0.62;
 	const FADE = 320;
 	const DIM = new Set(['Dark', 'Midnight', 'Forest', 'Ocean', 'Rose', 'Lavender', 'Amber']);
 
 	let left = $state(true);
 	let right = $state(true);
-	let room = $state(WIDTH);
 	let tab = $state('queue');
 
 	const at = $derived(route.now);
-
-	const scale = $derived(Math.min(Math.max(room / WIDTH, FLOOR), 1));
 
 	const tint = $derived(shelf.get(player.track.album)?.tint ?? shelf.get('nocturnes')?.tint);
 	const tokens = $derived(palette(tint, settings.adaptive, settings.theme));
@@ -66,69 +61,60 @@
 	onDestroy(() => player.release());
 </script>
 
-<div class="stage" bind:clientWidth={room} style:height="{HEIGHT * scale}px">
-	<div class="sizer" style:width="{WIDTH * scale}px" style:height="{HEIGHT * scale}px">
-		<div
-			class="app"
-			class:fading={fading && !still}
-			class:still
-			{style}
-			style:color-scheme={scheme}
-			style:--m-radius="{settings.radius}px"
-			style:transform="scale({scale})"
-		>
-			<TitleBar bind:left bind:right />
-			<div class="body">
-				{#if left}
-					<Sidebar />
-				{/if}
-				{#if at.screen === 'home'}
-					<Home />
-				{:else if at.screen === 'search'}
-					<Search room={content} />
-				{:else if at.screen === 'library'}
-					<Library shelf="library" tab={at.tab ?? 'Songs'} />
-				{:else if at.screen === 'local'}
-					<Library shelf="local" tab={at.tab ?? 'Songs'} />
-				{:else if at.screen === 'history'}
-					<History />
-				{:else if at.screen === 'settings'}
-					<Settings tab={at.tab ?? 'General'} />
-				{:else if at.screen === 'artist'}
-					<Artist id={at.id ?? 'chopin'} />
-				{:else if at.screen === 'playlist'}
-					<Playlist id={at.id ?? 'quiet-hours'} />
-				{:else}
-					<Detail id={at.id ?? 'airs'} />
-				{/if}
-				{#if right}
-					<Aside {tab} />
-				{/if}
-			</div>
-			<PlayerBar bind:tab />
+<div class="stage">
+	<div
+		class="app"
+		class:fading={fading && !still}
+		class:still
+		{style}
+		style:color-scheme={scheme}
+		style:--m-radius="{settings.radius}px"
+	>
+		<TitleBar bind:left bind:right />
+		<div class="body">
+			{#if left}
+				<Sidebar />
+			{/if}
+			{#if at.screen === 'home'}
+				<Home />
+			{:else if at.screen === 'search'}
+				<Search room={content} />
+			{:else if at.screen === 'library'}
+				<Library shelf="library" tab={at.tab ?? 'Songs'} />
+			{:else if at.screen === 'local'}
+				<Library shelf="local" tab={at.tab ?? 'Songs'} />
+			{:else if at.screen === 'history'}
+				<History />
+			{:else if at.screen === 'settings'}
+				<Settings tab={at.tab ?? 'General'} />
+			{:else if at.screen === 'artist'}
+				<Artist id={at.id ?? 'chopin'} />
+			{:else if at.screen === 'playlist'}
+				<Playlist id={at.id ?? 'quiet-hours'} />
+			{:else}
+				<Detail id={at.id ?? 'airs'} />
+			{/if}
+			{#if right}
+				<Aside {tab} />
+			{/if}
 		</div>
+		<PlayerBar bind:tab />
 	</div>
 </div>
 
 <style>
 	.stage {
+		display: flex;
 		width: 100%;
-		overflow-x: auto;
-		overflow-y: hidden;
-		overscroll-behavior-x: contain;
-	}
-
-	.sizer {
-		margin: 0 auto;
-		overflow: hidden;
+		justify-content: center;
 	}
 
 	.app {
+		flex: none;
 		display: flex;
 		width: 1180px;
 		height: 730px;
 		flex-direction: column;
-		transform-origin: top left;
 		overflow: hidden;
 		font-size: 14px;
 		line-height: 1.618;
