@@ -37,17 +37,16 @@
 			</div>
 		</figure>
 
+		<h2 use:reveal>Not a render. Sonora itself.</h2>
 		{#if small}
-			<h2 use:reveal>Not a mockup. The app itself.</h2>
 			<p class="lead" use:reveal>
-				Sonora's own window, captured as it runs. The interface is also rebuilt in the browser, live
-				and clickable — open the page on a wider screen and it takes over from this screenshot.
+				A screenshot of the window as it runs. Open the page wider and the live interface takes its
+				place.
 			</p>
 		{:else}
-			<h2 use:reveal>Not a video. The app itself.</h2>
 			<p class="lead" use:reveal>
-				Sonora's interface, rebuilt in the browser at the size the window opens on your desktop. The
-				library, the queue, the lyrics and every setting are live — click around.
+				The interface rebuilt in the browser, at the size the window opens on your desktop. Library,
+				queue, lyrics and every setting are live — click around.
 			</p>
 		{/if}
 	</div>
