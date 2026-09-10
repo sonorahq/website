@@ -1,5 +1,6 @@
 <script>
 	import { settings } from '$lib/mock/settings.svelte.js';
+	import { themes } from '$lib/mock/theme.js';
 	import Control from '../Control.svelte';
 	import Icon from '../Icon.svelte';
 	import Picker from '../Picker.svelte';
@@ -324,7 +325,7 @@
 {#snippet themePick()}
 	<Picker
 		value={settings.theme}
-		options={['System', 'Dark', 'Light']}
+		options={themes}
 		width={170}
 		onpick={(value) => (settings.theme = value)}
 	/>
