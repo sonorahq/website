@@ -35,16 +35,20 @@
 					<AppMock />
 				{/if}
 			</div>
-			{#if small}
-				<figcaption>A screenshot — the live rebuild needs a wider window.</figcaption>
-			{/if}
 		</figure>
 
-		<h2 use:reveal>Not a video. The app itself.</h2>
-		<p class="lead" use:reveal>
-			Sonora's interface, rebuilt in the browser at the size the window opens on your desktop. The
-			library, the queue, the lyrics and every setting are live — click around.
-		</p>
+		<h2 use:reveal>Not a render. Sonora itself.</h2>
+		{#if small}
+			<p class="lead" use:reveal>
+				A screenshot of the window as it runs. Open the page wider and the live interface takes its
+				place.
+			</p>
+		{:else}
+			<p class="lead" use:reveal>
+				The interface rebuilt in the browser, at the size the window opens on your desktop. Library,
+				queue, lyrics and every setting are live — click around.
+			</p>
+		{/if}
 	</div>
 </section>
 
@@ -52,7 +56,7 @@
 	.preview {
 		position: relative;
 		scroll-margin-top: var(--header);
-		padding: 104px 0;
+		padding: 0 0 104px;
 	}
 
 	.preview .page {
@@ -85,7 +89,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 14px;
 		width: 100%;
 		margin: 0;
 	}
@@ -110,14 +113,9 @@
 		height: auto;
 	}
 
-	figcaption {
-		font-size: 12px;
-		color: var(--dim);
-	}
-
 	@media (max-width: 900px) {
 		.preview {
-			padding: 64px 0;
+			padding: 0 0 64px;
 		}
 
 		h2 {
