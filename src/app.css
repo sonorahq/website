@@ -261,3 +261,19 @@ a {
 		transition-duration: 0.01ms !important;
 	}
 }
+
+@keyframes rise {
+	from {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+}
+
+html.js:not(.fonts) [data-enter] {
+	opacity: 0;
+}
+
+html.fonts [data-enter] {
+	animation: rise 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+	animation-delay: var(--enter, 0s);
+}
