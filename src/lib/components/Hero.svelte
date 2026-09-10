@@ -7,20 +7,18 @@
 	import Mark from './Mark.svelte';
 	import PlatformTabs from './PlatformTabs.svelte';
 
-	const FULL = 1180;
+	const NARROW = '(max-width: 900px)';
 
-	let frame = $state(/** @type {HTMLElement | null} */ (null));
-	let small = $state(true);
+	let small = $state(false);
 
 	onMount(() => {
 		platform.id = detectPlatform();
-		if (!frame) return;
 
-		const watch = new ResizeObserver(([entry]) => {
-			small = entry.target.clientWidth < FULL;
-		});
-		watch.observe(frame);
-		return () => watch.disconnect();
+		const narrow = window.matchMedia(NARROW);
+		small = narrow.matches;
+		const follow = () => (small = narrow.matches);
+		narrow.addEventListener('change', follow);
+		return () => narrow.removeEventListener('change', follow);
 	});
 </script>
 
@@ -75,7 +73,7 @@
 	</div>
 
 	<figure class="shot">
-		<div class="frame" bind:this={frame}>
+		<div class="frame">
 			{#if small}
 				<img
 					src="/app-artist.webp"
@@ -89,7 +87,7 @@
 		</div>
 		<figcaption>
 			{#if small}
-				A screenshot — the live rebuild needs a wider window.
+				Sonora on a desktop — open this page there to try the live rebuild.
 			{:else}
 				A first look — a working rebuild of the app, not a video. Try it.
 			{/if}
@@ -100,17 +98,18 @@
 <style>
 	.hero {
 		display: flex;
-		flex-direction: column;
-		align-items: stretch;
-		gap: 32px;
+		align-items: center;
+		gap: 48px;
 		padding-top: 72px;
-		padding-bottom: 64px;
+		padding-bottom: 80px;
+		min-height: calc(100vh - var(--header) - var(--band-height));
+		min-height: calc(100svh - var(--header) - var(--band-height));
 	}
 
 	.pitch {
-		max-width: 680px;
-		margin-inline: auto;
-		text-align: center;
+		width: 31.25%;
+		min-width: 380px;
+		flex-shrink: 0;
 	}
 
 	.sub {
@@ -123,7 +122,6 @@
 
 	.cta {
 		display: flex;
-		justify-content: center;
 		gap: 10px;
 		margin-top: 28px;
 	}
@@ -140,7 +138,6 @@
 	.command {
 		width: 100%;
 		height: 46px;
-		text-align: left;
 		display: flex;
 		align-items: center;
 		gap: 10px;
@@ -207,16 +204,64 @@
 	}
 
 	figcaption {
-		align-self: center;
+		align-self: flex-end;
 		font-size: 12px;
 		color: var(--dim);
 	}
 
+	@media (max-width: 1303px) and (min-width: 901px) {
+		.hero {
+			min-height: 0;
+			flex-direction: column;
+			align-items: stretch;
+			gap: 32px;
+			padding-bottom: 64px;
+		}
+
+		.pitch {
+			width: auto;
+			min-width: 0;
+			max-width: 680px;
+			margin-inline: auto;
+			text-align: center;
+		}
+
+		.cta,
+		.picker {
+			align-items: center;
+			justify-content: center;
+		}
+
+		.command {
+			text-align: left;
+		}
+
+		figcaption {
+			align-self: center;
+		}
+	}
+
+	@media (max-height: 920px) and (min-width: 1304px) {
+		.hero {
+			padding-top: 48px;
+			padding-bottom: 56px;
+		}
+	}
+
 	@media (max-width: 900px) {
 		.hero {
+			min-height: 0;
+			flex-direction: column;
+			align-items: stretch;
 			gap: 24px;
 			padding-top: 28px;
 			padding-bottom: 48px;
+			text-align: center;
+		}
+
+		.pitch {
+			width: auto;
+			min-width: 0;
 		}
 
 		.cta {
