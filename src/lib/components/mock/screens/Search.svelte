@@ -1,14 +1,26 @@
 <script>
-	import { albums, catalogue, clock, shelf } from '$lib/mock/album.js';
+	import { albums, catalogue, shelf } from '$lib/mock/album.js';
 	import { artists, genres, playlists } from '$lib/mock/screens.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import { route } from '$lib/mock/route.svelte.js';
 	import Card from '../Card.svelte';
+	import HitRow from '../HitRow.svelte';
 	import Icon from './../Icon.svelte';
 
 	const LANES = 2;
+	const WIDE = 740;
+
+	const COLUMNS = [
+		{ title: 'Songs', kinds: ['Song'] },
+		{ title: 'Artists', kinds: ['Artist'] },
+		{ title: 'Albums & playlists', kinds: ['Album', 'Playlist'] }
+	];
+
+	let { room = 729 } = $props();
 
 	let query = $state('');
+
+	const wide = $derived(room >= WIDE);
 
 	const asked = $derived(query.trim().length > 0);
 	const needle = $derived(query.trim().toLowerCase());
@@ -16,24 +28,10 @@
 	/** @param {string} text */
 	const holds = (text) => text.toLowerCase().includes(needle);
 
-	/**
-	 * @typedef {{
-	 *   kind: string,
-	 *   id: string,
-	 *   title: string,
-	 *   meta: string,
-	 *   cover: string,
-	 *   fallback: string,
-	 *   circle: boolean,
-	 *   track?: import('$lib/mock/album.js').Track,
-	 *   to?: { screen: string, id: string }
-	 * }} Hit
-	 */
-
-	/** @type {Hit[]} */
+	/** @type {import('$lib/mock/screens.js').Hit[]} */
 	const hits = $derived.by(() => {
 		if (!asked) return [];
-		/** @type {Hit[]} */
+		/** @type {import('$lib/mock/screens.js').Hit[]} */
 		const songs = [...catalogue.values()]
 			.filter((track) => holds(track.title))
 			.map((track) => ({
@@ -46,7 +44,7 @@
 				circle: false,
 				track
 			}));
-		/** @type {Hit[]} */
+		/** @type {import('$lib/mock/screens.js').Hit[]} */
 		const people = artists
 			.filter((artist) => holds(artist.name))
 			.map((artist) => ({
@@ -59,7 +57,7 @@
 				circle: true,
 				to: { screen: 'artist', id: artist.id }
 			}));
-		/** @type {Hit[]} */
+		/** @type {import('$lib/mock/screens.js').Hit[]} */
 		const records = albums
 			.filter((entry) => holds(entry.title))
 			.map((entry) => ({
@@ -72,7 +70,7 @@
 				circle: false,
 				to: { screen: 'album', id: entry.id }
 			}));
-		/** @type {Hit[]} */
+		/** @type {import('$lib/mock/screens.js').Hit[]} */
 		const lists = playlists
 			.filter((list) => holds(list.name))
 			.map((list) => ({
@@ -91,7 +89,7 @@
 	const best = $derived(hits[0]);
 	const rest = $derived(hits.slice(1));
 
-	/** @param {Hit} hit */
+	/** @param {import('$lib/mock/screens.js').Hit} hit */
 	function open(hit) {
 		if (hit.track) player.select(hit.track.id);
 		else if (hit.to) route.go(hit.to);
@@ -101,7 +99,7 @@
 	const plates = (lane) => genres.filter((_, at) => at % LANES === lane);
 </script>
 
-<div class="page">
+<div class="screen">
 	<div class="gutter">
 		<div class="field">
 			<Icon name="search" />
@@ -139,6 +137,27 @@
 				</div>
 			</div>
 		</div>
+	{:else if wide}
+		<div class="columns">
+			{#each COLUMNS as column, at (column.title)}
+				{#if at > 0}
+					<span class="split"></span>
+				{/if}
+				<div class="shell">
+					<span class="head"><span class="eyebrow pad">{column.title}</span></span>
+					<div class="scroll rail">
+						<div class="rows">
+							{#each hits.filter((hit) => column.kinds.includes(hit.kind)) as hit (hit.id)}
+								<HitRow {hit} compact={column.kinds.length > 1} onopen={open} />
+							{/each}
+							{#if !hits.some((hit) => column.kinds.includes(hit.kind))}
+								<span class="vacant">No matches</span>
+							{/if}
+						</div>
+					</div>
+				</div>
+			{/each}
+		</div>
 	{:else}
 		<div class="scroll results">
 			{#if best}
@@ -165,17 +184,7 @@
 			{/if}
 			<div class="rows">
 				{#each rest as hit (hit.id)}
-					<Card
-						circle={hit.circle}
-						title={hit.title}
-						meta="{hit.kind} · {hit.meta}"
-						cover={hit.cover}
-						fallback={hit.fallback}
-						trailing={hit.track ? clock(hit.track.length) : ''}
-						playing={!!hit.track && player.id === hit.track.id && player.playing}
-						onplay={hit.track ? () => open(hit) : undefined}
-						onpress={() => open(hit)}
-					/>
+					<HitRow {hit} compact onopen={open} />
 				{/each}
 				{#if !hits.length}
 					<span class="vacant">No matches</span>
@@ -186,7 +195,7 @@
 </div>
 
 <style>
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;
@@ -283,6 +292,39 @@
 		min-width: 0;
 		flex-direction: column;
 		gap: 8px;
+	}
+
+	.columns {
+		display: flex;
+		width: 100%;
+		flex: 1;
+		min-height: 0;
+		padding: 0 24px;
+	}
+
+	.split {
+		flex: none;
+		width: 1px;
+		background: var(--m-border);
+	}
+
+	.shell {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		min-height: 0;
+		flex-direction: column;
+		gap: 3.5px;
+	}
+
+	.head {
+		display: flex;
+		flex: none;
+		padding-left: 12px;
+	}
+
+	.scroll.rail {
+		padding: 0 12px 24px;
 	}
 
 	.results {

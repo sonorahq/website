@@ -15,7 +15,7 @@
 	const holding = $derived(mine && player.playing);
 </script>
 
-<div class="page">
+<div class="screen">
 	<div class="gutter">
 		<PageHero
 			title={list.name}
@@ -56,7 +56,7 @@
 </div>
 
 <style>
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;

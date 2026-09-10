@@ -32,6 +32,20 @@ export const favorites = [
 	added: ['Sep 4, 2026', 'Sep 2, 2026', 'Aug 29, 2026', 'Aug 24, 2026', 'Aug 20, 2026'][at % 5]
 }));
 
+/**
+ * @typedef {{
+ *   kind: string,
+ *   id: string,
+ *   title: string,
+ *   meta: string,
+ *   cover: string,
+ *   fallback: string,
+ *   circle: boolean,
+ *   track?: import('./album.js').Track,
+ *   to?: { screen: string, id: string }
+ * }} Hit
+ */
+
 export const ABOUT_FALLBACK = "Explore the artist's popular songs and releases.";
 
 export const artists = [
