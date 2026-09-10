@@ -3,7 +3,7 @@ const rounding = { Square: 0, Subtle: 6, Rounded: 10, Round: 20 };
 
 let corners = $state('Rounded');
 let theme = $state('Dark');
-let adaptive = $state(true);
+let adaptive = $state(false);
 let visualizer = $state(true);
 let icons = $state('Lucide');
 let backdrop = $state('Plain');
