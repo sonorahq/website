@@ -6,6 +6,7 @@
 	import { palette } from '$lib/mock/theme.js';
 	import { route } from '$lib/mock/route.svelte.js';
 	import { settings } from '$lib/mock/settings.svelte.js';
+	import { theme } from '$lib/theme.svelte.js';
 	import Aside from './Aside.svelte';
 	import Detail from './Detail.svelte';
 	import Artist from './screens/Artist.svelte';
@@ -50,6 +51,11 @@
 
 	let fading = $state(false);
 	let settle = 0;
+
+	$effect(() => {
+		const choice = theme.choice;
+		settings.theme = choice === 'light' ? 'Light' : choice === 'dark' ? 'Dark' : 'System';
+	});
 
 	$effect(() => {
 		reach(settings.icons);
