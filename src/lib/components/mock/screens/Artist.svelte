@@ -79,7 +79,7 @@
 </script>
 
 <div class="frame">
-	<div class="page">
+	<div class="screen">
 		<PageHero
 			title={artist.name}
 			eyebrow="Artist"
@@ -191,7 +191,7 @@
 		min-width: 0;
 	}
 
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;
