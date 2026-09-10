@@ -21,6 +21,7 @@ function scramble(ids) {
 }
 
 let current = $state('t2');
+let past = $state(['t5', 't1']);
 let source = $state(playlistOrder);
 let queued = $state([...playlistOrder]);
 let from = $state(origin);
@@ -58,6 +59,10 @@ function wind() {
 	base = elapsed;
 }
 
+function remember() {
+	past = [...past, current];
+}
+
 /** @param {number} value */
 function land(value) {
 	elapsed = value;
@@ -66,6 +71,7 @@ function land(value) {
 
 /** @param {string} id */
 function start(id) {
+	remember();
 	current = id;
 	land(0);
 	source = after(id);
@@ -76,6 +82,7 @@ function start(id) {
 function advance() {
 	if (queued.length) {
 		const [next, ...rest] = queued;
+		remember();
 		current = next;
 		queued = rest;
 		land(0);
@@ -83,6 +90,7 @@ function advance() {
 	}
 	if (suggested.length) {
 		const [next, ...rest] = suggested;
+		remember();
 		current = next;
 		suggested = rest;
 		land(0);
@@ -125,6 +133,9 @@ export const player = {
 	},
 	get from() {
 		return from;
+	},
+	get past() {
+		return past;
 	},
 	get queued() {
 		return queued;
@@ -195,6 +206,7 @@ export const player = {
 		}
 		const at = queued.indexOf(id);
 		if (at >= 0) {
+			remember();
 			current = id;
 			land(0);
 			queued = queued.slice(at + 1);
@@ -202,6 +214,7 @@ export const player = {
 			return;
 		}
 		if (suggested.includes(id)) {
+			remember();
 			current = id;
 			land(0);
 			suggested = suggested.slice(suggested.indexOf(id) + 1);
@@ -239,6 +252,7 @@ export const player = {
 		shuffle = true;
 		const rest = scramble(albumOrder);
 		const [first, ...tail] = rest;
+		remember();
 		current = first;
 		land(0);
 		source = after(first);
