@@ -107,8 +107,8 @@
 		flex-direction: column;
 		align-items: center;
 		text-align: center;
-		padding-top: 96px;
-		padding-bottom: 96px;
+		padding-top: 64px;
+		padding-bottom: 64px;
 	}
 
 	h1 {
