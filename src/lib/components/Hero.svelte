@@ -209,7 +209,7 @@
 		color: var(--dim);
 	}
 
-	@media (max-width: 1321px) and (min-width: 901px) {
+	@media (max-width: 1303px) and (min-width: 901px) {
 		.hero {
 			min-height: 0;
 			flex-direction: column;
@@ -241,7 +241,7 @@
 		}
 	}
 
-	@media (max-height: 920px) and (min-width: 1322px) {
+	@media (max-height: 920px) and (min-width: 1304px) {
 		.hero {
 			padding-top: 48px;
 			padding-bottom: 56px;
