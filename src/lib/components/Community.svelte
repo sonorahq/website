@@ -1,4 +1,5 @@
 <script>
+	import { reveal } from '$lib/reveal.js';
 	import { discord, matrix, repo } from '$lib/data/links.js';
 	import Flag from './Flag.svelte';
 	import Mark from './Mark.svelte';
@@ -7,7 +8,7 @@
 </script>
 
 <section class="section">
-	<div class="page community">
+	<div class="page community" use:reveal={{ stagger: true }}>
 		<div class="panel">
 			<h2>Speaks {languages.length} languages</h2>
 			<p>

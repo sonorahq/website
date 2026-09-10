@@ -1,12 +1,16 @@
+<script>
+	import { reveal } from '$lib/reveal.js';
+</script>
+
 <section id="features" class="section">
 	<div class="page">
-		<h2>Built like a desktop app,<br />because it is one.</h2>
-		<p class="lead">
+		<h2 use:reveal>Built like a desktop app,<br />because it is one.</h2>
+		<p class="lead" use:reveal>
 			GPUI renders the whole interface on the GPU. Playback, library and lyrics all run in the same
 			Rust process.
 		</p>
 
-		<div class="cards">
+		<div class="cards" use:reveal={{ stagger: true }}>
 			<article>
 				<span class="icon">
 					<svg viewBox="0 0 24 24" aria-hidden="true">
