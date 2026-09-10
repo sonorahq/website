@@ -22,6 +22,7 @@
 	const HEIGHT = 730;
 	const FLOOR = 0.62;
 	const FADE = 320;
+	const DIM = new Set(['Dark', 'Midnight', 'Forest', 'Ocean', 'Rose', 'Lavender', 'Amber']);
 
 	let left = $state(true);
 	let right = $state(true);
@@ -33,9 +34,9 @@
 	const scale = $derived(Math.min(Math.max(room / WIDTH, FLOOR), 1));
 
 	const tint = $derived(shelf.get(player.track.album)?.tint ?? shelf.get('nocturnes')?.tint);
-	const tokens = $derived(tint ? palette(tint, settings.adaptive) : {});
+	const tokens = $derived(palette(tint, settings.adaptive, settings.theme));
 	const scheme = $derived(
-		settings.theme === 'Dark' ? 'dark' : settings.theme === 'Light' ? 'light' : undefined
+		settings.theme === 'System' ? undefined : DIM.has(settings.theme) ? 'dark' : 'light'
 	);
 	const style = $derived(
 		Object.entries(tokens)
