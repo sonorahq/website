@@ -130,7 +130,6 @@
 								<Card
 									title={genre.name}
 									weight={600}
-									flat
 									surface
 									onpress={() => (query = genre.name)}
 								/>
@@ -144,21 +143,23 @@
 		<div class="scroll results">
 			{#if best}
 				<div class="lead">
-					<span class="eyebrow pad">Best match</span>
-					<Card
-						filled
-						flat
-						art={63}
-						size={24}
-						weight={700}
-						circle={best.circle}
-						eyebrow={best.kind}
-						title={best.title}
-						meta={best.meta}
-						cover={best.cover}
-						fallback={best.fallback}
-						onpress={() => open(best)}
-					/>
+					<div class="best">
+						<span class="eyebrow pad">Best match</span>
+						<Card
+							filled
+							flat
+							art={63}
+							size={24}
+							weight={700}
+							circle={best.circle}
+							eyebrow={best.kind}
+							title={best.title}
+							meta={best.meta}
+							cover={best.cover}
+							fallback={best.fallback}
+							onpress={() => open(best)}
+						/>
+					</div>
 					<span class="eyebrow pad">Results</span>
 				</div>
 			{/if}
@@ -295,6 +296,13 @@
 		flex-direction: column;
 		gap: 21px;
 		flex: none;
+	}
+
+	.best {
+		display: flex;
+		flex: none;
+		flex-direction: column;
+		gap: 7px;
 	}
 
 	.rows {

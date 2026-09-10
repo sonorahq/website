@@ -4,8 +4,8 @@
 	import { lyrics, writers } from '$lib/mock/lyrics.js';
 	import { player } from '$lib/mock/player.svelte.js';
 	import { settings } from '$lib/mock/settings.svelte.js';
+	import Card from './Card.svelte';
 	import Control from './Control.svelte';
-	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
 
 	let { tab } = $props();
@@ -26,7 +26,7 @@
 	const BLUR = 0.13;
 	const HAZE = 0.45;
 	const VEIL = 0.3;
-	const VERSE = 21;
+	const VERSE = 19;
 	const HAZE_LEAST = 0.05;
 
 	const verses = $derived(lyrics.get(player.id) ?? []);
@@ -183,6 +183,10 @@
 	const trail = (row) => Math.min(Math.max(rows[row].width - edges[row], 0), EDGE_FADE);
 </script>
 
+{#snippet remove()}
+	<span class="shove"><Control icon="x" title="Remove from queue" small tint="muted" /></span>
+{/snippet}
+
 <aside class="aside">
 	<header class="head">
 		<span class="eyebrow">{tab === 'lyrics' ? 'Lyrics' : 'Queue'}</span>
@@ -287,37 +291,40 @@
 					<span class="source">{player.from.name}</span>
 				{/if}
 			</span>
-			<div class="card chosen">
-				<Cover src={player.track.cover} />
-				<span class="text">
-					<span class="title playing">{player.track.title}</span>
-					<span class="caption">{player.track.artist}</span>
-				</span>
-			</div>
+			<Card
+				title={player.track.title}
+				meta={player.track.artist}
+				cover={player.track.cover}
+				tint="var(--m-primary)"
+				playing={player.playing}
+				onplay={() => player.toggle()}
+			/>
 
 			{#if upcoming.length}
 				<span class="group"><span class="eyebrow">Up next</span></span>
 				{#each upcoming as track (track.id)}
-					<button type="button" class="card" onclick={() => player.select(track.id)}>
-						<Cover src={track.cover} />
-						<span class="text">
-							<span class="title">{track.title}</span>
-							<span class="caption">{track.artist}</span>
-						</span>
-					</button>
+					<Card
+						title={track.title}
+						meta={track.artist}
+						cover={track.cover}
+						onplay={() => player.select(track.id)}
+						onpress={() => player.select(track.id)}
+						action={remove}
+					/>
 				{/each}
 			{/if}
 
 			{#if suggested.length}
 				<span class="group"><span class="eyebrow">Similar tracks</span></span>
 				{#each suggested as track (track.id)}
-					<button type="button" class="card" onclick={() => player.select(track.id)}>
-						<Cover src={track.cover} />
-						<span class="text">
-							<span class="title">{track.title}</span>
-							<span class="caption">{track.artist}</span>
-						</span>
-					</button>
+					<Card
+						title={track.title}
+						meta={track.artist}
+						cover={track.cover}
+						onplay={() => player.select(track.id)}
+						onpress={() => player.select(track.id)}
+						action={remove}
+					/>
 				{/each}
 			{/if}
 		</div>
@@ -405,7 +412,7 @@
 		line-height: 26.25px;
 		transform: scale(0.904762);
 		transform-origin: left center;
-		transition: transform 200ms cubic-bezier(0.45, 0, 0.55, 1);
+		transition: transform 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
 	}
 
 	.verse:hover {
@@ -482,9 +489,25 @@
 
 	.list {
 		display: flex;
+		flex: 1;
+		min-height: 0;
 		flex-direction: column;
 		padding: 48px 7px 0;
-		overflow: hidden;
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: color-mix(in srgb, var(--m-muted-foreground) 45%, transparent) transparent;
+		mask-image: linear-gradient(
+			to bottom,
+			transparent 0,
+			#000 48px,
+			#000 calc(100% - 96px),
+			transparent 100%
+		);
+	}
+
+	.shove {
+		display: flex;
+		margin-right: 3.5px;
 	}
 
 	.group {
@@ -522,56 +545,5 @@
 	.source:hover {
 		color: var(--m-foreground);
 		text-decoration: underline;
-	}
-
-	.card {
-		display: flex;
-		flex: none;
-		align-items: center;
-		gap: 10.5px;
-		width: 100%;
-		height: 52px;
-		padding: 8px;
-		border: 0;
-		border-radius: var(--m-radius);
-		background: none;
-		color: var(--m-foreground);
-		font: inherit;
-		text-align: left;
-		cursor: pointer;
-	}
-
-	.card:hover {
-		background: var(--m-table-hover);
-	}
-
-	.chosen {
-		background: var(--m-table-active);
-	}
-
-	.text {
-		display: flex;
-		flex: 1;
-		min-width: 0;
-		flex-direction: column;
-		gap: 2px;
-		line-height: 1.25;
-	}
-
-	.title,
-	.caption {
-		min-width: 0;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	.playing {
-		color: var(--m-primary);
-	}
-
-	.caption {
-		font-size: 12px;
-		color: var(--m-muted-foreground);
 	}
 </style>

@@ -18,8 +18,8 @@
 
 	let { shelf = 'library', tab = 'Songs' } = $props();
 
-	const CARD = 146;
-	const GAP = 32;
+	const CARD = 145;
+	const GAP = 33;
 
 	const local = $derived(shelf === 'local');
 	const songs = $derived(local ? localTracks : favorites);
@@ -45,7 +45,7 @@
 					<Control
 						variant="filled"
 						icon={holding ? 'pause' : 'play'}
-						label={holding ? 'Pause' : 'Play'}
+						label={holding ? 'Pause' : mine ? 'Resume' : 'Play'}
 						onclick={() => {
 							if (holding) player.pause();
 							else if (mine) player.resume();
@@ -63,13 +63,14 @@
 		</div>
 		<Table columns={libraryColumns} rows={songs} />
 	{:else if tab === 'Albums'}
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#each shown as entry (entry.id)}
 				<Card
 					tile={CARD}
 					flat
 					weight={600}
 					title={entry.title}
+					underline
 					meta="{entry.released} · {entry.artist}"
 					cover={entry.cover}
 					onplay={() => player.select((records.get(entry.id) ?? [])[0]?.id ?? player.id)}
@@ -78,7 +79,7 @@
 			{/each}
 		</div>
 	{:else if tab === 'Artists'}
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#each people as artist (artist.id)}
 				<Card
 					tile={CARD}
@@ -93,7 +94,7 @@
 			{/each}
 		</div>
 	{:else}
-		<div class="grid" style:gap="{GAP}px">
+		<div class="grid" style:column-gap="{GAP}px">
 			{#if !lists.length}
 				<span class="vacant">No local playlists yet</span>
 			{/if}
@@ -120,6 +121,7 @@
 		flex-direction: column;
 		padding: 24px;
 		background: var(--m-background);
+		overflow-x: hidden;
 		overflow-y: auto;
 		scrollbar-width: thin;
 		scrollbar-color: color-mix(in srgb, var(--m-muted-foreground) 45%, transparent) transparent;

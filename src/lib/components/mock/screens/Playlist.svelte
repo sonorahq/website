@@ -28,7 +28,7 @@
 				<Control
 					variant="filled"
 					icon={holding ? 'pause' : 'play'}
-					label={holding ? 'Pause' : 'Play'}
+					label={holding ? 'Pause' : mine ? 'Resume' : 'Play playlist'}
 					onclick={() => {
 						if (holding) player.pause();
 						else if (mine) player.resume();
@@ -40,6 +40,13 @@
 					icon="shuffle"
 					title="Shuffle"
 					onclick={() => player.playShuffled()}
+				/>
+				<Control
+					variant="outline"
+					icon={player.saved ? 'heart-filled' : 'heart'}
+					title={player.saved ? 'Remove from library' : 'Add to library'}
+					tint={player.saved ? 'primary' : ''}
+					onclick={() => player.toggleSaved()}
 				/>
 				<Control icon="ellipsis" title="More" />
 			{/snippet}
@@ -56,6 +63,7 @@
 		flex-direction: column;
 		padding: 24px 0;
 		background: var(--m-background);
+		overflow-x: hidden;
 		overflow-y: auto;
 		scrollbar-width: thin;
 		scrollbar-color: color-mix(in srgb, var(--m-muted-foreground) 45%, transparent) transparent;
