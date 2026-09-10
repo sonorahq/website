@@ -14,7 +14,9 @@
 	const look = (ids) => ids.map((id) => catalogue.get(id)).filter((track) => track !== undefined);
 
 	const ROOM = 6;
+	const PAST = 2;
 
+	const played = $derived(look(player.past).slice(-PAST));
 	const upcoming = $derived(look(player.queued).slice(0, ROOM));
 	const suggested = $derived(look(player.suggested).slice(0, ROOM - upcoming.length));
 
@@ -283,6 +285,20 @@
 		</div>
 	{:else}
 		<div class="list">
+			{#if played.length}
+				<span class="group"><span class="eyebrow">History</span></span>
+				{#each played as track (track.id)}
+					<Card
+						title={track.title}
+						meta={track.artist}
+						cover={track.cover}
+						tint="var(--m-muted-foreground)"
+						onplay={() => player.select(track.id)}
+						onpress={() => player.select(track.id)}
+					/>
+				{/each}
+			{/if}
+
 			<span class="group">
 				<span class="eyebrow">Now playing</span>
 				{#if player.from}
