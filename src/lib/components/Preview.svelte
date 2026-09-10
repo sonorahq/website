@@ -52,7 +52,7 @@
 	.preview {
 		position: relative;
 		scroll-margin-top: var(--header);
-		padding: 104px 0;
+		padding: 0 0 104px;
 	}
 
 	.preview .page {
@@ -117,7 +117,7 @@
 
 	@media (max-width: 900px) {
 		.preview {
-			padding: 64px 0;
+			padding: 0 0 64px;
 		}
 
 		h2 {

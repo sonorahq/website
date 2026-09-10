@@ -25,7 +25,7 @@
 	--page: 1520px;
 	--gutter: clamp(24px, 5.5vw, 96px);
 	--header: 65px;
-	--fold-peek: 469px;
+	--fold-peek: 365px;
 	--mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, Consolas, monospace;
 }
 
