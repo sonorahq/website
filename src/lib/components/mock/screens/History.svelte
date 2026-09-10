@@ -8,7 +8,7 @@
 	const total = played.reduce((sum, track) => sum + track.length, 0);
 </script>
 
-<div class="page">
+<div class="screen">
 	<div class="gutter">
 		<PageHero
 			title="History"
@@ -26,7 +26,7 @@
 </div>
 
 <style>
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;

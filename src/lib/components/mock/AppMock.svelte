@@ -45,6 +45,7 @@
 	);
 
 	const still = $derived(settings.motion === 'Never');
+	const content = $derived(WIDTH - (left ? 196 : 0) - (right ? 255 : 0));
 
 	let fading = $state(false);
 	let settle = 0;
@@ -79,7 +80,7 @@
 				{#if at.screen === 'home'}
 					<Home />
 				{:else if at.screen === 'search'}
-					<Search />
+					<Search room={content} />
 				{:else if at.screen === 'library'}
 					<Library shelf="library" tab={at.tab ?? 'Songs'} />
 				{:else if at.screen === 'local'}

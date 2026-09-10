@@ -31,7 +31,7 @@
 	const holding = $derived(mine && player.playing);
 </script>
 
-<div class="page" class:listing={tab === 'Songs'}>
+<div class="screen" class:listing={tab === 'Songs'}>
 	{#if tab === 'Songs'}
 		<div class="gutter">
 			<PageHero
@@ -114,7 +114,7 @@
 </div>
 
 <style>
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;
@@ -127,7 +127,7 @@
 		scrollbar-color: color-mix(in srgb, var(--m-muted-foreground) 45%, transparent) transparent;
 	}
 
-	.page.listing {
+	.screen.listing {
 		padding: 24px 0;
 	}
 

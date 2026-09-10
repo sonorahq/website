@@ -30,7 +30,7 @@
 		'Copyright © 2026 Sonora Contributors. Sonora comes with absolutely no warranty. It is free software, and you are welcome to redistribute it under the terms of the GNU General Public License version 3 or later. Sonora is unofficial and is not affiliated with Spotify AB.';
 </script>
 
-<div class="page">
+<div class="screen">
 	<div class="sheet">
 		{#if tab === 'General'}
 			<div class="profile">
@@ -575,7 +575,7 @@
 {/snippet}
 
 <style>
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;
