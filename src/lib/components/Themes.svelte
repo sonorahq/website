@@ -1,12 +1,16 @@
+<script>
+	import { reveal } from '$lib/reveal.js';
+</script>
+
 <section id="themes" class="section">
 	<div class="page">
-		<h2>Eight looks, plus your own.</h2>
-		<p class="lead">
+		<h2 use:reveal>Eight looks, plus your own.</h2>
+		<p class="lead" use:reveal>
 			Dark, light, midnight, forest, ocean, rose, lavender, amber — or follow the system. Adaptive
 			tinting takes its colour from the artwork, and every token underneath is overridable.
 		</p>
 
-		<div class="themes">
+		<div class="themes" use:reveal={{ stagger: true }}>
 			<figure>
 				<div class="inset">
 					<img
