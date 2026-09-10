@@ -1,5 +1,6 @@
 <script>
 	import { settings } from '$lib/mock/settings.svelte.js';
+	import { themes } from '$lib/mock/theme.js';
 	import Control from '../Control.svelte';
 	import Icon from '../Icon.svelte';
 	import Picker from '../Picker.svelte';
@@ -29,7 +30,7 @@
 		'Copyright © 2026 Sonora Contributors. Sonora comes with absolutely no warranty. It is free software, and you are welcome to redistribute it under the terms of the GNU General Public License version 3 or later. Sonora is unofficial and is not affiliated with Spotify AB.';
 </script>
 
-<div class="page">
+<div class="screen">
 	<div class="sheet">
 		{#if tab === 'General'}
 			<div class="profile">
@@ -324,7 +325,7 @@
 {#snippet themePick()}
 	<Picker
 		value={settings.theme}
-		options={['System', 'Dark', 'Light']}
+		options={themes}
 		width={170}
 		onpick={(value) => (settings.theme = value)}
 	/>
@@ -574,7 +575,7 @@
 {/snippet}
 
 <style>
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;

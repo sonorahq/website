@@ -26,7 +26,7 @@
 	const lane = (column) => page.slice(column * ROWS, column * ROWS + ROWS);
 </script>
 
-<div class="page">
+<div class="screen">
 	<section class="again">
 		<div class="bar">
 			<h2>Listen again</h2>
@@ -111,7 +111,7 @@
 </div>
 
 <style>
-	.page {
+	.screen {
 		display: flex;
 		flex: 1;
 		min-width: 0;
