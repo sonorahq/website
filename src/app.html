@@ -11,12 +11,24 @@
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
 		/>
 		<script>
+			const root = document.documentElement;
+			root.classList.add('js');
+
 			try {
 				const stored = localStorage.getItem('theme');
 				if (stored === 'light' || stored === 'dark') {
-					document.documentElement.dataset.theme = stored;
+					root.dataset.theme = stored;
 				}
 			} catch {}
+
+			const settled = () => root.classList.add('fonts');
+
+			if (document.fonts) {
+				document.fonts.ready.then(settled);
+				setTimeout(settled, 900);
+			} else {
+				settled();
+			}
 		</script>
 		%sveltekit.head%
 	</head>

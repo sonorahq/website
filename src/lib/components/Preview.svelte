@@ -22,7 +22,7 @@
 
 <section id="preview" class="preview">
 	<div class="page">
-		<figure class="shot" bind:this={column}>
+		<figure class="shot" data-enter style="--enter: 0.35s" bind:this={column}>
 			<div class="frame" class:tight={!small}>
 				{#if small}
 					<img

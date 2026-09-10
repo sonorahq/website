@@ -13,14 +13,14 @@
 
 <section class="hero">
 	<div class="page">
-		<h1>Your whole library. One native app.</h1>
+		<h1 data-enter>Your whole library. One native app.</h1>
 
-		<p class="sub">
+		<p class="sub" data-enter style="--enter: 0.07s">
 			Spotify, YouTube Music, Subsonic and your local files in a single window. Written in Rust on
 			GPU-accelerated GPUI — not a browser in a costume.
 		</p>
 
-		<div id="install" class="picker">
+		<div id="install" class="picker" data-enter style="--enter: 0.14s">
 			<PlatformTabs />
 
 			{#if platform.current.hero}
@@ -34,7 +34,7 @@
 			{/if}
 		</div>
 
-		<div class="cta">
+		<div class="cta" data-enter style="--enter: 0.21s">
 			<a class="btn btn-primary" href="https://github.com/sonorahq/sonora/releases/latest">
 				<svg
 					width="16"
@@ -59,7 +59,9 @@
 			</a>
 		</div>
 
-		<p class="fine">Free and open source · macOS, Linux, Windows · No account required</p>
+		<p class="fine" data-enter style="--enter: 0.28s">
+			Free and open source · macOS, Linux, Windows · No account required
+		</p>
 	</div>
 </section>
 
@@ -71,33 +73,6 @@
 		justify-content: center;
 		min-height: calc(100vh - var(--header) - var(--fold-peek));
 		min-height: calc(100svh - var(--header) - var(--fold-peek));
-	}
-
-	.hero .page > * {
-		animation: rise 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
-	}
-
-	.hero .page > *:nth-child(2) {
-		animation-delay: 0.07s;
-	}
-
-	.hero .page > *:nth-child(3) {
-		animation-delay: 0.14s;
-	}
-
-	.hero .page > *:nth-child(4) {
-		animation-delay: 0.21s;
-	}
-
-	.hero .page > *:nth-child(5) {
-		animation-delay: 0.28s;
-	}
-
-	@keyframes rise {
-		from {
-			opacity: 0;
-			transform: translateY(14px);
-		}
 	}
 
 	.hero .page {
@@ -186,12 +161,6 @@
 		font-size: 12px;
 		line-height: 1.5;
 		color: var(--dim);
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.hero .page > * {
-			animation: none;
-		}
 	}
 
 	@media (max-height: 940px) and (min-width: 901px) {
