@@ -179,4 +179,6 @@ export const icons = new Map([
 
 export const solid = new Set(['play-filled', 'pause-filled', 'spotify', 'youtubemusic']);
 
+export const shared = new Set(['spotify', 'youtubemusic']);
+
 export const filled = new Set(['heart-filled']);
