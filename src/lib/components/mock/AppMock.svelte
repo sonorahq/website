@@ -2,6 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import { shelf } from '$lib/mock/album.js';
 	import { player } from '$lib/mock/player.svelte.js';
+	import { reach } from '$lib/mock/packs.svelte.js';
 	import { palette } from '$lib/mock/theme.js';
 	import { route } from '$lib/mock/route.svelte.js';
 	import { settings } from '$lib/mock/settings.svelte.js';
@@ -49,6 +50,10 @@
 
 	let fading = $state(false);
 	let settle = 0;
+
+	$effect(() => {
+		reach(settings.icons);
+	});
 
 	$effect(() => {
 		void tint;
