@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { untrack } from 'svelte';
 	import { catalogue } from '$lib/mock/album';
-	import { lyrics, writers } from '$lib/mock/lyrics';
+	import { lyricsFor } from '$lib/mock/lyrics';
 	import { player } from '$lib/mock/player.svelte';
 	import { settings } from '$lib/mock/settings.svelte';
 	import Card from './Card.svelte';
@@ -31,7 +31,8 @@
 	const VERSE = 19;
 	const HAZE_LEAST = 0.05;
 
-	const verses = $derived(lyrics.get(player.id) ?? []);
+	const song = $derived(lyricsFor(player.id));
+	const verses = $derived(song.lines);
 
 	const sung = (line: { words?: unknown[] }) => settings.karaoke && !!line.words;
 	const at = $derived(player.elapsed);
@@ -280,8 +281,8 @@
 				{/each}
 
 				<div class="credit">
-					<span>Lyrics from {writers.source}</span>
-					<span>Written by {writers.by}</span>
+					<span>Lyrics from {song.source}</span>
+					<span>Written by {song.by}</span>
 				</div>
 			</div>
 		</div>
