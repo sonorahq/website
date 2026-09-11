@@ -3,22 +3,32 @@
  */
 export function anchors() {
 	const gentle = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const behavior = gentle ? 'smooth' : 'auto';
 
 	/** @param {MouseEvent} event */
 	const onclick = (event) => {
 		if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey) return;
 
-		const link = /** @type {HTMLElement | null} */ (event.target)?.closest?.('a[href^="#"]');
-		if (!(link instanceof HTMLAnchorElement)) return;
+		const link = /** @type {HTMLElement | null} */ (event.target)?.closest?.('a[href]');
+		if (!(link instanceof HTMLAnchorElement) || link.target || link.origin !== location.origin) {
+			return;
+		}
 
-		const id = link.hash.slice(1);
-		const target = id && document.getElementById(id);
-		if (!target) return;
+		if (link.hash) {
+			const target = document.getElementById(link.hash.slice(1));
+			if (!target || link.pathname !== location.pathname) return;
+
+			event.preventDefault();
+			target.scrollIntoView({ behavior, block: 'start' });
+			return;
+		}
+
+		if (link.pathname !== location.pathname || link.search !== location.search) return;
 
 		event.preventDefault();
-		target.scrollIntoView({ behavior: gentle ? 'smooth' : 'auto', block: 'start' });
+		scrollTo({ top: 0, behavior });
 	};
 
-	document.addEventListener('click', onclick);
-	return () => document.removeEventListener('click', onclick);
+	document.addEventListener('click', onclick, true);
+	return () => document.removeEventListener('click', onclick, true);
 }
