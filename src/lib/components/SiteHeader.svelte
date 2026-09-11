@@ -35,7 +35,7 @@
 			</a>
 			<nav>
 				<a href="#features">Features</a>
-				<a href="#themes">Themes</a>
+				<a href="#themes">Looks</a>
 				<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
 			</nav>
 		</div>

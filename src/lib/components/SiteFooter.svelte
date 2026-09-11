@@ -19,7 +19,7 @@
 					<h3>Product</h3>
 					<a href="#features">Features</a>
 					<a href="#install">Install</a>
-					<a href="#themes">Themes</a>
+					<a href="#themes">Looks</a>
 				</div>
 				<div>
 					<h3>Project</h3>

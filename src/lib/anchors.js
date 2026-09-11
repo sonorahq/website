@@ -17,7 +17,6 @@ export function anchors() {
 
 		event.preventDefault();
 		target.scrollIntoView({ behavior: gentle ? 'smooth' : 'auto', block: 'start' });
-		history.replaceState(history.state, '', link.hash);
 	};
 
 	document.addEventListener('click', onclick);
