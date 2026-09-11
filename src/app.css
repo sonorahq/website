@@ -162,6 +162,7 @@ button {
 }
 
 .section {
+	scroll-margin-top: var(--header);
 	border-top: 1px solid var(--border);
 	padding: 104px 0;
 }
@@ -250,6 +251,16 @@ a {
 	transition:
 		opacity 0.65s ease,
 		transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+html {
+	scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+	width: 0;
+	height: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {

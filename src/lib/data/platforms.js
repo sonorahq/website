@@ -3,7 +3,6 @@ export const platforms = [
 		id: 'macos',
 		mark: 'apple',
 		label: 'macOS',
-		download: 'Download for macOS',
 		prompt: '$',
 		hero: 'brew install --cask nolight132/tap/sonora',
 		steps: [
@@ -22,7 +21,6 @@ export const platforms = [
 		id: 'arch',
 		mark: 'arch',
 		label: 'Arch',
-		download: 'Download for Arch',
 		prompt: '$',
 		hero: 'yay -S sonora-bin',
 		steps: [
@@ -39,7 +37,6 @@ export const platforms = [
 		id: 'flatpak',
 		mark: 'flatpak',
 		label: 'Flatpak',
-		download: 'Download the .flatpak',
 		prompt: '$',
 		hero: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref',
 		steps: [
@@ -59,7 +56,6 @@ export const platforms = [
 		id: 'nix',
 		mark: 'nix',
 		label: 'Nix',
-		download: 'Download for Nix',
 		prompt: '$',
 		hero: 'nix run github:sonorahq/sonora',
 		steps: [
@@ -84,7 +80,6 @@ export const platforms = [
 		id: 'windows',
 		mark: 'windows',
 		label: 'Windows',
-		download: 'Download for Windows',
 		prompt: '',
 		hero: '',
 		steps: [
