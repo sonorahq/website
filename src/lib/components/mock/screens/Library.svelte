@@ -1,5 +1,5 @@
-<script>
-	import { albums, clock, records } from '$lib/mock/album.js';
+<script lang="ts">
+	import { albums, clock, records } from '$lib/mock/album';
 	import {
 		artists,
 		favorites,
@@ -8,15 +8,15 @@
 		localArtists,
 		localTracks,
 		playlists
-	} from '$lib/mock/screens.js';
-	import { player } from '$lib/mock/player.svelte.js';
-	import { route } from '$lib/mock/route.svelte.js';
+	} from '$lib/mock/screens';
+	import { player } from '$lib/mock/player.svelte';
+	import { route } from '$lib/mock/route.svelte';
 	import Card from '../Card.svelte';
 	import Control from '../Control.svelte';
 	import PageHero from '../PageHero.svelte';
 	import Table from '../Table.svelte';
 
-	let { shelf = 'library', tab = 'Songs' } = $props();
+	let { shelf = 'library', tab = 'Songs' }: { shelf?: string; tab?: string } = $props();
 
 	const CARD = 145;
 	const GAP = 33;

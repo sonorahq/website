@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Icon from './Icon.svelte';
 
 	let {
@@ -13,6 +13,18 @@
 		size = 0,
 		trailing = '',
 		onclick = undefined
+	}: {
+		icon?: string;
+		label?: string;
+		title?: string;
+		variant?: string;
+		small?: boolean;
+		tint?: string;
+		selected?: boolean;
+		disabled?: boolean;
+		size?: number;
+		trailing?: string;
+		onclick?: (event: MouseEvent) => void;
 	} = $props();
 </script>
 

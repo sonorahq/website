@@ -1,9 +1,9 @@
-<script>
-	import { filled, icons, shared, solid } from '$lib/mock/icons.js';
-	import { glyphs } from '$lib/mock/packs.svelte.js';
-	import { settings } from '$lib/mock/settings.svelte.js';
+<script lang="ts">
+	import { filled, icons, shared, solid } from '$lib/mock/icons';
+	import { glyphs } from '$lib/mock/packs.svelte';
+	import { settings } from '$lib/mock/settings.svelte';
 
-	let { name, size = 16 } = $props();
+	let { name, size = 16 }: { name: string; size?: number } = $props();
 
 	const picked = $derived(shared.has(name) ? undefined : glyphs(settings.icons)?.get(name));
 	const markup = $derived(picked ?? icons.get(name) ?? '');

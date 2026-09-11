@@ -1,17 +1,17 @@
-<script>
+<script lang="ts">
 	import { untrack } from 'svelte';
-	import { catalogue } from '$lib/mock/album.js';
-	import { lyrics, writers } from '$lib/mock/lyrics.js';
-	import { player } from '$lib/mock/player.svelte.js';
-	import { settings } from '$lib/mock/settings.svelte.js';
+	import { catalogue } from '$lib/mock/album';
+	import { lyrics, writers } from '$lib/mock/lyrics';
+	import { player } from '$lib/mock/player.svelte';
+	import { settings } from '$lib/mock/settings.svelte';
 	import Card from './Card.svelte';
 	import Control from './Control.svelte';
 	import Icon from './Icon.svelte';
 
-	let { tab } = $props();
+	let { tab }: { tab: string } = $props();
 
-	/** @param {string[]} ids */
-	const look = (ids) => ids.map((id) => catalogue.get(id)).filter((track) => track !== undefined);
+	const look = (ids: string[]) =>
+		ids.map((id) => catalogue.get(id)).filter((track) => track !== undefined);
 
 	const ROOM = 6;
 	const PAST = 2;
@@ -33,17 +33,16 @@
 
 	const verses = $derived(lyrics.get(player.id) ?? []);
 
-	/** @param {{ words?: unknown[] }} line */
-	const sung = (line) => settings.karaoke && !!line.words;
+	const sung = (line: { words?: unknown[] }) => settings.karaoke && !!line.words;
 	const at = $derived(player.elapsed);
 	const active = $derived(
 		verses.reduce((found, line, index) => (at >= line.start ? index : found), -1)
 	);
 
-	let roll = $state(/** @type {HTMLElement | null} */ (null));
-	let sheet = $state(/** @type {HTMLElement | null} */ (null));
+	let roll = $state<HTMLElement | null>(null);
+	let sheet = $state<HTMLElement | null>(null);
 	let lift = $state(0);
-	let veils = $state(/** @type {number[]} */ ([]));
+	let veils = $state<number[]>([]);
 
 	$effect(() => {
 		void active;
@@ -55,8 +54,7 @@
 		const rise = height * PIN - line.offsetTop;
 		lift = rise;
 
-		/** @type {number[]} */
-		const hazed = [];
+		const hazed: number[] = [];
 		for (let index = 0; index < verses.length; index += 1) {
 			const row = sheet.children[index];
 			if (!settings.blur || index === active || !(row instanceof HTMLElement)) {
@@ -71,14 +69,20 @@
 		veils = hazed;
 	});
 
-	let spans = $state(/** @type {(HTMLElement | null)[]} */ ([]));
-	let body = $state(/** @type {HTMLElement | null} */ (null));
-	let plan = $state(
-		/** @type {{ word: number, row: number, x: number, width: number, before: number, whole: number, evenly: boolean }[]} */ ([])
-	);
-	let rows = $state(
-		/** @type {{ top: number, left: number, height: number, width: number }[]} */ ([])
-	);
+	let spans = $state<(HTMLElement | null)[]>([]);
+	let body = $state<HTMLElement | null>(null);
+	let plan = $state<
+		{
+			word: number;
+			row: number;
+			x: number;
+			width: number;
+			before: number;
+			whole: number;
+			evenly: boolean;
+		}[]
+	>([]);
+	let rows = $state<{ top: number; left: number; height: number; width: number }[]>([]);
 	let reach = $state(0);
 
 	function measure() {
@@ -90,8 +94,7 @@
 		const zoom = body.clientWidth ? frame.width / body.clientWidth : 1;
 		if (!zoom) return;
 
-		/** @param {DOMRect} rect */
-		const box = (rect) => ({
+		const box = (rect: DOMRect) => ({
 			top: (rect.top - frame.top) / zoom,
 			left: (rect.left - frame.left) / zoom,
 			width: rect.width / zoom,
@@ -113,8 +116,15 @@
 			};
 		});
 
-		/** @type {{ word: number, row: number, x: number, width: number, before: number, whole: number, evenly: boolean }[]} */
-		const cut = [];
+		const cut: {
+			word: number;
+			row: number;
+			x: number;
+			width: number;
+			before: number;
+			whole: number;
+			evenly: boolean;
+		}[] = [];
 		pieces.forEach((rects, word) => {
 			const whole = rects.reduce((sum, rect) => sum + rect.width, 0);
 			let before = 0;
@@ -149,8 +159,7 @@
 		document.fonts?.ready.then(() => untrack(measure));
 	});
 
-	/** @param {{ start: number, end: number }} word @param {boolean} last */
-	const swept = (word, last) => {
+	const swept = (word: { start: number; end: number }, last: boolean) => {
 		const span = word.end - word.start;
 		const travel = Math.max(last ? span : span * SWEEP_STRETCH, SWEEP_LEAST);
 		const along = Math.min(Math.max((at - word.start) / travel, 0), 1);
@@ -158,8 +167,7 @@
 		return eased >= SWEPT ? 1 : eased;
 	};
 
-	/** @param {{ start: number, end: number }} word */
-	const evenly = (word) => {
+	const evenly = (word: { start: number; end: number }) => {
 		const span = word.end - word.start;
 		if (span <= 0) return at >= word.end ? 1 : 0;
 		return Math.min(Math.max((at - word.start) / span, 0), 1);
@@ -181,8 +189,7 @@
 		return front;
 	});
 
-	/** @param {number} row */
-	const trail = (row) => Math.min(Math.max(rows[row].width - edges[row], 0), EDGE_FADE);
+	const trail = (row: number) => Math.min(Math.max(rows[row].width - edges[row], 0), EDGE_FADE);
 </script>
 
 {#snippet remove()}

@@ -4,10 +4,18 @@ export const installer =
 export const installerArm =
 	'https://github.com/sonorahq/sonora/releases/latest/download/Sonora-Setup-arm64.exe';
 
-/** @typedef {{ caption: string, command: string, link?: string, hint?: string }} Step */
+export type Step = { caption: string; command: string; link?: string; hint?: string };
 
-/** @type {{ id: string, mark: string, label: string, prompt: string, hero: string, pending?: string, steps: Step[], note: string }[]} */
-export const platforms = [
+export const platforms: {
+	id: string;
+	mark: string;
+	label: string;
+	prompt: string;
+	hero: string;
+	pending?: string;
+	steps: Step[];
+	note: string;
+}[] = [
 	{
 		id: 'macos',
 		mark: 'apple',

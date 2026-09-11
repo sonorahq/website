@@ -1,11 +1,13 @@
-<script>
+<script lang="ts">
 	import About from '$lib/components/About.svelte';
 	import Community from '$lib/components/Community.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import Install from '$lib/components/Install.svelte';
 	import Preview from '$lib/components/Preview.svelte';
 
-	let { data } = $props();
+	import type { PageProps } from './$types';
+
+	let { data }: PageProps = $props();
 </script>
 
 <svelte:head>

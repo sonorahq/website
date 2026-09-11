@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import type { Snippet } from 'svelte';
 	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
 
@@ -24,6 +25,28 @@
 		onplay = undefined,
 		onpress = undefined,
 		action = undefined
+	}: {
+		title?: string;
+		eyebrow?: string;
+		meta?: string;
+		trailing?: string;
+		cover?: string;
+		fallback?: string;
+		accent?: boolean;
+		circle?: boolean;
+		tile?: number;
+		art?: number;
+		size?: number;
+		weight?: number;
+		tint?: string;
+		flat?: boolean;
+		filled?: boolean;
+		surface?: boolean;
+		playing?: boolean;
+		underline?: boolean;
+		onplay?: (event: Event) => void;
+		onpress?: (event: Event) => void;
+		action?: Snippet;
 	} = $props();
 
 	const ROW = 52;

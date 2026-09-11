@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
 	import { SvelteSet } from 'svelte/reactivity';
-	import { nav, pinned } from '$lib/mock/album.js';
-	import { route } from '$lib/mock/route.svelte.js';
+	import { nav, pinned } from '$lib/mock/album';
+	import { route } from '$lib/mock/route.svelte';
 	import Card from './Card.svelte';
 	import Icon from './Icon.svelte';
 
@@ -13,8 +13,7 @@
 		if (nav.some((entry) => entry.tabs && entry.id === at.screen)) opened.add(at.screen);
 	});
 
-	/** @param {{ id: string, tabs?: string[] }} entry */
-	function pick(entry) {
+	function pick(entry: { id: string; tabs?: string[] }) {
 		if (entry.tabs) {
 			if (opened.has(entry.id)) opened.delete(entry.id);
 			else opened.add(entry.id);
@@ -23,14 +22,12 @@
 		route.go({ screen: entry.id });
 	}
 
-	/** @param {{ id: string }} entry */
-	const inside = (entry) => at.screen === entry.id;
+	const inside = (entry: { id: string }) => at.screen === entry.id;
 
-	/** @param {{ id: string }} entry @param {string} tab */
-	const chosen = (entry, tab) => at.screen === entry.id && at.tab === tab;
+	const chosen = (entry: { id: string }, tab: string) => at.screen === entry.id && at.tab === tab;
 
-	/** @param {{ to: { screen: string, id: string } }} entry */
-	const here = (entry) => at.screen === entry.to.screen && at.id === entry.to.id;
+	const here = (entry: { to: { screen: string; id: string } }) =>
+		at.screen === entry.to.screen && at.id === entry.to.id;
 </script>
 
 <nav class="sidebar">

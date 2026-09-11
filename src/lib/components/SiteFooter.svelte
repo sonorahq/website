@@ -1,5 +1,5 @@
-<script>
-	import { discord, matrix, repo } from '$lib/data/links.js';
+<script lang="ts">
+	import { discord, matrix, repo } from '$lib/data/links';
 	import Logo from './Logo.svelte';
 </script>
 

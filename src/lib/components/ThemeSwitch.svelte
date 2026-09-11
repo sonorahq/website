@@ -1,6 +1,6 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
-	import { theme, options } from '$lib/theme.svelte.js';
+	import { theme, options } from '$lib/theme.svelte';
 
 	onMount(() => theme.sync());
 </script>

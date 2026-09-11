@@ -1,11 +1,17 @@
-<script>
-	import { TRAIL, clock, shelf } from '$lib/mock/album.js';
-	import { player } from '$lib/mock/player.svelte.js';
+<script lang="ts">
+	import { TRAIL, clock, shelf, type Track } from '$lib/mock/album';
+	import { player } from '$lib/mock/player.svelte';
 	import Cover from './Cover.svelte';
 	import Icon from './Icon.svelte';
 	import Like from './Like.svelte';
 
-	let { columns = [], rows = [], framed = false } = $props();
+	type Column = { key: string; label: string; width: number; align?: string; sortable?: boolean };
+
+	let {
+		columns = [],
+		rows = [],
+		framed = false
+	}: { columns?: Column[]; rows?: Track[]; framed?: boolean } = $props();
 
 	const span = $derived(columns.reduce((sum, column) => sum + column.width, 0));
 	const head = $derived(columns.map((column) => `${column.width}px`).join(' '));
@@ -68,7 +74,8 @@
 				{:else if column.key === 'length'}
 					<span class="cell right muted">{clock(row.length)}</span>
 				{:else}
-					<span class="cell {column.align ?? ''} muted">{row[column.key] ?? ''}</span>
+					<span class="cell {column.align ?? ''} muted">{row[column.key as keyof Track] ?? ''}</span
+					>
 				{/if}
 			{/each}
 		</div>

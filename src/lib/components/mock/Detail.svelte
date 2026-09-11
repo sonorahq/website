@@ -1,11 +1,11 @@
-<script>
-	import { album as first, clock, columns, records, shelf } from '$lib/mock/album.js';
-	import { player } from '$lib/mock/player.svelte.js';
+<script lang="ts">
+	import { album as first, clock, columns, records, shelf } from '$lib/mock/album';
+	import { player } from '$lib/mock/player.svelte';
 	import Control from './Control.svelte';
 	import PageHero from './PageHero.svelte';
 	import Table from './Table.svelte';
 
-	let { id = 'airs' } = $props();
+	let { id = 'airs' }: { id?: string } = $props();
 
 	const album = $derived(shelf.get(id) ?? first);
 	const rows = $derived(records.get(id) ?? []);

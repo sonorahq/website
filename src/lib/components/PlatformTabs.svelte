@@ -1,9 +1,9 @@
-<script>
-	import { platforms } from '$lib/data/platforms.js';
-	import { platform } from '$lib/platform.svelte.js';
+<script lang="ts">
+	import { platforms } from '$lib/data/platforms';
+	import { platform } from '$lib/platform.svelte';
 	import Mark from './Mark.svelte';
 
-	let { size = 'sm' } = $props();
+	let { size = 'sm' }: { size?: 'sm' | 'lg' } = $props();
 </script>
 
 <div class="tabs {size}">

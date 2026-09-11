@@ -1,10 +1,12 @@
-<script>
-	import { reveal } from '$lib/reveal.js';
-	import { discord, matrix, repo } from '$lib/data/links.js';
+<script lang="ts">
+	import type { Language } from '$lib/data/languages';
+	import { reveal } from '$lib/reveal';
+	import { discord, matrix, repo } from '$lib/data/links';
 	import Flag from './Flag.svelte';
 	import Mark from './Mark.svelte';
 
-	let { languages, strings, done } = $props();
+	let { languages, strings, done }: { languages: Language[]; strings: number; done: number } =
+		$props();
 </script>
 
 <section id="community" class="section">

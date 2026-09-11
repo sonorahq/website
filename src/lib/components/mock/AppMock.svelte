@@ -1,12 +1,12 @@
-<script>
+<script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { shelf } from '$lib/mock/album.js';
-	import { player } from '$lib/mock/player.svelte.js';
-	import { reach } from '$lib/mock/packs.svelte.js';
-	import { palette } from '$lib/mock/theme.js';
-	import { route } from '$lib/mock/route.svelte.js';
-	import { settings } from '$lib/mock/settings.svelte.js';
-	import { theme } from '$lib/theme.svelte.js';
+	import { shelf } from '$lib/mock/album';
+	import { player } from '$lib/mock/player.svelte';
+	import { reach } from '$lib/mock/packs.svelte';
+	import { palette } from '$lib/mock/theme';
+	import { route } from '$lib/mock/route.svelte';
+	import { settings } from '$lib/mock/settings.svelte';
+	import { theme } from '$lib/theme.svelte';
 	import Aside from './Aside.svelte';
 	import Detail from './Detail.svelte';
 	import Artist from './screens/Artist.svelte';

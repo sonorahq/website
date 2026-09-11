@@ -1,5 +1,4 @@
-/** @type {Record<string, number>} */
-const rounding = { Square: 0, Subtle: 6, Rounded: 10, Round: 20 };
+const rounding: Record<string, number> = { Square: 0, Subtle: 6, Rounded: 10, Round: 20 };
 
 let corners = $state('Rounded');
 let theme = $state('Dark');

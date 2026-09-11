@@ -1,5 +1,4 @@
-/** @type {[number, number, string][]} */
-const rover = [
+const rover: [number, number, string][] = [
 	[9.6, 13.0, "I've been a wild rover for many a year"],
 	[13.4, 16.8, 'And I spent all my money on whiskey and beer'],
 	[17.2, 20.6, "But now I'm returning with gold in great store"],
@@ -26,8 +25,7 @@ const rover = [
 	[84.0, 86.0, 'No never, no more']
 ];
 
-/** @param {[number, number, string][]} lines */
-const timed = (lines) =>
+const timed = (lines: [number, number, string][]) =>
 	lines.map(([start, end, text]) => {
 		const parts = text
 			.split(' ')

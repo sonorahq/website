@@ -1,13 +1,13 @@
-<script>
-	import { clock } from '$lib/mock/album.js';
-	import { player } from '$lib/mock/player.svelte.js';
-	import { settings } from '$lib/mock/settings.svelte.js';
+<script lang="ts">
+	import { clock } from '$lib/mock/album';
+	import { player } from '$lib/mock/player.svelte';
+	import { settings } from '$lib/mock/settings.svelte';
 	import Control from './Control.svelte';
 	import Cover from './Cover.svelte';
 	import Like from './Like.svelte';
 	import Scrubber from './Scrubber.svelte';
 
-	let { tab = $bindable() } = $props();
+	let { tab = $bindable() }: { tab: string } = $props();
 
 	const level = $derived(
 		player.volume <= 0.0001
@@ -64,7 +64,7 @@
 				<Scrubber
 					fraction={player.progress}
 					label="Seek"
-					onseek={(/** @type {number} */ to) => player.seek(to)}
+					onseek={(to: number) => player.seek(to)}
 				/>
 			</div>
 			<span class="clock">{clock(player.track.length)}</span>
@@ -100,7 +100,7 @@
 				<Scrubber
 					fraction={player.volume}
 					label="Volume"
-					onseek={(/** @type {number} */ to) => player.setVolume(to)}
+					onseek={(to: number) => player.setVolume(to)}
 				/>
 			</div>
 		</div>

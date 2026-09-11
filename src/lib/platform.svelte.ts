@@ -1,4 +1,4 @@
-import { platforms } from '$lib/data/platforms.js';
+import { platforms } from '$lib/data/platforms';
 
 let id = $state(platforms[0].id);
 

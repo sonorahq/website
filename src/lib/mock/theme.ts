@@ -35,8 +35,7 @@ const SURFACES = 10;
 const BORDERS = 14;
 const TEXTS = 18;
 
-/** @type {Record<string, string[]>} */
-const palettes = {
+const palettes: Record<string, string[]> = {
 	light:
 		'fafafa f5f5f5 e5e5e5 d4d4d4 e5e5e5 ffffff f5f5f5 e5e5e5 f5f5f5e6 f0f0f0 d4d4d4 d4d4d4 d4d4d4 d4d4d4b3 171717 171717 737373 737373 171717 262626 fafafa 262626 2563eb1f'.split(
 			' '
@@ -69,8 +68,7 @@ const palettes = {
 		)
 };
 
-/** @type {Record<string, string>} */
-const kinds = {
+const kinds: Record<string, string> = {
 	System: 'system',
 	Dark: 'dark',
 	Light: 'light',
@@ -84,16 +82,13 @@ const kinds = {
 
 export const themes = Object.keys(kinds);
 
-/** @typedef {[number, number, number, number]} Shade */
+export type Shade = [number, number, number, number];
 
-/** @param {number} value @param {number} low @param {number} high */
-const clamp = (value, low, high) => Math.min(Math.max(value, low), high);
+const clamp = (value: number, low: number, high: number) => Math.min(Math.max(value, low), high);
 
-/** @param {number} value */
-const round = (value) => Math.round(value * 1000) / 1000;
+const round = (value: number) => Math.round(value * 1000) / 1000;
 
-/** @param {string} value @returns {Shade} */
-function shade(value) {
+function shade(value: string): Shade {
 	const bits = parseInt(value, 16);
 	const wide = value.length === 8;
 	const red = ((wide ? bits >>> 24 : bits >> 16) & 255) / 255;
@@ -118,31 +113,21 @@ function shade(value) {
 	return [hue * 60, saturation, lightness * 100, alpha];
 }
 
-/** @param {Shade} shade */
-const css = ([hue, saturation, lightness, alpha]) => {
+const css = ([hue, saturation, lightness, alpha]: Shade) => {
 	const parts = `${round(hue)} ${round(saturation * 100)}% ${round(lightness)}%`;
 	return alpha === 1 ? `hsl(${parts})` : `hsl(${parts} / ${round(alpha)})`;
 };
 
-/**
- * @param {Shade} base
- * @param {{ hue: number, saturation: number }} tint
- * @param {number} strength
- * @returns {Shade}
- */
-const wash = (base, tint, strength) => [
+type Tint = { hue: number; saturation: number };
+
+const wash = (base: Shade, tint: Tint, strength: number): Shade => [
 	tint.hue,
 	Math.min(base[1] + tint.saturation * strength, MAX_WASH_SATURATION),
 	base[2],
 	base[3]
 ];
 
-/**
- * @param {string[]} source
- * @param {{ hue: number, saturation: number } | undefined} tint
- * @returns {Record<string, string>}
- */
-function shades(source, tint) {
+function shades(source: string[], tint: Tint | undefined): Record<string, string> {
 	const base = source.map(shade);
 	const out = [...base];
 
@@ -155,8 +140,7 @@ function shades(source, tint) {
 
 		const dark = base[0][2] < 50;
 		const saturation = clamp(tint.saturation, MIN_ACCENT_SATURATION, MAX_ACCENT_SATURATION);
-		/** @param {number} lightness @returns {Shade} */
-		const accent = (lightness) => [tint.hue, saturation, lightness, 1];
+		const accent = (lightness: number): Shade => [tint.hue, saturation, lightness, 1];
 
 		out[FIELDS.indexOf('primary')] = accent(dark ? 72 : 42);
 		out[FIELDS.indexOf('primary_hover')] = accent(dark ? 82 : 34);
@@ -170,29 +154,25 @@ function shades(source, tint) {
 		out[FIELDS.indexOf('table_active')] = [tint.hue, saturation, dark ? 44 : 50, 0.22];
 	}
 
-	/** @type {Record<string, string>} */
-	const tokens = {};
+	const tokens: Record<string, string> = {};
 	FIELDS.forEach((name, at) => {
 		tokens[`--m-${name.replaceAll('_', '-')}`] = css(out[at]);
 	});
 	return tokens;
 }
 
-/**
- * @param {{ hue: number, saturation: number } | undefined} tint
- * @param {boolean} adaptive
- * @param {string} theme
- * @returns {Record<string, string>}
- */
-export function palette(tint, adaptive = true, theme = 'Dark') {
+export function palette(
+	tint: Tint | undefined,
+	adaptive = true,
+	theme = 'Dark'
+): Record<string, string> {
 	const washing = adaptive ? tint : undefined;
 	const kind = kinds[theme] ?? 'dark';
 	if (kind !== 'system') return shades(palettes[kind], washing);
 
 	const light = shades(palettes.light, washing);
 	const dark = shades(palettes.dark, washing);
-	/** @type {Record<string, string>} */
-	const tokens = {};
+	const tokens: Record<string, string> = {};
 	for (const name of Object.keys(dark)) {
 		tokens[name] = `light-dark(${light[name]}, ${dark[name]})`;
 	}

@@ -1,6 +1,6 @@
-<script>
-	import { settings } from '$lib/mock/settings.svelte.js';
-	import { themes } from '$lib/mock/theme.js';
+<script lang="ts">
+	import { settings } from '$lib/mock/settings.svelte';
+	import { themes } from '$lib/mock/theme';
 	import Control from '../Control.svelte';
 	import Icon from '../Icon.svelte';
 	import Picker from '../Picker.svelte';
@@ -9,7 +9,7 @@
 	import SettingRow from '../SettingRow.svelte';
 	import Switch from '../Switch.svelte';
 
-	let { tab = 'General' } = $props();
+	let { tab = 'General' }: { tab?: string } = $props();
 
 	const listener = { name: 'Alex Rivera', id: '31mfqtv7xk2dwrbn4hpz8ecajlyu' };
 
@@ -481,7 +481,7 @@
 				fraction={settings.opacity}
 				label="Opacity"
 				empty="var(--m-muted)"
-				onseek={(/** @type {number} */ to) => (settings.opacity = to)}
+				onseek={(to: number) => (settings.opacity = to)}
 			/>
 		</span>
 		<span class="value">{Math.round(settings.opacity * 100)}%</span>

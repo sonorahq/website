@@ -1,14 +1,10 @@
-/**
- * @returns {() => void}
- */
-export function anchors() {
+export function anchors(): () => void {
 	const gentle = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	/** @param {MouseEvent} event */
-	const onclick = (event) => {
+	const onclick = (event: MouseEvent) => {
 		if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey) return;
 
-		const link = /** @type {HTMLElement | null} */ (event.target)?.closest?.('a[href^="#"]');
+		const link = (event.target as HTMLElement | null)?.closest?.('a[href^="#"]');
 		if (!(link instanceof HTMLAnchorElement)) return;
 
 		const id = link.hash.slice(1);

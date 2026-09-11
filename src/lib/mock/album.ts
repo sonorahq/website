@@ -71,20 +71,17 @@ export const album = albums[0];
 
 export const origin = { name: 'Quiet Hours', kind: 'Playlist' };
 
-/**
- * @typedef {{
- *   id: string,
- *   album: string,
- *   title: string,
- *   length: number,
- *   plays: string,
- *   artist: string,
- *   cover: string
- * }} Track
- */
+export type Track = {
+	id: string;
+	album: string;
+	title: string;
+	length: number;
+	plays: string;
+	artist: string;
+	cover: string;
+};
 
-/** @param {string} id @param {[string, string, number, string][]} rows */
-const listing = (id, rows) =>
+const listing = (id: string, rows: [string, string, number, string][]) =>
 	rows.map(([key, title, length, plays]) => ({
 		id: key,
 		album: id,
@@ -188,8 +185,8 @@ export const records = new Map([
 
 export const catalogue = new Map([...records.values()].flat().map((track) => [track.id, track]));
 
-/** @param {string[]} ids */
-const gather = (ids) => ids.map((id) => catalogue.get(id)).filter((track) => track !== undefined);
+const gather = (ids: string[]) =>
+	ids.map((id) => catalogue.get(id)).filter((track) => track !== undefined);
 
 export const tracks = records.get('airs') ?? [];
 
@@ -283,8 +280,7 @@ export const TRAIL = 4;
 
 export const total = tracks.reduce((sum, track) => sum + track.length, 0);
 
-/** @param {number} seconds */
-export function clock(seconds) {
+export function clock(seconds: number) {
 	const whole = Math.max(0, Math.floor(seconds));
 	const minutes = Math.floor(whole / 60) % 60;
 	const rest = String(whole % 60).padStart(2, '0');

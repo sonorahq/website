@@ -1,6 +1,9 @@
-<script>
-	/** @type {{ checked?: boolean, onchange?: (value: boolean) => void, label?: string }} */
-	let { checked = false, onchange = undefined, label = '' } = $props();
+<script lang="ts">
+	let {
+		checked = false,
+		onchange = undefined,
+		label = ''
+	}: { checked?: boolean; onchange?: (value: boolean) => void; label?: string } = $props();
 </script>
 
 <button
