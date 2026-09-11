@@ -10,6 +10,7 @@
 
 	let list = $state<HTMLElement | null>(null);
 	let ended = $state(false);
+	let height = $state(0);
 
 	function settle() {
 		if (!list) return;
@@ -52,44 +53,52 @@
 			</div>
 
 			<div class="steps">
-				{#each current.steps as step, index (step.caption)}
-					<div class="step">
-						<span class="mono index">{String(index + 1).padStart(2, '0')}</span>
-						<div class="body">
-							<p class="caption">{step.caption}</p>
-							{#if step.link}
-								<a class="code link" href={step.link}>
-									<span class="mono text">{step.command}</span>
-									<svg
-										width="14"
-										height="14"
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										stroke-width="2"
-										stroke-linecap="round"
-										stroke-linejoin="round"
-										aria-hidden="true"
-									>
-										<path d="M12 3v13" />
-										<path d="M7 12l5 5 5-5" />
-										<path d="M4 21h16" />
-									</svg>
-								</a>
-							{:else}
-								<div class="code">
-									<pre class="mono text">{step.command}</pre>
-									<CopyButton text={step.command} />
-								</div>
-							{/if}
-							{#if step.hint}
-								<p class="hint-text">{step.hint}</p>
-							{/if}
-						</div>
-					</div>
-				{/each}
+				<div class="clip" style:height={height ? `${height}px` : null}>
+					<div class="stack" bind:clientHeight={height}>
+						{#key platform.id}
+							<div class="swap">
+								{#each current.steps as step, index (step.caption)}
+									<div class="step">
+										<span class="mono index">{String(index + 1).padStart(2, '0')}</span>
+										<div class="body">
+											<p class="caption">{step.caption}</p>
+											{#if step.link}
+												<a class="code link" href={step.link}>
+													<span class="mono text">{step.command}</span>
+													<svg
+														width="14"
+														height="14"
+														viewBox="0 0 24 24"
+														fill="none"
+														stroke="currentColor"
+														stroke-width="2"
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														aria-hidden="true"
+													>
+														<path d="M12 3v13" />
+														<path d="M7 12l5 5 5-5" />
+														<path d="M4 21h16" />
+													</svg>
+												</a>
+											{:else}
+												<div class="code">
+													<pre class="mono text">{step.command}</pre>
+													<CopyButton text={step.command} />
+												</div>
+											{/if}
+											{#if step.hint}
+												<p class="hint-text">{step.hint}</p>
+											{/if}
+										</div>
+									</div>
+								{/each}
 
-				<p class="note">{current.note}</p>
+								<p class="note">{current.note}</p>
+							</div>
+						{/key}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -147,9 +156,29 @@
 		color: var(--faint);
 	}
 
-	.steps {
+	.clip {
+		overflow: hidden;
+		transition: height 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+	}
+
+	.stack {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.swap {
 		display: flex;
 		flex-direction: column;
+		grid-area: 1 / 1;
+		min-width: 0;
+		animation: swap-in 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	@keyframes swap-in {
+		from {
+			opacity: 0;
+			transform: translateY(6px);
+		}
 	}
 
 	.step {
@@ -232,6 +261,16 @@
 	.note {
 		padding: 18px 20px;
 		max-width: 68ch;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.clip {
+			transition: none;
+		}
+
+		.swap {
+			animation: none;
+		}
 	}
 
 	@media (max-width: 900px) {
