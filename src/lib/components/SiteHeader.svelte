@@ -30,12 +30,13 @@
 	<div class="bar">
 		<div class="left">
 			<a href="/" class="brand">
-				<Logo />
+				<Logo size={20} />
 				<span>Sonora</span>
 			</a>
 			<nav>
-				<a href="#features">Features</a>
-				<a href="#themes">Themes</a>
+				<a href="#steps">Install</a>
+				<a href="#about">What it does</a>
+				<a href="#community">Community</a>
 				<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
 			</nav>
 		</div>
@@ -59,14 +60,16 @@
 		position: sticky;
 		top: 0;
 		z-index: 10;
-		height: calc(var(--header) - 1px);
-		border-bottom: 1px solid var(--border);
+		height: var(--header);
+		border-bottom: 1px solid var(--line);
 		background: var(--header-bg);
 		backdrop-filter: blur(12px);
 	}
 
 	.bar {
 		height: 100%;
+		max-width: var(--page);
+		margin: 0 auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -76,27 +79,27 @@
 	.left {
 		display: flex;
 		align-items: center;
-		gap: 40px;
+		gap: 36px;
 	}
 
 	.right {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 10px;
 	}
 
 	.brand {
 		display: flex;
 		align-items: center;
-		gap: 10px;
-		font-size: 16px;
+		gap: 9px;
+		font-size: 15px;
 		font-weight: 600;
 		letter-spacing: -0.02em;
 	}
 
 	nav {
 		display: flex;
-		gap: 24px;
+		gap: 22px;
 		font-size: 13px;
 		color: var(--muted-fg);
 	}

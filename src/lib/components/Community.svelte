@@ -7,43 +7,65 @@
 	let { languages, strings, done } = $props();
 </script>
 
-<section class="section">
-	<div class="page community" use:reveal={{ stagger: true }}>
-		<div class="panel">
-			<h2>Speaks {languages.length} languages</h2>
-			<p>
-				{strings} strings, translated by the community and tracked in the repo. {done}
-				{done === 1 ? 'is' : 'are'} complete — the rest are a pull request away.
-			</p>
+<section id="community" class="section">
+	<span class="cross start"></span>
+	<span class="cross end"></span>
 
-			<ul>
-				{#each languages as language (language.code)}
-					<li>
-						<Flag code={language.flag} />
-						<span class="name">{language.name}</span>
-						<span class="code mono">{language.code}</span>
-						<span class="share" class:full={language.share === 100}>{language.share}%</span>
-					</li>
-				{/each}
-			</ul>
-
-			<a class="more" href="{repo}/blob/main/README.md#translations">
-				Add a language
-				<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
-			</a>
+	<div class="page">
+		<div class="section-head" use:reveal>
+			<span class="kicker">Community</span>
+			<h2>Come say hi</h2>
 		</div>
 
-		<div class="panel">
-			<h2>Come hang out</h2>
-			<p>Discord is where most of it happens, bridged to Matrix.</p>
-			<div class="panel-cta">
-				<a class="btn btn-primary" href={discord}>
-					<Mark name="discord" size={16} />
-					Join Discord
-				</a>
-				<a class="btn btn-secondary" href={matrix}>
-					<Mark name="matrix" size={16} />
-					Matrix space
+		<div class="wire cols" use:reveal>
+			<div class="talk">
+				<div class="block">
+					<span class="kicker">Chat</span>
+					<div class="links">
+						<a class="btn btn-primary" href={discord}>
+							<Mark name="discord" size={16} />
+							Discord
+						</a>
+						<a class="btn btn-secondary" href={matrix}>
+							<Mark name="matrix" size={16} />
+							Matrix
+						</a>
+					</div>
+				</div>
+
+				<div class="block">
+					<span class="kicker">Project</span>
+					<div class="plain">
+						<a href="{repo}/issues">Issues</a>
+						<a href="{repo}/blob/main/CONTRIBUTING.md">Contributing</a>
+						<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="langs">
+				<div class="head">
+					<span class="kicker">Translations</span>
+					<p>{strings} strings · {languages.length} languages · {done} complete</p>
+				</div>
+
+				<ul>
+					{#each languages as language (language.code)}
+						<li>
+							<Flag code={language.flag} />
+							<span class="name">{language.name}</span>
+							<span class="mono code">{language.code}</span>
+							<span class="bar" aria-hidden="true">
+								<span class="fill" style:width="{language.share}%"></span>
+							</span>
+							<span class="mono share" class:full={language.share === 100}>{language.share}%</span>
+						</li>
+					{/each}
+				</ul>
+
+				<a class="more" href="{repo}/blob/main/README.md#translations">
+					Add a language
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" /></svg>
 				</a>
 			</div>
 		</div>
@@ -51,55 +73,93 @@
 </section>
 
 <style>
-	.community {
-		display: grid;
-		align-items: start;
-		grid-template-columns: 2fr 1fr;
-		gap: 20px;
+	.page {
+		padding-bottom: 72px;
 	}
 
-	.panel {
+	.cols {
+		grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+	}
+
+	.talk {
 		display: flex;
 		flex-direction: column;
-		gap: 14px;
-		padding: 32px;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-lg);
-		background: var(--card);
 	}
 
-	h2 {
-		font-size: 24px;
-		text-align: left;
-		letter-spacing: -0.025em;
+	.block {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		padding: 24px;
+		border-bottom: 1px solid var(--line);
 	}
 
-	p {
+	.block:last-child {
+		flex-grow: 1;
+		border-bottom: none;
+	}
+
+	.links {
+		display: flex;
+		gap: 8px;
+	}
+
+	.plain {
+		display: flex;
+		gap: 18px;
 		font-size: 14px;
-		line-height: 1.6;
+	}
+
+	.plain a {
+		text-decoration: underline;
+		text-decoration-color: var(--faint);
+		text-underline-offset: 3px;
+	}
+
+	.plain a:hover {
+		text-decoration-color: var(--fg);
+	}
+
+	.langs {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.head {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 24px 24px 18px;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.head p {
+		font-size: 13px;
 		color: var(--muted-fg);
-		max-width: 460px;
 	}
 
 	ul {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 4px 40px;
-		margin: 10px 0 0;
+		margin: 0;
 		padding: 0;
 		list-style: none;
 	}
 
 	li {
-		display: flex;
+		display: grid;
+		grid-template-columns: 14px minmax(0, 1fr) 44px minmax(60px, 120px) 40px;
 		align-items: center;
-		gap: 10px;
-		height: 26px;
+		gap: 12px;
+		height: 36px;
+		padding: 0 24px;
+		border-bottom: 1px solid var(--line);
 		font-size: 13px;
 	}
 
+	li:hover {
+		background: var(--secondary);
+	}
+
 	.name {
-		flex-grow: 1;
 		min-width: 0;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -108,19 +168,31 @@
 
 	.code {
 		font-size: 11px;
-		color: var(--dim);
+		color: var(--faint);
+	}
+
+	.bar {
+		height: 1px;
+		background: var(--line);
+	}
+
+	.fill {
+		display: block;
+		height: 3px;
+		margin-top: -1px;
+		border-radius: 2px;
+		background: var(--dim);
 	}
 
 	.share {
-		width: 34px;
 		text-align: right;
-		font-size: 12px;
+		font-size: 11px;
 		font-variant-numeric: tabular-nums;
 		color: var(--dim);
 	}
 
 	.share.full {
-		color: var(--muted-fg);
+		color: var(--fg);
 	}
 
 	.more {
@@ -128,7 +200,7 @@
 		align-items: center;
 		gap: 6px;
 		margin-top: auto;
-		padding-top: 10px;
+		padding: 16px 24px;
 		font-size: 13px;
 		color: var(--muted-fg);
 	}
@@ -147,20 +219,36 @@
 		stroke-linejoin: round;
 	}
 
-	.panel-cta {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
-		margin-top: 4px;
-	}
-
 	@media (max-width: 900px) {
-		.community {
+		.page {
+			padding-bottom: 48px;
+		}
+
+		.cols {
 			grid-template-columns: minmax(0, 1fr);
 		}
 
-		ul {
-			grid-template-columns: minmax(0, 1fr);
+		.block:last-child {
+			border-bottom: 1px solid var(--line);
+		}
+
+		.block,
+		.head {
+			padding: 18px 16px;
+		}
+
+		li {
+			grid-template-columns: 14px minmax(0, 1fr) 40px;
+			padding: 0 16px;
+		}
+
+		.bar,
+		.code {
+			display: none;
+		}
+
+		.more {
+			padding: 14px 16px;
 		}
 	}
 </style>

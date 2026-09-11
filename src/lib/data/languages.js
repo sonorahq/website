@@ -11,7 +11,9 @@ export const flags = new Map([
 	['ru', 'ru'],
 	['uk', 'ua'],
 	['pl', 'pl'],
-	['pt-BR', 'br']
+	['pt-BR', 'br'],
+	['zh-CN', 'cn'],
+	['tr', 'tr']
 ]);
 
 export const fallback = {

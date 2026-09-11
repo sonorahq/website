@@ -15,6 +15,7 @@
 
 <SiteHeader stars={data.stars} />
 
-{@render children()}
-
-<SiteFooter />
+<div class="page-column">
+	{@render children()}
+	<SiteFooter />
+</div>

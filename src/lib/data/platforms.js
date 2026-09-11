@@ -1,3 +1,12 @@
+export const installer =
+	'https://github.com/sonorahq/sonora/releases/latest/download/Sonora-Setup.exe';
+
+export const installerArm =
+	'https://github.com/sonorahq/sonora/releases/latest/download/Sonora-Setup-arm64.exe';
+
+/** @typedef {{ caption: string, command: string, link?: string, hint?: string }} Step */
+
+/** @type {{ id: string, mark: string, label: string, prompt: string, hero: string, pending?: string, steps: Step[], note: string }[]} */
 export const platforms = [
 	{
 		id: 'macos',
@@ -12,10 +21,11 @@ export const platforms = [
 			},
 			{
 				caption: 'Clear the quarantine flag',
-				command: 'xattr -dr com.apple.quarantine /Applications/Sonora.app'
+				command: 'xattr -dr com.apple.quarantine /Applications/Sonora.app',
+				hint: 'The app is not signed yet, so macOS quarantines it on the first install.'
 			}
 		],
-		note: 'Apple quarantines unsigned apps, so the second command is required after a first install.'
+		note: 'Code signing through SignPath Foundation is applied for. Until it lands, the second command is needed once.'
 	},
 	{
 		id: 'arch',
@@ -26,12 +36,12 @@ export const platforms = [
 		steps: [
 			{ caption: 'Install from the AUR', command: 'yay -S sonora-bin' },
 			{
-				caption: 'Audio backend — match your sound server',
+				caption: 'Add the ALSA plugin for your sound server',
 				command: 'pacman -S pipewire-alsa',
-				hint: 'On PulseAudio, install pulseaudio-alsa instead.'
+				hint: 'On PulseAudio install pulseaudio-alsa instead.'
 			}
 		],
-		note: 'sonora-bin pulls the prebuilt release. sonora builds the same version from source against your own system libraries, which takes a while on a Rust and GPUI tree.'
+		note: 'sonora-bin ships the prebuilt release. The sonora package builds the same version from source against your own system libraries, which takes a while.'
 	},
 	{
 		id: 'flatpak',
@@ -41,16 +51,18 @@ export const platforms = [
 		hero: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref',
 		steps: [
 			{
-				caption: 'Add the repository once, then update with flatpak update',
-				command: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref'
+				caption: 'Add the repository and install',
+				command: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref',
+				hint: 'Updates arrive with flatpak update.'
 			},
 			{
-				caption: 'Moving an older remote to the new address',
+				caption: 'Point an older remote at the new address',
 				command:
-					'flatpak remote-modify --user \\\n  --url=https://sonorahq.github.io/sonora/repo sonora'
+					'flatpak remote-modify --user \\\n  --url=https://sonorahq.github.io/sonora/repo sonora',
+				hint: 'Only needed if you added the remote before the move to the sonorahq organisation.'
 			}
 		],
-		note: 'A remote added before the move to the sonorahq organisation still points at the old address and fails to update. Standalone .flatpak bundles are attached to every release.'
+		note: 'Standalone .flatpak bundles are attached to every release.'
 	},
 	{
 		id: 'nix',
@@ -59,9 +71,9 @@ export const platforms = [
 		prompt: '$',
 		hero: 'nix run github:sonorahq/sonora',
 		steps: [
-			{ caption: 'Run it straight from the flake', command: 'nix run github:sonorahq/sonora' },
+			{ caption: 'Run it from the flake', command: 'nix run github:sonorahq/sonora' },
 			{
-				caption: 'Home Manager module',
+				caption: 'Or manage it with Home Manager',
 				command: `{
   imports = [ inputs.sonora.homeManagerModules.default ];
   programs.sonora = {
@@ -80,19 +92,30 @@ export const platforms = [
 		id: 'windows',
 		mark: 'windows',
 		label: 'Windows',
-		prompt: '',
+		prompt: '>',
 		hero: '',
+		pending: 'winget install sonora',
 		steps: [
 			{
 				caption: 'Download and run the installer',
-				command: 'https://github.com/sonorahq/sonora/releases/latest/download/Sonora-Setup.exe'
+				link: installer,
+				command: 'Sonora-Setup.exe'
+			},
+			{
+				caption: 'On Windows on ARM, take the ARM build',
+				link: installerArm,
+				command: 'Sonora-Setup-arm64.exe'
+			},
+			{
+				caption: 'Portable build',
+				link: 'https://github.com/sonorahq/sonora/releases/latest',
+				command: 'windows-msvc.exe',
+				hint: 'Pick the file for your architecture on the releases page and run it as-is.'
 			}
 		],
-		note: 'Prefer no installer? Grab the latest windows-msvc.exe for your architecture from Releases and run it as-is.'
+		note: 'A winget package is coming soon. For now, download the installer.'
 	}
 ];
-
-export const languages = ['en-US', 'de', 'es', 'fr', 'it', 'id', 'ja', 'ru', 'uk', 'pl', 'pt-BR'];
 
 export function detectPlatform() {
 	const ua = navigator.userAgent;
