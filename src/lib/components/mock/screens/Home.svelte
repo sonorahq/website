@@ -1,7 +1,7 @@
-<script>
-	import { shelf } from '$lib/mock/album.js';
-	import { listenAgain, quickPicks } from '$lib/mock/screens.js';
-	import { player } from '$lib/mock/player.svelte.js';
+<script lang="ts">
+	import { shelf } from '$lib/mock/album';
+	import { listenAgain, quickPicks } from '$lib/mock/screens';
+	import { player } from '$lib/mock/player.svelte';
 	import Card from '../Card.svelte';
 	import Control from '../Control.svelte';
 
@@ -22,8 +22,7 @@
 		quickPicks.slice(picks * COLUMNS * ROWS, picks * COLUMNS * ROWS + COLUMNS * ROWS)
 	);
 
-	/** @param {number} column */
-	const lane = (column) => page.slice(column * ROWS, column * ROWS + ROWS);
+	const lane = (column: number) => page.slice(column * ROWS, column * ROWS + ROWS);
 </script>
 
 <div class="screen">

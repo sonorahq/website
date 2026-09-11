@@ -1,5 +1,5 @@
-<script>
-	let { name, size = 15 } = $props();
+<script lang="ts">
+	let { name, size = 15 }: { name: string; size?: number } = $props();
 
 	const optical = new Map([
 		['matrix', 1.25],

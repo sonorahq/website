@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import Icon from './Icon.svelte';
 
 	let {
@@ -8,6 +8,13 @@
 		fallback = 'music',
 		circle = false,
 		accent = false
+	}: {
+		src?: string;
+		size?: number;
+		radius?: string;
+		fallback?: string;
+		circle?: boolean;
+		accent?: boolean;
 	} = $props();
 
 	const corner = $derived(circle ? '50%' : radius);

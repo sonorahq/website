@@ -1,17 +1,15 @@
 import { SvelteSet } from 'svelte/reactivity';
-import { album, catalogue, origin, similar, tracks, upcoming } from '$lib/mock/album.js';
+import { album, catalogue, origin, similar, tracks, upcoming } from '$lib/mock/album';
 
 const albumOrder = tracks.map((track) => track.id);
 const playlistOrder = upcoming.map((track) => track.id);
 
-/** @param {string} id */
-function after(id) {
+function after(id: string) {
 	const at = albumOrder.indexOf(id);
 	return at < 0 ? [...albumOrder] : albumOrder.slice(at + 1);
 }
 
-/** @param {string[]} ids */
-function scramble(ids) {
+function scramble(ids: string[]) {
 	const out = [...ids];
 	for (let i = out.length - 1; i > 0; i -= 1) {
 		const j = Math.floor(Math.random() * (i + 1));
@@ -63,14 +61,12 @@ function remember() {
 	past = [...past, current];
 }
 
-/** @param {number} value */
-function land(value) {
+function land(value: number) {
 	elapsed = value;
 	wind();
 }
 
-/** @param {string} id */
-function start(id) {
+function start(id: string) {
 	remember();
 	current = id;
 	land(0);
@@ -100,8 +96,7 @@ function advance() {
 	return false;
 }
 
-/** @param {number} now */
-function tick(now) {
+function tick(now: number) {
 	ticker = requestAnimationFrame(tick);
 
 	const span = catalogue.get(current)?.length ?? 0;
@@ -171,12 +166,10 @@ export const player = {
 		return saved;
 	},
 
-	/** @param {string} id */
-	likes(id) {
+	likes(id: string) {
 		return liked.has(id);
 	},
-	/** @param {string} id */
-	toggleLike(id) {
+	toggleLike(id: string) {
 		if (liked.has(id)) liked.delete(id);
 		else liked.add(id);
 	},
@@ -198,8 +191,7 @@ export const player = {
 		if (playing) this.pause();
 		else this.resume();
 	},
-	/** @param {string} id */
-	select(id) {
+	select(id: string) {
 		if (id === current) {
 			this.toggle();
 			return;
@@ -240,12 +232,10 @@ export const player = {
 		}
 		this.select(albumOrder[0]);
 	},
-	/** @param {number} fraction */
-	seek(fraction) {
+	seek(fraction: number) {
 		land(fraction * this.track.length);
 	},
-	/** @param {number} level */
-	setVolume(level) {
+	setVolume(level: number) {
 		volume = level;
 	},
 	playShuffled() {

@@ -1,6 +1,9 @@
-<script>
-	/** @type {{ title: string, detail: string, control: import('svelte').Snippet }} */
-	let { title, detail, control } = $props();
+<script lang="ts">
+	let {
+		title,
+		detail,
+		control
+	}: { title: string; detail: string; control: import('svelte').Snippet } = $props();
 </script>
 
 <div class="row">

@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+	import type { Snippet } from 'svelte';
 	import Cover from './Cover.svelte';
 
 	let {
@@ -10,6 +11,15 @@
 		circle = false,
 		meta = [],
 		actions = undefined
+	}: {
+		title?: string;
+		eyebrow?: string;
+		cover?: string;
+		fallback?: string;
+		accent?: boolean;
+		circle?: boolean;
+		meta?: string[];
+		actions?: Snippet;
 	} = $props();
 </script>
 

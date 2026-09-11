@@ -1,12 +1,12 @@
-<script>
-	import { clock } from '$lib/mock/album.js';
-	import { libraryColumns, playlists, favorites } from '$lib/mock/screens.js';
-	import { player } from '$lib/mock/player.svelte.js';
+<script lang="ts">
+	import { clock } from '$lib/mock/album';
+	import { libraryColumns, playlists, favorites } from '$lib/mock/screens';
+	import { player } from '$lib/mock/player.svelte';
 	import Control from '../Control.svelte';
 	import PageHero from '../PageHero.svelte';
 	import Table from '../Table.svelte';
 
-	let { id = 'quiet-hours' } = $props();
+	let { id = 'quiet-hours' }: { id?: string } = $props();
 
 	const list = $derived(playlists.find((one) => one.id === id) ?? playlists[0]);
 	const rows = favorites;

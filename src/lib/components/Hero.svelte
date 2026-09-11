@@ -1,14 +1,14 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
-	import { repo } from '$lib/data/links.js';
-	import { detectPlatform, installer } from '$lib/data/platforms.js';
-	import { platform } from '$lib/platform.svelte.js';
+	import { repo } from '$lib/data/links';
+	import { detectPlatform, installer } from '$lib/data/platforms';
+	import { platform } from '$lib/platform.svelte';
 	import CopyButton from './CopyButton.svelte';
 	import Logo from './Logo.svelte';
 	import Mark from './Mark.svelte';
 	import PlatformTabs from './PlatformTabs.svelte';
 
-	let { version = null } = $props();
+	let { version = null }: { version?: string | null } = $props();
 
 	const windows = $derived(platform.id === 'windows');
 

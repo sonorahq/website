@@ -1,8 +1,9 @@
-<script>
-	import { albums, catalogue, shelf } from '$lib/mock/album.js';
-	import { artists, genres, playlists } from '$lib/mock/screens.js';
-	import { player } from '$lib/mock/player.svelte.js';
-	import { route } from '$lib/mock/route.svelte.js';
+<script lang="ts">
+	import type { Hit } from '$lib/mock/screens';
+	import { albums, catalogue, shelf } from '$lib/mock/album';
+	import { artists, genres, playlists } from '$lib/mock/screens';
+	import { player } from '$lib/mock/player.svelte';
+	import { route } from '$lib/mock/route.svelte';
 	import Card from '../Card.svelte';
 	import HitRow from '../HitRow.svelte';
 	import Icon from './../Icon.svelte';
@@ -16,7 +17,7 @@
 		{ title: 'Albums & playlists', kinds: ['Album', 'Playlist'] }
 	];
 
-	let { room = 729 } = $props();
+	let { room = 729 }: { room?: number } = $props();
 
 	let query = $state('');
 
@@ -25,14 +26,11 @@
 	const asked = $derived(query.trim().length > 0);
 	const needle = $derived(query.trim().toLowerCase());
 
-	/** @param {string} text */
-	const holds = (text) => text.toLowerCase().includes(needle);
+	const holds = (text: string) => text.toLowerCase().includes(needle);
 
-	/** @type {import('$lib/mock/screens.js').Hit[]} */
-	const hits = $derived.by(() => {
+	const hits: Hit[] = $derived.by(() => {
 		if (!asked) return [];
-		/** @type {import('$lib/mock/screens.js').Hit[]} */
-		const songs = [...catalogue.values()]
+		const songs: Hit[] = [...catalogue.values()]
 			.filter((track) => holds(track.title))
 			.map((track) => ({
 				kind: 'Song',
@@ -44,8 +42,7 @@
 				circle: false,
 				track
 			}));
-		/** @type {import('$lib/mock/screens.js').Hit[]} */
-		const people = artists
+		const people: Hit[] = artists
 			.filter((artist) => holds(artist.name))
 			.map((artist) => ({
 				kind: 'Artist',
@@ -57,8 +54,7 @@
 				circle: true,
 				to: { screen: 'artist', id: artist.id }
 			}));
-		/** @type {import('$lib/mock/screens.js').Hit[]} */
-		const records = albums
+		const records: Hit[] = albums
 			.filter((entry) => holds(entry.title))
 			.map((entry) => ({
 				kind: 'Album',
@@ -70,8 +66,7 @@
 				circle: false,
 				to: { screen: 'album', id: entry.id }
 			}));
-		/** @type {import('$lib/mock/screens.js').Hit[]} */
-		const lists = playlists
+		const lists: Hit[] = playlists
 			.filter((list) => holds(list.name))
 			.map((list) => ({
 				kind: 'Playlist',
@@ -89,14 +84,12 @@
 	const best = $derived(hits[0]);
 	const rest = $derived(hits.slice(1));
 
-	/** @param {import('$lib/mock/screens.js').Hit} hit */
-	function open(hit) {
+	function open(hit: Hit) {
 		if (hit.track) player.select(hit.track.id);
 		else if (hit.to) route.go(hit.to);
 	}
 
-	/** @param {number} lane */
-	const plates = (lane) => genres.filter((_, at) => at % LANES === lane);
+	const plates = (lane: number) => genres.filter((_, at) => at % LANES === lane);
 </script>
 
 {#snippet spotlight()}

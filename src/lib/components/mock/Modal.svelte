@@ -1,15 +1,21 @@
-<script>
-	/**
-	 * @type {{
-	 *   title?: string,
-	 *   detail?: string,
-	 *   width?: number,
-	 *   ondismiss?: () => void,
-	 *   body?: import('svelte').Snippet,
-	 *   actions?: import('svelte').Snippet
-	 * }}
-	 */
-	let { title = '', detail = '', width = 336, ondismiss, body, actions } = $props();
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	let {
+		title = '',
+		detail = '',
+		width = 336,
+		ondismiss,
+		body,
+		actions
+	}: {
+		title?: string;
+		detail?: string;
+		width?: number;
+		ondismiss?: () => void;
+		body?: Snippet;
+		actions?: Snippet;
+	} = $props();
 </script>
 
 <div class="scrim">

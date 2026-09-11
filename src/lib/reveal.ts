@@ -1,20 +1,16 @@
 const EDGE = 0.92;
 const STEP = 80;
 
-/**
- * @param {HTMLElement} node
- * @param {{ stagger?: boolean }} [options]
- * @returns {{ destroy(): void }}
- */
-export function reveal(node, options = {}) {
+export function reveal(
+	node: HTMLElement,
+	options: { stagger?: boolean } = {}
+): { destroy(): void } {
 	const still = { destroy() {} };
 
 	if (matchMedia('(prefers-reduced-motion: reduce)').matches) return still;
 	if (node.getBoundingClientRect().top < innerHeight * EDGE) return still;
 
-	const targets = /** @type {HTMLElement[]} */ (
-		options.stagger ? Array.from(node.children) : [node]
-	);
+	const targets = (options.stagger ? Array.from(node.children) : [node]) as HTMLElement[];
 
 	for (const target of targets) target.dataset.reveal = 'idle';
 

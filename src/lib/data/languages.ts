@@ -16,7 +16,9 @@ export const flags = new Map([
 	['tr', 'tr']
 ]);
 
-export const fallback = {
+export type Language = { code: string; name: string; flag: string; share: number; total?: number };
+
+export const fallback: { strings: number; done: number; languages: Language[] } = {
 	strings: 533,
 	done: 3,
 	languages: [

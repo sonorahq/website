@@ -1,4 +1,4 @@
-import { fallback, flags, readme } from '$lib/data/languages.js';
+import { fallback, flags, readme } from '$lib/data/languages';
 
 const ROW = /\|\s*([^|]+?)\s*\(`([^`]+)`\)\s*\|\s*(\d+)\/(\d+)\s*\|/g;
 

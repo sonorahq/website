@@ -1,8 +1,8 @@
-<script>
-	import { route } from '$lib/mock/route.svelte.js';
+<script lang="ts">
+	import { route } from '$lib/mock/route.svelte';
 	import Control from './Control.svelte';
 
-	let { left = $bindable(), right = $bindable() } = $props();
+	let { left = $bindable(), right = $bindable() }: { left: boolean; right: boolean } = $props();
 
 	const at = $derived(route.now);
 	const listing = $derived(

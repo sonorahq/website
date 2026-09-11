@@ -1,7 +1,7 @@
-<script>
-	import { platforms } from '$lib/data/platforms.js';
-	import { platform } from '$lib/platform.svelte.js';
-	import { reveal } from '$lib/reveal.js';
+<script lang="ts">
+	import { platforms } from '$lib/data/platforms';
+	import { platform } from '$lib/platform.svelte';
+	import { reveal } from '$lib/reveal';
 	import CopyButton from './CopyButton.svelte';
 	import Mark from './Mark.svelte';
 

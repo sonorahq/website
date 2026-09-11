@@ -1,10 +1,9 @@
-import { albums, catalogue, shelf, tracks, upcoming, similar } from './album.js';
+import type { Track } from './album';
+import { albums, catalogue, shelf, tracks, upcoming, similar } from './album';
 
-/** @param {string} id */
-const one = (id) => catalogue.get(id);
+const one = (id: string) => catalogue.get(id);
 
-/** @param {string[]} ids */
-const pick = (ids) => ids.map(one).filter((track) => track !== undefined);
+const pick = (ids: string[]) => ids.map(one).filter((track) => track !== undefined);
 
 export const listenAgain = [...upcoming, ...similar.slice(0, 2)];
 
@@ -32,19 +31,17 @@ export const favorites = [
 	added: ['Sep 4, 2026', 'Sep 2, 2026', 'Aug 29, 2026', 'Aug 24, 2026', 'Aug 20, 2026'][at % 5]
 }));
 
-/**
- * @typedef {{
- *   kind: string,
- *   id: string,
- *   title: string,
- *   meta: string,
- *   cover: string,
- *   fallback: string,
- *   circle: boolean,
- *   track?: import('./album.js').Track,
- *   to?: { screen: string, id: string }
- * }} Hit
- */
+export type Hit = {
+	kind: string;
+	id: string;
+	title: string;
+	meta: string;
+	cover: string;
+	fallback: string;
+	circle: boolean;
+	track?: Track;
+	to?: { screen: string; id: string };
+};
 
 export const ABOUT_FALLBACK = "Explore the artist's popular songs and releases.";
 
@@ -133,14 +130,12 @@ export const localTracks = pick(['g3', 'g2', 'b1', 'b2', 'x2']).map((track, at) 
 	added: ['Sep 6, 2026', 'Sep 6, 2026', 'Aug 31, 2026', 'Aug 31, 2026', 'Aug 12, 2026'][at]
 }));
 
-/** @param {string} id */
-export function albumsOf(id) {
+export function albumsOf(id: string) {
 	const name = artists.find((artist) => artist.id === id)?.name;
 	return albums.filter((entry) => entry.artist === name);
 }
 
-/** @param {string} id */
-export function popularOf(id) {
+export function popularOf(id: string) {
 	const name = artists.find((artist) => artist.id === id)?.name;
 	const owned = albums.filter((entry) => entry.artist === name).map((entry) => entry.id);
 	return [...catalogue.values()].filter((track) => owned.includes(track.album));

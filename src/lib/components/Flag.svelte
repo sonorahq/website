@@ -1,5 +1,5 @@
-<script>
-	let { code } = $props();
+<script lang="ts">
+	let { code }: { code: string } = $props();
 </script>
 
 <svg viewBox="0 0 16 12" aria-hidden="true">

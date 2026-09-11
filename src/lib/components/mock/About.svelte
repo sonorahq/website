@@ -1,8 +1,13 @@
-<script>
-	import { ABOUT_FALLBACK } from '$lib/mock/screens.js';
+<script lang="ts">
+	import { ABOUT_FALLBACK } from '$lib/mock/screens';
 	import Cover from './Cover.svelte';
 
-	let { name = '', cover = '', biography = '', onpress = undefined } = $props();
+	let {
+		name = '',
+		cover = '',
+		biography = '',
+		onpress = undefined
+	}: { name?: string; cover?: string; biography?: string; onpress?: () => void } = $props();
 </script>
 
 <button type="button" class="about" onclick={onpress}>

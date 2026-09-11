@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import AppMock from './mock/AppMock.svelte';
 
 	const FULL = 1180;
 	const FRAME = 2;
 
-	let column = $state(/** @type {HTMLElement | null} */ (null));
+	let column = $state<HTMLElement | null>(null);
 	let small = $state(true);
 
 	onMount(() => {

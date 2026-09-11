@@ -1,37 +1,33 @@
-<script>
+<script lang="ts">
 	let {
 		fraction,
 		label,
 		onseek,
 		empty = 'color-mix(in srgb, var(--m-muted-foreground) 30%, transparent)'
-	} = $props();
+	}: { fraction: number; label: string; onseek: (to: number) => void; empty?: string } = $props();
 
-	let bar = $state(/** @type {HTMLElement | null} */ (null));
+	let bar = $state<HTMLElement | null>(null);
 	let held = $state(false);
 
-	/** @param {number} x */
-	function at(x) {
+	function at(x: number) {
 		if (!bar) return 0;
 		const box = bar.getBoundingClientRect();
 		const travel = box.width - 12;
 		return travel <= 0 ? 0 : Math.min(Math.max((x - box.left - 6) / travel, 0), 1);
 	}
 
-	/** @param {PointerEvent} event */
-	function grab(event) {
+	function grab(event: PointerEvent) {
 		held = true;
 		if (event.currentTarget instanceof Element)
 			event.currentTarget.setPointerCapture(event.pointerId);
 		onseek(at(event.clientX));
 	}
 
-	/** @param {PointerEvent} event */
-	function drag(event) {
+	function drag(event: PointerEvent) {
 		if (held) onseek(at(event.clientX));
 	}
 
-	/** @param {PointerEvent} event */
-	function release(event) {
+	function release(event: PointerEvent) {
 		held = false;
 		if (event.currentTarget instanceof Element)
 			event.currentTarget.releasePointerCapture(event.pointerId);

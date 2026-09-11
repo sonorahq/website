@@ -1,6 +1,5 @@
-<script>
-	/** @type {{ label: string }} */
-	let { label } = $props();
+<script lang="ts">
+	let { label }: { label: string } = $props();
 </script>
 
 <div class="group"><span class="eyebrow">{label}</span></div>

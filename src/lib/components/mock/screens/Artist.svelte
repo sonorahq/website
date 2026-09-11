@@ -1,13 +1,7 @@
-<script>
-	import {
-		ABOUT_FALLBACK,
-		albumsOf,
-		artistColumns,
-		artists,
-		popularOf
-	} from '$lib/mock/screens.js';
-	import { player } from '$lib/mock/player.svelte.js';
-	import { route } from '$lib/mock/route.svelte.js';
+<script lang="ts">
+	import { ABOUT_FALLBACK, albumsOf, artistColumns, artists, popularOf } from '$lib/mock/screens';
+	import { player } from '$lib/mock/player.svelte';
+	import { route } from '$lib/mock/route.svelte';
 	import About from '../About.svelte';
 	import Card from '../Card.svelte';
 	import Control from '../Control.svelte';
@@ -29,7 +23,7 @@
 		{ id: 'EPs', kinds: ['Ep'] }
 	];
 
-	let { id = 'chopin' } = $props();
+	let { id = 'chopin' }: { id?: string } = $props();
 
 	const DIALOG = 630;
 
@@ -62,8 +56,7 @@
 
 	const shown = $derived(spread ? matching : matching.slice(0, COLUMNS * RELEASE_ROWS));
 
-	/** @param {string} next */
-	function narrow(next) {
+	function narrow(next: string) {
 		if (filter === next) return;
 		filter = next;
 		spread = false;

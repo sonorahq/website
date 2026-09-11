@@ -1,16 +1,14 @@
-<script>
-	import { clock } from '$lib/mock/album.js';
-	import { player } from '$lib/mock/player.svelte.js';
+<script lang="ts">
+	import type { Hit } from '$lib/mock/screens';
+	import { clock } from '$lib/mock/album';
+	import { player } from '$lib/mock/player.svelte';
 	import Card from './Card.svelte';
 
-	/**
-	 * @type {{
-	 *   hit: import('$lib/mock/screens.js').Hit,
-	 *   compact?: boolean,
-	 *   onopen: (hit: import('$lib/mock/screens.js').Hit) => void
-	 * }}
-	 */
-	let { hit, compact = false, onopen } = $props();
+	let {
+		hit,
+		compact = false,
+		onopen
+	}: { hit: Hit; compact?: boolean; onopen: (hit: Hit) => void } = $props();
 
 	const current = $derived(!!hit.track && player.id === hit.track.id);
 	const meta = $derived(

@@ -28,8 +28,7 @@ export const theme = {
 		if (browser) choice = stored();
 	},
 
-	/** @param {string} value */
-	select(value) {
+	select(value: string) {
 		choice = value;
 		if (!browser) return;
 

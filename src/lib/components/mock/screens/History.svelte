@@ -1,6 +1,6 @@
-<script>
-	import { clock } from '$lib/mock/album.js';
-	import { historyColumns, played } from '$lib/mock/screens.js';
+<script lang="ts">
+	import { clock } from '$lib/mock/album';
+	import { historyColumns, played } from '$lib/mock/screens';
 	import Control from '../Control.svelte';
 	import PageHero from '../PageHero.svelte';
 	import Table from '../Table.svelte';

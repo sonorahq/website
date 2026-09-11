@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
-	import { repo } from '$lib/data/links.js';
+	import { repo } from '$lib/data/links';
 	import Logo from './Logo.svelte';
 	import Mark from './Mark.svelte';
 	import ThemeSwitch from './ThemeSwitch.svelte';
 
-	let { stars = null } = $props();
+	let { stars = null }: { stars?: number | null } = $props();
 
 	let live = $state(null);
 

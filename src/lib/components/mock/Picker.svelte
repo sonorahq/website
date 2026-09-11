@@ -1,8 +1,17 @@
-<script>
+<script lang="ts">
 	import Icon from './Icon.svelte';
 
-	/** @type {{ value?: string, options?: string[], width?: number, onpick?: (value: string) => void }} */
-	let { value = '', options = [], width = 190, onpick = undefined } = $props();
+	let {
+		value = '',
+		options = [],
+		width = 190,
+		onpick = undefined
+	}: {
+		value?: string;
+		options?: string[];
+		width?: number;
+		onpick?: (value: string) => void;
+	} = $props();
 
 	let open = $state(false);
 </script>

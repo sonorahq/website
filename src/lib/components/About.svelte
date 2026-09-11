@@ -1,5 +1,5 @@
-<script>
-	import { reveal } from '$lib/reveal.js';
+<script lang="ts">
+	import { reveal } from '$lib/reveal';
 
 	const cells = [
 		{ label: 'Providers', title: 'Spotify, YouTube Music, Subsonic, local files' },
