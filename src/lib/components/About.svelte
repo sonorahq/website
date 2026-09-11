@@ -1,13 +1,60 @@
 <script lang="ts">
 	import { reveal } from '$lib/reveal';
+	import Glyph from './Glyph.svelte';
 
 	const cells = [
-		{ label: 'Providers', title: 'Spotify, YouTube Music, Subsonic, local files' },
-		{ label: 'Playback', title: 'Gapless, normalization, shuffle, sleep timer' },
-		{ label: 'Lyrics', title: 'Synced and karaoke, background vocals, romanization' },
-		{ label: 'Appearance', title: 'Themes, fonts, icon packs, transparency, blur' },
-		{ label: 'Integration', title: 'Discord Rich Presence, opens files from the system' },
-		{ label: 'Platforms', title: 'macOS, Windows, Linux' }
+		{
+			label: 'Providers',
+			items: [
+				{ glyph: 'spotify', text: 'Spotify' },
+				{ glyph: 'youtubemusic', text: 'YouTube Music' },
+				{ glyph: 'server', text: 'Subsonic' },
+				{ glyph: 'file-music', text: 'Local files' }
+			]
+		},
+		{
+			label: 'Playback',
+			items: [
+				{ glyph: 'audio-lines', text: 'Gapless' },
+				{ glyph: 'volume-2', text: 'Normalization' },
+				{ glyph: 'shuffle', text: 'Shuffle' },
+				{ glyph: 'moon', text: 'Sleep timer' }
+			]
+		},
+		{
+			label: 'Lyrics',
+			items: [
+				{ glyph: 'list-music', text: 'Synced' },
+				{ glyph: 'mic-vocal', text: 'Karaoke' },
+				{ glyph: 'music-2', text: 'Background vocals' },
+				{ glyph: 'languages', text: 'Romanization' }
+			]
+		},
+		{
+			label: 'Appearance',
+			items: [
+				{ glyph: 'palette', text: 'Themes' },
+				{ glyph: 'type', text: 'Fonts' },
+				{ glyph: 'grid', text: 'Icon packs' },
+				{ glyph: 'blend', text: 'Transparency' },
+				{ glyph: 'blur', text: 'Blur' }
+			]
+		},
+		{
+			label: 'Integration',
+			items: [
+				{ glyph: 'discord', text: 'Discord Rich Presence' },
+				{ glyph: 'folder-open', text: 'Opens files from the system' }
+			]
+		},
+		{
+			label: 'Platforms',
+			items: [
+				{ glyph: 'apple', text: 'macOS' },
+				{ glyph: 'windows', text: 'Windows' },
+				{ glyph: 'terminal', text: 'Linux' }
+			]
+		}
 	];
 </script>
 
@@ -25,7 +72,14 @@
 			{#each cells as cell (cell.label)}
 				<article>
 					<span class="kicker">{cell.label}</span>
-					<h3>{cell.title}</h3>
+					<ul>
+						{#each cell.items as item (item.text)}
+							<li>
+								<Glyph name={item.glyph} />
+								<span>{item.text}</span>
+							</li>
+						{/each}
+					</ul>
 				</article>
 			{/each}
 		</div>
@@ -48,10 +102,30 @@
 		padding: 22px 22px 24px;
 	}
 
-	h3 {
-		font-size: 16px;
-		line-height: 1.35;
-		text-wrap: balance;
+	article .kicker {
+		color: var(--fg);
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 9px;
+	}
+
+	li {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		font-size: 14px;
+		line-height: 1.3;
+		color: var(--muted-fg);
+	}
+
+	li :global(svg) {
+		color: var(--dim);
 	}
 
 	@media (max-width: 900px) {
