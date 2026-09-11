@@ -29,7 +29,7 @@
 <header>
 	<div class="bar">
 		<div class="left">
-			<a href="/" class="brand">
+			<a href="#top" class="brand">
 				<Logo size={20} />
 				<span>Sonora</span>
 			</a>
@@ -50,7 +50,7 @@
 					<span class="count">{label}</span>
 				{/if}
 			</a>
-			<a href="#install" class="download">Install</a>
+			<a href="#steps" class="download">Install</a>
 		</div>
 	</div>
 </header>

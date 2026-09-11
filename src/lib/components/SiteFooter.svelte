@@ -10,7 +10,7 @@
 	<div class="page">
 		<div class="cols">
 			<div class="about">
-				<a href="/" class="brand">
+				<a href="#top" class="brand">
 					<Logo size={18} />
 					<span>Sonora</span>
 				</a>
@@ -20,7 +20,7 @@
 			<div class="links">
 				<div>
 					<h3>Site</h3>
-					<a href="#install">Install</a>
+					<a href="#steps">Install</a>
 					<a href="#about">What it does</a>
 					<a href="#community">Community</a>
 				</div>
