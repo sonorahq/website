@@ -28,10 +28,14 @@
 	];
 
 	let column = $state<HTMLElement | null>(null);
+	let mounted = $state(false);
 	let small = $state(true);
 
 	onMount(() => {
 		if (!column) return;
+
+		small = column.clientWidth < FULL + FRAME;
+		mounted = true;
 
 		const watch = new ResizeObserver(([entry]) => {
 			small = entry.target.clientWidth < FULL + FRAME;
@@ -47,7 +51,12 @@
 
 	<div class="page">
 		<figure class="shot" data-enter style="--enter: 0.35s" bind:this={column}>
-			{#if small}
+			{#if !mounted}
+				<div class="narrow">
+					<Gallery items={shots} />
+				</div>
+				<div class="frame live ghost" aria-hidden="true"></div>
+			{:else if small}
 				<Gallery items={shots} />
 			{:else}
 				<div class="frame live">
@@ -89,6 +98,27 @@
 
 	.frame.live {
 		box-shadow: var(--shadow), var(--glow);
+	}
+
+	/* before hydration the server markup holds both views and the viewport picks one, so nothing swaps on screen */
+	.narrow {
+		width: 100%;
+	}
+
+	.ghost {
+		display: none;
+		width: 1182px;
+		height: 732px;
+	}
+
+	@media (min-width: 1280px) {
+		.narrow {
+			display: none;
+		}
+
+		.ghost {
+			display: block;
+		}
 	}
 
 	@media (max-width: 900px) {
