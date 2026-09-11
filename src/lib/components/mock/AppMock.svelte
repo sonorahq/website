@@ -29,7 +29,7 @@
 	let left = $state(true);
 	let right = $state(true);
 	let room = $state(WIDTH);
-	let tab = $state('queue');
+	let tab = $state('lyrics');
 
 	const at = $derived(route.now);
 
