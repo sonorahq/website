@@ -8,8 +8,17 @@
 
 	const current = $derived(platform.current);
 
+	let list = $state<HTMLElement | null>(null);
+	let ended = $state(false);
+
+	function settle() {
+		if (!list) return;
+		ended = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
+	}
+
 	onMount(() => {
 		platform.id = detectPlatform();
+		settle();
 	});
 </script>
 
@@ -24,21 +33,23 @@
 		</div>
 
 		<div class="wire panel" use:reveal>
-			<nav class="list" aria-label="Platforms">
-				{#each platforms as entry (entry.id)}
-					<button
-						type="button"
-						class="row"
-						class:on={platform.id === entry.id}
-						aria-pressed={platform.id === entry.id}
-						onclick={() => (platform.id = entry.id)}
-					>
-						<Mark name={entry.mark} size={14} />
-						<span class="label">{entry.label}</span>
-						<span class="mono hint">{entry.hero ? entry.prompt : 'exe'}</span>
-					</button>
-				{/each}
-			</nav>
+			<div class="rail" class:ended>
+				<nav class="list" aria-label="Platforms" bind:this={list} onscroll={settle}>
+					{#each platforms as entry (entry.id)}
+						<button
+							type="button"
+							class="row"
+							class:on={platform.id === entry.id}
+							aria-pressed={platform.id === entry.id}
+							onclick={() => (platform.id = entry.id)}
+						>
+							<Mark name={entry.mark} size={14} />
+							<span class="label">{entry.label}</span>
+							<span class="mono hint">{entry.hero ? entry.prompt : 'exe'}</span>
+						</button>
+					{/each}
+				</nav>
+			</div>
 
 			<div class="steps">
 				{#each current.steps as step, index (step.caption)}
@@ -91,6 +102,10 @@
 
 	.panel {
 		grid-template-columns: 220px minmax(0, 1fr);
+	}
+
+	.rail {
+		position: relative;
 	}
 
 	.list {
@@ -231,6 +246,27 @@
 		.list {
 			flex-direction: row;
 			overflow-x: auto;
+			scrollbar-width: none;
+		}
+
+		.list::-webkit-scrollbar {
+			display: none;
+		}
+
+		.rail::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			width: 56px;
+			background: linear-gradient(to right, transparent, var(--bg));
+			pointer-events: none;
+			transition: opacity 0.18s ease;
+		}
+
+		.rail.ended::after {
+			opacity: 0;
 		}
 
 		.row {
