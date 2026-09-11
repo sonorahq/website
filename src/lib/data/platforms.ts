@@ -62,12 +62,6 @@ export const platforms: {
 				caption: 'Add the repository and install',
 				command: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref',
 				hint: 'Updates arrive with flatpak update.'
-			},
-			{
-				caption: 'Point an older remote at the new address',
-				command:
-					'flatpak remote-modify --user \\\n  --url=https://sonorahq.github.io/sonora/repo sonora',
-				hint: 'Only needed if you added the remote before the move to the sonorahq organisation.'
 			}
 		],
 		note: 'Standalone .flatpak bundles are attached to every release.'
