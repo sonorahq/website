@@ -20,7 +20,7 @@
 <section class="hero">
 	<div class="page">
 		<div class="mark" data-enter>
-			<Logo size={44} />
+			<Logo size={72} />
 		</div>
 
 		<h1 data-enter style="--enter: 0.05s">Sonora</h1>
@@ -125,13 +125,8 @@
 
 	.mark {
 		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 72px;
-		height: 72px;
-		border: 1px solid var(--line);
+		box-shadow: var(--shadow);
 		border-radius: 18px;
-		color: var(--fg);
 	}
 
 	h1 {
@@ -243,12 +238,6 @@
 		.hero .page {
 			padding-top: 72px;
 			padding-bottom: 48px;
-		}
-
-		.mark {
-			width: 60px;
-			height: 60px;
-			border-radius: 14px;
 		}
 
 		h1 {
