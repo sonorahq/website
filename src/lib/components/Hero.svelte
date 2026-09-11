@@ -51,7 +51,7 @@
 					<path d="M7 12l5 5 5-5" />
 					<path d="M4 21h16" />
 				</svg>
-				{platform.current.download}
+				Latest release
 			</a>
 			<a class="btn btn-secondary" href="https://github.com/sonorahq/sonora">
 				<Mark name="github" size={16} />

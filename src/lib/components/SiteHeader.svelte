@@ -35,7 +35,6 @@
 			</a>
 			<nav>
 				<a href="#features">Features</a>
-				<a href="#install">Install</a>
 				<a href="#themes">Themes</a>
 				<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
 			</nav>
@@ -45,12 +44,12 @@
 			<ThemeSwitch />
 			<a href={repo} class="star">
 				<Mark name="github" />
-				Star
+				GitHub
 				{#if label}
 					<span class="count">{label}</span>
 				{/if}
 			</a>
-			<a href="#install" class="download">Download</a>
+			<a href="#install" class="download">Install</a>
 		</div>
 	</div>
 </header>

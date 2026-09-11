@@ -18,7 +18,7 @@
 				<div>
 					<h3>Product</h3>
 					<a href="#features">Features</a>
-					<a href="#install">Download</a>
+					<a href="#install">Install</a>
 					<a href="#themes">Themes</a>
 				</div>
 				<div>
