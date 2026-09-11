@@ -254,7 +254,6 @@ a {
 }
 
 html {
-	scroll-behavior: smooth;
 	scrollbar-width: none;
 }
 
@@ -265,10 +264,6 @@ body::-webkit-scrollbar {
 }
 
 @media (prefers-reduced-motion: reduce) {
-	html {
-		scroll-behavior: auto;
-	}
-
 	*,
 	*::before,
 	*::after {
