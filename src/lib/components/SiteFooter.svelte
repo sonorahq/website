@@ -3,55 +3,66 @@
 	import Logo from './Logo.svelte';
 </script>
 
-<footer>
+<footer class="section">
+	<span class="cross start"></span>
+	<span class="cross end"></span>
+
 	<div class="page">
 		<div class="cols">
 			<div class="about">
 				<a href="/" class="brand">
-					<Logo size={20} />
+					<Logo size={18} />
 					<span>Sonora</span>
 				</a>
-				<p>A native music streaming client, built with Rust and GPUI.</p>
+				<p>A native music streaming client, written in Rust with GPUI.</p>
 			</div>
 
 			<div class="links">
 				<div>
-					<h3>Product</h3>
-					<a href="#features">Features</a>
+					<h3>Site</h3>
 					<a href="#install">Install</a>
-					<a href="#themes">Looks</a>
+					<a href="#about">What it does</a>
+					<a href="#community">Community</a>
 				</div>
 				<div>
 					<h3>Project</h3>
 					<a href={repo}>GitHub</a>
+					<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
 					<a href="{repo}/blob/main/CONTRIBUTING.md">Contributing</a>
 					<a href="{repo}/blob/main/README.md#translations">Translations</a>
 				</div>
 				<div>
-					<h3>Community</h3>
+					<h3>Talk</h3>
 					<a href={discord}>Discord</a>
 					<a href={matrix}>Matrix</a>
 					<a href="{repo}/issues">Issues</a>
 				</div>
+				<div>
+					<h3>Legal</h3>
+					<a href="{repo}/blob/main/COPYING">License</a>
+					<a href="{repo}/blob/main/PRIVACY.md">Privacy</a>
+					<a href="{repo}/blob/main/THIRD-PARTY.md">Third-party notices</a>
+				</div>
 			</div>
 		</div>
 
-		<div class="fine">
-			<span>Licensed under the GPL. Built with Zed's GPUI, librespot and yt-dlp.</span>
-			<span>sonorahq/sonora</span>
+		<div class="legal">
+			<p>
+				Sonora is free software under the GNU General Public License, version 3 or later. It is an
+				unofficial client and is not affiliated with, endorsed by or sponsored by Spotify AB.
+			</p>
+			<p>
+				The preview on this page plays public domain recordings with public domain lyrics. Its
+				covers are public domain paintings from Wikimedia Commons.
+			</p>
 		</div>
-
-		<p class="credit">
-			The preview plays public domain music and public domain lyrics. Its covers are public domain
-			paintings from Wikimedia Commons — Whistler, van Gogh, Monet, Hokusai and Munch.
-		</p>
 	</div>
 </footer>
 
 <style>
-	footer {
-		border-top: 1px solid var(--border);
-		padding: 64px 0 40px;
+	.page {
+		padding-top: 48px;
+		padding-bottom: 40px;
 	}
 
 	.cols {
@@ -64,15 +75,15 @@
 	.about {
 		display: flex;
 		flex-direction: column;
-		gap: 14px;
-		max-width: 300px;
+		gap: 12px;
+		max-width: 280px;
 	}
 
 	.brand {
 		display: flex;
 		align-items: center;
-		gap: 10px;
-		font-size: 15px;
+		gap: 9px;
+		font-size: 14px;
 		font-weight: 600;
 		letter-spacing: -0.02em;
 	}
@@ -85,16 +96,16 @@
 
 	.links {
 		display: flex;
-		gap: 72px;
+		gap: 56px;
 		flex-wrap: wrap;
 	}
 
 	.links > div {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 10px;
 		font-size: 13px;
-		color: var(--chip-fg);
+		color: var(--muted-fg);
 	}
 
 	.links a:hover {
@@ -102,37 +113,41 @@
 	}
 
 	h3 {
-		margin: 0;
+		margin: 0 0 4px;
 		font-size: 12px;
 		font-weight: 600;
-		letter-spacing: 0.06em;
 		text-transform: uppercase;
-		color: var(--dim);
+		color: var(--muted-fg);
 	}
 
-	.fine {
-		margin-top: 56px;
-		border-top: 1px solid var(--border);
-		padding-top: 24px;
+	.legal {
 		display: flex;
-		justify-content: space-between;
-		gap: 16px;
-		flex-wrap: wrap;
-		font-size: 12px;
-		color: var(--dim);
+		flex-direction: column;
+		gap: 10px;
+		margin-top: 48px;
+		padding-top: 20px;
+		border-top: 1px solid var(--line);
 	}
 
-	.credit {
-		margin: 12px 0 0;
-		max-width: 640px;
-		font-size: 12px;
-		line-height: 1.5;
+	.legal p {
+		max-width: 72ch;
+		font-size: 12.5px;
+		line-height: 1.6;
 		color: var(--dim);
+		text-wrap: pretty;
 	}
 
 	@media (max-width: 900px) {
+		.page {
+			padding-top: 36px;
+		}
+
 		.links {
-			gap: 40px;
+			gap: 32px;
+		}
+
+		.legal {
+			margin-top: 36px;
 		}
 	}
 </style>

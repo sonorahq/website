@@ -45,6 +45,14 @@
 		<rect width="16" height="12" fill="#fff" />
 		<rect width="5.34" height="12" fill="#008c45" />
 		<rect x="10.66" width="5.34" height="12" fill="#cd212a" />
+	{:else if code === 'cn'}
+		<rect width="16" height="12" fill="#de2910" />
+		<path d="M3.2 1.8 4 3.5l1.9.2-1.4 1.3.4 1.9-1.7-1-1.7 1 .4-1.9L.5 3.7l1.9-.2z" fill="#ffde00" />
+	{:else if code === 'tr'}
+		<rect width="16" height="12" fill="#e30a17" />
+		<circle cx="6.2" cy="6" r="3" fill="#fff" />
+		<circle cx="6.9" cy="6" r="2.4" fill="#e30a17" />
+		<path d="M9.6 4.6l.5 1.1 1.2.1-.9.8.3 1.2-1.1-.7-1.1.7.3-1.2-.9-.8 1.2-.1z" fill="#fff" />
 	{/if}
 </svg>
 
