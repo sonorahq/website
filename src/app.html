@@ -21,6 +21,15 @@
 				}
 			} catch {}
 
+			try {
+				const nav = performance.getEntriesByType('navigation')[0];
+				if (location.hash && (!nav || nav.type === 'reload')) {
+					history.replaceState(history.state, '', location.pathname + location.search);
+				}
+			} catch {}
+
+			addEventListener('beforeunload', () => scrollTo(0, 0));
+
 			const settled = () => root.classList.add('fonts');
 
 			if (document.fonts) {
