@@ -119,10 +119,15 @@ export const platforms: {
 	}
 ];
 
+/** Picks the install tab for the visitor's OS, falling back to macOS. Linux lands on Arch because the page cannot see the distro. */
 export function detectPlatform() {
+	const hint =
+		(navigator as Navigator & { userAgentData?: { platform?: string } }).userAgentData?.platform ??
+		'';
 	const ua = navigator.userAgent;
-	if (/Mac/i.test(ua)) return 'macos';
-	if (/Win/i.test(ua)) return 'windows';
-	if (/Linux|X11/i.test(ua)) return 'arch';
+	if (/Windows/i.test(hint) || /Windows/i.test(ua)) return 'windows';
+	if (/macOS/i.test(hint) || (/Macintosh|Mac OS/i.test(ua) && !/iPhone|iPad|iPod/i.test(ua)))
+		return 'macos';
+	if (/Linux|Chrome OS|X11/i.test(hint) || /Linux|X11/i.test(ua)) return 'arch';
 	return 'macos';
 }

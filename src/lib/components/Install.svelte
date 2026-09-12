@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { detectPlatform, platforms } from '$lib/data/platforms';
 	import { platform } from '$lib/platform.svelte';
 	import { reveal } from '$lib/reveal';
@@ -17,8 +17,18 @@
 		ended = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
 	}
 
-	onMount(() => {
+	/** Scrolls the tab strip so the chosen platform is visible without moving the page itself. */
+	function focusRow() {
+		const row = list?.querySelector<HTMLElement>('.row.on');
+		if (!list || !row) return;
+		const offset = row.getBoundingClientRect().left - list.getBoundingClientRect().left;
+		list.scrollLeft += offset - (list.clientWidth - row.offsetWidth) / 2;
+	}
+
+	onMount(async () => {
 		platform.id = detectPlatform();
+		await tick();
+		focusRow();
 		settle();
 	});
 </script>
