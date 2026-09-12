@@ -43,6 +43,10 @@
 						<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
 					</div>
 				</div>
+
+				<div class="clip">
+					<video src="/hi.mp4" autoplay loop muted playsinline aria-hidden="true"></video>
+				</div>
 			</div>
 
 			<div class="langs">
@@ -96,9 +100,20 @@
 		border-bottom: 1px solid var(--line);
 	}
 
-	.block:last-child {
+	.clip {
+		position: relative;
 		flex-grow: 1;
-		border-bottom: none;
+		min-height: 240px;
+		overflow: hidden;
+	}
+
+	.clip video {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 
 	.links {
@@ -230,7 +245,9 @@
 			grid-template-columns: minmax(0, 1fr);
 		}
 
-		.block:last-child {
+		.clip {
+			min-height: 0;
+			aspect-ratio: 4 / 3;
 			border-bottom: 1px solid var(--line);
 		}
 
