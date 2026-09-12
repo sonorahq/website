@@ -8,7 +8,7 @@
 			items: [
 				{ glyph: 'spotify', text: 'Spotify' },
 				{ glyph: 'youtubemusic', text: 'YouTube Music' },
-				{ glyph: 'server', text: 'Subsonic' },
+				{ glyph: 'subsonic', text: 'Subsonic' },
 				{ glyph: 'file-music', text: 'Local files' }
 			]
 		},
@@ -52,7 +52,7 @@
 			items: [
 				{ glyph: 'apple', text: 'macOS' },
 				{ glyph: 'windows', text: 'Windows' },
-				{ glyph: 'terminal', text: 'Linux' }
+				{ glyph: 'linux', text: 'Linux' }
 			]
 		}
 	];

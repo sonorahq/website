@@ -39,7 +39,7 @@
 		['terminal', '<path d="m4 17 6-6-6-6"/><path d="M12 19h8"/>']
 	]);
 
-	const brands = new Set(['apple', 'windows', 'discord']);
+	const brands = new Set(['apple', 'windows', 'linux', 'discord', 'subsonic']);
 	const solid = new Set(['spotify', 'youtubemusic']);
 	const markup = $derived(extra.get(name) ?? icons.get(name) ?? '');
 </script>
