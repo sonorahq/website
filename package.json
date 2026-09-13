@@ -22,5 +22,8 @@
 		"svelte-check": "^4.7.6",
 		"vite": "^7.0.0",
 		"wrangler": "^4.130.0"
+	},
+	"dependencies": {
+		"flag-icons": "^7.5.0"
 	}
 }
