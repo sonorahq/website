@@ -48,12 +48,14 @@ export const ABOUT_FALLBACK = "Explore the artist's popular songs and releases."
 export const artists = [
 	{
 		id: 'traditional',
+		image: '',
 		name: 'Traditional',
 		listeners: '2,410,338',
 		biography: ''
 	},
 	{
 		id: 'chopin',
+		image: '/artist-chopin.webp',
 		name: 'Frédéric Chopin',
 		listeners: '8,924,715',
 		biography:
@@ -61,6 +63,7 @@ export const artists = [
 	},
 	{
 		id: 'debussy',
+		image: '/artist-debussy.webp',
 		name: 'Claude Debussy',
 		listeners: '6,142,908',
 		biography:
@@ -68,6 +71,7 @@ export const artists = [
 	},
 	{
 		id: 'satie',
+		image: '/artist-satie.webp',
 		name: 'Erik Satie',
 		listeners: '5,308,441',
 		biography:
@@ -75,6 +79,7 @@ export const artists = [
 	},
 	{
 		id: 'vivaldi',
+		image: '/artist-vivaldi.webp',
 		name: 'Antonio Vivaldi',
 		listeners: '9,776,120',
 		biography:
@@ -82,6 +87,7 @@ export const artists = [
 	},
 	{
 		id: 'grieg',
+		image: '/artist-grieg.webp',
 		name: 'Edvard Grieg',
 		listeners: '4,015,663',
 		biography:
@@ -89,6 +95,7 @@ export const artists = [
 	},
 	{
 		id: 'mussorgsky',
+		image: '/artist-mussorgsky.webp',
 		name: 'Modest Mussorgsky',
 		listeners: '3,229,504',
 		biography:
@@ -96,12 +103,48 @@ export const artists = [
 	}
 ];
 
+const stamped = (ids: string[]) =>
+	pick(ids).map((track, at) => ({
+		...track,
+		added: ['Sep 4, 2026', 'Sep 2, 2026', 'Aug 29, 2026', 'Aug 24, 2026', 'Aug 20, 2026'][at % 5]
+	}));
+
 export const playlists = [
-	{ id: 'quiet-hours', name: 'Quiet Hours', owner: 'You', count: 10 },
-	{ id: 'evening-studies', name: 'Evening Studies', owner: 'You', count: 24 },
-	{ id: 'rainy-windows', name: 'Rainy Windows', owner: 'You', count: 18 },
-	{ id: 'morning-light', name: 'Morning Light', owner: 'You', count: 31 },
-	{ id: 'long-drives', name: 'Long Drives', owner: 'You', count: 42 }
+	{
+		id: 'quiet-hours',
+		name: 'Quiet Hours',
+		owner: 'You',
+		cover: '/mosaic-quiet-hours.webp',
+		tracks: stamped(['t2', 'n2', 'b3', 'g1', 't5', 'p1', 's1', 'x1', 'b4', 'p4'])
+	},
+	{
+		id: 'evening-studies',
+		name: 'Evening Studies',
+		owner: 'You',
+		cover: '/mosaic-evening-studies.webp',
+		tracks: stamped(['n1', 'b1', 'x2', 's6', 'n3', 'g2', 'b2', 'p2', 'x5', 'n4'])
+	},
+	{
+		id: 'rainy-windows',
+		name: 'Rainy Windows',
+		owner: 'You',
+		cover: '/mosaic-rainy-windows.webp',
+		tracks: stamped(['g2', 't3', 'b2', 'p3', 'g3', 't6', 'n5', 'b1'])
+	},
+	{
+		id: 'morning-light',
+		name: 'Morning Light',
+		owner: 'You',
+		cover: '/mosaic-morning-light.webp',
+		tracks: stamped(['s1', 'p1', 'b1', 'n4', 's2', 'p2', 'g1', 's3', 'x3'])
+	},
+	{
+		id: 'long-drives',
+		name: 'Long Drives',
+		owner: 'You',
+		cover: '/mosaic-long-drives.webp',
+		tracks: stamped(['x1', 's6', 'p2', 't1', 'x5', 's11', 'n6', 't7', 'x7', 'p3', 's9'])
+	}
 ];
 
 export const played = [

@@ -135,7 +135,8 @@
 							weight={600}
 							title={artist.name}
 							meta="Artist"
-							fallback="user"
+							fallback="user-round"
+							cover={artist.image}
 							onpress={() => route.go({ screen: 'artist', id: artist.id })}
 						/>
 					{/each}

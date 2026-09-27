@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { clock } from '$lib/mock/album';
-	import { libraryColumns, playlists, favorites } from '$lib/mock/screens';
+	import { libraryColumns, playlists } from '$lib/mock/screens';
 	import { player } from '$lib/mock/player.svelte';
 	import Control from '../Control.svelte';
 	import PageHero from '../PageHero.svelte';
@@ -9,8 +9,8 @@
 	let { id = 'quiet-hours' }: { id?: string } = $props();
 
 	const list = $derived(playlists.find((one) => one.id === id) ?? playlists[0]);
-	const rows = favorites;
-	const total = rows.reduce((sum, track) => sum + track.length, 0);
+	const rows = $derived(list.tracks);
+	const total = $derived(rows.reduce((sum, track) => sum + track.length, 0));
 	const mine = $derived(rows.some((track) => track.id === player.id));
 	const holding = $derived(mine && player.playing);
 </script>
@@ -20,6 +20,7 @@
 		<PageHero
 			title={list.name}
 			eyebrow="Playlist"
+			cover={list.cover}
 			fallback="list-music"
 			accent
 			meta={[list.owner, `${rows.length} songs`, clock(total)]}

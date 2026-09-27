@@ -213,7 +213,7 @@ export const pinned = [
 		title: 'Quiet Hours',
 		kind: 'Playlist',
 		icon: 'list',
-		cover: '',
+		cover: '/mosaic-quiet-hours.webp',
 		to: { screen: 'playlist', id: 'quiet-hours' }
 	},
 	{
@@ -230,7 +230,7 @@ export const pinned = [
 		title: 'Frédéric Chopin',
 		kind: 'Artist',
 		icon: 'user',
-		cover: '',
+		cover: '/artist-chopin.webp',
 		round: true,
 		to: { screen: 'artist', id: 'chopin' }
 	},

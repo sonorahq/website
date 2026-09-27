@@ -83,6 +83,7 @@
 		<PageHero
 			title={artist.name}
 			eyebrow="Artist"
+			cover={artist.image}
 			fallback="user-round"
 			circle
 			meta={[`${artist.listeners} monthly listeners`]}
@@ -205,7 +206,12 @@
 		{/if}
 
 		<div class="about">
-			<About name={artist.name} biography={artist.biography} onpress={() => (telling = true)} />
+			<About
+				name={artist.name}
+				cover={artist.image}
+				biography={artist.biography}
+				onpress={() => (telling = true)}
+			/>
 		</div>
 	</div>
 
