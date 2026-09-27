@@ -7,6 +7,8 @@
 
 	const opened = new SvelteSet(['library']);
 
+	let folded = $state(false);
+
 	const at = $derived(route.now);
 
 	$effect(() => {
@@ -68,23 +70,33 @@
 		{/if}
 	{/each}
 
-	<span class="group"><span class="eyebrow">Pinned</span></span>
+	<div class="group">
+		<button type="button" class="fold" onclick={() => (folded = !folded)}>
+			<Icon name={folded ? 'chevron-right' : 'chevron-down'} size={12} />
+			<span class="eyebrow">Pinned</span>
+		</button>
+		{#if !folded}
+			<button type="button" class="sort" title="Sort"><Icon name="arrow-up-down" /></button>
+		{/if}
+	</div>
 
-	{#each pinned as entry (entry.id)}
-		<span class="pin" class:here={here(entry)}>
-			<Card
-				flat
-				title={entry.title}
-				meta={entry.kind}
-				cover={entry.cover}
-				fallback={entry.icon}
-				tint={here(entry) ? 'var(--m-foreground)' : 'var(--m-muted-foreground)'}
-				circle={entry.round ?? false}
-				onplay={() => route.go(entry.to)}
-				onpress={() => route.go(entry.to)}
-			/>
-		</span>
-	{/each}
+	{#if !folded}
+		{#each pinned as entry (entry.id)}
+			<span class="pin" class:here={here(entry)}>
+				<Card
+					flat
+					title={entry.title}
+					meta={entry.kind}
+					cover={entry.cover}
+					fallback={entry.icon}
+					tint={here(entry) ? 'var(--m-foreground)' : 'var(--m-muted-foreground)'}
+					circle={entry.round ?? false}
+					onplay={() => route.go(entry.to)}
+					onpress={() => route.go(entry.to)}
+				/>
+			</span>
+		{/each}
+	{/if}
 </nav>
 
 <style>
@@ -168,16 +180,54 @@
 	.group {
 		display: flex;
 		flex: none;
-		align-items: flex-end;
-		height: 52px;
-		padding: 0 7px 3.5px;
-		font-size: 12px;
-		font-weight: 600;
-		color: var(--m-muted-foreground);
+		align-items: center;
+		justify-content: space-between;
+		height: 26px;
+		margin: 8px 0 2px;
+		padding: 0 3.5px 0 7px;
 	}
 
-	.group .eyebrow {
+	.fold {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		align-items: center;
+		gap: 3.5px;
+		padding: 0;
+		border: 0;
+		background: none;
+		color: var(--m-muted-foreground);
+		font: inherit;
+		font-size: 12px;
+		font-weight: 600;
+		cursor: pointer;
+	}
+
+	.fold .eyebrow {
+		overflow: hidden;
+		text-overflow: ellipsis;
 		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.sort {
+		display: flex;
+		width: 26px;
+		height: 26px;
+		flex: none;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		border: 0;
+		border-radius: var(--m-radius);
+		background: none;
+		color: var(--m-muted-foreground);
+		cursor: pointer;
+	}
+
+	.sort:hover {
+		background: var(--m-secondary-hover);
+		color: var(--m-foreground);
 	}
 
 	.pin {

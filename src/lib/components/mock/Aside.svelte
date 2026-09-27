@@ -18,7 +18,7 @@
 
 	const played = $derived(look(player.past).slice(-PAST));
 	const upcoming = $derived(look(player.queued).slice(0, ROOM));
-	const suggested = $derived(look(player.suggested).slice(0, ROOM - upcoming.length));
+	const suggested = $derived(look(player.suggested).slice(0, ROOM));
 
 	const PIN = 0.3;
 	const EDGE_FADE = 11.4;
