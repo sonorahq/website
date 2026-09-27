@@ -260,12 +260,7 @@ export const nav = [
 		tabs: ['Songs', 'Albums', 'Artists', 'Playlists']
 	},
 	{ id: 'history', label: 'History', icon: 'rotate-ccw-clock' },
-	{
-		id: 'settings',
-		label: 'Settings',
-		icon: 'settings',
-		tabs: ['General', 'Appearance', 'Playback', 'Privacy', 'About']
-	}
+	{ id: 'settings', label: 'Settings', icon: 'settings' }
 ];
 
 export const columns = [

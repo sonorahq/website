@@ -1,624 +1,314 @@
 <script lang="ts">
+	import {
+		bands,
+		catalog,
+		notice,
+		providers,
+		scrobblers,
+		tabs,
+		team,
+		version
+	} from '$lib/mock/catalog';
+	import type { Row } from '$lib/mock/catalog';
 	import { settings } from '$lib/mock/settings.svelte';
 	import { themes } from '$lib/mock/theme';
-	import Control from '../Control.svelte';
 	import Icon from '../Icon.svelte';
 	import Picker from '../Picker.svelte';
 	import Scrubber from '../Scrubber.svelte';
-	import SettingGroup from '../SettingGroup.svelte';
-	import SettingRow from '../SettingRow.svelte';
 	import Switch from '../Switch.svelte';
 
-	let { tab = 'General' }: { tab?: string } = $props();
+	let { tab = $bindable('General') }: { tab?: string } = $props();
 
-	const listener = { name: 'Alex Rivera', id: '31mfqtv7xk2dwrbn4hpz8ecajlyu' };
+	let query = $state('');
 
-	const accounts = [
-		{ slug: 'spotify', name: 'Spotify', status: 'Playing from this service', stored: true },
-		{ slug: 'youtubemusic', name: 'YouTube Music', status: 'Not connected', stored: false }
-	];
+	const store = settings as unknown as Record<string, string | number | boolean>;
 
-	const team = [
-		{ login: 'nolight132', role: 'Lead Maintainer' },
-		{ login: 'zxsleebu', role: 'Maintainer' },
-		{ login: 'fx-got', role: 'Maintainer' },
-		{ login: 'Makakashan', role: 'Contributor' },
-		{ login: 'imizgun', role: 'Contributor' }
-	];
+	const marks: Record<string, string> = {
+		General: 'settings',
+		Appearance: 'palette',
+		Playback: 'play',
+		Privacy: 'lock',
+		Integrations: 'link',
+		About: 'info'
+	};
 
-	const notice =
-		'Copyright © 2026 Sonora Contributors. Sonora comes with absolutely no warranty. It is free software, and you are welcome to redistribute it under the terms of the GNU General Public License version 3 or later. Sonora is unofficial and is not affiliated with Spotify AB.';
+	const searching = $derived(query.trim().length > 0);
+
+	function shown(row: Row) {
+		if (row.needs === 'ambient') return settings.ambient;
+		if (row.needs === 'visualizer') return settings.visualizer !== 'Off';
+		if (row.needs === 'equalizer') return settings.equalizer;
+		if (row.needs === 'discord') return settings.discord;
+		return true;
+	}
+
+	const found = $derived.by(() => {
+		const needle = query.trim().toLowerCase();
+		if (!needle) return [];
+
+		const hits: Row[] = [];
+		for (const entries of Object.values(catalog)) {
+			for (const entry of entries) {
+				if (entry.kind !== 'row' || !entry.title || !shown(entry)) continue;
+				const title = entry.title.toLowerCase().includes(needle);
+				const detail = (entry.detail ?? '').toLowerCase().includes(needle);
+				if (title || detail) hits.push(entry);
+			}
+		}
+		return hits;
+	});
+
+	const listed = $derived(
+		searching ? found : (catalog[tab] ?? []).filter((entry) => entry.kind !== 'row' || shown(entry))
+	);
+
+	function reading(key: string): string {
+		if (key === 'opacity') return `${Math.round(settings.opacity * 100)}%`;
+		if (key === 'fontSize') return `${settings.fontSize} px`;
+		if (key === 'panelLyrics') return `${Math.round(settings.panelLyrics * 100)}%`;
+		if (key === 'fullscreenLyrics') return `${Math.round(settings.fullscreenLyrics * 100)}%`;
+		return '';
+	}
+
+	function fraction(key: string): number {
+		if (key === 'opacity') return Number(settings.opacity);
+		if (key === 'fontSize') return (Number(settings.fontSize) - 10) / 14;
+		return Number(store[key]) / 2;
+	}
+
+	const hertz = (hz: number) => (hz >= 1000 ? `${hz / 1000} kHz` : `${hz} Hz`);
 </script>
 
 <div class="screen">
-	<div class="sheet">
-		{#if tab === 'General'}
-			<div class="profile">
-				<span class="face">{listener.name.slice(0, 1)}</span>
-				<div class="who">
-					<span class="display">{listener.name}</span>
-					<span class="handle">{listener.id}</span>
-				</div>
+	<header class="head">
+		<div class="column">
+			<label class="field">
+				<Icon name="search" />
+				<input placeholder="Search settings" bind:value={query} />
+			</label>
+			<div class="bar">
+				{#each tabs as name (name)}
+					<button
+						type="button"
+						class="chip"
+						class:on={!searching && tab === name}
+						onclick={() => {
+							query = '';
+							tab = name;
+						}}
+					>
+						<Icon name={marks[name]} />
+						{name}
+					</button>
+				{/each}
 			</div>
-			<hr />
-			<div class="panel">
-				<SettingRow
-					title="Show on startup"
-					detail="The screen Sonora opens on launch"
-					control={startupPick}
-				/>
-				<hr />
-				<SettingRow
-					title="Sidebar entries"
-					detail="The sections listed in the sidebar"
-					control={entriesPick}
-				/>
-				<hr />
-				<SettingRow
-					title="Language"
-					detail="The language Sonora uses across the interface"
-					control={languagePick}
-				/>
-				<SettingGroup label="Window" />
-				<SettingRow
-					title="Keep playing when closed"
-					detail="Keep Sonora in the system tray and continue playing after its window closes"
-					control={trayToggle}
-				/>
-				<SettingGroup label="Accounts" />
-				<div class="accounts">
-					<div class="text">
-						<span>Manage accounts</span>
-						<span class="detail">The services this device can play from</span>
-					</div>
-					{#each accounts as account (account.slug)}
+		</div>
+	</header>
+
+	<div class="sheet">
+		{#each listed as entry, at (entry.kind === 'row' ? entry.key : `${entry.label}-${at}`)}
+			{#if entry.kind === 'title'}
+				<div class="group"><span class="eyebrow">{entry.label}</span></div>
+			{:else if entry.control === 'accounts'}
+				<div class="deck">
+					{#each providers as account (account.slug)}
 						<div class="account">
-							<div class="head">
-								<Icon name={account.slug} size={26} />
-								<div class="ident">
-									<span class="name">{account.name}</span>
-									<span class="hint">{account.status}</span>
-								</div>
-								{#if account.stored}
-									<Control icon="log-out" label="Sign out" small />
-								{/if}
+							<span class="mark"><Icon name={account.slug} /></span>
+							<div class="text">
+								<span class="title">{account.name}</span>
+								<span class="detail">{account.status}</span>
 							</div>
-							{#if !account.stored}
-								<div class="methods">
-									<Control variant="outline" small label="Use Guest mode" />
-									<Control variant="outline" small label="Paste cookies manually" />
-								</div>
-							{/if}
+							<button type="button" class="ghost">
+								{account.stored ? 'Sign out' : 'Connect'}
+							</button>
 						</div>
 					{/each}
 				</div>
-				<SettingGroup label="Library" />
-				<SettingRow title="Music folders" detail="Not configured" control={folderAction} />
-			</div>
-		{:else if tab === 'Appearance'}
-			<div class="panel">
-				<SettingRow
-					title="Theme"
-					detail="Choose the application colour palette"
-					control={themePick}
-				/>
-				<hr />
-				<SettingRow
-					title="Adaptive theme"
-					detail="Tint the palette with the artwork of the playing album"
-					control={adaptiveToggle}
-				/>
-				<hr />
-				<SettingRow
-					title="Visualizer"
-					detail="Show spectrum bars behind fullscreen artwork"
-					control={visualizerToggle}
-				/>
-				<hr />
-				<SettingRow
-					title="Icon pack"
-					detail="Choose the icon set the interface draws from"
-					control={iconsPick}
-				/>
-				<hr />
-				<SettingRow
-					title="Opacity"
-					detail="Adjust the app background opacity"
-					control={opacityScrub}
-				/>
-				<hr />
-				<SettingRow
-					title="Backdrop"
-					detail="The material drawn behind the app window"
-					control={backdropPick}
-				/>
-				<hr />
-				<SettingRow
-					title="Corners"
-					detail="How rounded surfaces and controls are"
-					control={cornersPick}
-				/>
-				<SettingGroup label="Lyrics" />
-				<SettingRow
-					title="Lyrics size (panel)"
-					detail="Size of the lyrics text in the side panel, on top of the base font size"
-					control={panelLyricsStep}
-				/>
-				<hr />
-				<SettingRow
-					title="Lyrics size (fullscreen)"
-					detail="Size of the lyrics text on the fullscreen player, on top of the base font size"
-					control={fullscreenLyricsStep}
-				/>
-				<hr />
-				<SettingRow
-					title="Blur inactive lyrics"
-					detail="Blur upcoming and previous lines in the lyrics panel"
-					control={blurToggle}
-				/>
-				<SettingGroup label="Text" />
-				<SettingRow
-					title="Font size"
-					detail="Base text size, everything else scales with it"
-					control={fontStep}
-				/>
-				<hr />
-				<SettingRow
-					title="Font"
-					detail="The typeface Sonora uses across the interface"
-					control={typefacePick}
-				/>
-				<SettingGroup label="Motion" />
-				<SettingRow
-					title="Reduce motion"
-					detail="Skip interface animations and transitions"
-					control={motionPick}
-				/>
-				<hr />
-				<SettingRow
-					title="Animation speed"
-					detail="How fast interface animations play"
-					control={pacePick}
-				/>
-				<hr />
-				<SettingRow
-					title="Battery saving"
-					detail="Cap the frame rate of animations while Sonora is not focused, applied from the next launch"
-					control={saverPick}
-				/>
-				<SettingGroup label="Advanced" />
-				<SettingRow
-					title="Adaptive context menu"
-					detail="Leaves out entries the row already shows, such as the album or the artist"
-					control={menusToggle}
-				/>
-			</div>
-		{:else if tab === 'Playback'}
-			<div class="panel">
-				<SettingRow
-					title="Normalize loudness"
-					detail="Keeps tracks at a consistent volume"
-					control={loudToggle}
-				/>
-				<hr />
-				<SettingRow
-					title="Gapless playback"
-					detail="Runs one track into the next without a pause, the way an album was sequenced"
-					control={gaplessToggle}
-				/>
-				<hr />
-				<SettingRow
-					title="Sleep timer"
-					detail="Lets the music stop on its own after a set time, so it can play you to sleep"
-					control={sleepToggle}
-				/>
-				<SettingGroup label="Lyrics" />
-				<SettingRow
-					title="Karaoke lyrics"
-					detail="Highlight lyrics word by word when timing is available"
-					control={karaokeToggle}
-				/>
-				<hr />
-				<SettingRow
-					title="Romanized lyrics"
-					detail="Show locally generated pronunciation for selected writing systems"
-					control={romanizedToggle}
-				/>
-			</div>
-		{:else if tab === 'Privacy'}
-			<div class="panel">
-				<SettingRow
-					title="Lyrics for local files"
-					detail="Use metadata from local files to fetch lyrics from the internet"
-					control={localLyricsToggle}
-				/>
-			</div>
-		{:else}
-			<div class="panel">
-				<SettingRow
-					title="Version"
-					detail="The build of sonora you are running"
-					control={versionText}
-				/>
-				<hr />
-				<SettingRow
-					title="Check for updates"
-					detail="Ask GitHub once at startup whether a newer version is out. Sonora installs the update itself on Windows only; elsewhere it points you at what changed"
-					control={updatesToggle}
-				/>
-				<SettingGroup label="Project" />
-				<SettingRow
-					title="License"
-					detail="GNU General Public License version 3 or later"
-					control={licenseAction}
-				/>
-				<hr />
-				<SettingRow
-					title="Source code"
-					detail="The corresponding source for this build"
-					control={sourceAction}
-				/>
-			</div>
-			<div class="card">
-				<div class="cap">
-					<span class="eyebrow">Team</span>
-					<span class="rule"></span>
-				</div>
-				<div class="members">
-					{#each team as member (member.login)}
-						<a class="member" href="https://github.com/{member.login}">
-							<img
-								class="avatar"
-								src="https://github.com/{member.login}.png"
-								width="34"
-								height="34"
-								alt=""
-							/>
-							<span class="ident">
-								<span class="name">{member.login}</span>
-								<span class="hint">GitHub</span>
-							</span>
-							<span class="role">{member.role}</span>
-						</a>
+			{:else if entry.control === 'scrobbling'}
+				<div class="deck">
+					{#each scrobblers as service (service.id)}
+						<div class="account">
+							<div class="text">
+								<span class="title">{service.name}</span>
+								<span class="detail">{service.detail || service.status}</span>
+							</div>
+							{#if service.linked}
+								<Switch checked onchange={() => {}} />
+							{/if}
+							<button type="button" class="ghost">
+								{service.linked ? 'Disconnect' : 'Connect'}
+							</button>
+						</div>
 					{/each}
 				</div>
+			{:else if entry.control === 'bands'}
+				<div class="bands">
+					{#each bands as hz (hz)}
+						<div class="band">
+							<span class="db">0 dB</span>
+							<div class="slot"><span class="knob"></span></div>
+							<span class="hz">{hertz(hz)}</span>
+						</div>
+					{/each}
+				</div>
+			{:else}
+				<div class="row">
+					<div class="text">
+						<span class="title">{entry.title}</span>
+						{#if entry.detail}<span class="detail">{entry.detail}</span>{/if}
+					</div>
+					<div class="control">
+						{#if entry.control === 'switch'}
+							{#if entry.extra}
+								<button type="button" class="ghost">{entry.extra}</button>
+							{/if}
+							<Switch
+								checked={Boolean(store[entry.key])}
+								onchange={(value) => (store[entry.key] = value)}
+							/>
+						{:else if entry.control === 'picker'}
+							{#if entry.extra}
+								<button type="button" class="ghost">{entry.extra}</button>
+							{/if}
+							<Picker
+								value={String(store[entry.key] ?? '')}
+								options={entry.key === 'theme' ? themes : (entry.options ?? [])}
+								onpick={(value) => (store[entry.key] = value)}
+							/>
+						{:else if entry.control === 'slider'}
+							<div class="slider">
+								<Scrubber fraction={fraction(entry.key)} label="" onseek={() => {}} />
+								<span class="reading">{reading(entry.key)}</span>
+							</div>
+						{:else if entry.control === 'button'}
+							{#if entry.value}<span class="reading">{entry.value}</span>{/if}
+							<button type="button" class="ghost">{entry.label}</button>
+						{:else}
+							<span class="reading">{entry.value ?? version}</span>
+						{/if}
+					</div>
+				</div>
+			{/if}
+		{/each}
+
+		{#if !searching && tab === 'About'}
+			<div class="group"><span class="eyebrow">Team</span></div>
+			<div class="deck">
+				{#each team as member (member.login)}
+					<div class="account">
+						<span class="face">{member.login.slice(0, 1).toUpperCase()}</span>
+						<div class="text">
+							<span class="title">{member.login}</span>
+							<span class="detail">{member.role}</span>
+						</div>
+						<button type="button" class="ghost">GitHub</button>
+					</div>
+				{/each}
 			</div>
 			<p class="notice">{notice}</p>
+		{/if}
+
+		{#if searching && !found.length}
+			<p class="notice">Nothing here</p>
 		{/if}
 	</div>
 </div>
 
-{#snippet startupPick()}
-	<Picker
-		value={settings.startup}
-		options={['Home', 'Search', 'Your Library', 'Local Music', 'History']}
-		width={170}
-		onpick={(value) => (settings.startup = value)}
-	/>
-{/snippet}
-
-{#snippet entriesPick()}
-	<Control variant="outline" small label="Choose entries" />
-{/snippet}
-
-{#snippet languagePick()}
-	<Picker
-		value={settings.language}
-		options={['System', 'English', 'Russian', 'German', 'Japanese']}
-		width={170}
-		onpick={(value) => (settings.language = value)}
-	/>
-{/snippet}
-
-{#snippet trayToggle()}
-	<Switch
-		checked={settings.tray}
-		label="Keep playing when closed"
-		onchange={(value) => (settings.tray = value)}
-	/>
-{/snippet}
-
-{#snippet folderAction()}
-	<Control variant="outline" small label="Choose folder…" />
-{/snippet}
-
-{#snippet themePick()}
-	<Picker
-		value={settings.theme}
-		options={themes}
-		width={170}
-		onpick={(value) => (settings.theme = value)}
-	/>
-{/snippet}
-
-{#snippet adaptiveToggle()}
-	<Switch
-		checked={settings.adaptive}
-		label="Adaptive theme"
-		onchange={(value) => (settings.adaptive = value)}
-	/>
-{/snippet}
-
-{#snippet visualizerToggle()}
-	<Switch
-		checked={settings.visualizer}
-		label="Visualizer"
-		onchange={(value) => (settings.visualizer = value)}
-	/>
-{/snippet}
-
-{#snippet iconsPick()}
-	<Picker
-		value={settings.icons}
-		options={['Lucide', 'Remix', 'Solar', 'Iconoir']}
-		width={170}
-		onpick={(value) => (settings.icons = value)}
-	/>
-{/snippet}
-
-{#snippet backdropPick()}
-	<Picker
-		value={settings.backdrop}
-		options={['Plain', 'Blur']}
-		width={170}
-		onpick={(value) => (settings.backdrop = value)}
-	/>
-{/snippet}
-
-{#snippet cornersPick()}
-	<Picker
-		value={settings.corners}
-		options={['Square', 'Subtle', 'Rounded', 'Round']}
-		width={170}
-		onpick={(value) => (settings.corners = value)}
-	/>
-{/snippet}
-
-{#snippet blurToggle()}
-	<Switch
-		checked={settings.blur}
-		label="Blur inactive lyrics"
-		onchange={(value) => (settings.blur = value)}
-	/>
-{/snippet}
-
-{#snippet typefacePick()}
-	<Picker
-		value={settings.typeface}
-		options={['Default', 'Inter', 'JetBrains Mono']}
-		width={170}
-		onpick={(value) => (settings.typeface = value)}
-	/>
-{/snippet}
-
-{#snippet motionPick()}
-	<Picker
-		value={settings.motion}
-		options={['System', 'Always', 'Never']}
-		width={170}
-		onpick={(value) => (settings.motion = value)}
-	/>
-{/snippet}
-
-{#snippet pacePick()}
-	<Picker
-		value={settings.pace}
-		options={['Slow', 'Standard', 'Quick']}
-		width={170}
-		onpick={(value) => (settings.pace = value)}
-	/>
-{/snippet}
-
-{#snippet saverPick()}
-	<Picker
-		value={settings.saver}
-		options={['Off', 'Light (90 FPS)', 'Medium (60 FPS)', 'Strong (30 FPS)']}
-		width={170}
-		onpick={(value) => (settings.saver = value)}
-	/>
-{/snippet}
-
-{#snippet menusToggle()}
-	<Switch
-		checked={settings.menus}
-		label="Adaptive context menu"
-		onchange={(value) => (settings.menus = value)}
-	/>
-{/snippet}
-
-{#snippet loudToggle()}
-	<Switch
-		checked={settings.normalisation}
-		label="Normalize loudness"
-		onchange={(value) => (settings.normalisation = value)}
-	/>
-{/snippet}
-
-{#snippet gaplessToggle()}
-	<Switch
-		checked={settings.gapless}
-		label="Gapless playback"
-		onchange={(value) => (settings.gapless = value)}
-	/>
-{/snippet}
-
-{#snippet sleepToggle()}
-	<Switch
-		checked={settings.sleep}
-		label="Sleep timer"
-		onchange={(value) => (settings.sleep = value)}
-	/>
-{/snippet}
-
-{#snippet karaokeToggle()}
-	<Switch
-		checked={settings.karaoke}
-		label="Karaoke lyrics"
-		onchange={(value) => (settings.karaoke = value)}
-	/>
-{/snippet}
-
-{#snippet romanizedToggle()}
-	<Switch
-		checked={settings.romanized}
-		label="Romanized lyrics"
-		onchange={(value) => (settings.romanized = value)}
-	/>
-{/snippet}
-
-{#snippet localLyricsToggle()}
-	<Switch
-		checked={settings.localLyrics}
-		label="Lyrics for local files"
-		onchange={(value) => (settings.localLyrics = value)}
-	/>
-{/snippet}
-
-{#snippet opacityScrub()}
-	<span class="stepper">
-		<span class="dial">
-			<Scrubber
-				fraction={settings.opacity}
-				label="Opacity"
-				empty="var(--m-muted)"
-				onseek={(to: number) => (settings.opacity = to)}
-			/>
-		</span>
-		<span class="value">{Math.round(settings.opacity * 100)}%</span>
-	</span>
-{/snippet}
-
-{#snippet fontStep()}
-	<span class="stepper">
-		<Control
-			small
-			variant="outline"
-			label="−"
-			title="Smaller"
-			disabled={settings.fontSize <= 10}
-			onclick={() => (settings.fontSize -= 1)}
-		/>
-		<span class="value">{settings.fontSize} px</span>
-		<Control
-			small
-			variant="outline"
-			label="+"
-			title="Larger"
-			disabled={settings.fontSize >= 24}
-			onclick={() => (settings.fontSize += 1)}
-		/>
-	</span>
-{/snippet}
-
-{#snippet panelLyricsStep()}
-	<span class="stepper">
-		<Control
-			small
-			variant="outline"
-			label="−"
-			title="Smaller"
-			disabled={settings.panelLyrics <= 0.6}
-			onclick={() => (settings.panelLyrics -= 0.1)}
-		/>
-		<span class="value">{Math.round(settings.panelLyrics * 100)}%</span>
-		<Control
-			small
-			variant="outline"
-			label="+"
-			title="Larger"
-			disabled={settings.panelLyrics >= 2}
-			onclick={() => (settings.panelLyrics += 0.1)}
-		/>
-	</span>
-{/snippet}
-
-{#snippet fullscreenLyricsStep()}
-	<span class="stepper">
-		<Control
-			small
-			variant="outline"
-			label="−"
-			title="Smaller"
-			disabled={settings.fullscreenLyrics <= 0.6}
-			onclick={() => (settings.fullscreenLyrics -= 0.1)}
-		/>
-		<span class="value">{Math.round(settings.fullscreenLyrics * 100)}%</span>
-		<Control
-			small
-			variant="outline"
-			label="+"
-			title="Larger"
-			disabled={settings.fullscreenLyrics >= 2}
-			onclick={() => (settings.fullscreenLyrics += 0.1)}
-		/>
-	</span>
-{/snippet}
-
-{#snippet updatesToggle()}
-	<Switch
-		checked={settings.updates}
-		label="Check for updates"
-		onchange={(value) => (settings.updates = value)}
-	/>
-{/snippet}
-
-{#snippet versionText()}
-	<span class="value">0.32.0</span>
-{/snippet}
-
-{#snippet licenseAction()}
-	<Control variant="outline" small label="Read the license" />
-{/snippet}
-
-{#snippet sourceAction()}
-	<Control variant="outline" small label="Open the repository" />
-{/snippet}
-
 <style>
 	.screen {
 		display: flex;
-		flex: 1;
-		min-width: 0;
 		flex-direction: column;
-		align-items: center;
-		background: var(--m-background);
+		height: 100%;
+		min-height: 0;
 		overflow-y: auto;
-		scrollbar-width: thin;
-		scrollbar-color: color-mix(in srgb, var(--m-muted-foreground) 45%, transparent) transparent;
 	}
 
-	.sheet {
+	.head {
+		position: sticky;
+		top: 0;
+		z-index: 2;
 		display: flex;
+		justify-content: center;
+		padding: 0 21px;
+		background: var(--m-background);
+	}
+
+	.column {
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
 		width: 100%;
 		max-width: 640px;
-		flex-direction: column;
-		gap: 21px;
-		padding: 21px;
-		flex: none;
+		padding: 21px 0;
 	}
 
-	.panel {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.stepper {
+	.field {
 		display: flex;
 		align-items: center;
 		gap: 7px;
+		height: 40px;
+		padding: 0 10.5px;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+		background: var(--m-secondary);
+		color: var(--m-muted-foreground);
 	}
 
-	.dial {
-		display: flex;
-		width: 140px;
-	}
-
-	hr {
-		width: 100%;
-		height: 1px;
-		margin: 0;
+	.field input {
+		flex: 1;
+		min-width: 0;
 		border: 0;
-		background: var(--m-border);
+		background: none;
+		color: var(--m-foreground);
+		font: inherit;
+		outline: none;
+	}
+
+	.bar {
+		display: flex;
+		justify-content: center;
+		gap: 3.5px;
+		padding: 3.5px;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+		background: var(--m-secondary);
+	}
+
+	.chip {
+		display: flex;
+		align-items: center;
+		gap: 5.25px;
+		height: 26px;
+		padding: 0 8.75px;
+		border: 0;
+		border-radius: calc(var(--m-radius) - 2px);
+		background: none;
+		color: var(--m-muted-foreground);
+		font: inherit;
+		font-size: 12px;
+		white-space: nowrap;
+		cursor: pointer;
+	}
+
+	.chip:hover {
+		background: var(--m-secondary-hover);
+		color: var(--m-foreground);
+	}
+
+	.chip.on {
+		background: var(--m-secondary-active);
+		color: var(--m-foreground);
+	}
+
+	.sheet {
+		width: 100%;
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 0 21px 28px;
+	}
+
+	.group {
+		padding: 17.5px 0 3.5px;
 	}
 
 	.eyebrow {
@@ -628,168 +318,149 @@
 		color: var(--m-muted-foreground);
 	}
 
-	.profile {
+	.row {
 		display: flex;
 		align-items: center;
+		justify-content: space-between;
 		gap: 14px;
-	}
-
-	.face {
-		display: flex;
-		width: 64px;
-		height: 64px;
-		flex: none;
-		align-items: center;
-		justify-content: center;
-		border-radius: 50%;
-		background: var(--m-secondary);
-		color: var(--m-muted-foreground);
-		font-size: 21.76px;
-	}
-
-	.display {
-		font-size: 19px;
-		font-weight: 600;
-	}
-
-	.handle {
-		font-size: 12px;
-		color: var(--m-muted-foreground);
-	}
-
-	.accounts {
-		display: flex;
-		flex-direction: column;
-		gap: 10.5px;
 		padding: 10.5px 0;
+		border-bottom: 1px solid var(--m-table-row-border);
 	}
 
-	.accounts .text {
+	.text {
 		display: flex;
+		flex: 1;
+		min-width: 0;
 		flex-direction: column;
 		gap: 3.5px;
 	}
 
+	.title {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
 	.detail {
+		min-width: 0;
+		font-size: 12px;
+		line-height: 1.45;
+		color: var(--m-muted-foreground);
+	}
+
+	.control {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: 7px;
+	}
+
+	.ghost {
+		height: 26px;
+		padding: 0 8.75px;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+		background: none;
+		color: var(--m-foreground);
+		font: inherit;
+		font-size: 12px;
+		white-space: nowrap;
+		cursor: pointer;
+	}
+
+	.ghost:hover {
+		background: var(--m-secondary-hover);
+	}
+
+	.reading {
 		font-size: 12px;
 		color: var(--m-muted-foreground);
+		white-space: nowrap;
+	}
+
+	.slider {
+		display: flex;
+		align-items: center;
+		gap: 10.5px;
+		width: 180px;
+	}
+
+	.deck {
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+		padding: 3.5px 0 10.5px;
 	}
 
 	.account {
 		display: flex;
-		flex-direction: column;
-		gap: 10.5px;
-		padding: 8px;
-		border: 1px solid var(--m-border);
-		border-radius: var(--m-radius);
-	}
-
-	.head {
-		display: flex;
 		align-items: center;
 		gap: 10.5px;
-		padding-left: 7px;
+		padding: 10.5px;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+		background: var(--m-secondary);
 	}
 
-	.methods {
+	.mark,
+	.face {
 		display: flex;
-		flex-wrap: wrap;
-		align-items: flex-start;
+		width: 28px;
+		height: 28px;
+		flex: none;
+		align-items: center;
+		justify-content: center;
+		border-radius: 999px;
+		background: var(--m-muted);
+		color: var(--m-muted-foreground);
+		font-size: 12px;
+	}
+
+	.bands {
+		display: flex;
+		justify-content: space-between;
+		gap: 3.5px;
+		padding: 10.5px 0 14px;
+	}
+
+	.band {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		align-items: center;
 		gap: 7px;
 	}
 
-	.who {
-		display: flex;
-		flex: 1;
-		min-width: 0;
-		flex-direction: column;
-		gap: 3.5px;
-	}
-
-	.card {
-		display: flex;
-		flex-direction: column;
-		gap: 14px;
-		padding: 17.5px;
-		border: 1px solid var(--m-border);
-		border-radius: var(--m-radius);
-		background: color-mix(in srgb, var(--m-secondary) 45%, transparent);
-	}
-
-	.cap {
-		display: flex;
-		align-items: center;
-		gap: 10.5px;
-	}
-
-	.rule {
-		flex: 1;
-		height: 1px;
-		background: var(--m-border);
-	}
-
-	.members {
-		display: flex;
-		flex-direction: column;
-		gap: 10.5px;
-	}
-
-	.member {
-		display: flex;
-		align-items: center;
-		gap: 10.5px;
-		padding: 4px 8px;
-		border-radius: var(--m-radius);
-		color: inherit;
-		text-decoration: none;
-	}
-
-	.member:hover {
-		background: var(--m-secondary-hover);
-	}
-
-	.avatar {
-		flex: none;
-		border-radius: 50%;
-		object-fit: cover;
-	}
-
-	.ident {
-		display: flex;
-		flex: 1;
-		min-width: 0;
-		flex-direction: column;
-		gap: 1.75px;
-	}
-
-	.name {
-		overflow: hidden;
-		text-overflow: ellipsis;
+	.db,
+	.hz {
+		font-size: 11px;
+		color: var(--m-muted-foreground);
 		white-space: nowrap;
-		font-weight: 500;
 	}
 
-	.hint {
-		font-size: 12px;
-		color: var(--m-muted-foreground);
+	.slot {
+		position: relative;
+		width: 4px;
+		height: 96px;
+		border-radius: 2px;
+		background: var(--m-muted);
 	}
 
-	.role {
-		flex: none;
-		font-size: 12px;
-		font-weight: 500;
-		color: var(--m-muted-foreground);
-	}
-
-	.value {
-		font-size: 13px;
-		color: var(--m-muted-foreground);
+	.knob {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 12px;
+		height: 12px;
+		transform: translate(-50%, -50%);
+		border-radius: 999px;
+		background: var(--m-primary);
 	}
 
 	.notice {
-		margin: 0;
+		margin: 14px 0 0;
 		font-size: 12px;
-		line-height: 1.618;
+		line-height: 1.6;
 		color: var(--m-muted-foreground);
 	}
 </style>

@@ -5,7 +5,7 @@
 	import { reach } from '$lib/mock/packs.svelte';
 	import { palette } from '$lib/mock/theme';
 	import { route } from '$lib/mock/route.svelte';
-	import { settings } from '$lib/mock/settings.svelte';
+	import { radius, settings } from '$lib/mock/settings.svelte';
 	import { theme } from '$lib/theme.svelte';
 	import Aside from './Aside.svelte';
 	import Detail from './Detail.svelte';
@@ -80,7 +80,7 @@
 			class:still
 			{style}
 			style:color-scheme={scheme}
-			style:--m-radius="{settings.radius}px"
+			style:--m-radius="{radius()}px"
 			style:transform="scale({scale})"
 		>
 			<TitleBar bind:left bind:right />
