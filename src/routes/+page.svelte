@@ -12,7 +12,7 @@
 	<title>Sonora — your whole library, one native app</title>
 	<meta
 		name="description"
-		content="Sonora plays Spotify, YouTube Music, Subsonic and your local files from a single window. Written in Rust on GPU-accelerated GPUI."
+		content="Sonora plays Apple Music, Spotify, YouTube Music, Deezer, Subsonic and your local files from a single window. Written in Rust on GPU-accelerated GPUI."
 	/>
 </svelte:head>
 

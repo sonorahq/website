@@ -38,6 +38,17 @@
 			<article>
 				<span class="icon">
 					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
+						<path d="M6 7h3" />
+					</svg>
+				</span>
+				<h3>Sleep timer</h3>
+				<p>Stops on its own after a set time, or at the end of the track that is playing.</p>
+			</article>
+
+			<article>
+				<span class="icon">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
 						<path d="M12 3v10" />
 						<path d="M8 8a4 4 0 0 0 8 0" />
 						<path d="M9 17.5A4 4 0 0 0 12 19a4 4 0 0 0 3-1.5" />
@@ -46,6 +57,20 @@
 				</span>
 				<h3>Synced and karaoke lyrics</h3>
 				<p>Line-by-line and word-by-word timing, with romanization for non-Latin scripts.</p>
+			</article>
+
+			<article>
+				<span class="icon">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M4.9 19.1a10 10 0 0 1 0-14.2" />
+						<path d="M7.8 16.2a6 6 0 0 1 0-8.4" />
+						<circle cx="12" cy="12" r="2" />
+						<path d="M16.2 7.8a6 6 0 0 1 0 8.4" />
+						<path d="M19.1 4.9a10 10 0 0 1 0 14.2" />
+					</svg>
+				</span>
+				<h3>Scrobbling</h3>
+				<p>Last.fm, ListenBrainz, Libre.fm and Maloja, submitted as the track plays out.</p>
 			</article>
 
 			<article>
@@ -71,6 +96,19 @@
 				</span>
 				<h3>Custom themes</h3>
 				<p>Eight built-in looks plus system, adaptive tinting, and every token overridable.</p>
+			</article>
+
+			<article>
+				<span class="icon">
+					<svg viewBox="0 0 24 24" aria-hidden="true">
+						<rect x="3" y="5" width="18" height="14" rx="2" />
+						<circle cx="8" cy="12" r="2" />
+						<path d="M13 10h5" />
+						<path d="M13 14h3" />
+					</svg>
+				</span>
+				<h3>Discord Rich Presence</h3>
+				<p>Puts what you are playing on your profile, down to the provider badge.</p>
 			</article>
 
 			<article>

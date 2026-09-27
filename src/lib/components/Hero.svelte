@@ -16,8 +16,8 @@
 		<h1 data-enter>Your whole library. One native app.</h1>
 
 		<p class="sub" data-enter style="--enter: 0.07s">
-			Spotify, YouTube Music, Subsonic and your local files in a single window. Written in Rust on
-			GPU-accelerated GPUI — not a browser in a costume.
+			Apple Music, Spotify, YouTube Music, Deezer, Subsonic and your local files in a single window.
+			Written in Rust on GPU-accelerated GPUI — not a browser in a costume.
 		</p>
 
 		<div id="install" class="picker" data-enter style="--enter: 0.14s">
