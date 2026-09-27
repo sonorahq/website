@@ -343,6 +343,38 @@ export const catalog: Record<string, (Title | Row)[]> = {
 			control: 'picker',
 			options: savers
 		},
+		{ kind: 'title', label: 'Window style' },
+		{
+			kind: 'row',
+			key: 'serverDecorations',
+			title: 'Server-side decorations',
+			detail: 'Let the compositor draw the title bar, border and shadow',
+			control: 'switch'
+		},
+		{
+			kind: 'row',
+			key: 'controlsSide',
+			title: 'Controls side',
+			detail: 'Which end of the title bar the controls sit on',
+			control: 'button',
+			label: 'Right'
+		},
+		{
+			kind: 'row',
+			key: 'trafficLights',
+			title: 'Traffic light controls',
+			detail: 'Draw minimise, maximise and close as colored dots',
+			control: 'switch'
+		},
+		{
+			kind: 'row',
+			key: 'windowCorners',
+			title: 'Window corners',
+			detail: "How rounded the window's own corners are",
+			control: 'picker',
+			options: corners,
+			needs: 'clientDecorations'
+		},
 		{ kind: 'title', label: 'Advanced' },
 		{
 			kind: 'row',

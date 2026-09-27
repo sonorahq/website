@@ -26,6 +26,9 @@ export const settings = $state({
 	motion: 'System',
 	pace: 'Standard',
 	saver: 'Off',
+	serverDecorations: true,
+	trafficLights: false,
+	windowCorners: 'Square',
 	adaptiveMenu: false,
 
 	normalisation: false,

@@ -21,6 +21,9 @@
 	let { tab = $bindable('General') }: { tab?: string } = $props();
 
 	let query = $state('');
+	let top = $state(125);
+
+	const listener = { name: 'Alex Rivera', id: '31mfqtv7xk2dwrbn4hpz8ecajlyu' };
 
 	const store = settings as unknown as Record<string, string | number | boolean>;
 
@@ -40,6 +43,7 @@
 		if (row.needs === 'visualizer') return settings.visualizer !== 'Off';
 		if (row.needs === 'equalizer') return settings.equalizer;
 		if (row.needs === 'discord') return settings.discord;
+		if (row.needs === 'clientDecorations') return !settings.serverDecorations;
 		return true;
 	}
 
@@ -80,8 +84,158 @@
 	const hertz = (hz: number) => (hz >= 1000 ? `${hz / 1000} kHz` : `${hz} Hz`);
 </script>
 
-<div class="screen">
-	<header class="masthead">
+<div class="settings">
+	<div class="screen" style:--m-top="{top}px">
+		<div class="sheet" style:padding-top="{top}px">
+			{#if !searching && tab === 'General'}
+				<div class="profile">
+					<span class="face">{listener.name.slice(0, 1)}</span>
+					<div class="who">
+						<span class="display">{listener.name}</span>
+						<span class="handle">{listener.id}</span>
+					</div>
+				</div>
+				<hr class="split" />
+			{/if}
+
+			{#each listed as entry, at (entry.kind === 'row' ? entry.key : `${entry.label}-${at}`)}
+				{#if entry.kind === 'title'}
+					<div class="group"><span class="eyebrow">{entry.label}</span></div>
+				{:else if entry.control === 'accounts'}
+					<div class="accounts">
+						<div class="text">
+							<span class="title">{entry.title}</span>
+							<span class="detail">{entry.detail}</span>
+						</div>
+						{#each providers as account (account.glyph)}
+							<div class="account" class:pressable={!account.active}>
+								<span class="radio" class:on={account.active}><span class="hole"></span></span>
+								<span class="logo"><Icon name={account.glyph} size={26} /></span>
+								<div class="text">
+									<span class="name">{account.name}</span>
+									<span class="detail">{account.status}</span>
+								</div>
+								{#if account.stored}
+									<Control icon="log-out" title="Sign out" size={32} />
+								{:else}
+									<span class="arrow"><Icon name="chevron-right" size={14} /></span>
+								{/if}
+							</div>
+						{/each}
+					</div>
+				{:else if entry.control === 'scrobbling'}
+					<div class="deck">
+						{#each scrobblers as service (service.id)}
+							<div class="account">
+								<div class="text">
+									<span class="title">{service.name}</span>
+									<span class="detail">{service.detail || service.status}</span>
+								</div>
+								{#if service.linked}
+									<Switch checked onchange={() => {}} />
+								{/if}
+								<button type="button" class="action">
+									{service.linked ? 'Disconnect' : 'Connect'}
+								</button>
+							</div>
+						{/each}
+					</div>
+				{:else if entry.control === 'bands'}
+					<div class="bands">
+						{#each bands as hz (hz)}
+							<div class="band">
+								<span class="db">0 dB</span>
+								<div class="slot"><span class="knob"></span></div>
+								<span class="hz">{hertz(hz)}</span>
+							</div>
+						{/each}
+					</div>
+				{:else}
+					<div class="row">
+						<div class="text">
+							<span class="title">{entry.title}</span>
+							{#if entry.detail}<span class="detail">{entry.detail}</span>{/if}
+						</div>
+						<div class="control">
+							{#if entry.control === 'switch'}
+								{#if entry.extra}
+									<button type="button" class="action">{entry.extra}</button>
+								{/if}
+								<Switch
+									checked={Boolean(store[entry.key])}
+									onchange={(value) => (store[entry.key] = value)}
+								/>
+							{:else if entry.control === 'picker'}
+								{#if entry.extra}
+									<button type="button" class="action">{entry.extra}</button>
+								{/if}
+								<Picker
+									value={String(store[entry.key] ?? '')}
+									options={entry.key === 'theme' ? themes : (entry.options ?? [])}
+									onpick={(value) => (store[entry.key] = value)}
+								/>
+							{:else if entry.control === 'slider'}
+								<div class="slider">
+									<Scrubber fraction={fraction(entry.key)} label="" onseek={() => {}} />
+									<span class="reading">{reading(entry.key)}</span>
+								</div>
+							{:else if entry.control === 'button'}
+								{#if entry.value}<span class="reading">{entry.value}</span>{/if}
+								{#if entry.href}
+									<a class="action" href={entry.href} target="_blank" rel="noreferrer"
+										>{entry.label}</a
+									>
+								{:else}
+									<button type="button" class="action">{entry.label}</button>
+								{/if}
+							{:else}
+								<span class="reading">{entry.value ?? version}</span>
+							{/if}
+						</div>
+					</div>
+				{/if}
+			{/each}
+
+			{#if !searching && tab === 'About'}
+				<div class="team">
+					<div class="cap">
+						<span class="eyebrow">Team</span>
+						<span class="rule"></span>
+					</div>
+					<div class="members">
+						{#each team as member (member.login)}
+							<a
+								class="member"
+								href="https://github.com/{member.login}"
+								target="_blank"
+								rel="noreferrer"
+							>
+								<img
+									class="avatar"
+									src="https://github.com/{member.login}.png"
+									width="34"
+									height="34"
+									alt=""
+								/>
+								<span class="ident">
+									<span class="login">{member.login}</span>
+									<span class="hint">GitHub</span>
+								</span>
+								<span class="role">{member.role}</span>
+							</a>
+						{/each}
+					</div>
+				</div>
+				<p class="notice">{notice}</p>
+			{/if}
+
+			{#if searching && !found.length}
+				<p class="notice">Nothing here</p>
+			{/if}
+		</div>
+	</div>
+
+	<header class="masthead" bind:clientHeight={top}>
 		<div class="haze"></div>
 		<div class="column">
 			<label class="field">
@@ -106,182 +260,90 @@
 			</div>
 		</div>
 	</header>
-
-	<div class="sheet">
-		{#each listed as entry, at (entry.kind === 'row' ? entry.key : `${entry.label}-${at}`)}
-			{#if entry.kind === 'title'}
-				<div class="group"><span class="eyebrow">{entry.label}</span></div>
-			{:else if entry.control === 'accounts'}
-				<div class="accounts">
-					<div class="text">
-						<span class="title">{entry.title}</span>
-						<span class="detail">{entry.detail}</span>
-					</div>
-					{#each providers as account (account.glyph)}
-						<div class="account" class:pressable={!account.active}>
-							<span class="radio" class:on={account.active}><span class="hole"></span></span>
-							<span class="logo"><Icon name={account.glyph} size={26} /></span>
-							<div class="text">
-								<span class="name">{account.name}</span>
-								<span class="detail">{account.status}</span>
-							</div>
-							{#if account.stored}
-								<Control icon="log-out" title="Sign out" size={32} />
-							{:else}
-								<span class="arrow"><Icon name="chevron-right" size={14} /></span>
-							{/if}
-						</div>
-					{/each}
-				</div>
-			{:else if entry.control === 'scrobbling'}
-				<div class="deck">
-					{#each scrobblers as service (service.id)}
-						<div class="account">
-							<div class="text">
-								<span class="title">{service.name}</span>
-								<span class="detail">{service.detail || service.status}</span>
-							</div>
-							{#if service.linked}
-								<Switch checked onchange={() => {}} />
-							{/if}
-							<button type="button" class="action">
-								{service.linked ? 'Disconnect' : 'Connect'}
-							</button>
-						</div>
-					{/each}
-				</div>
-			{:else if entry.control === 'bands'}
-				<div class="bands">
-					{#each bands as hz (hz)}
-						<div class="band">
-							<span class="db">0 dB</span>
-							<div class="slot"><span class="knob"></span></div>
-							<span class="hz">{hertz(hz)}</span>
-						</div>
-					{/each}
-				</div>
-			{:else}
-				<div class="row">
-					<div class="text">
-						<span class="title">{entry.title}</span>
-						{#if entry.detail}<span class="detail">{entry.detail}</span>{/if}
-					</div>
-					<div class="control">
-						{#if entry.control === 'switch'}
-							{#if entry.extra}
-								<button type="button" class="action">{entry.extra}</button>
-							{/if}
-							<Switch
-								checked={Boolean(store[entry.key])}
-								onchange={(value) => (store[entry.key] = value)}
-							/>
-						{:else if entry.control === 'picker'}
-							{#if entry.extra}
-								<button type="button" class="action">{entry.extra}</button>
-							{/if}
-							<Picker
-								value={String(store[entry.key] ?? '')}
-								options={entry.key === 'theme' ? themes : (entry.options ?? [])}
-								onpick={(value) => (store[entry.key] = value)}
-							/>
-						{:else if entry.control === 'slider'}
-							<div class="slider">
-								<Scrubber fraction={fraction(entry.key)} label="" onseek={() => {}} />
-								<span class="reading">{reading(entry.key)}</span>
-							</div>
-						{:else if entry.control === 'button'}
-							{#if entry.value}<span class="reading">{entry.value}</span>{/if}
-							{#if entry.href}
-								<a class="action" href={entry.href} target="_blank" rel="noreferrer"
-									>{entry.label}</a
-								>
-							{:else}
-								<button type="button" class="action">{entry.label}</button>
-							{/if}
-						{:else}
-							<span class="reading">{entry.value ?? version}</span>
-						{/if}
-					</div>
-				</div>
-			{/if}
-		{/each}
-
-		{#if !searching && tab === 'About'}
-			<div class="team">
-				<div class="cap">
-					<span class="eyebrow">Team</span>
-					<span class="rule"></span>
-				</div>
-				<div class="members">
-					{#each team as member (member.login)}
-						<a
-							class="member"
-							href="https://github.com/{member.login}"
-							target="_blank"
-							rel="noreferrer"
-						>
-							<img
-								class="avatar"
-								src="https://github.com/{member.login}.png"
-								width="34"
-								height="34"
-								alt=""
-							/>
-							<span class="ident">
-								<span class="login">{member.login}</span>
-								<span class="hint">GitHub</span>
-							</span>
-							<span class="role">{member.role}</span>
-						</a>
-					{/each}
-				</div>
-			</div>
-			<p class="notice">{notice}</p>
-		{/if}
-
-		{#if searching && !found.length}
-			<p class="notice">Nothing here</p>
-		{/if}
-	</div>
 </div>
 
 <style>
-	.screen {
+	.settings {
+		position: relative;
 		display: flex;
 		flex: 1;
 		min-width: 0;
-		flex-direction: column;
-		height: 100%;
 		min-height: 0;
+		overflow: hidden;
+	}
+
+	.screen {
+		position: absolute;
+		inset: 0;
 		overflow-y: auto;
+		mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--m-top) + 48px));
 	}
 
 	.masthead {
-		isolation: isolate;
-		position: sticky;
+		position: absolute;
 		top: 0;
+		right: 0;
+		left: 0;
 		z-index: 2;
 		display: flex;
 		justify-content: center;
 		padding: 0 21px;
+		pointer-events: none;
 	}
 
 	.haze {
 		position: absolute;
-		inset: 0 0 -48px;
-		z-index: -1;
-		pointer-events: none;
-		background: linear-gradient(
-			to bottom,
-			var(--m-background) 0,
-			var(--m-background) calc(100% - 72px),
-			transparent
-		);
+		inset: 0;
 		backdrop-filter: blur(1px);
-		mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
+		mask-image: linear-gradient(to bottom, #000, transparent);
+	}
+
+	.profile {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+	}
+
+	.face {
+		display: flex;
+		width: 64px;
+		height: 64px;
+		flex: none;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background: var(--m-secondary);
+		color: var(--m-muted-foreground);
+		font-size: 21.76px;
+	}
+
+	.who {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		flex-direction: column;
+		gap: 3.5px;
+	}
+
+	.display {
+		font-size: 19px;
+		font-weight: 600;
+	}
+
+	.handle {
+		font-size: 12px;
+		color: var(--m-muted-foreground);
+	}
+
+	.split {
+		margin: 21px 0 0;
+		border: 0;
+		border-top: 1px solid var(--m-border);
 	}
 
 	.column {
+		position: relative;
+		pointer-events: auto;
 		display: flex;
 		flex-direction: column;
 		gap: 7px;
