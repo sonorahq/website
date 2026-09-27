@@ -8,7 +8,7 @@
 	import Control from './Control.svelte';
 	import Icon from './Icon.svelte';
 
-	let { tab }: { tab: string } = $props();
+	let { tab, stripped = false }: { tab: string; stripped?: boolean } = $props();
 
 	const look = (ids: string[]) =>
 		ids.map((id) => catalogue.get(id)).filter((track) => track !== undefined);
@@ -28,8 +28,9 @@
 	const BLUR = 0.13;
 	const HAZE = 0.45;
 	const VEIL = 0.3;
-	const VERSE = 19;
 	const HAZE_LEAST = 0.05;
+
+	const VERSE = $derived(stripped ? 27 : 19);
 
 	const song = $derived(lyricsFor(player.id));
 	const verses = $derived(song.lines);
@@ -197,37 +198,39 @@
 	<span class="shove"><Control icon="x" title="Remove from queue" small tint="muted" /></span>
 {/snippet}
 
-<aside class="aside">
-	<header class="head">
-		<span class="eyebrow">{tab === 'lyrics' ? 'Lyrics' : 'Queue'}</span>
-		{#if tab === 'queue'}
-			<div class="tools">
-				<Control
-					icon="radio"
-					title="Autoplay similar tracks"
-					small
-					tint={player.radio ? 'primary' : 'muted'}
-					onclick={() => player.toggleRadio()}
-				/>
-				<Control
-					label="Reset"
-					title="Reset"
-					small
-					tint="muted"
-					disabled={!player.reordered}
-					onclick={() => player.resetQueue()}
-				/>
-				<Control
-					label="Clear"
-					title="Clear"
-					small
-					tint="muted"
-					disabled={upcoming.length === 0}
-					onclick={() => player.clearQueue()}
-				/>
-			</div>
-		{/if}
-	</header>
+<aside class="aside" class:stripped style:--m-verse="{VERSE}px">
+	{#if !stripped}
+		<header class="head">
+			<span class="eyebrow">{tab === 'lyrics' ? 'Lyrics' : 'Queue'}</span>
+			{#if tab === 'queue'}
+				<div class="tools">
+					<Control
+						icon="radio"
+						title="Autoplay similar tracks"
+						small
+						tint={player.radio ? 'primary' : 'muted'}
+						onclick={() => player.toggleRadio()}
+					/>
+					<Control
+						label="Reset"
+						title="Reset"
+						small
+						tint="muted"
+						disabled={!player.reordered}
+						onclick={() => player.resetQueue()}
+					/>
+					<Control
+						label="Clear"
+						title="Clear"
+						small
+						tint="muted"
+						disabled={upcoming.length === 0}
+						onclick={() => player.clearQueue()}
+					/>
+				</div>
+			{/if}
+		</header>
+	{/if}
 
 	{#if tab === 'lyrics' && verses.length}
 		<div class="verses" bind:this={roll}>
@@ -366,6 +369,16 @@
 		border-left: 1px solid var(--m-border);
 	}
 
+	.aside.stripped {
+		flex: 1;
+		width: auto;
+		min-width: 0;
+		min-height: 0;
+		height: 100%;
+		background: none;
+		border-left: 0;
+	}
+
 	.head {
 		display: flex;
 		flex: none;
@@ -431,9 +444,9 @@
 		margin: 0;
 		padding: 3.5px 7px;
 		border-radius: var(--m-radius);
-		font-size: 21px;
+		font-size: calc(var(--m-verse) * 21 / 19);
 		font-weight: 600;
-		line-height: 26.25px;
+		line-height: calc(var(--m-verse) * 21 / 19 * 1.25);
 		transform: scale(0.904762);
 		transform-origin: left center;
 		transition: transform 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955);

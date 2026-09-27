@@ -7,7 +7,7 @@
 	import Like from './Like.svelte';
 	import Scrubber from './Scrubber.svelte';
 
-	let { tab = $bindable() }: { tab: string } = $props();
+	let { tab = $bindable(), onfullscreen }: { tab: string; onfullscreen?: () => void } = $props();
 
 	const level = $derived(
 		player.volume <= 0.0001
@@ -105,7 +105,7 @@
 			</div>
 		</div>
 
-		<Control icon="maximize" title="Fullscreen" small />
+		<Control icon="maximize" title="Fullscreen" small onclick={onfullscreen} />
 	</div>
 </div>
 
