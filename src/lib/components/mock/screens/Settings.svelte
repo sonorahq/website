@@ -81,14 +81,14 @@
 </script>
 
 <div class="screen">
-	<header class="head">
+	<header class="masthead">
 		<div class="haze"></div>
 		<div class="column">
 			<label class="field">
 				<Icon name="search" />
 				<input placeholder="Search settings" bind:value={query} />
 			</label>
-			<div class="bar">
+			<div class="categories">
 				{#each tabs as name (name)}
 					<button
 						type="button"
@@ -144,7 +144,7 @@
 							{#if service.linked}
 								<Switch checked onchange={() => {}} />
 							{/if}
-							<button type="button" class="ghost">
+							<button type="button" class="action">
 								{service.linked ? 'Disconnect' : 'Connect'}
 							</button>
 						</div>
@@ -169,7 +169,7 @@
 					<div class="control">
 						{#if entry.control === 'switch'}
 							{#if entry.extra}
-								<button type="button" class="ghost">{entry.extra}</button>
+								<button type="button" class="action">{entry.extra}</button>
 							{/if}
 							<Switch
 								checked={Boolean(store[entry.key])}
@@ -177,7 +177,7 @@
 							/>
 						{:else if entry.control === 'picker'}
 							{#if entry.extra}
-								<button type="button" class="ghost">{entry.extra}</button>
+								<button type="button" class="action">{entry.extra}</button>
 							{/if}
 							<Picker
 								value={String(store[entry.key] ?? '')}
@@ -191,7 +191,7 @@
 							</div>
 						{:else if entry.control === 'button'}
 							{#if entry.value}<span class="reading">{entry.value}</span>{/if}
-							<button type="button" class="ghost">{entry.label}</button>
+							<button type="button" class="action">{entry.label}</button>
 						{:else}
 							<span class="reading">{entry.value ?? version}</span>
 						{/if}
@@ -210,7 +210,7 @@
 							<span class="title">{member.login}</span>
 							<span class="detail">{member.role}</span>
 						</div>
-						<button type="button" class="ghost">GitHub</button>
+						<button type="button" class="action">GitHub</button>
 					</div>
 				{/each}
 			</div>
@@ -234,7 +234,7 @@
 		overflow-y: auto;
 	}
 
-	.head {
+	.masthead {
 		isolation: isolate;
 		position: sticky;
 		top: 0;
@@ -291,7 +291,7 @@
 		outline: none;
 	}
 
-	.bar {
+	.categories {
 		display: flex;
 		align-self: center;
 		max-width: 100%;
@@ -385,7 +385,7 @@
 		gap: 7px;
 	}
 
-	.ghost {
+	.action {
 		height: 26px;
 		padding: 0 8.75px;
 		border: 1px solid var(--m-border);
@@ -398,7 +398,7 @@
 		cursor: pointer;
 	}
 
-	.ghost:hover {
+	.action:hover {
 		background: var(--m-secondary-hover);
 	}
 

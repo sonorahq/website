@@ -74,7 +74,7 @@
 	{/if}
 
 	<section class="rail">
-		<div class="head">
+		<div class="rail-head">
 			<h2>You might also like</h2>
 			{#if count > COLUMNS}
 				<div class="steps">
@@ -172,7 +172,7 @@
 		padding: 35px 24px 0;
 	}
 
-	.head {
+	.rail-head {
 		display: flex;
 		height: 39px;
 		align-items: flex-end;
@@ -180,7 +180,7 @@
 		gap: 14px;
 	}
 
-	.head h2 {
+	.rail-head h2 {
 		margin: 0;
 		font-size: 24px;
 		font-weight: 600;

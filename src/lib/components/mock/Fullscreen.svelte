@@ -170,7 +170,7 @@
 
 	<div class="band"></div>
 
-	<div class="stage">
+	<div class="scene">
 		{#if showing}
 			<Visualizer
 				color={accent}
@@ -255,7 +255,7 @@
 		flex: none;
 	}
 
-	.stage {
+	.scene {
 		position: relative;
 		display: flex;
 		flex: 1;
