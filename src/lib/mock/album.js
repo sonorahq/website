@@ -7,7 +7,8 @@ export const albums = [
 		eyebrow: 'Album',
 		cover: '/cover-airs.webp',
 		release: 'Album',
-		tint: { hue: 171.89, saturation: 0.371 }
+		label: 'Field Recordings',
+		tint: { hue: 0.47747, saturation: 0.371 }
 	},
 	{
 		id: 'nocturnes',
@@ -16,7 +17,7 @@ export const albums = [
 		released: '1846',
 		cover: '/cover-nocturnes.webp',
 		release: 'Album',
-		tint: { hue: 218.72, saturation: 0.368 }
+		tint: { hue: 0.60756, saturation: 0.368 }
 	},
 	{
 		id: 'bergamasque',
@@ -25,7 +26,7 @@ export const albums = [
 		released: '1905',
 		cover: '/cover-bergamasque.webp',
 		release: 'Album',
-		tint: { hue: 202.07, saturation: 0.299 }
+		tint: { hue: 0.56131, saturation: 0.299 }
 	},
 	{
 		id: 'gymnopedies',
@@ -34,7 +35,7 @@ export const albums = [
 		released: '1888',
 		cover: '/cover-gymnopedies.webp',
 		release: 'Album',
-		tint: { hue: 94.64, saturation: 0.307 }
+		tint: { hue: 0.26289, saturation: 0.307 }
 	},
 	{
 		id: 'seasons',
@@ -43,7 +44,7 @@ export const albums = [
 		released: '1725',
 		cover: '/cover-seasons.webp',
 		release: 'Album',
-		tint: { hue: 48.64, saturation: 0.722 }
+		tint: { hue: 0.13511, saturation: 0.722 }
 	},
 	{
 		id: 'peer-gynt',
@@ -52,7 +53,7 @@ export const albums = [
 		released: '1875',
 		cover: '/cover-peer-gynt.webp',
 		release: 'Album',
-		tint: { hue: 22.62, saturation: 0.368 }
+		tint: { hue: 0.06283, saturation: 0.368 }
 	},
 	{
 		id: 'pictures',
@@ -61,7 +62,7 @@ export const albums = [
 		released: '1874',
 		cover: '/cover-pictures.webp',
 		release: 'Album',
-		tint: { hue: 9.28, saturation: 0.622 }
+		tint: { hue: 0.02578, saturation: 0.622 }
 	}
 ];
 
@@ -279,6 +280,25 @@ export const TRAIL = 4;
 export const total = tracks.reduce((sum, track) => sum + track.length, 0);
 
 /** @param {number} seconds */
+/**
+ * A whole collection's running time in words, the way `ui::runtime` spells it.
+ * @param {number} seconds
+ * @returns {string}
+ */
+export function runtime(seconds) {
+	const whole = Math.max(0, Math.floor(seconds));
+	const hours = Math.floor(whole / 3600);
+	const minutes = Math.floor(whole / 60) % 60;
+	const rest = whole % 60;
+	if (hours) return `${hours}h ${minutes}m`;
+	if (minutes) return `${minutes}m ${rest}s`;
+	return `${rest}s`;
+}
+
+/**
+ * @param {number} seconds
+ * @returns {string}
+ */
 export function clock(seconds) {
 	const whole = Math.max(0, Math.floor(seconds));
 	const minutes = Math.floor(whole / 60) % 60;

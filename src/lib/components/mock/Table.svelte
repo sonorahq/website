@@ -66,7 +66,7 @@
 				{:else if column.key === 'album'}
 					<span class="cell muted">{shelf.get(row.album)?.title ?? ''}</span>
 				{:else if column.key === 'length'}
-					<span class="cell right muted">{clock(row.length)}</span>
+					<span class="cell right muted clock">{clock(row.length)}</span>
 				{:else}
 					<span class="cell {column.align ?? ''} muted">{row[column.key] ?? ''}</span>
 				{/if}
@@ -198,5 +198,9 @@
 
 	.row:hover .hit {
 		visibility: visible;
+	}
+
+	.clock {
+		font-variant-numeric: tabular-nums;
 	}
 </style>
