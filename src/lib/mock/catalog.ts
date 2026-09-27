@@ -46,11 +46,29 @@ export const statuses = ['Sonora', 'Provider', 'Music', 'Title', 'Artist', 'Arti
 export const bands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
 
 export const providers = [
-	{ slug: 'applemusic', name: 'Apple Music', status: 'Not connected', stored: false },
-	{ slug: 'spotify', name: 'Spotify', status: 'Playing from this service', stored: true },
-	{ slug: 'youtubemusic', name: 'YouTube Music', status: 'Connected', stored: true },
-	{ slug: 'deezer', name: 'Deezer', status: 'Not connected', stored: false },
-	{ slug: 'radio', name: 'Subsonic', status: 'Not connected', stored: false }
+	{
+		glyph: 'spotify',
+		name: 'Spotify',
+		status: 'Playing from this service',
+		stored: true,
+		active: true
+	},
+	{
+		glyph: 'applemusic',
+		name: 'Apple Music',
+		status: 'Not connected',
+		stored: false,
+		active: false
+	},
+	{
+		glyph: 'youtubemusic',
+		name: 'YouTube Music',
+		status: 'Connected',
+		stored: true,
+		active: false
+	},
+	{ glyph: 'subsonic', name: 'Subsonic', status: 'Not connected', stored: false, active: false },
+	{ glyph: 'deezer', name: 'Deezer', status: 'Not connected', stored: false, active: false }
 ];
 
 export const scrobblers = [

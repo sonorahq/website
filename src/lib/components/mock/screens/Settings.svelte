@@ -12,6 +12,7 @@
 	import type { Row } from '$lib/mock/catalog';
 	import { settings } from '$lib/mock/settings.svelte';
 	import { themes } from '$lib/mock/theme';
+	import Control from '../Control.svelte';
 	import Icon from '../Icon.svelte';
 	import Picker from '../Picker.svelte';
 	import Scrubber from '../Scrubber.svelte';
@@ -81,6 +82,7 @@
 
 <div class="screen">
 	<header class="head">
+		<div class="haze"></div>
 		<div class="column">
 			<label class="field">
 				<Icon name="search" />
@@ -110,17 +112,24 @@
 			{#if entry.kind === 'title'}
 				<div class="group"><span class="eyebrow">{entry.label}</span></div>
 			{:else if entry.control === 'accounts'}
-				<div class="deck">
-					{#each providers as account (account.slug)}
-						<div class="account">
-							<span class="mark"><Icon name={account.slug} /></span>
+				<div class="accounts">
+					<div class="text">
+						<span class="title">{entry.title}</span>
+						<span class="detail">{entry.detail}</span>
+					</div>
+					{#each providers as account (account.glyph)}
+						<div class="account" class:pressable={!account.active}>
+							<span class="radio" class:on={account.active}><span class="hole"></span></span>
+							<span class="logo"><Icon name={account.glyph} size={26} /></span>
 							<div class="text">
-								<span class="title">{account.name}</span>
+								<span class="name">{account.name}</span>
 								<span class="detail">{account.status}</span>
 							</div>
-							<button type="button" class="ghost">
-								{account.stored ? 'Sign out' : 'Connect'}
-							</button>
+							{#if account.stored}
+								<Control icon="log-out" title="Sign out" size={32} />
+							{:else}
+								<span class="arrow"><Icon name="chevron-right" size={14} /></span>
+							{/if}
 						</div>
 					{/each}
 				</div>
@@ -217,6 +226,8 @@
 <style>
 	.screen {
 		display: flex;
+		flex: 1;
+		min-width: 0;
 		flex-direction: column;
 		height: 100%;
 		min-height: 0;
@@ -224,13 +235,28 @@
 	}
 
 	.head {
+		isolation: isolate;
 		position: sticky;
 		top: 0;
 		z-index: 2;
 		display: flex;
 		justify-content: center;
 		padding: 0 21px;
-		background: var(--m-background);
+	}
+
+	.haze {
+		position: absolute;
+		inset: 0 0 -48px;
+		z-index: -1;
+		pointer-events: none;
+		background: linear-gradient(
+			to bottom,
+			var(--m-background) 0,
+			var(--m-background) calc(100% - 72px),
+			transparent
+		);
+		backdrop-filter: blur(1px);
+		mask-image: linear-gradient(to bottom, #000 calc(100% - 48px), transparent);
 	}
 
 	.column {
@@ -250,7 +276,8 @@
 		padding: 0 10.5px;
 		border: 1px solid var(--m-border);
 		border-radius: var(--m-radius);
-		background: var(--m-secondary);
+		background: color-mix(in srgb, var(--m-popover) 20%, transparent);
+		backdrop-filter: blur(8px);
 		color: var(--m-muted-foreground);
 	}
 
@@ -266,26 +293,29 @@
 
 	.bar {
 		display: flex;
-		justify-content: center;
+		align-self: center;
+		max-width: 100%;
 		gap: 3.5px;
 		padding: 3.5px;
 		border: 1px solid var(--m-border);
 		border-radius: var(--m-radius);
-		background: var(--m-secondary);
+		background: color-mix(in srgb, var(--m-popover) 20%, transparent);
+		backdrop-filter: blur(8px);
+		box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
 	}
 
 	.chip {
 		display: flex;
 		align-items: center;
-		gap: 5.25px;
+		gap: 4px;
 		height: 26px;
-		padding: 0 8.75px;
+		padding: 0 8px;
 		border: 0;
-		border-radius: calc(var(--m-radius) - 2px);
+		border-radius: var(--m-radius);
 		background: none;
-		color: var(--m-muted-foreground);
+		color: var(--m-foreground);
 		font: inherit;
-		font-size: 12px;
+		font-size: 13px;
 		white-space: nowrap;
 		cursor: pointer;
 	}
@@ -302,7 +332,7 @@
 
 	.sheet {
 		width: 100%;
-		max-width: 640px;
+		max-width: 682px;
 		margin: 0 auto;
 		padding: 0 21px 28px;
 	}
@@ -392,17 +422,6 @@
 		padding: 3.5px 0 10.5px;
 	}
 
-	.account {
-		display: flex;
-		align-items: center;
-		gap: 10.5px;
-		padding: 10.5px;
-		border: 1px solid var(--m-border);
-		border-radius: var(--m-radius);
-		background: var(--m-secondary);
-	}
-
-	.mark,
 	.face {
 		display: flex;
 		width: 28px;
@@ -461,6 +480,82 @@
 		margin: 14px 0 0;
 		font-size: 12px;
 		line-height: 1.6;
+		color: var(--m-muted-foreground);
+	}
+
+	.accounts {
+		display: flex;
+		flex-direction: column;
+		gap: 10.5px;
+		padding: 10.5px 0;
+		border-bottom: 1px solid var(--m-table-row-border);
+	}
+
+	.account {
+		display: flex;
+		min-height: 35px;
+		align-items: center;
+		gap: 10.5px;
+		padding: 8px;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+	}
+
+	.account.pressable {
+		cursor: pointer;
+	}
+
+	.account.pressable:hover {
+		background: var(--m-secondary);
+	}
+
+	.radio {
+		display: flex;
+		width: 16px;
+		height: 16px;
+		flex: none;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--m-border);
+		border-radius: 999px;
+	}
+
+	.radio.on {
+		border-color: var(--m-primary);
+		background: var(--m-primary);
+	}
+
+	.hole {
+		width: 5px;
+		height: 5px;
+		border-radius: 999px;
+	}
+
+	.radio.on .hole {
+		background: var(--m-primary-foreground);
+	}
+
+	.logo {
+		display: flex;
+		flex: none;
+		color: var(--m-foreground);
+	}
+
+	.name {
+		overflow: hidden;
+		font-weight: 500;
+		line-height: 1.25;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.arrow {
+		display: flex;
+		width: 32px;
+		height: 32px;
+		flex: none;
+		align-items: center;
+		justify-content: center;
 		color: var(--m-muted-foreground);
 	}
 </style>
