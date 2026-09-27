@@ -5,8 +5,9 @@
 		color,
 		style = 'Bars and wave',
 		playing = false,
+		gain = 1,
 		max = 160
-	}: { color: string; style?: string; playing?: boolean; max?: number } = $props();
+	}: { color: string; style?: string; playing?: boolean; gain?: number; max?: number } = $props();
 
 	const BANDS = 32;
 	const GAP = 3;
@@ -22,26 +23,41 @@
 	const FILL = 0.22;
 	const FILL_BASE = 0.05;
 	const LINE_BLUR = 0.7;
-	const RISE = 0.09;
-	const FALL = 0.28;
+	const RATE = 48000 / 2048;
+	const DECAY = 0.12;
+	const SETTLE = 0.04;
+	const SOURCE = '/spectrum.bin';
 
 	let canvas = $state<HTMLCanvasElement | null>(null);
 
 	const bars = $derived(style === 'Bars' || style === 'Bars and wave');
 	const waves = $derived(style === 'Wave' || style === 'Bars and wave');
 
-	let levels: number[][] = [new Array(BANDS).fill(FLOOR), new Array(BANDS).fill(FLOOR)];
+	let levels: number[][] = [new Array(BANDS).fill(0), new Array(BANDS).fill(0)];
+	let heard: number[][] = [new Array(BANDS).fill(0), new Array(BANDS).fill(0)];
 
-	function spectrum(time: number, lag: number): number[] {
-		const beat = Math.pow(Math.max(0, Math.sin((time - lag) * Math.PI * 2 * 1.6)), 3);
-		return Array.from({ length: BANDS }, (_, band) => {
-			const slope = 0.42 * Math.exp(-band / 22) + 0.2;
-			const stir =
-				0.13 * Math.sin(time * 1.6 + band * 0.55 + lag * 4) +
-				0.08 * Math.sin(time * 2.3 - band * 0.3);
-			const kick = band < 6 ? beat * 0.18 * (1 - band / 6) : beat * 0.03;
-			return Math.min(Math.max(slope + stir * (0.4 + slope) + kick, FLOOR), 1);
-		});
+	let recording: Promise<Uint8Array[]> | null = null;
+
+	function load(): Promise<Uint8Array[]> {
+		recording ??= fetch(SOURCE)
+			.then((response) => response.body!.pipeThrough(new DecompressionStream('gzip')))
+			.then((stream) => new Response(stream).arrayBuffer())
+			.then((buffer) => {
+				const deltas = new Uint8Array(buffer);
+				const width = BANDS * 2;
+				const frames: Uint8Array[] = [];
+				let previous = new Uint8Array(width);
+				for (let at = 0; at + width <= deltas.length; at += width) {
+					const frame = new Uint8Array(width);
+					for (let band = 0; band < width; band += 1) {
+						frame[band] = (previous[band] + deltas[at + band]) & 255;
+					}
+					frames.push(frame);
+					previous = frame;
+				}
+				return frames;
+			});
+		return recording;
 	}
 
 	function trace(context: CanvasRenderingContext2D, points: [number, number][]) {
@@ -145,19 +161,36 @@
 		};
 
 		let last = 0;
+		let clock = 0;
+		let beat = 0;
+		let frames: Uint8Array[] = [];
+		load().then((loaded) => (frames = loaded));
 
 		const tick = (now: number) => {
-			const time = now / 1000;
-			const step = last ? Math.min((now - last) / 1000, 0.1) : 0;
+			const step = last ? Math.min((now - last) / 1000, 0.25) : 0;
 			last = now;
-			const up = 1 - Math.exp(-step / RISE);
-			const down = 1 - Math.exp(-step / FALL);
-			const target = playing && !still ? [spectrum(time, 0), spectrum(time, 0.07)] : null;
+			const live = playing && !still && frames.length > 0;
+
+			if (live) {
+				clock += step;
+				const index = Math.floor(clock * RATE) % frames.length;
+				const loud = Math.sqrt(gain);
+				heard = [0, 1].map((channel) =>
+					Array.from({ length: BANDS }, (_, band) =>
+						Math.min((frames[index][channel * BANDS + band] / 255) * loud, 1)
+					)
+				);
+			} else {
+				beat += step;
+				while (beat >= 1 / RATE) {
+					beat -= 1 / RATE;
+					heard = heard.map((bands) => bands.map((level) => level * (1 - DECAY)));
+				}
+			}
+
+			const ease = 1 - Math.exp(-step / SETTLE);
 			levels = levels.map((bands, channel) =>
-				bands.map((level, band) => {
-					const goal = target ? target[channel][band] : FLOOR;
-					return level + (goal - level) * (goal > level ? up : down);
-				})
+				bands.map((level, band) => level + (heard[channel][band] - level) * ease)
 			);
 			draw();
 			frame = requestAnimationFrame(tick);

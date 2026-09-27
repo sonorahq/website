@@ -176,6 +176,7 @@
 				color={accent}
 				style={String(settings.visualizer)}
 				playing={player.playing}
+				gain={settings.visualizerAbsolute ? 1 : player.volume}
 				max={reach}
 			/>
 			<div class="veil" style:height="{HEIGHT * VEIL}px"></div>
