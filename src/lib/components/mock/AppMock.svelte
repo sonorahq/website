@@ -5,9 +5,10 @@
 	import { reach } from '$lib/mock/packs.svelte';
 	import { palette } from '$lib/mock/theme';
 	import { route } from '$lib/mock/route.svelte';
-	import { settings } from '$lib/mock/settings.svelte';
+	import { radius, settings } from '$lib/mock/settings.svelte';
 	import { theme } from '$lib/theme.svelte';
 	import Aside from './Aside.svelte';
+	import Fullscreen from './Fullscreen.svelte';
 	import Detail from './Detail.svelte';
 	import Artist from './screens/Artist.svelte';
 	import History from './screens/History.svelte';
@@ -30,6 +31,8 @@
 	let right = $state(true);
 	let room = $state(WIDTH);
 	let tab = $state('lyrics');
+	let full = $state(false);
+	let stage = $state<string | null>('lyrics');
 
 	const at = $derived(route.now);
 
@@ -80,38 +83,42 @@
 			class:still
 			{style}
 			style:color-scheme={scheme}
-			style:--m-radius="{settings.radius}px"
+			style:--m-radius="{radius()}px"
 			style:transform="scale({scale})"
 		>
-			<TitleBar bind:left bind:right />
-			<div class="body">
-				{#if left}
-					<Sidebar />
-				{/if}
-				{#if at.screen === 'home'}
-					<Home />
-				{:else if at.screen === 'search'}
-					<Search room={content} />
-				{:else if at.screen === 'library'}
-					<Library shelf="library" tab={at.tab ?? 'Songs'} />
-				{:else if at.screen === 'local'}
-					<Library shelf="local" tab={at.tab ?? 'Songs'} />
-				{:else if at.screen === 'history'}
-					<History />
-				{:else if at.screen === 'settings'}
-					<Settings tab={at.tab ?? 'General'} />
-				{:else if at.screen === 'artist'}
-					<Artist id={at.id ?? 'chopin'} />
-				{:else if at.screen === 'playlist'}
-					<Playlist id={at.id ?? 'quiet-hours'} />
-				{:else}
-					<Detail id={at.id ?? 'airs'} />
-				{/if}
-				{#if right}
-					<Aside {tab} />
-				{/if}
-			</div>
-			<PlayerBar bind:tab />
+			{#if full}
+				<Fullscreen bind:panel={stage} onleave={() => (full = false)} />
+			{:else}
+				<TitleBar bind:left bind:right />
+				<div class="body">
+					{#if left}
+						<Sidebar />
+					{/if}
+					{#if at.screen === 'home'}
+						<Home />
+					{:else if at.screen === 'search'}
+						<Search room={content} />
+					{:else if at.screen === 'library'}
+						<Library shelf="library" tab={at.tab ?? 'Songs'} />
+					{:else if at.screen === 'local'}
+						<Library shelf="local" tab={at.tab ?? 'Songs'} />
+					{:else if at.screen === 'history'}
+						<History />
+					{:else if at.screen === 'settings'}
+						<Settings tab={at.tab ?? 'General'} />
+					{:else if at.screen === 'artist'}
+						<Artist id={at.id ?? 'chopin'} />
+					{:else if at.screen === 'playlist'}
+						<Playlist id={at.id ?? 'quiet-hours'} />
+					{:else}
+						<Detail id={at.id ?? 'airs'} />
+					{/if}
+					{#if right}
+						<Aside {tab} />
+					{/if}
+				</div>
+				<PlayerBar bind:tab onfullscreen={() => (full = true)} />
+			{/if}
 		</div>
 	</div>
 </div>

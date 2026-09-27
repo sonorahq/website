@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { ABOUT_FALLBACK, albumsOf, artistColumns, artists, popularOf } from '$lib/mock/screens';
+	import { albums } from '$lib/mock/album';
 	import { player } from '$lib/mock/player.svelte';
 	import { route } from '$lib/mock/route.svelte';
 	import About from '../About.svelte';
@@ -15,6 +16,7 @@
 	const RELEASE_ROWS = 2;
 	const LISTED = 5;
 	const LISTED_MAX = 10;
+	const RAIL_GAP = 16;
 
 	const FILTERS = [
 		{ id: 'All', kinds: [] },
@@ -69,6 +71,11 @@
 		filter = 'All';
 		telling = false;
 	});
+
+	let slide = $state(0);
+
+	const appears = $derived(albums.filter((entry) => entry.artist !== artist.name).slice(0, 6));
+	const reachable = $derived(Math.max(appears.length - COLUMNS, 0));
 </script>
 
 <div class="frame">
@@ -76,6 +83,7 @@
 		<PageHero
 			title={artist.name}
 			eyebrow="Artist"
+			cover={artist.image}
 			fallback="user-round"
 			circle
 			meta={[`${artist.listeners} monthly listeners`]}
@@ -154,8 +162,56 @@
 			</section>
 		{/if}
 
+		{#if appears.length}
+			<section class="rail">
+				<div class="rail-head">
+					<h2 class="flush">Appears on</h2>
+					{#if appears.length > COLUMNS}
+						<div class="steps">
+							<Control
+								icon="chevron-left"
+								title="Previous"
+								variant="outline"
+								small
+								disabled={slide === 0}
+								onclick={() => (slide = Math.max(slide - COLUMNS, 0))}
+							/>
+							<Control
+								icon="chevron-right"
+								title="Next"
+								variant="outline"
+								small
+								disabled={slide >= reachable}
+								onclick={() => (slide = Math.min(slide + COLUMNS, reachable))}
+							/>
+						</div>
+					{/if}
+				</div>
+				<div class="lane">
+					<div class="run" style:transform="translateX(-{slide * (CARD + RAIL_GAP)}px)">
+						{#each appears as entry (entry.id)}
+							<Card
+								tile={CARD}
+								flat
+								weight={600}
+								title={entry.title}
+								meta="{entry.released} · {entry.artist}"
+								cover={entry.cover}
+								onpress={() => route.go({ screen: 'album', id: entry.id })}
+							/>
+						{/each}
+					</div>
+				</div>
+			</section>
+		{/if}
+
 		<div class="about">
-			<About name={artist.name} biography={artist.biography} onpress={() => (telling = true)} />
+			<About
+				name={artist.name}
+				cover={artist.image}
+				biography={artist.biography}
+				onpress={() => (telling = true)}
+			/>
 		</div>
 	</div>
 
@@ -247,5 +303,34 @@
 		display: flex;
 		flex: none;
 		padding-top: 21px;
+	}
+
+	.rail {
+		display: flex;
+		flex-direction: column;
+		gap: 10.5px;
+	}
+
+	.rail-head {
+		display: flex;
+		height: 39px;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 14px;
+	}
+
+	.steps {
+		display: flex;
+		gap: 3.5px;
+	}
+
+	.lane {
+		overflow: hidden;
+	}
+
+	.run {
+		display: flex;
+		gap: 16px;
+		transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
 	}
 </style>

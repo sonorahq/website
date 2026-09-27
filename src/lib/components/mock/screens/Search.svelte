@@ -49,7 +49,7 @@
 				id: `artist-${artist.id}`,
 				title: artist.name,
 				meta: `${artist.listeners} monthly listeners`,
-				cover: '',
+				cover: artist.image,
 				fallback: 'user-round',
 				circle: true,
 				to: { screen: 'artist', id: artist.id }

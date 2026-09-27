@@ -7,6 +7,7 @@ export const albums = [
 		eyebrow: 'Album',
 		cover: '/cover-airs.webp',
 		release: 'Album',
+		label: 'Field Recordings',
 		tint: { hue: 171.89, saturation: 0.371 }
 	},
 	{
@@ -212,7 +213,7 @@ export const pinned = [
 		title: 'Quiet Hours',
 		kind: 'Playlist',
 		icon: 'list',
-		cover: '',
+		cover: '/mosaic-quiet-hours.webp',
 		to: { screen: 'playlist', id: 'quiet-hours' }
 	},
 	{
@@ -229,7 +230,7 @@ export const pinned = [
 		title: 'Frédéric Chopin',
 		kind: 'Artist',
 		icon: 'user',
-		cover: '',
+		cover: '/artist-chopin.webp',
 		round: true,
 		to: { screen: 'artist', id: 'chopin' }
 	},
@@ -260,12 +261,7 @@ export const nav = [
 		tabs: ['Songs', 'Albums', 'Artists', 'Playlists']
 	},
 	{ id: 'history', label: 'History', icon: 'rotate-ccw-clock' },
-	{
-		id: 'settings',
-		label: 'Settings',
-		icon: 'settings',
-		tabs: ['General', 'Appearance', 'Playback', 'Privacy', 'About']
-	}
+	{ id: 'settings', label: 'Settings', icon: 'settings' }
 ];
 
 export const columns = [
@@ -279,6 +275,16 @@ export const columns = [
 export const TRAIL = 4;
 
 export const total = tracks.reduce((sum, track) => sum + track.length, 0);
+
+export function runtime(seconds: number): string {
+	const whole = Math.max(0, Math.floor(seconds));
+	const hours = Math.floor(whole / 3600);
+	const minutes = Math.floor(whole / 60) % 60;
+	const rest = whole % 60;
+	if (hours) return `${hours}h ${minutes}m`;
+	if (minutes) return `${minutes}m ${rest}s`;
+	return `${rest}s`;
+}
 
 export function clock(seconds: number) {
 	const whole = Math.max(0, Math.floor(seconds));

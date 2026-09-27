@@ -87,6 +87,7 @@
 					circle
 					weight={600}
 					fallback="user-round"
+					cover={artist.image}
 					title={artist.name}
 					meta="Artist"
 					onpress={() => route.go({ screen: 'artist', id: artist.id })}
@@ -104,6 +105,7 @@
 					flat
 					weight={600}
 					fallback="list-music"
+					cover={list.cover}
 					title={list.name}
 					meta={list.owner}
 					onpress={() => route.go({ screen: 'playlist', id: list.id })}

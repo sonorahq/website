@@ -44,8 +44,14 @@
 					</div>
 				</div>
 
-				<div class="clip">
-					<video src="/hi.mp4" autoplay loop muted playsinline aria-hidden="true"></video>
+				<div class="clip" aria-hidden="true">
+					<img class="topic" src="/hi-head.webp" width="638" height="56" alt="" />
+					<div class="feed">
+						<div class="reel">
+							<img src="/hi-chat.webp" width="638" height="1961" alt="" />
+							<img src="/hi-chat.webp" width="638" height="1961" alt="" />
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -107,13 +113,48 @@
 		overflow: hidden;
 	}
 
-	.clip video {
-		position: absolute;
-		inset: 0;
+	.clip {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.clip img {
 		display: block;
 		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		height: auto;
+	}
+
+	.topic {
+		position: relative;
+		z-index: 1;
+		flex: none;
+	}
+
+	.feed {
+		position: relative;
+		flex: 1;
+		min-height: 0;
+		overflow: hidden;
+	}
+
+	.reel {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		animation: reel 10.08s linear infinite;
+	}
+
+	@keyframes reel {
+		to {
+			transform: translateY(-50%);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reel {
+			animation: none;
+		}
 	}
 
 	.links {

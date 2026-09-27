@@ -26,6 +26,49 @@
 </script>
 
 <div class="screen">
+	<section class="panel">
+		<div class="bar head">
+			<div class="titles">
+				<span class="eyebrow">Alex Rivera</span>
+				<h2>Quick picks</h2>
+			</div>
+			<div class="steps">
+				<Control
+					icon="chevron-left"
+					title="Previous"
+					variant="outline"
+					small
+					disabled={picks === 0}
+					onclick={() => (picks -= 1)}
+				/>
+				<Control
+					icon="chevron-right"
+					title="Next"
+					variant="outline"
+					small
+					disabled={picks + 1 >= pages}
+					onclick={() => (picks += 1)}
+				/>
+			</div>
+		</div>
+		<div class="lanes">
+			{#each { length: COLUMNS } as _, column (column)}
+				<div class="lane">
+					{#each lane(column) as track (track.id)}
+						<Card
+							title={track.title}
+							meta={`Song · ${shelf.get(track.album)?.artist ?? track.artist}`}
+							cover={track.cover}
+							playing={player.id === track.id && player.playing}
+							onplay={() => player.select(track.id)}
+							onpress={() => player.select(track.id)}
+						/>
+					{/each}
+				</div>
+			{/each}
+		</div>
+	</section>
+
 	<section class="again">
 		<div class="bar">
 			<h2>Listen again</h2>
@@ -61,49 +104,6 @@
 					onplay={() => player.select(track.id)}
 					onpress={() => player.select(track.id)}
 				/>
-			{/each}
-		</div>
-	</section>
-
-	<section class="panel">
-		<div class="bar head">
-			<div class="titles">
-				<span class="eyebrow">Start from a song</span>
-				<h2>Quick picks</h2>
-			</div>
-			<div class="steps">
-				<Control
-					icon="chevron-left"
-					title="Previous"
-					variant="outline"
-					small
-					disabled={picks === 0}
-					onclick={() => (picks -= 1)}
-				/>
-				<Control
-					icon="chevron-right"
-					title="Next"
-					variant="outline"
-					small
-					disabled={picks + 1 >= pages}
-					onclick={() => (picks += 1)}
-				/>
-			</div>
-		</div>
-		<div class="lanes">
-			{#each { length: COLUMNS } as _, column (column)}
-				<div class="lane">
-					{#each lane(column) as track (track.id)}
-						<Card
-							title={track.title}
-							meta={shelf.get(track.album)?.artist ?? track.artist}
-							cover={track.cover}
-							playing={player.id === track.id && player.playing}
-							onplay={() => player.select(track.id)}
-							onpress={() => player.select(track.id)}
-						/>
-					{/each}
-				</div>
 			{/each}
 		</div>
 	</section>
