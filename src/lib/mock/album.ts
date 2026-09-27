@@ -7,6 +7,7 @@ export const albums = [
 		eyebrow: 'Album',
 		cover: '/cover-airs.webp',
 		release: 'Album',
+		label: 'Field Recordings',
 		tint: { hue: 171.89, saturation: 0.371 }
 	},
 	{
@@ -274,6 +275,16 @@ export const columns = [
 export const TRAIL = 4;
 
 export const total = tracks.reduce((sum, track) => sum + track.length, 0);
+
+export function runtime(seconds: number): string {
+	const whole = Math.max(0, Math.floor(seconds));
+	const hours = Math.floor(whole / 3600);
+	const minutes = Math.floor(whole / 60) % 60;
+	const rest = whole % 60;
+	if (hours) return `${hours}h ${minutes}m`;
+	if (minutes) return `${minutes}m ${rest}s`;
+	return `${rest}s`;
+}
 
 export function clock(seconds: number) {
 	const whole = Math.max(0, Math.floor(seconds));

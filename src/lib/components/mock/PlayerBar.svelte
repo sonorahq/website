@@ -186,6 +186,7 @@
 	}
 
 	.clock {
+		font-variant-numeric: tabular-nums;
 		flex: none;
 		width: 37.4px;
 		font-size: 11px;

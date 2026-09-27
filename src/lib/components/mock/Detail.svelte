@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { album as first, clock, columns, records, shelf } from '$lib/mock/album';
+	import { album as first, columns, records, runtime, shelf } from '$lib/mock/album';
 	import { player } from '$lib/mock/player.svelte';
 	import Control from './Control.svelte';
 	import PageHero from './PageHero.svelte';
@@ -12,7 +12,8 @@
 	const total = $derived(rows.reduce((sum, track) => sum + track.length, 0));
 	const mine = $derived(rows.some((track) => track.id === player.id));
 	const holding = $derived(mine && player.playing);
-	const meta = $derived([album.artist, album.released, `${rows.length} songs`, clock(total)]);
+	const meta = $derived([album.artist, album.released, `${rows.length} songs`, runtime(total)]);
+	const notices = $derived(album.label ? [`℗ ${album.label}`] : []);
 </script>
 
 <div class="screen">
@@ -48,6 +49,14 @@
 	</div>
 
 	<Table {columns} {rows} />
+
+	{#if notices.length}
+		<div class="notices">
+			{#each notices as line (line)}
+				<span>{line}</span>
+			{/each}
+		</div>
+	{/if}
 </div>
 
 <style>
@@ -67,5 +76,16 @@
 	.gutter {
 		padding: 0 24px;
 		flex: none;
+	}
+
+	.notices {
+		display: flex;
+		flex: none;
+		flex-direction: column;
+		gap: 3.5px;
+		min-width: 0;
+		padding: 7px 16px 0;
+		font-size: 11px;
+		color: var(--m-muted-foreground);
 	}
 </style>
