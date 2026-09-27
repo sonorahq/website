@@ -191,7 +191,13 @@
 							</div>
 						{:else if entry.control === 'button'}
 							{#if entry.value}<span class="reading">{entry.value}</span>{/if}
-							<button type="button" class="action">{entry.label}</button>
+							{#if entry.href}
+								<a class="action" href={entry.href} target="_blank" rel="noreferrer"
+									>{entry.label}</a
+								>
+							{:else}
+								<button type="button" class="action">{entry.label}</button>
+							{/if}
 						{:else}
 							<span class="reading">{entry.value ?? version}</span>
 						{/if}
@@ -201,18 +207,34 @@
 		{/each}
 
 		{#if !searching && tab === 'About'}
-			<div class="group"><span class="eyebrow">Team</span></div>
-			<div class="deck">
-				{#each team as member (member.login)}
-					<div class="account">
-						<span class="face">{member.login.slice(0, 1).toUpperCase()}</span>
-						<div class="text">
-							<span class="title">{member.login}</span>
-							<span class="detail">{member.role}</span>
-						</div>
-						<button type="button" class="action">GitHub</button>
-					</div>
-				{/each}
+			<div class="team">
+				<div class="cap">
+					<span class="eyebrow">Team</span>
+					<span class="rule"></span>
+				</div>
+				<div class="members">
+					{#each team as member (member.login)}
+						<a
+							class="member"
+							href="https://github.com/{member.login}"
+							target="_blank"
+							rel="noreferrer"
+						>
+							<img
+								class="avatar"
+								src="https://github.com/{member.login}.png"
+								width="34"
+								height="34"
+								alt=""
+							/>
+							<span class="ident">
+								<span class="login">{member.login}</span>
+								<span class="hint">GitHub</span>
+							</span>
+							<span class="role">{member.role}</span>
+						</a>
+					{/each}
+				</div>
 			</div>
 			<p class="notice">{notice}</p>
 		{/if}
@@ -386,7 +408,10 @@
 	}
 
 	.action {
+		display: inline-flex;
+		align-items: center;
 		height: 26px;
+		text-decoration: none;
 		padding: 0 8.75px;
 		border: 1px solid var(--m-border);
 		border-radius: var(--m-radius);
@@ -420,19 +445,6 @@
 		flex-direction: column;
 		gap: 7px;
 		padding: 3.5px 0 10.5px;
-	}
-
-	.face {
-		display: flex;
-		width: 28px;
-		height: 28px;
-		flex: none;
-		align-items: center;
-		justify-content: center;
-		border-radius: 999px;
-		background: var(--m-muted);
-		color: var(--m-muted-foreground);
-		font-size: 12px;
 	}
 
 	.bands {
@@ -557,5 +569,80 @@
 		align-items: center;
 		justify-content: center;
 		color: var(--m-muted-foreground);
+	}
+
+	.team {
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		margin-top: 17.5px;
+		padding: 17.5px;
+		border: 1px solid var(--m-border);
+		border-radius: var(--m-radius);
+		background: color-mix(in srgb, var(--m-secondary) 45%, transparent);
+	}
+
+	.cap {
+		display: flex;
+		align-items: center;
+		gap: 10.5px;
+	}
+
+	.rule {
+		flex: 1;
+		height: 1px;
+		background: var(--m-border);
+	}
+
+	.members {
+		display: flex;
+		flex-direction: column;
+		gap: 10.5px;
+	}
+
+	.member {
+		display: flex;
+		align-items: center;
+		gap: 10.5px;
+		padding: 4px 8px;
+		border-radius: var(--m-radius);
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.member:hover {
+		background: var(--m-secondary-hover);
+	}
+
+	.avatar {
+		flex: none;
+		border-radius: 50%;
+		object-fit: cover;
+	}
+
+	.ident {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		flex-direction: column;
+		gap: 1.75px;
+	}
+
+	.login {
+		overflow: hidden;
+		font-weight: 500;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.hint,
+	.role {
+		font-size: 12px;
+		color: var(--m-muted-foreground);
+	}
+
+	.role {
+		flex: none;
+		font-weight: 500;
 	}
 </style>

@@ -122,6 +122,7 @@ export type Row = {
 	value?: string;
 	extra?: string;
 	needs?: string;
+	href?: string;
 };
 
 export const catalog: Record<string, (Title | Row)[]> = {
@@ -553,7 +554,8 @@ export const catalog: Record<string, (Title | Row)[]> = {
 			title: 'License',
 			detail: 'GNU General Public License version 3 or later',
 			control: 'button',
-			label: 'Read the license'
+			label: 'Read the license',
+			href: 'https://www.gnu.org/licenses/gpl-3.0.html'
 		},
 		{
 			kind: 'row',
@@ -561,7 +563,8 @@ export const catalog: Record<string, (Title | Row)[]> = {
 			title: 'Source code',
 			detail: 'The corresponding source for this build',
 			control: 'button',
-			label: 'Open the repository'
+			label: 'Open the repository',
+			href: 'https://github.com/sonorahq/sonora'
 		}
 	]
 };
