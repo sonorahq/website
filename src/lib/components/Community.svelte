@@ -45,11 +45,11 @@
 				</div>
 
 				<div class="clip" aria-hidden="true">
-					<img class="topic" src="/hi-head.webp" width="638" height="56" alt="" />
+					<img class="topic" src="/hi-head.webp" width="634" height="56" alt="" />
 					<div class="feed">
 						<div class="reel">
-							<img src="/hi-chat.webp" width="638" height="1961" alt="" />
-							<img src="/hi-chat.webp" width="638" height="1961" alt="" />
+							<img src="/hi-chat.webp" width="634" height="1961" alt="" />
+							<img src="/hi-chat.webp" width="634" height="1961" alt="" />
 						</div>
 					</div>
 				</div>
