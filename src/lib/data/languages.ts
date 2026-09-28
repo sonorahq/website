@@ -11,6 +11,7 @@ export const flags = new Map([
 	['ru', 'ru'],
 	['uk', 'ua'],
 	['pl', 'pl'],
+	['sq', 'al'],
 	['pt-BR', 'br'],
 	['zh-CN', 'cn'],
 	['tr', 'tr']
