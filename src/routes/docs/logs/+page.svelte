@@ -9,13 +9,14 @@
 
 <h1>Logs</h1>
 <p class="summary">
-	Sonora writes a log file on every platform. Attach it to bug reports. It stays on your machine
-	unless you send it to someone.
+	Sonora keeps a log file on every platform. It never leaves your machine unless you send it to
+	someone, and if you're filing a bug, please do.
 </p>
 
 <h2 id="location">Location</h2>
 <p>
 	<MenuPath steps={['Settings', 'About', 'Log file', 'Open log']} /> opens it in your default text editor.
+	Or find it yourself:
 </p>
 <table>
 	<tbody>
@@ -29,27 +30,27 @@
 	</tbody>
 </table>
 <p>
-	The file is capped at 16 MB. When it fills up, it moves to <code>sonora.log.1</code> and a new one starts,
-	so the two never take more than 32 MB. The first line holds the Sonora version.
+	The log is capped at 16 MB. When it fills up it becomes <code>sonora.log.1</code> and a fresh file starts,
+	so you never have more than 32 MB of logs. The first line tells you which version wrote it.
 </p>
 
 <h2 id="verbose">More detail</h2>
 <p>
-	By default the log holds warnings plus debug lines from Sonora's own modules. For a bug that is
-	hard to pin down, start Sonora with <code>SONORA_LOG=debug</code> to log everything.
+	By default you get warnings plus debug output from Sonora's own code. If a bug is hard to pin
+	down, start Sonora with <code>SONORA_LOG=debug</code> and it logs everything.
 </p>
 <Code label="Linux" text="SONORA_LOG=debug sonora" />
 <Code label="Flatpak" text="flatpak run --env=SONORA_LOG=debug io.github.nolight132.sonora" />
 <Code label="macOS, then start Sonora" text="launchctl setenv SONORA_LOG debug" />
 <Code label="Windows, then start Sonora" text="setx SONORA_LOG debug" />
 <p>
-	On macOS and Windows the variable stays set. Clear it afterwards with
-	<code>launchctl unsetenv SONORA_LOG</code>, or on Windows with
-	<code>reg delete HKCU\Environment /v SONORA_LOG /f</code>, because debug logs grow fast.
+	On macOS and Windows the variable sticks around, and debug logs grow fast. Clear it when you're
+	done with <code>launchctl unsetenv SONORA_LOG</code> on macOS or
+	<code>reg delete HKCU\Environment /v SONORA_LOG /f</code> on Windows.
 </p>
 
 <h2 id="terminal">Terminal output</h2>
 <p>
-	When you start Sonora from a terminal, it also prints warnings to stderr. <code>RUST_LOG</code>
-	sets that level and does not change the file. Windows builds have no console.
+	Start Sonora from a terminal and it also prints warnings to stderr. <code>RUST_LOG</code> controls that
+	output and leaves the file alone. Windows builds don't open a console.
 </p>

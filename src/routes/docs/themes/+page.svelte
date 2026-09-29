@@ -89,14 +89,14 @@
 
 <h1>Custom themes</h1>
 <p class="summary">
-	A theme is a JSON file in the themes folder. Sonora watches the folder, so a new or edited file
-	shows up in the theme picker without a restart.
+	A theme is one JSON file in the themes folder. Sonora watches that folder, so new and edited
+	themes show up in the picker straight away, no restart needed.
 </p>
 
 <h2 id="folder">The themes folder</h2>
 <p>
-	<MenuPath steps={['Settings', 'Appearance', 'Theme', 'Open folder']} /> creates the folder and opens
-	it. It sits next to the <a href="/docs/settings">settings file</a>.
+	<MenuPath steps={['Settings', 'Appearance', 'Theme', 'Open folder']} /> opens it. It lives next to the
+	<a href="/docs/settings">settings file</a>.
 </p>
 <table>
 	<tbody>
@@ -112,17 +112,18 @@
 
 <h2 id="format">Writing a theme</h2>
 <p>
-	The file name is the theme's id, so <code>nord.json</code> becomes <code>nord</code>. The built-in
-	names, such as <code>dark</code>, <code>light</code> and <code>midnight</code>, are taken. The
-	file has exactly four keys: <code>name</code>, <code>author</code>, <code>version</code>, which is
-	always
-	<code>1</code>, and <code>theme</code>, which holds the colours.
+	The file name becomes the theme's id, so <code>nord.json</code> is <code>nord</code>. Built-in
+	names like <code>dark</code>, <code>light</code> and <code>midnight</code> are taken.
+</p>
+<p>
+	The file needs exactly four keys: <code>name</code>, <code>author</code>, <code>version</code> and
+	<code>theme</code>. The version is always <code>1</code>, and <code>theme</code> holds the colours.
 </p>
 <Code label="themes/nord.json" lang="json" text={example} />
 <p>
-	Colours are hex, as <code>RRGGBB</code> or <code>RRGGBBAA</code>, with or without the
-	<code>#</code>. Every theme is laid over the built-in Dark theme, and any token you leave out
-	keeps its Dark value. A light theme therefore has to set all of them.
+	Colours are hex, <code>RRGGBB</code> or <code>RRGGBBAA</code>, with or without the <code>#</code>.
+	Your theme sits on top of the built-in Dark theme, and every token you skip keeps its Dark value.
+	That's handy for a dark theme. For a light one you'll want to set all 30.
 </p>
 
 <h2 id="tokens">Colour tokens</h2>
@@ -144,28 +145,29 @@
 
 <h2 id="using">Using it</h2>
 <p>
-	Custom themes appear at the bottom of the theme picker. You can also set
-	<code>appearance.theme</code> to the id in settings.json.
+	Your themes show up at the bottom of the theme picker. Setting <code>appearance.theme</code> to the
+	id in settings.json works too.
 </p>
 <p class="note">
-	Turn off <strong>Adaptive theme</strong> first. It is on by default and only works with System, Dark
-	and Light, so custom themes stay greyed out while it is on. Turning it back on switches the theme to
-	Dark.
+	Turn off <strong>Adaptive theme</strong> first. It's on by default and only works with System, Dark
+	and Light, so your themes stay greyed out until you do. Turning it back on resets the theme to Dark.
 </p>
 
-<h2 id="errors">When a theme does not load</h2>
+<h2 id="errors">When a theme won't load</h2>
 <p>
-	One bad colour or an extra top-level key rejects the whole file. Sonora keeps showing the last
+	One bad colour or one extra top-level key, and the whole file is rejected. Sonora keeps the last
 	version that loaded and writes the reason to the <a href="/docs/logs">log</a> as
-	<code>settings: cannot load theme</code>. A theme that is selected but missing shows as
-	<strong>(unavailable)</strong> in the picker.
+	<code>settings: cannot load theme</code>. If the theme you picked is gone, the picker marks it
+	<strong>(unavailable)</strong>.
 </p>
 
 <h2 id="overrides">Tweaking a built-in theme</h2>
 <p>
-	To change a few colours without writing a file, add <code>theme_overrides</code> to the appearance
-	block of settings.json. It works on top of any theme, including the built-in ones, and wins over
-	the adaptive tint. It also takes <code>radius</code>, from 0 to 24, and <code>font_size</code>,
-	from 10 to 24. Theme files cannot set those two.
+	Only want to change a colour or two? Skip the file and add <code>theme_overrides</code> to the appearance
+	block in settings.json. It works on any theme, built-in ones included, and beats the adaptive tint.
+</p>
+<p>
+	Overrides also take <code>radius</code>, from 0 to 24, and <code>font_size</code>, from 10 to 24.
+	Theme files can't set those.
 </p>
 <Code label="settings.json" lang="json" text={overrides} />

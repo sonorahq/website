@@ -54,21 +54,14 @@
 
 <h1>Shortcuts</h1>
 <p class="summary">
-	On macOS the navigation shortcuts also work with <kbd>⌘</kbd> in place of <kbd>Ctrl</kbd>, and
-	<kbd>Alt</kbd> is <kbd>⌥</kbd>. Media keys and the mouse back and forward buttons work too.
+	On macOS the navigation shortcuts take <kbd>⌘</kbd> as well as <kbd>Ctrl</kbd>, and <kbd>Alt</kbd>
+	is <kbd>⌥</kbd>.
 </p>
 
-<p class="note">
-	The bindings are fixed for now. They will become customizable in a later release.
-</p>
+<p class="note">You can't rebind anything yet. Custom shortcuts are on the way.</p>
 
 {#each sections as section (section.id)}
 	<h2 id={section.id}>{section.title}</h2>
-	{#if section.id === 'playback'}
-		<p>
-			These only work while no text field has focus, so typing a space in search does not pause.
-		</p>
-	{/if}
 	<table>
 		<tbody>
 			{#each section.rows as row (row.action)}

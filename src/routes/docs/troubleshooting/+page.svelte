@@ -9,83 +9,82 @@
 
 <h1>Troubleshooting</h1>
 <p class="summary">
-	Fixes for the problems people hit most. If yours is not here, the <a href="/docs/logs">log</a>
-	usually says what went wrong.
+	The problems people run into most, and what fixes them. If yours isn't here, check the
+	<a href="/docs/logs">log</a>. It usually names the culprit.
 </p>
 
 <h2 id="macos-damaged">macOS says the app is damaged</h2>
 <p>
-	The app is not signed with an Apple developer certificate yet, so macOS quarantines it. Clear the
-	flag once after installing.
+	It isn't. Sonora isn't signed with an Apple developer certificate yet, so macOS quarantines it.
+	Clear the flag once after installing.
 </p>
 <Code text="xattr -dr com.apple.quarantine /Applications/Sonora.app" />
 
 <h2 id="windows-warning">Windows warns about an unknown publisher</h2>
 <p>
-	The Windows builds are not code-signed yet, and signing through the SignPath Foundation is applied
-	for. Until it lands, choose <MenuPath steps={['More info', 'Run anyway']} /> on the first launch.
+	The Windows builds aren't code-signed yet. We've applied to the SignPath Foundation for that.
+	Until it comes through, click <MenuPath steps={['More info', 'Run anyway']} /> the first time.
 </p>
 
 <h2 id="linux-no-sound">No sound on Linux</h2>
 <p>
-	Sonora plays through ALSA, and an error like <strong>no audio output device</strong> means the
-	ALSA bridge to your sound server is missing. Install <code>pipewire-alsa</code> on PipeWire or
-	<code>pulseaudio-alsa</code> on PulseAudio. The AppImage does not bundle it either.
+	Sonora plays through ALSA. If it says <strong>no audio output device</strong>, you're missing the
+	ALSA bridge to your sound server. Install <code>pipewire-alsa</code> on PipeWire or
+	<code>pulseaudio-alsa</code> on PulseAudio. The AppImage doesn't bundle it either.
 </p>
 
-<h2 id="blank-window">The window is blank or Sonora will not start</h2>
+<h2 id="blank-window">The window is blank or Sonora won't start</h2>
 <p>
-	Sonora draws with Vulkan and needs a Vulkan driver for your GPU, not only the loader. That means
-	<code>mesa-vulkan-drivers</code>, <code>vulkan-radeon</code> or <code>vulkan-intel</code>, or the
-	proprietary NVIDIA driver. <code>vulkaninfo --summary</code> shows whether one is working.
+	Sonora draws with Vulkan, and the Vulkan loader alone isn't enough. You need a driver for your
+	GPU, such as <code>mesa-vulkan-drivers</code>, <code>vulkan-radeon</code>,
+	<code>vulkan-intel</code>
+	or the proprietary NVIDIA driver. Run <code>vulkaninfo --summary</code> to see whether one works.
 </p>
 <p>
-	If Sonora starts but feels slow, set <code>SONORA_BLUR=0</code> to turn off lyric blur, edge fades and
-	the visualizer.
+	If Sonora starts but feels sluggish, <code>SONORA_BLUR=0</code> turns off the lyric blur, edge fades
+	and visualizer.
 </p>
 
-<h2 id="sign-in-window">The sign-in window does not open on Linux</h2>
+<h2 id="sign-in-window">The sign-in window doesn't open on Linux</h2>
 <p>
-	The login windows for YouTube Music, Apple Music and Deezer need WebKitGTK, as
-	<code>webkit2gtk-4.1</code> or <code>4.0</code>. Without it, Sonora says
-	<strong>webkit2gtk is not installed</strong> and only offers pasting cookies by hand, which works just
-	as well.
+	The login windows for YouTube Music, Apple Music and Deezer need WebKitGTK, either
+	<code>webkit2gtk-4.1</code> or <code>4.0</code>. Without it Sonora says
+	<strong>webkit2gtk is not installed</strong> and offers cookie pasting instead. That works just as well.
 </p>
 
 <h2 id="spotify-sign-in">Spotify sign-in fails</h2>
 <ul>
-	<li>Free accounts are refused. Playback needs Premium.</li>
+	<li>Free accounts don't get in. You need Premium.</li>
 	<li>
-		The browser has to reach Sonora on <code>127.0.0.1:8989</code>. Close whatever else is using
-		that port and try again.
+		Your browser has to reach Sonora on <code>127.0.0.1:8989</code>. Close whatever else holds that
+		port and try again.
 	</li>
-	<li>A region error comes from Spotify refusing the account in the country you connect from.</li>
+	<li>A region error means Spotify won't serve your account from where you're connecting.</li>
 </ul>
 
-<h2 id="widevine">Apple Music will not play</h2>
+<h2 id="widevine">Apple Music won't play</h2>
 <p>
-	<strong>No widevine module was found on this machine</strong> means Sonora found no Widevine copy
-	in your browsers. Download it under <MenuPath
+	<strong>No widevine module was found on this machine</strong> means none of your browsers had a
+	copy Sonora could borrow. Download one in <MenuPath
 		steps={['Settings', 'Playback', 'Widevine module']}
 	/>.
 </p>
 
-<h2 id="skipping">Playback stops after several tracks</h2>
+<h2 id="skipping">Playback stops after a few tracks</h2>
 <p>
-	Sonora stops when several tracks in a row fail to play, rather than skipping through your whole
-	queue. The log has the details.
+	When several tracks in a row fail, Sonora stops instead of burning through your whole queue. The
+	log has the reason.
 </p>
 
-<h2 id="lastfm">Last.fm will not link</h2>
+<h2 id="lastfm">Last.fm won't link</h2>
 <p>
-	Linking waits for Last.fm on <code>127.0.0.1:8990</code> for five minutes. Free the port, then approve
-	Sonora in the browser before the time runs out.
+	Sonora waits five minutes for Last.fm on <code>127.0.0.1:8990</code>. Make sure that port is free,
+	then approve Sonora in the browser before the time runs out.
 </p>
 
-<h2 id="settings-not-saved">Changes in settings are not saved</h2>
+<h2 id="settings-not-saved">Settings changes don't stick</h2>
 <p>
-	If you edited settings.json by hand and left a syntax error, Sonora shows <strong
-		>Fix line N of settings.json to save changes</strong
-	>
-	and stops saving until you fix it. See <a href="/docs/settings">Settings file</a>.
+	You probably left a syntax error in settings.json. Sonora shows
+	<strong>Fix line N of settings.json to save changes</strong> and stops saving until the file
+	parses again. See <a href="/docs/settings">Settings file</a>.
 </p>
