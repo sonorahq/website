@@ -157,7 +157,7 @@
 
 			<h2>Settings and themes</h2>
 			<div class="questions">
-				<Question id="theme-greyed-out" question="Why is my custom theme greyed out?">
+				<Question id="theme-grayed-out" question="Why is my custom theme grayed out?">
 					<p>
 						Turn off <strong>Adaptive theme</strong>. While it's on, you can only pick System, Dark
 						and Light. See <a href="/docs/themes">Custom themes</a>.

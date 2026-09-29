@@ -6,7 +6,7 @@ export type Token = {
 const JSON_TOKEN =
 	/("(?:[^"\\]|\\.)*")(\s*:)?|(-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?)|\b(true|false|null)\b|([{}[\],:])/g;
 
-/** Splits JSON into coloured tokens. It is lenient, so snippets with `...` or other gaps still come out, with the unknown parts left plain. */
+/** Splits JSON into colored tokens. It is lenient, so snippets with `...` or other gaps still come out, with the unknown parts left plain. */
 export function highlightJson(source: string): Token[] {
 	const tokens: Token[] = [];
 	let last = 0;

@@ -51,7 +51,7 @@
 				{ text: 'Reorder playlists and give them custom covers', issue: 806 },
 				{ text: 'Import and export playlists in a standard format', issue: 642 },
 				{ text: 'A rethought library tab', issue: 13, done: true },
-				{ text: 'Favourites, playlists and a tag editor for local files', done: '0.26' }
+				{ text: 'Favorites, playlists and a tag editor for local files', done: '0.26' }
 			]
 		},
 		{

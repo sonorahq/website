@@ -90,7 +90,7 @@
 					: 'volume-2'
 	);
 
-	/** The app's own colour tokens for the site's current theme, so the player bar is drawn exactly as Sonora draws it. */
+	/** The app's own color tokens for the site's current theme, so the player bar is drawn exactly as Sonora draws it. */
 	const chrome = $derived(
 		[
 			...Object.entries(

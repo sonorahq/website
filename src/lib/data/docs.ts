@@ -45,7 +45,7 @@ export const groups: { label: string; pages: DocPage[] }[] = [
 			{
 				slug: 'themes',
 				title: 'Custom themes',
-				summary: 'Writing your own colour theme as a JSON file.'
+				summary: 'Writing your own color theme as a JSON file.'
 			}
 		]
 	},

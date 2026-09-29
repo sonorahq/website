@@ -33,7 +33,7 @@
   }
 }`;
 
-	/** The colour tokens a theme file may set, grouped by the part of the window they paint. */
+	/** The color tokens a theme file may set, grouped by the part of the window they paint. */
 	const tokens = [
 		{
 			area: 'Surfaces and text',
@@ -123,12 +123,12 @@
 </p>
 <Code label="themes/nord.json" lang="json" text={example} />
 <p>
-	Colours are hex, <code>RRGGBB</code> or <code>RRGGBBAA</code>, with or without the <code>#</code>.
+	Colors are hex, <code>RRGGBB</code> or <code>RRGGBBAA</code>, with or without the <code>#</code>.
 	Unset values currently default to a dark theme. Do not rely on this behavior. It may change in the
 	future.
 </p>
 
-<h2 id="tokens">Colour tokens</h2>
+<h2 id="tokens">Color tokens</h2>
 <table>
 	<tbody>
 		{#each tokens as group (group.area)}
@@ -158,7 +158,7 @@
 
 <h2 id="overrides">Tweaking a built-in theme</h2>
 <p>
-	Only want to change a colour or two? Skip the file and add <code>theme_overrides</code> to the appearance
+	Only want to change a color or two? Skip the file and add <code>theme_overrides</code> to the appearance
 	block in settings.json. It works on any theme, built-in ones included, and beats the adaptive tint.
 </p>
 <Code label="settings.json" lang="json" text={overrides} />

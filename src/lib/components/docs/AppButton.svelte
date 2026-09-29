@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	/** A label drawn like one of Sonora's settings buttons, so prose can point at a button the reader will recognise. It does nothing when clicked. */
+	/** A label drawn like one of Sonora's settings buttons, so prose can point at a button the reader will recognize. It does nothing when clicked. */
 	let { children }: { children: Snippet } = $props();
 </script>
 
