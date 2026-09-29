@@ -11,27 +11,55 @@ export const flags = new Map([
 	['ru', 'ru'],
 	['uk', 'ua'],
 	['pl', 'pl'],
+	['cs', 'cz'],
 	['pt-BR', 'br'],
 	['zh-CN', 'cn'],
-	['tr', 'tr']
+	['tr', 'tr'],
+	['sq', 'al']
 ]);
 
 export type Language = { code: string; name: string; flag: string; share: number; total?: number };
 
-export const fallback: { strings: number; done: number; languages: Language[] } = {
-	strings: 533,
-	done: 3,
-	languages: [
-		{ code: 'en-US', name: 'English', flag: 'us', share: 100 },
-		{ code: 'de', name: 'Deutsch', flag: 'de', share: 100 },
-		{ code: 'pl', name: 'Polski', flag: 'pl', share: 100 },
-		{ code: 'id', name: 'Bahasa Indonesia', flag: 'id', share: 99 },
-		{ code: 'es', name: 'Español', flag: 'es', share: 96 },
-		{ code: 'ja', name: '日本語', flag: 'jp', share: 96 },
-		{ code: 'pt-BR', name: 'Português (Brasil)', flag: 'br', share: 96 },
-		{ code: 'ru', name: 'Русский', flag: 'ru', share: 94 },
-		{ code: 'uk', name: 'Українська', flag: 'ua', share: 94 },
-		{ code: 'fr', name: 'Français', flag: 'fr', share: 92 },
-		{ code: 'it', name: 'Italiano', flag: 'it', share: 92 }
-	]
-};
+/**
+ * The translation table as it stood when last copied from the README, served when GitHub cannot
+ * be reached at build time. `locales` keeps the README order, which is the order the app lists them.
+ */
+export const fallback: { strings: number; done: number; languages: Language[]; locales: string[] } =
+	{
+		strings: 749,
+		done: 2,
+		languages: [
+			{ code: 'en-US', name: 'English', flag: 'us', share: 100 },
+			{ code: 'fr', name: 'Français', flag: 'fr', share: 100 },
+			{ code: 'cs', name: 'Čeština', flag: 'cz', share: 99 },
+			{ code: 'pl', name: 'Polski', flag: 'pl', share: 95 },
+			{ code: 'sq', name: 'Shqip', flag: 'al', share: 95 },
+			{ code: 'ru', name: 'Русский', flag: 'ru', share: 95 },
+			{ code: 'uk', name: 'Українська', flag: 'ua', share: 95 },
+			{ code: 'es', name: 'Español', flag: 'es', share: 92 },
+			{ code: 'de', name: 'Deutsch', flag: 'de', share: 84 },
+			{ code: 'id', name: 'Bahasa Indonesia', flag: 'id', share: 81 },
+			{ code: 'it', name: 'Italiano', flag: 'it', share: 81 },
+			{ code: 'pt-BR', name: 'Português (Brasil)', flag: 'br', share: 81 },
+			{ code: 'tr', name: 'Türkçe', flag: 'tr', share: 81 },
+			{ code: 'ja', name: '日本語', flag: 'jp', share: 81 },
+			{ code: 'zh-CN', name: '简体中文', flag: 'cn', share: 81 }
+		],
+		locales: [
+			'English',
+			'Deutsch',
+			'Español',
+			'Français',
+			'Italiano',
+			'Bahasa Indonesia',
+			'日本語',
+			'Русский',
+			'Українська',
+			'Polski',
+			'Čeština',
+			'Português (Brasil)',
+			'简体中文',
+			'Türkçe',
+			'Shqip'
+		]
+	};

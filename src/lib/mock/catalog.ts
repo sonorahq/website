@@ -1,4 +1,5 @@
-export const version = '0.40.0';
+/** The version the mock reports when GitHub cannot be reached at build time. */
+export const version = '0.42.0';
 
 export const tabs = ['General', 'Appearance', 'Playback', 'Privacy', 'Integrations', 'About'];
 
@@ -148,8 +149,7 @@ export const catalog: Record<string, (Title | Row)[]> = {
 			key: 'language',
 			title: 'Language',
 			detail: 'The language Sonora uses across the interface',
-			control: 'picker',
-			options: ['System', 'English', 'Deutsch', '简体中文', 'Türkçe', 'Русский']
+			control: 'picker'
 		},
 		{ kind: 'title', label: 'Window' },
 		{
@@ -560,8 +560,7 @@ export const catalog: Record<string, (Title | Row)[]> = {
 			key: 'version',
 			title: 'Version',
 			detail: 'The build of sonora you are running',
-			control: 'plain',
-			value: version
+			control: 'plain'
 		},
 		{
 			kind: 'row',
