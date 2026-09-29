@@ -71,6 +71,11 @@ export const groups: { label: string; pages: DocPage[] }[] = [
 				slug: 'vision',
 				title: 'Vision',
 				summary: 'What Sonora is for, and what it will never be.'
+			},
+			{
+				slug: 'roadmap',
+				title: 'Roadmap',
+				summary: "What's planned, and what has already shipped."
 			}
 		]
 	}
