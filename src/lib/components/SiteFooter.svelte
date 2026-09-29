@@ -56,10 +56,12 @@
 				Sonora is free software under the GNU General Public License, version 3 or later. It is an
 				unofficial client and is not affiliated with, endorsed by or sponsored by Spotify AB.
 			</p>
-			<p>
-				The preview on this page plays public domain recordings with public domain lyrics. Its
-				covers are public domain paintings from Wikimedia Commons.
-			</p>
+			{#if !home}
+				<p>
+					The preview on this page plays public domain recordings with public domain lyrics. Its
+					covers are public domain paintings from Wikimedia Commons.
+				</p>
+			{/if}
 		</div>
 	</div>
 </footer>
