@@ -6,17 +6,80 @@
 	import Search from '$lib/components/docs/Search.svelte';
 	import '$lib/prose.css';
 
+	const DURATION = 240;
+
+	/** Animates one answer open or shut. A closing question keeps its `open` attribute and carries a `closing` class until the animation ends, so clicking it again mid-way reverses cleanly. */
+	function slide(details: HTMLDetailsElement, open: boolean) {
+		const answer = details.querySelector<HTMLElement>('.answer');
+		const closing = details.classList.contains('closing');
+		if (!answer || (open && details.open && !closing) || (!open && (!details.open || closing)))
+			return;
+
+		const duration = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : DURATION;
+		answer.getAnimations().forEach((animation) => animation.cancel());
+		const folded = { height: '0px', paddingTop: '0px', paddingBottom: '0px', opacity: 0 };
+
+		if (open) {
+			details.classList.remove('closing');
+			details.open = true;
+			const style = getComputedStyle(answer);
+			const full = {
+				height: `${answer.offsetHeight}px`,
+				paddingTop: style.paddingTop,
+				paddingBottom: style.paddingBottom,
+				opacity: 1
+			};
+			answer.animate([folded, full], { duration, easing: 'cubic-bezier(0.22, 0.61, 0.36, 1)' });
+			return;
+		}
+
+		const style = getComputedStyle(answer);
+		const full = {
+			height: `${answer.offsetHeight}px`,
+			paddingTop: style.paddingTop,
+			paddingBottom: style.paddingBottom,
+			opacity: 1
+		};
+		details.classList.add('closing');
+		const animation = answer.animate([full, folded], { duration, easing: 'ease-in-out' });
+		animation.onfinish = () => {
+			details.open = false;
+			details.classList.remove('closing');
+		};
+	}
+
+	/** Opens `target` and closes every other question, so only one answer is ever showing. */
+	function show(target: HTMLDetailsElement) {
+		for (const other of document.querySelectorAll<HTMLDetailsElement>('.questions details')) {
+			if (other !== target) slide(other, false);
+		}
+		slide(target, true);
+	}
+
 	/** Opens the question the URL points at, so links and search results land on an expanded answer. */
 	function reveal() {
 		const target = location.hash && document.getElementById(location.hash.slice(1));
 		if (!(target instanceof HTMLDetailsElement)) return;
-		target.open = true;
+		show(target);
 		target.scrollIntoView({ block: 'start' });
 	}
 
 	onMount(() => {
+		const onclick = (event: MouseEvent) => {
+			const summary = (event.target as Element | null)?.closest('.questions summary');
+			const details = summary?.parentElement;
+			if (!(details instanceof HTMLDetailsElement)) return;
+			event.preventDefault();
+			if (details.open && !details.classList.contains('closing')) slide(details, false);
+			else show(details);
+		};
+
+		document.addEventListener('click', onclick);
 		addEventListener('hashchange', reveal);
-		return () => removeEventListener('hashchange', reveal);
+		return () => {
+			document.removeEventListener('click', onclick);
+			removeEventListener('hashchange', reveal);
+		};
 	});
 
 	afterNavigate(reveal);
@@ -248,6 +311,8 @@
 		font-size: 15px;
 		font-weight: 500;
 		cursor: pointer;
+		user-select: none;
+		-webkit-tap-highlight-color: transparent;
 		list-style: none;
 	}
 
@@ -267,7 +332,7 @@
 		transition: transform 0.18s ease;
 	}
 
-	details[open] summary::after {
+	details[open]:not(.closing) summary::after {
 		transform: translateY(2px) rotate(-135deg);
 	}
 
@@ -279,7 +344,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 14px;
-		padding: 0 18px 18px;
+		padding: 10px 18px 20px;
+		overflow: hidden;
 	}
 
 	.more {
