@@ -12,6 +12,7 @@
 				{ text: 'Jellyfin', issue: 422 },
 				{ text: 'SoundCloud', issue: 474 },
 				{ text: 'NetEase Cloud Music', pull: 801 },
+				{ text: 'Spotify', done: '0.1' },
 				{ text: 'YouTube Music', done: '0.8' },
 				{ text: 'Local files', done: '0.9' },
 				{ text: 'Subsonic and Navidrome', done: '0.32' },
@@ -25,7 +26,6 @@
 			entries: [
 				{ text: 'A quality setting where the provider offers more than one stream' },
 				{ text: 'SponsorBlock for YouTube Music', issue: 431 },
-				{ text: 'YouTube Music radio and mixes', issue: 452 },
 				{ text: 'Gapless playback', done: '0.5' },
 				{ text: 'System media controls', done: '0.6' },
 				{ text: 'Sleep timer', done: '0.32' },
@@ -50,7 +50,6 @@
 			entries: [
 				{ text: 'Reorder playlists and give them custom covers', issue: 806 },
 				{ text: 'Import and export playlists in a standard format', issue: 642 },
-				{ text: 'Split artist tags like "A feat. B" into separate artists', issue: 439 },
 				{ text: 'A rethought library tab', issue: 13, done: true },
 				{ text: 'Favourites, playlists and a tag editor for local files', done: '0.26' }
 			]
@@ -76,7 +75,6 @@
 				{ text: 'A rethink of global shortcuts', issue: 10 },
 				{ text: 'Vim-style navigation', issue: 263 },
 				{ text: 'Control Sonora from the command line, like sonora next-track', pull: 777 },
-				{ text: 'A plugin system and remote API', issue: 403 },
 				{ text: 'Discord status', done: '0.34' },
 				{ text: 'Cover art in Discord for local music', issue: 571, done: '0.40' },
 				{ text: 'Scrobbling to Last.fm, Libre.fm, ListenBrainz and Maloja', done: '0.36' }
@@ -111,8 +109,7 @@
 </p>
 
 <p class="note">
-	Nothing here has a date, and the order within a group means nothing. For what won't be built at
-	all, see <a href="/docs/vision">Vision</a>.
+	The order means nothing. For what won't be built at all, see <a href="/docs/vision">Vision</a>.
 </p>
 
 {#each areas as area (area.id)}
