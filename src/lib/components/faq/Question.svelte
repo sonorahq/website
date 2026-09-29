@@ -5,7 +5,7 @@
 
 <script lang="ts">
 	import { getContext, onMount, type Snippet } from 'svelte';
-	import { cubicOut } from 'svelte/easing';
+	import { cubicInOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
 
 	/** `id` is also the anchor, so `/faq#<id>` opens this question. */
@@ -14,7 +14,7 @@
 	const accordion = getContext<Accordion>('faq');
 	const open = $derived(accordion.open === id);
 
-	let duration = $state(240);
+	let duration = $state(260);
 
 	onMount(() => {
 		if (matchMedia('(prefers-reduced-motion: reduce)').matches) duration = 0;
@@ -32,7 +32,7 @@
 	</button>
 
 	{#if open}
-		<div class="panel" id="{id}-answer" transition:slide={{ duration, easing: cubicOut }}>
+		<div class="panel" id="{id}-answer" transition:slide={{ duration, easing: cubicInOut }}>
 			<div class="answer">{@render children()}</div>
 		</div>
 	{:else}
@@ -84,7 +84,7 @@
 		border-right: 1.5px solid var(--dim);
 		border-bottom: 1.5px solid var(--dim);
 		transform: translateY(-2px) rotate(45deg);
-		transition: transform 0.24s cubic-bezier(0.22, 0.61, 0.36, 1);
+		transition: transform 0.26s ease-in-out;
 	}
 
 	button[aria-expanded='true']::after {
@@ -96,5 +96,9 @@
 		flex-direction: column;
 		gap: 14px;
 		padding: 10px 18px 20px;
+	}
+
+	.answer[hidden] {
+		padding: 0;
 	}
 </style>
