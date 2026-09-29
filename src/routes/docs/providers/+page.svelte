@@ -1,4 +1,5 @@
 <script lang="ts">
+	import AppButton from '$lib/components/docs/AppButton.svelte';
 	import MenuPath from '$lib/components/docs/MenuPath.svelte';
 </script>
 
@@ -57,7 +58,7 @@
 <p>
 	Add folders in settings. Sonora walks through them, subfolders and symlinks included. After the
 	first scan it only rereads files whose size or date changed, so later scans are quick. It doesn't
-	watch the folders while it runs, though. Hit <strong>Rescan</strong> after you add music.
+	watch the folders while it runs, though. Hit <AppButton>Rescan</AppButton> after you add music.
 </p>
 <ul>
 	<li>It plays MP3, FLAC, M4A, MP4, AAC, OGG, Opus, WAV, WavPack, APE, WebM and MKA.</li>
