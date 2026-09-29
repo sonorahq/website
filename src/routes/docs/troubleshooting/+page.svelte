@@ -56,18 +56,32 @@
 <ul>
 	<li>Free accounts don't get in. You need Premium.</li>
 	<li>
-		Your browser has to reach Sonora on <code>127.0.0.1:8989</code>. Close whatever else holds that
-		port and try again.
+		The sign-in window hands the session back to Sonora on <code>127.0.0.1:8989</code>. Close
+		whatever else holds that port and try again.
 	</li>
 	<li>A region error means Spotify won't serve your account from where you're connecting.</li>
 </ul>
 
+<h2 id="spotify-playback-keys">Spotify won't play anything</h2>
+<p>
+	If every track fails with <strong>Spotify is not granting this account playback keys</strong>,
+	Spotify won't work for your account in Sonora. Sonora plays Spotify through librespot, and
+	<a href="https://github.com/librespot-org/librespot/issues/1649">librespot issue 1649</a> tracks the
+	problem.
+</p>
+
 <h2 id="widevine">Apple Music won't play</h2>
 <p>
-	<strong>No widevine module was found on this machine</strong> means none of your browsers had a
-	copy Sonora could borrow. Download one in <MenuPath
+	Apple Music needs the Widevine module. When none of your browsers has a copy, Sonora offers to
+	download it from Google. If you dismissed that or it never showed up, get it from <MenuPath
 		steps={['Settings', 'Playback', 'Widevine module']}
 	/>.
+</p>
+
+<h2 id="theme-greyed-out">My custom theme is greyed out</h2>
+<p>
+	Turn off <strong>Adaptive theme</strong>. While it's on, you can only pick System, Dark and Light.
+	See <a href="/docs/themes">Custom themes</a>.
 </p>
 
 <h2 id="skipping">Playback stops after a few tracks</h2>
@@ -84,7 +98,7 @@
 
 <h2 id="settings-not-saved">Settings changes don't stick</h2>
 <p>
-	You probably left a syntax error in settings.json. Sonora shows
-	<strong>Fix line N of settings.json to save changes</strong> and stops saving until the file
-	parses again. See <a href="/docs/settings">Settings file</a>.
+	You probably broke the formatting of settings.json. Sonora shows
+	<strong>Fix line N of settings.json to save changes</strong> and won't save anything until you fix
+	it. See <a href="/docs/settings">Settings file</a>.
 </p>
