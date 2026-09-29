@@ -6,7 +6,7 @@
 <script lang="ts">
 	import { getContext, onMount, type Snippet } from 'svelte';
 	import { cubicInOut } from 'svelte/easing';
-	import { slide } from 'svelte/transition';
+	import { slide, type SlideParams } from 'svelte/transition';
 
 	/** `id` is also the anchor, so `/faq#<id>` opens this question. */
 	let { id, question, children }: { id: string; question: string; children: Snippet } = $props();
@@ -15,6 +15,12 @@
 	const open = $derived(accordion.open === id);
 
 	let duration = $state(260);
+
+	/** Svelte's `slide` with a fade on top, so the answer fades in as it opens and out as it closes. */
+	function unfold(node: Element, params: SlideParams) {
+		const base = slide(node, params);
+		return { ...base, css: (t: number, u: number) => `${base.css?.(t, u) ?? ''}; opacity: ${t}` };
+	}
 
 	onMount(() => {
 		if (matchMedia('(prefers-reduced-motion: reduce)').matches) duration = 0;
@@ -32,7 +38,7 @@
 	</button>
 
 	{#if open}
-		<div class="panel" id="{id}-answer" transition:slide={{ duration, easing: cubicInOut }}>
+		<div class="panel" id="{id}-answer" transition:unfold={{ duration, easing: cubicInOut }}>
 			<div class="answer">{@render children()}</div>
 		</div>
 	{:else}
