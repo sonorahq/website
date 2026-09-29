@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import {
 		bands,
 		catalog,
@@ -26,6 +27,15 @@
 	const listener = { name: 'Alex Rivera', id: '31mfqtv7xk2dwrbn4hpz8ecajlyu' };
 
 	const store = settings as unknown as Record<string, string | number | boolean>;
+
+	const running = $derived(page.data.version?.replace(/^v/, '') ?? version);
+	const locales = $derived(['System', ...(page.data.locales ?? [])]);
+
+	function options(row: Row): string[] {
+		if (row.key === 'theme') return themes;
+		if (row.key === 'language') return locales;
+		return row.options ?? [];
+	}
 
 	const marks: Record<string, string> = {
 		General: 'settings',
@@ -171,7 +181,7 @@
 								{/if}
 								<Picker
 									value={String(store[entry.key] ?? '')}
-									options={entry.key === 'theme' ? themes : (entry.options ?? [])}
+									options={options(entry)}
 									onpick={(value) => (store[entry.key] = value)}
 								/>
 							{:else if entry.control === 'slider'}
@@ -189,7 +199,7 @@
 									<button type="button" class="action">{entry.label}</button>
 								{/if}
 							{:else}
-								<span class="reading">{entry.value ?? version}</span>
+								<span class="reading">{entry.value ?? running}</span>
 							{/if}
 						</div>
 					</div>

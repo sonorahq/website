@@ -57,7 +57,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: 5px;
+		border-radius: calc(var(--radius) - 3px);
 		color: var(--dim);
 	}
 

@@ -20,12 +20,15 @@ export async function load({ fetch }) {
 
 		if (!rows.length) return fallback;
 
+		const locales = rows.map((row) => row.name);
+
 		rows.sort((a, b) => b.share - a.share || a.name.localeCompare(b.name));
 
 		return {
 			strings: rows[0].total,
 			languages: rows,
-			done: rows.filter((row) => row.share === 100).length
+			done: rows.filter((row) => row.share === 100).length,
+			locales
 		};
 	} catch {
 		return fallback;

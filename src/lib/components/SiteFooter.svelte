@@ -1,6 +1,10 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { discord, matrix, repo } from '$lib/data/links';
 	import Logo from './Logo.svelte';
+
+	/** Prefix for the home page anchors, so they still resolve from other routes. */
+	const home = $derived(page.url.pathname === '/' ? '' : '/');
 </script>
 
 <footer class="section">
@@ -10,7 +14,7 @@
 	<div class="page">
 		<div class="cols">
 			<div class="about">
-				<a href="#top" class="brand">
+				<a href="{home}#top" class="brand">
 					<Logo size={18} />
 					<span>Sonora</span>
 				</a>
@@ -20,9 +24,11 @@
 			<div class="links">
 				<div>
 					<h3>Site</h3>
-					<a href="#steps">Install</a>
-					<a href="#about">What it does</a>
-					<a href="#community">Community</a>
+					<a href="{home}#steps">Install</a>
+					<a href="{home}#about">What it does</a>
+					<a href="{home}#community">Community</a>
+					<a href="/docs">Docs</a>
+					<a href="/faq">FAQ</a>
 				</div>
 				<div>
 					<h3>Project</h3>
@@ -51,10 +57,12 @@
 				Sonora is free software under the GNU General Public License, version 3 or later. It is an
 				unofficial client and is not affiliated with, endorsed by or sponsored by Spotify AB.
 			</p>
-			<p>
-				The preview on this page plays public domain recordings with public domain lyrics. Its
-				covers are public domain paintings from Wikimedia Commons.
-			</p>
+			{#if !home}
+				<p>
+					The preview on this page plays public domain recordings with public domain lyrics. Its
+					covers are public domain paintings from Wikimedia Commons.
+				</p>
+			{/if}
 		</div>
 	</div>
 </footer>
