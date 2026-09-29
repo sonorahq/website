@@ -2,8 +2,13 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { onMount } from 'svelte';
+	import Control from '$lib/components/mock/Control.svelte';
 	import Icon from '$lib/components/mock/Icon.svelte';
+	import Scrubber from '$lib/components/mock/Scrubber.svelte';
 	import { pages } from '$lib/data/docs';
+	import { radius } from '$lib/mock/settings.svelte';
+	import { palette } from '$lib/mock/theme';
+	import { theme } from '$lib/theme.svelte';
 
 	const status = $derived(page.status);
 	const missing = $derived(status === 404);
@@ -71,6 +76,33 @@
 
 	let elapsed = $state(0);
 	let playing = $state(false);
+	let liked = $state(false);
+	let volume = $state(0.8);
+	let queueing = $state<HTMLElement | null>(null);
+
+	const level = $derived(
+		volume <= 0.0001
+			? 'volume-x'
+			: volume < 0.25
+				? 'volume'
+				: volume < 0.5
+					? 'volume-1'
+					: 'volume-2'
+	);
+
+	/** The app's own colour tokens for the site's current theme, so the player bar is drawn exactly as Sonora draws it. */
+	const chrome = $derived(
+		[
+			...Object.entries(
+				palette(
+					undefined,
+					false,
+					theme.choice === 'light' ? 'Light' : theme.choice === 'dark' ? 'Dark' : 'System'
+				)
+			).map(([name, value]) => `${name}:${value}`),
+			`--m-radius:${radius()}px`
+		].join(';')
+	);
 
 	const line = $derived(Math.floor(elapsed / LINE) % lyrics.length);
 
@@ -163,69 +195,82 @@
 				</ol>
 			</div>
 
-			<div class="bar">
-				<div class="track">
+			<div class="bar" style={chrome}>
+				<div class="now">
 					<div class="thumb">{@render mosaic()}</div>
-					<div class="names">
-						<span class="name">{title}</span>
-						<span class="artist">Sonora · {missing ? 'Unreleased' : `Error ${status}`}</span>
-					</div>
+					<span class="text">
+						<span class="line">
+							<span class="title">{title}</span>
+							<Control
+								icon={liked ? 'heart-filled' : 'heart'}
+								title={liked ? 'Unlike' : 'Like'}
+								small
+								size={22}
+								tint={liked ? 'primary' : 'muted'}
+								onclick={() => (liked = !liked)}
+							/>
+						</span>
+						<span class="caption">Sonora · {missing ? 'Unreleased' : `Error ${status}`}</span>
+					</span>
 				</div>
 
 				<div class="center">
-					<div class="controls">
-						<button type="button" class="small" aria-label="Shuffle" onclick={shuffle}>
-							<Icon name="shuffle" size={16} />
-						</button>
-						<button type="button" aria-label="Go back" onclick={back}>
-							<Icon name="skip-back" size={18} />
-						</button>
-						<button
-							type="button"
-							class="play"
-							aria-label={playing ? 'Pause' : 'Play'}
+					<div class="transport">
+						<Control icon="shuffle" title="Shuffle" small tint="muted" onclick={shuffle} />
+						<Control icon="skip-back" title="Go back" small onclick={back} />
+						<Control
+							icon={playing ? 'pause' : 'play'}
+							title={playing ? 'Pause' : 'Play'}
+							small
 							onclick={() => (playing = !playing)}
-						>
-							<Icon name={playing ? 'pause-filled' : 'play-filled'} size={18} />
-						</button>
-						<button type="button" aria-label="Go home" onclick={() => goto('/')}>
-							<Icon name="skip-forward" size={18} />
-						</button>
-						<button
-							type="button"
-							class="small"
-							aria-label="Try this page again"
+						/>
+						<Control icon="skip-forward" title="Go home" small onclick={() => goto('/')} />
+						<Control
+							icon="repeat"
+							title="Try this page again"
+							small
+							tint="muted"
 							onclick={() => location.reload()}
-						>
-							<Icon name="repeat" size={16} />
-						</button>
+						/>
 					</div>
 
-					<div class="progress">
-						<span class="mono">{clock(elapsed)}</span>
-						<div
-							class="rail"
-							role="slider"
-							tabindex="0"
-							aria-label="Position"
-							aria-valuemin="0"
-							aria-valuemax={length}
-							aria-valuenow={Math.floor(elapsed)}
-							onpointerdown={seek}
-						>
-							<div class="fill" style:width="{(elapsed / length) * 100}%"></div>
+					<div class="seek">
+						<span class="clock end">{clock(elapsed)}</span>
+						<div class="rail">
+							<Scrubber
+								fraction={elapsed / length}
+								label="Seek"
+								onseek={(to: number) => (elapsed = to * length)}
+							/>
 						</div>
-						<span class="mono">{clock(length)}</span>
+						<span class="clock">{clock(length)}</span>
 					</div>
 				</div>
 
-				<div class="hint mono">
-					<kbd>Space</kbd>
-					{playing ? 'pause' : 'play'}
+				<div class="side">
+					<div class="tabs">
+						<Control icon="mic-vocal" title="Lyrics" small selected />
+						<Control
+							icon="list-music"
+							title="Queue"
+							small
+							tint="muted"
+							onclick={() => queueing?.scrollIntoView({ behavior: 'smooth', block: 'center' })}
+						/>
+					</div>
+
+					<div class="sound">
+						<Control icon={level} title="Volume" small tint="muted" />
+						<div class="volume">
+							<Scrubber fraction={volume} label="Volume" onseek={(to: number) => (volume = to)} />
+						</div>
+					</div>
+
+					<Control icon="maximize" title="Fullscreen" small />
 				</div>
 			</div>
 
-			<div class="queue">
+			<div class="queue" bind:this={queueing}>
 				<div class="head">
 					<span class="kicker">Up next</span>
 				</div>
@@ -341,28 +386,31 @@
 
 	.bar {
 		grid-column: 1 / -1;
-		display: grid;
-		grid-template-columns: 1fr minmax(0, 460px) 1fr;
-		align-items: center;
-		gap: 24px;
-		padding: 14px 18px;
-		background: var(--card);
-	}
-
-	.track {
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 14px;
+		height: 76px;
+		padding: 0 17.5px;
+		background: var(--m-secondary);
+		color: var(--m-foreground);
+		font-size: 14px;
+	}
+
+	.now {
+		display: flex;
+		flex: 1;
 		min-width: 0;
+		align-items: center;
+		gap: 10.5px;
 	}
 
 	.thumb {
 		flex: none;
-		width: 48px;
+		width: 42px;
+		height: 42px;
 		padding: 5px;
-		border: 1px solid var(--line);
-		border-radius: 8px;
-		background: var(--bg);
+		border-radius: calc(var(--m-radius) * 0.6);
+		background: var(--m-background);
 	}
 
 	.thumb .mosaic {
@@ -373,123 +421,95 @@
 		border-radius: 0;
 	}
 
-	.names {
+	.text {
 		display: flex;
-		flex-direction: column;
-		gap: 3px;
+		flex: 1;
 		min-width: 0;
+		flex-direction: column;
+		justify-content: center;
 	}
 
-	.name {
-		font-size: 13.5px;
-		font-weight: 600;
-		white-space: nowrap;
+	.line {
+		display: flex;
+		min-width: 0;
+		align-items: center;
+		gap: 3.5px;
+	}
+
+	.title,
+	.caption {
+		min-width: 0;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
-	.artist {
+	.caption {
 		font-size: 12px;
-		color: var(--muted-fg);
-		white-space: nowrap;
+		color: var(--m-muted-foreground);
 	}
 
 	.center {
 		display: flex;
+		flex: 1;
+		min-width: 0;
+		max-width: 560px;
 		flex-direction: column;
-		gap: 8px;
+		align-items: center;
+		gap: 3.5px;
 	}
 
-	.controls {
+	.transport {
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		gap: 8px;
+		gap: 7px;
 	}
 
-	.controls button {
-		width: 34px;
-		height: 34px;
-		display: grid;
-		place-items: center;
-		border-radius: 8px;
-		color: var(--fg);
-	}
-
-	.controls button:hover {
-		background: var(--secondary-hover);
-	}
-
-	.controls .small {
-		color: var(--dim);
-	}
-
-	.controls .small:hover {
-		color: var(--fg);
-	}
-
-	.controls .play {
-		width: 38px;
-		height: 38px;
-		margin: 0 4px;
-		border-radius: 10px;
-		background: var(--primary);
-		color: var(--primary-fg);
-	}
-
-	.controls .play:hover {
-		background: var(--primary-hover);
-	}
-
-	.progress {
-		display: grid;
-		grid-template-columns: 38px minmax(0, 1fr) 38px;
+	.seek {
+		display: flex;
+		width: 100%;
 		align-items: center;
-		gap: 10px;
-		font-size: 11px;
-		color: var(--dim);
-	}
-
-	.progress span:last-child {
-		text-align: right;
+		gap: 7px;
 	}
 
 	.rail {
-		position: relative;
-		height: 4px;
-		background: var(--border);
-		cursor: pointer;
-		touch-action: none;
+		flex: 1;
+		min-width: 0;
 	}
 
-	.rail::before {
-		content: '';
-		position: absolute;
-		inset: -10px 0;
-	}
-
-	.fill {
-		height: 100%;
-		background: var(--fg);
-	}
-
-	.hint {
-		justify-self: end;
-		display: flex;
-		align-items: center;
-		gap: 8px;
+	.clock {
+		font-variant-numeric: tabular-nums;
+		flex: none;
+		width: 37.4px;
 		font-size: 11px;
-		color: var(--dim);
+		color: var(--m-muted-foreground);
+		white-space: nowrap;
 	}
 
-	kbd {
-		padding: 2px 6px;
-		border: 1px solid var(--border);
-		border-bottom-width: 2px;
-		border-radius: 5px;
-		font-family: var(--mono);
-		font-size: 10.5px;
-		color: var(--muted-fg);
+	.end {
+		text-align: right;
+	}
+
+	.side {
+		display: flex;
+		flex: 1;
+		min-width: 0;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 7px;
+	}
+
+	.tabs,
+	.sound {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: 3.5px;
+	}
+
+	.volume {
+		width: 110px;
+		flex: none;
 	}
 
 	.queue {
@@ -577,12 +597,15 @@
 			font-size: 19px;
 		}
 
-		.bar {
-			grid-template-columns: minmax(0, 1fr);
-			gap: 14px;
+		.side {
+			display: none;
 		}
 
-		.hint {
+		.now {
+			flex: none;
+		}
+
+		.text {
 			display: none;
 		}
 
