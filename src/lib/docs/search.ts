@@ -53,13 +53,13 @@ function words(node: Node): string {
 	return parts.join('').replace(/\s+/g, ' ').trim();
 }
 
-/** Cuts one page into sections, at its `h2[id]` headings or, on the FAQ, at each `details[id]` question. */
+/** Cuts one page into sections, at its `h2[id]` headings or, on the FAQ, at each `.question[id]`. */
 function sections(path: string, page: string, html: string): Section[] {
 	const article = new DOMParser().parseFromString(html, 'text/html').querySelector('article.prose');
 	if (!article) return [];
 
 	const intro: Section = { path, page, id: '', title: page, text: '' };
-	const questions = Array.from(article.querySelectorAll('details[id]'));
+	const questions = Array.from(article.querySelectorAll('.question[id]'));
 	if (questions.length) {
 		intro.text = words(article.querySelector('.summary') ?? article);
 		return [
@@ -68,7 +68,7 @@ function sections(path: string, page: string, html: string): Section[] {
 				path,
 				page,
 				id: question.id,
-				title: words(question.querySelector('summary') ?? question),
+				title: words(question.querySelector('.label') ?? question),
 				text: words(question.querySelector('.answer') ?? question)
 			}))
 		];
