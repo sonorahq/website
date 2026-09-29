@@ -12,8 +12,10 @@
 </p>
 <ul>
 	<li>
-		<b>No piracy</b>: plain audio file downloading, ripping, etc. will
-		<u>never</u> be supported. Getting around subscriptions also counts.
+		<b>No piracy.</b> Sonora is a music player, not a music downloader or ripping tool. Exporting
+		audio from streaming services, circumventing subscription requirements, and similar
+		functionality will
+		<u>never</u> be supported.
 	</li>
 	<li>
 		<b>Sonora is not VLC.</b> It will not reconstruct a broken .mp69 file into something audible. If a
