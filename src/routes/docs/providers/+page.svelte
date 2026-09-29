@@ -31,8 +31,7 @@
 
 <h2 id="apple-music">Apple Music</h2>
 <p>
-	Apple Music support is experimental, so expect rough edges. Sign in through the Apple Music
-	window, or paste the <code>media-user-token</code> cookie from music.apple.com.
+	Sign in through the Apple Music window, or paste the <code>media-user-token</code> cookie from music.apple.com.
 </p>
 <ul>
 	<li>Playback needs the <a href="#widevine">Widevine module</a>.</li>
