@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { page } from '$app/state';
 	import { repo } from '$lib/data/links';
 	import Logo from './Logo.svelte';
 	import Mark from './Mark.svelte';
@@ -8,6 +9,9 @@
 	let { stars = null }: { stars?: number | null } = $props();
 
 	let live = $state(null);
+
+	/** Prefix for the home page anchors, so they still resolve from other routes. */
+	const home = $derived(page.url.pathname === '/' ? '' : '/');
 
 	const label = $derived.by(() => {
 		const count = live ?? stars;
@@ -29,14 +33,15 @@
 <header>
 	<div class="bar">
 		<div class="left">
-			<a href="#top" class="brand">
+			<a href="{home}#top" class="brand">
 				<Logo size={20} />
 				<span>Sonora</span>
 			</a>
 			<nav>
-				<a href="#steps">Install</a>
-				<a href="#about">What it does</a>
-				<a href="#community">Community</a>
+				<a href="{home}#steps">Install</a>
+				<a href="{home}#about">What it does</a>
+				<a href="{home}#community">Community</a>
+				<a href="/docs">Docs</a>
 				<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
 			</nav>
 		</div>
@@ -50,7 +55,7 @@
 					<span class="count">{label}</span>
 				{/if}
 			</a>
-			<a href="#steps" class="download">Install</a>
+			<a href="{home}#steps" class="download">Install</a>
 		</div>
 	</div>
 </header>
