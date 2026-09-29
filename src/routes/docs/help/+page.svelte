@@ -35,7 +35,11 @@
 
 <h2 id="features">Asking for a feature</h2>
 <p>
-	Open a <a href="{repo}/issues/new/choose">feature request</a>. Start with the problem you're
-	trying to solve, then the feature you have in mind. One thing we won't add is anything that
-	downloads or rips streams.
+	Read the <a href="/docs/vision">Vision</a> page first. It spells out what fits Sonora and what's out
+	of scope, so you can tell before writing a request whether your idea belongs here.
 </p>
+<p>
+	If it does, open a <a href="{repo}/issues/new/choose">feature request</a>. Start with the problem
+	you're trying to solve, then the feature you have in mind.
+</p>
+<p class="note">Sonora won't add anything that downloads or rips streams.</p>

@@ -2,9 +2,13 @@
 	import { onMount } from 'svelte';
 	import { groups } from '$lib/data/docs';
 
-	const rest = groups.filter(
-		(group) => !group.pages.some((entry) => entry.slug === 'introduction')
-	);
+	/** Every docs group with this page left out, and any group that ends up empty dropped. */
+	const rest = groups
+		.map((group) => ({
+			...group,
+			pages: group.pages.filter((entry) => entry.slug !== 'introduction')
+		}))
+		.filter((group) => group.pages.length);
 
 	let mac = $state(false);
 

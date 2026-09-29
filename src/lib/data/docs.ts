@@ -10,6 +10,11 @@ export const groups: { label: string; pages: DocPage[] }[] = [
 				slug: 'introduction',
 				title: 'Introduction',
 				summary: 'What the docs cover and where to start.'
+			},
+			{
+				slug: 'vision',
+				title: 'Vision',
+				summary: 'What Sonora is for, and what it will never be.'
 			}
 		]
 	},
