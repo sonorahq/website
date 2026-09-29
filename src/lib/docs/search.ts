@@ -1,11 +1,20 @@
 import { pages } from '$lib/data/docs';
 
-/** One searchable stretch of a docs page: the text under a heading, or the page intro when `id` is empty. */
-export type Section = { slug: string; page: string; id: string; title: string; text: string };
+/** One searchable stretch of a page: the text under a heading or FAQ question, or the page intro when `id` is empty. */
+export type Section = { path: string; page: string; id: string; title: string; text: string };
 
 export type Hit = { section: Section; snippet: { text: string; hit: boolean }[] };
 
+/** Every page the search covers, in the order results tie-break. */
+const sources = [
+	...pages.map(({ slug, title }) => ({ path: `/docs/${slug}`, title })),
+	{ path: '/faq', title: 'FAQ' }
+];
+
 let loading: Promise<Section[]> | null = null;
+
+/** Controls whose labels are not page content. */
+const SKIPPED = new Set(['BUTTON', 'DIALOG']);
 
 /** Elements whose text must not run into the next element's, such as table cells and key caps. */
 const SPACED = new Set([
@@ -30,7 +39,7 @@ function words(node: Node): string {
 			parts.push(current.textContent ?? '');
 			return;
 		}
-		if (!(current instanceof Element)) return;
+		if (!(current instanceof Element) || SKIPPED.has(current.tagName)) return;
 		if (current.tagName.toLowerCase() === 'svg') {
 			if (current.getAttribute('aria-label') === 'then') parts.push(' › ');
 			return;
@@ -44,16 +53,32 @@ function words(node: Node): string {
 	return parts.join('').replace(/\s+/g, ' ').trim();
 }
 
-/** Cuts one page into sections at its `h2[id]` headings. */
-function sections(slug: string, title: string, html: string): Section[] {
-	const article = new DOMParser().parseFromString(html, 'text/html').querySelector('article.doc');
+/** Cuts one page into sections, at its `h2[id]` headings or, on the FAQ, at each `details[id]` question. */
+function sections(path: string, page: string, html: string): Section[] {
+	const article = new DOMParser().parseFromString(html, 'text/html').querySelector('article.prose');
 	if (!article) return [];
 
-	const found: Section[] = [{ slug, page: title, id: '', title, text: '' }];
+	const intro: Section = { path, page, id: '', title: page, text: '' };
+	const questions = Array.from(article.querySelectorAll('details[id]'));
+	if (questions.length) {
+		intro.text = words(article.querySelector('.summary') ?? article);
+		return [
+			intro,
+			...questions.map((question) => ({
+				path,
+				page,
+				id: question.id,
+				title: words(question.querySelector('summary') ?? question),
+				text: words(question.querySelector('.answer') ?? question)
+			}))
+		];
+	}
+
+	const found = [intro];
 	for (const child of Array.from(article.children)) {
 		if (child.tagName === 'H1') continue;
-		if (child.tagName === 'H2' && child.id) {
-			found.push({ slug, page: title, id: child.id, title: words(child), text: '' });
+		if (child.tagName === 'H2') {
+			if (child.id) found.push({ path, page, id: child.id, title: words(child), text: '' });
 			continue;
 		}
 		const current = found[found.length - 1];
@@ -62,13 +87,13 @@ function sections(slug: string, title: string, html: string): Section[] {
 	return found;
 }
 
-/** Fetches every docs page once and indexes it. Later calls reuse the same result, and a failed page is skipped rather than failing the whole index. */
+/** Fetches every page once and indexes it. Later calls reuse the same result, and a failed page is skipped rather than failing the whole index. */
 export function loadIndex(): Promise<Section[]> {
 	loading ??= Promise.all(
-		pages.map(async ({ slug, title }) => {
+		sources.map(async ({ path, title }) => {
 			try {
-				const res = await fetch(`/docs/${slug}`);
-				return res.ok ? sections(slug, title, await res.text()) : [];
+				const res = await fetch(path);
+				return res.ok ? sections(path, title, await res.text()) : [];
 			} catch {
 				return [];
 			}

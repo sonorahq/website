@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import Outline from '$lib/components/docs/Outline.svelte';
 	import Search from '$lib/components/docs/Search.svelte';
+	import '$lib/prose.css';
 	import { groups, pages } from '$lib/data/docs';
 
 	let { children } = $props();
@@ -40,7 +41,7 @@
 		</aside>
 
 		<div class="main">
-			<article class="doc" bind:this={article}>
+			<article class="prose" bind:this={article}>
 				{@render children()}
 			</article>
 
@@ -161,146 +162,6 @@
 		text-align: right;
 	}
 
-	.doc {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-	}
-
-	.doc :global(h1) {
-		font-size: 34px;
-		line-height: 1.1;
-	}
-
-	.doc :global(.summary) {
-		margin-bottom: 8px;
-		font-size: 17px;
-		line-height: 1.55;
-	}
-
-	.doc :global(h2) {
-		margin-top: 36px;
-		font-size: 22px;
-		scroll-margin-top: calc(var(--header) + 24px);
-	}
-
-	.doc :global(h3) {
-		margin-top: 12px;
-	}
-
-	.doc :global(p),
-	.doc :global(li) {
-		font-size: 15px;
-		line-height: 1.65;
-		color: var(--muted-fg);
-		text-wrap: pretty;
-	}
-
-	.doc :global(ul),
-	.doc :global(ol) {
-		margin: 0;
-		padding-left: 20px;
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-	}
-
-	.doc :global(strong) {
-		color: var(--fg);
-		font-weight: 500;
-	}
-
-	.doc :global(p a),
-	.doc :global(li a) {
-		color: var(--fg);
-		text-decoration: underline;
-		text-decoration-color: var(--faint);
-		text-underline-offset: 3px;
-	}
-
-	.doc :global(p a:hover),
-	.doc :global(li a:hover) {
-		text-decoration-color: var(--fg);
-	}
-
-	.doc :global(code),
-	.doc :global(kbd) {
-		font-family: var(--mono);
-		font-size: 12.5px;
-	}
-
-	.doc :global(p code),
-	.doc :global(li code),
-	.doc :global(td code) {
-		padding: 2px 6px;
-		border-radius: 6px;
-		background: var(--secondary);
-		color: var(--fg);
-		overflow-wrap: anywhere;
-	}
-
-	.doc :global(kbd) {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		min-width: 22px;
-		height: 22px;
-		padding: 0 6px;
-		border: 1px solid var(--border);
-		border-bottom-width: 2px;
-		border-radius: 6px;
-		background: var(--card);
-		color: var(--fg);
-	}
-
-	.doc :global(.note) {
-		padding: 14px 16px;
-		border: 1px solid var(--line);
-		border-radius: var(--radius);
-		background: var(--secondary);
-	}
-
-	.doc :global(table) {
-		width: 100%;
-		border: 1px solid var(--line);
-		border-radius: var(--radius);
-		border-spacing: 0;
-		overflow: hidden;
-		font-size: 13.5px;
-	}
-
-	.doc :global(th) {
-		padding: 10px 16px;
-		border-bottom: 1px solid var(--line);
-		background: var(--secondary);
-		font-size: 12px;
-		font-weight: 600;
-		text-align: left;
-		color: var(--muted-fg);
-	}
-
-	.doc :global(td) {
-		padding: 10px 16px;
-		border-bottom: 1px solid var(--line);
-		color: var(--muted-fg);
-		vertical-align: top;
-		line-height: 1.5;
-	}
-
-	.doc :global(tr:last-child td) {
-		border-bottom: none;
-	}
-
-	.doc :global(td:first-child) {
-		color: var(--fg);
-		white-space: nowrap;
-	}
-
-	.doc :global(.keys) {
-		display: inline-flex;
-		gap: 4px;
-	}
-
 	@media (max-width: 1100px) {
 		.layout {
 			grid-template-columns: 190px minmax(0, 1fr);
@@ -333,14 +194,6 @@
 
 		.group {
 			flex-shrink: 0;
-		}
-
-		.doc :global(h1) {
-			font-size: 28px;
-		}
-
-		.doc :global(td:first-child) {
-			white-space: normal;
 		}
 	}
 </style>

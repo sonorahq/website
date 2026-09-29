@@ -9,6 +9,7 @@
 <h1>Getting help</h1>
 <p class="summary">
 	Questions go in the chat and bugs go on GitHub. Please don't open an issue just to ask something.
+	The <a href="/faq">FAQ</a> covers the problems people hit most, so it's worth a look first.
 </p>
 
 <h2 id="chat">Chat</h2>

@@ -20,7 +20,6 @@ export const groups: { label: string; pages: DocPage[] }[] = [
 	{
 		label: 'When something breaks',
 		pages: [
-			{ slug: 'troubleshooting', title: 'Troubleshooting' },
 			{ slug: 'logs', title: 'Logs' },
 			{ slug: 'help', title: 'Getting help' }
 		]

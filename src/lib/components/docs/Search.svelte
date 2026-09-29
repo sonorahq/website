@@ -32,7 +32,7 @@
 	}
 
 	function href(hit: Hit) {
-		return `/docs/${hit.section.slug}${hit.section.id ? `#${hit.section.id}` : ''}`;
+		return `${hit.section.path}${hit.section.id ? `#${hit.section.id}` : ''}`;
 	}
 
 	function choose(hit: Hit | undefined) {

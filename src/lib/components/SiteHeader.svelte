@@ -42,6 +42,7 @@
 				<a href="{home}#about">What it does</a>
 				<a href="{home}#community">Community</a>
 				<a href="/docs">Docs</a>
+				<a href="/faq">FAQ</a>
 				<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
 			</nav>
 		</div>
