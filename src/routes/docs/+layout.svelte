@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import Outline from '$lib/components/docs/Outline.svelte';
+	import Search from '$lib/components/docs/Search.svelte';
 	import { groups, pages } from '$lib/data/docs';
 
 	let { children } = $props();
@@ -18,21 +19,24 @@
 
 	<div class="page layout">
 		<aside class="pages">
-			<nav aria-label="Docs">
-				{#each groups as group (group.label)}
-					<div class="group">
-						<span class="kicker">{group.label}</span>
-						{#each group.pages as entry (entry.slug)}
-							<a
-								href="/docs/{entry.slug}"
-								class:on={index >= 0 && pages[index].slug === entry.slug}
-								aria-current={index >= 0 && pages[index].slug === entry.slug ? 'page' : undefined}
-								>{entry.title}</a
-							>
-						{/each}
-					</div>
-				{/each}
-			</nav>
+			<div class="rail">
+				<Search />
+				<nav aria-label="Docs">
+					{#each groups as group (group.label)}
+						<div class="group">
+							<span class="kicker">{group.label}</span>
+							{#each group.pages as entry (entry.slug)}
+								<a
+									href="/docs/{entry.slug}"
+									class:on={index >= 0 && pages[index].slug === entry.slug}
+									aria-current={index >= 0 && pages[index].slug === entry.slug ? 'page' : undefined}
+									>{entry.title}</a
+								>
+							{/each}
+						</div>
+					{/each}
+				</nav>
+			</div>
 		</aside>
 
 		<div class="main">
@@ -75,10 +79,16 @@
 		padding-bottom: 96px;
 	}
 
-	.pages nav,
+	.rail,
 	.sticky {
 		position: sticky;
 		top: calc(var(--header) + 32px);
+	}
+
+	.rail {
+		display: flex;
+		flex-direction: column;
+		gap: 28px;
 	}
 
 	.pages nav {
@@ -309,8 +319,12 @@
 			padding-bottom: 64px;
 		}
 
-		.pages nav {
+		.rail {
 			position: static;
+			gap: 20px;
+		}
+
+		.pages nav {
 			flex-direction: row;
 			gap: 20px;
 			overflow-x: auto;
