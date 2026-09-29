@@ -71,7 +71,7 @@
 	and saves nothing until you fix it. It also refuses to overwrite a file that changed on disk after it
 	last read it.
 </p>
-<Code label="settings.json" text={example} />
+<Code label="settings.json" lang="json" text={example} />
 
 <h2 id="not-here">What is not in the file</h2>
 <p>

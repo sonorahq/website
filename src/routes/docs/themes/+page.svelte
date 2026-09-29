@@ -117,7 +117,7 @@
 	always
 	<code>1</code>, and <code>theme</code>, which holds the colours.
 </p>
-<Code label="themes/nord.json" text={example} />
+<Code label="themes/nord.json" lang="json" text={example} />
 <p>
 	Colours are hex, as <code>RRGGBB</code> or <code>RRGGBBAA</code>, with or without the
 	<code>#</code>. Every theme is laid over the built-in Dark theme, and any token you leave out
@@ -167,4 +167,4 @@
 	the adaptive tint. It also takes <code>radius</code>, from 0 to 24, and <code>font_size</code>,
 	from 10 to 24. Theme files cannot set those two.
 </p>
-<Code label="settings.json" text={overrides} />
+<Code label="settings.json" lang="json" text={overrides} />

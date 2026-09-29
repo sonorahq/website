@@ -1,7 +1,11 @@
 <script lang="ts">
+	import { highlightJson } from '$lib/highlight';
 	import CopyButton from '../CopyButton.svelte';
 
-	let { text, label }: { text: string; label?: string } = $props();
+	/** `lang` turns on highlighting. Without it the text is shown as is. */
+	let { text, label, lang }: { text: string; label?: string; lang?: 'json' } = $props();
+
+	const tokens = $derived(lang === 'json' ? highlightJson(text) : null);
 </script>
 
 <figure>
@@ -9,7 +13,8 @@
 		<figcaption class="mono">{label}</figcaption>
 	{/if}
 	<div class="body">
-		<pre class="mono">{text}</pre>
+		<!-- prettier-ignore -->
+		<pre class="mono">{#if tokens}{#each tokens as token, index (index)}<span class={token.kind}>{token.text}</span>{/each}{:else}{text}{/if}</pre>
 		<CopyButton {text} />
 	</div>
 </figure>
@@ -44,5 +49,25 @@
 		overflow-x: auto;
 		font-size: 13px;
 		line-height: 1.6;
+	}
+
+	.key {
+		color: var(--syntax-key);
+	}
+
+	.string {
+		color: var(--syntax-string);
+	}
+
+	.number {
+		color: var(--syntax-number);
+	}
+
+	.literal {
+		color: var(--syntax-literal);
+	}
+
+	.punct {
+		color: var(--dim);
 	}
 </style>

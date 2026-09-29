@@ -78,4 +78,4 @@
 	<a href="/docs/settings">settings file</a>. To point ListenBrainz at a self-hosted server, set its
 	<code>server</code> there.
 </p>
-<Code label="settings.json" text={selfHosted} />
+<Code label="settings.json" lang="json" text={selfHosted} />

@@ -20,6 +20,10 @@
 	--shadow: 0 50px 130px -30px rgb(0 0 0 / 0.95);
 	--glow: 0 0 140px -24px rgb(255 255 255 / 0.24);
 	--header-bg: rgb(10 10 10 / 0.86);
+	--syntax-key: #93c5fd;
+	--syntax-string: #a7d9a0;
+	--syntax-number: #f4b77a;
+	--syntax-literal: #d8b4fe;
 
 	--radius: 10px;
 	--radius-lg: 14px;
@@ -54,6 +58,10 @@
 	--shadow: 0 32px 70px -28px rgb(23 23 23 / 0.28);
 	--glow: 0 0 0 0 transparent;
 	--header-bg: rgb(250 250 250 / 0.86);
+	--syntax-key: #1d5fbf;
+	--syntax-string: #2f7d32;
+	--syntax-number: #a85400;
+	--syntax-literal: #8a3fb8;
 }
 
 @media (prefers-color-scheme: light) {
@@ -79,6 +87,10 @@
 		--shadow: 0 32px 70px -28px rgb(23 23 23 / 0.28);
 		--glow: 0 0 0 0 transparent;
 		--header-bg: rgb(250 250 250 / 0.86);
+		--syntax-key: #1d5fbf;
+		--syntax-string: #2f7d32;
+		--syntax-number: #a85400;
+		--syntax-literal: #8a3fb8;
 	}
 }
 
