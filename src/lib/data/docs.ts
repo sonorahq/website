@@ -40,7 +40,7 @@ export const groups: { label: string; pages: DocPage[] }[] = [
 			{
 				slug: 'settings',
 				title: 'Settings file',
-				summary: 'Where settings.json lives, editing it by hand, and the Home Manager module.'
+				summary: 'Where settings.json is, editing it by hand, and the Home Manager module.'
 			},
 			{
 				slug: 'themes',

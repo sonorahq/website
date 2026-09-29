@@ -21,13 +21,19 @@
 </p>
 <ul>
 	<li>You need Premium. Spotify turns free accounts away at sign-in.</li>
+	<li>
+		If you are getting a "Spotify is not granting this account playback keys" error each time you
+		try playing a track, Spotify won't work for you in Sonora. See <a
+			href="https://github.com/librespot-org/librespot/issues/1649">issue 1649</a
+		> in librespot.
+	</li>
 	<li>A region error means Spotify won't serve your account from where you're connecting.</li>
 </ul>
 
 <h2 id="youtube">YouTube Music</h2>
 <p>
-	There are three ways in: a Google login window, pasting your cookies by hand, or guest mode. None
-	of them needs Premium.
+	There are three ways to log in: a Google login window, pasting your cookies manually, or guest
+	mode. None of them needs Premium.
 </p>
 
 <h2 id="apple-music">Apple Music</h2>
@@ -38,8 +44,7 @@
 
 <h2 id="deezer">Deezer</h2>
 <p>
-	Sign in through the Deezer window or paste your <code>arl</code> cookie. The bare value works, and
-	so does <code>arl=…</code>.
+	Sign in through the Deezer window or paste your <code>arl</code> cookie.
 </p>
 
 <h2 id="subsonic">Subsonic and Navidrome</h2>
@@ -47,24 +52,18 @@
 	Enter the server address, your user name and password. Leave out the scheme and Sonora assumes
 	<code>http://</code>, so type <code>https://</code> yourself if your server has TLS.
 </p>
-<ul>
-	<li>
-		Your password is stored in plain text in the cache folder. On Linux and macOS only your user can
-		read it.
-	</li>
-</ul>
 
 <h2 id="local-files">Local files</h2>
 <p>
-	Add folders in settings. Sonora walks through them, subfolders and symlinks included. After the
-	first scan it only rereads files whose size or date changed, so later scans are quick. It doesn't
-	watch the folders while it runs, though. Hit <AppButton>Rescan</AppButton> after you add music.
+	Add folders in settings. Sonora scans them, subfolders and symlinks included. After the first read
+	it only checks files whose size or date changed, so later scans are quick. It doesn't watch the
+	folders while it runs, though. Hit <AppButton>Rescan</AppButton> after you add music.
 </p>
 <ul>
-	<li>It plays MP3, FLAC, M4A, MP4, AAC, OGG, Opus, WAV, WavPack, APE, WebM and MKA.</li>
+	<li>MP3, FLAC, M4A, MP4, AAC, OGG, Opus, WAV, WavPack, APE, WebM and MKA are supported.</li>
 	<li>
-		Covers come from the embedded art, or from <code>cover.*</code> or <code>folder.*</code> in the
-		same folder. Artist pictures come from <code>artist.jpg</code>.
+		Covers are loaded from the embedded art, or from <code>cover.*</code> or <code>folder.*</code>
+		in the same folder. Artist pictures come from <code>artist.jpg</code>.
 	</li>
 	<li>Lyrics come from a <code>.lrc</code> file next to the track, or from the tags.</li>
 </ul>
@@ -84,18 +83,18 @@
 	</tbody>
 </table>
 <p>
-	You can't choose a quality yet. Sonora always asks for the best stream it can get. A quality
-	setting might be added in the future, mostly for people on metered connections. The same goes for
-	lossless Apple Music and asking a Subsonic server to transcode.
+	You can't choose a specific quality (yet). The app always asks for the best stream it can get. A
+	quality setting might be added in the future, mostly for people on metered connections, as
+	lossless is currently out of reach for most providers that don't already support it.
 </p>
 
 <h2 id="widevine">Widevine</h2>
 <p>
-	Apple Music streams are encrypted, and decrypting them takes Google's Widevine module. Sonora
-	doesn't ship it. If you have Chrome, Edge, Brave, Vivaldi, Chromium, Opera or Firefox, it borrows
-	their copy.
+	Apple Music streams are encrypted, and decrypting them needs Google's Widevine module. If you have
+	Chrome, Edge, Brave, Vivaldi, Chromium, Opera or Firefox, it borrows their copy.
 </p>
 <p>
-	If you don't, go to <MenuPath steps={['Settings', 'Playback', 'Widevine module']} /> and download it
-	from Google once you've accepted their terms. Widevine only exists for x86_64 and arm64.
+	If you don't, the app will offer to download one from Google once you've accepted their terms. If
+	it doesn't, go to <MenuPath steps={['Settings', 'Playback', 'Widevine module']} /> and download it manually.
+	Widevine only exists for x86_64 and arm64.
 </p>

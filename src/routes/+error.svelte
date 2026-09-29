@@ -59,7 +59,7 @@
 		'We looked through every playlist',
 		'and every shelf in the library',
 		'but this page was never released',
-		'maybe the link was a bootleg',
+		'maybe the link is broken',
 		"or it's still stuck in the queue",
 		'so here are some tracks that exist'
 	];
@@ -179,7 +179,6 @@
 
 	<div class="page">
 		<div class="section-head">
-			<span class="kicker">Error {status}</span>
 			<h1>{title}</h1>
 		</div>
 

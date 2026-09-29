@@ -49,16 +49,11 @@
 		</tr>
 	</tbody>
 </table>
-<p>It's one account per service.</p>
 
 <h2 id="when">When a play counts</h2>
 <p>
-	The track has to be at least 30 seconds long. It counts at the halfway point or at four minutes,
-	whichever comes first. Skipping ahead past that point counts. Pausing doesn't reset anything.
-</p>
-<p>
-	Tracks with no artist or title are skipped. For tracks with several artists, only the first one is
-	sent.
+	Normal scrobbling conventions apply. The track has to be at least 30 seconds long, and it counts
+	at the halfway point or at four minutes, whichever comes first.
 </p>
 <p>
 	Last.fm, Libre.fm and ListenBrainz also get a now-playing update when a track starts. Maloja
@@ -70,11 +65,3 @@
 	Sonora sends each play once. If you're offline or the service is down, that play is gone, and the
 	<a href="/docs/logs">log</a> says why. Queueing plays and sending them later might be added in the future.
 </p>
-
-<h2 id="storage">Where accounts are stored</h2>
-<p>
-	Keys and session tokens sit in plain text under <code>scrobbling</code> in the
-	<a href="/docs/settings">settings file</a>. That's also where you point ListenBrainz at a
-	self-hosted server, by setting <code>server</code>. The app has no field for it yet.
-</p>
-<Code label="settings.json" lang="json" text={selfHosted} />

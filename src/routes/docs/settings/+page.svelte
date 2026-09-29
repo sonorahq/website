@@ -38,8 +38,8 @@
 
 <h1>Settings file</h1>
 <p class="summary">
-	Everything on the settings page ends up in one JSON file. Edit it while Sonora is running and the
-	change shows up almost at once.
+	Everything on the settings page is one JSON file. Just like <a href="/docs/themes">themes</a>,
+	it's picked up on the fly.
 </p>
 
 <h2 id="location">Location</h2>
@@ -60,23 +60,21 @@
 
 <h2 id="editing">Editing by hand</h2>
 <p>
-	It's plain JSON, no comments. Leave a key out and Sonora uses the default. Keys it doesn't know
-	are ignored, and they disappear the next time Sonora saves, because it rewrites the whole file.
-	Your formatting goes with them.
+	Unknown keys are ignored, and they disappear the next time Sonora saves, because it rewrites the
+	whole file. Here is an example of a valid settings.json:
 </p>
 <Code label="settings.json" lang="json" text={example} />
 <p>
-	Break the JSON and Sonora shows <strong>Fix line N of settings.json to save changes</strong>. It
-	won't save anything until you fix it. It also won't overwrite the file if something else changed
+	Break the formatting and Sonora shows <strong>Fix line N of settings.json to save changes</strong
+	>. It won't save anything until you do. It also won't overwrite the file if something else changed
 	it since Sonora last read it.
 </p>
 
 <h2 id="not-here">What isn't in the file</h2>
 <p>
-	Some things live in <code>state.sqlite</code> in the data folder instead: the provider you're
-	signed in to, volume, shuffle and repeat, the window size, sidebar widths, table layouts and pins.
-	Your history, local playlists and favourites are in there too. Putting <code>provider</code> in settings.json
-	does nothing.
+	Providers and application state are saved into a local SQLite database. Scrobbling services are
+	not, so their secrets may appear in settings.json. This will most likely change in the coming
+	releases.
 </p>
 
 <h2 id="other-files">Other files</h2>

@@ -14,8 +14,8 @@
 
 <h2 id="chat">Chat</h2>
 <p>
-	Most people hang out on <a href={discord}>Discord</a>. The <a href={matrix}>Matrix</a> space is bridged
-	to it, so you'll reach the same people either way.
+	Most people hang out on <a href={discord}>Discord</a>. We also have a bridged
+	<a href={matrix}>Matrix</a> space.
 </p>
 
 <h2 id="bugs">Reporting a bug</h2>
@@ -25,7 +25,7 @@
 </p>
 <ul>
 	<li>what happened and how to make it happen again</li>
-	<li>your Sonora version, which is on the first line of the log</li>
+	<li>your Sonora version</li>
 	<li>how you installed it, and your OS and its version</li>
 	<li>on Linux, Wayland or X11 and your desktop</li>
 	<li>your GPU and Vulkan driver</li>
