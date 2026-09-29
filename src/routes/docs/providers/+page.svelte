@@ -31,14 +31,9 @@
 
 <h2 id="apple-music">Apple Music</h2>
 <p>
-	Sign in through the Apple Music window, or paste the <code>media-user-token</code> cookie from music.apple.com.
+	Sign in through the Apple Music window, or paste the <code>media-user-token</code> cookie from
+	music.apple.com. Playback needs the <a href="#widevine">Widevine module</a>.
 </p>
-<ul>
-	<li>Playback needs the <a href="#widevine">Widevine module</a>.</li>
-	<li>
-		Your account can't fetch lyrics. Sonora gets them from the public Apple Music catalogue instead.
-	</li>
-</ul>
 
 <h2 id="deezer">Deezer</h2>
 <p>
