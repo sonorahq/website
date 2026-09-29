@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MenuPath from '$lib/components/docs/MenuPath.svelte';
 	import Code from '$lib/components/docs/Code.svelte';
 </script>
 
@@ -13,7 +14,9 @@
 </p>
 
 <h2 id="location">Location</h2>
-<p><strong>Settings → About → Log file → Open log</strong> opens it in your default text editor.</p>
+<p>
+	<MenuPath steps={['Settings', 'About', 'Log file', 'Open log']} /> opens it in your default text editor.
+</p>
 <table>
 	<tbody>
 		<tr><td>Linux</td><td><code>~/.local/state/sonora/sonora.log</code></td></tr>

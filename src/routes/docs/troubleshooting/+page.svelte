@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MenuPath from '$lib/components/docs/MenuPath.svelte';
 	import Code from '$lib/components/docs/Code.svelte';
 </script>
 
@@ -22,7 +23,7 @@
 <h2 id="windows-warning">Windows warns about an unknown publisher</h2>
 <p>
 	The Windows builds are not code-signed yet, and signing through the SignPath Foundation is applied
-	for. Until it lands, choose <strong>More info → Run anyway</strong> on the first launch.
+	for. Until it lands, choose <MenuPath steps={['More info', 'Run anyway']} /> on the first launch.
 </p>
 
 <h2 id="linux-no-sound">No sound on Linux</h2>
@@ -64,7 +65,9 @@
 <h2 id="widevine">Apple Music will not play</h2>
 <p>
 	<strong>No widevine module was found on this machine</strong> means Sonora found no Widevine copy
-	in your browsers. Download it under <strong>Settings → Playback → Widevine module</strong>.
+	in your browsers. Download it under <MenuPath
+		steps={['Settings', 'Playback', 'Widevine module']}
+	/>.
 </p>
 
 <h2 id="skipping">Playback stops after several tracks</h2>

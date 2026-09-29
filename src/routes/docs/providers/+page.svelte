@@ -1,3 +1,7 @@
+<script lang="ts">
+	import MenuPath from '$lib/components/docs/MenuPath.svelte';
+</script>
+
 <svelte:head>
 	<title>Providers · Sonora docs</title>
 </svelte:head>
@@ -96,6 +100,7 @@
 <p>
 	Apple Music streams are encrypted and need Google's Widevine module to play. Sonora does not ship
 	it. It first looks for a copy from Chrome, Edge, Brave, Vivaldi, Chromium, Opera or Firefox. If it
-	finds none, open <strong>Settings → Playback → Widevine module</strong> and download it from Google
-	after accepting their terms. The same place uninstalls it. Widevine only exists for x86_64 and arm64.
+	finds none, open <MenuPath steps={['Settings', 'Playback', 'Widevine module']} /> and download it from
+	Google after accepting their terms. The same place uninstalls it. Widevine only exists for x86_64 and
+	arm64.
 </p>

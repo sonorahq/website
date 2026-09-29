@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MenuPath from '$lib/components/docs/MenuPath.svelte';
 	import Code from '$lib/components/docs/Code.svelte';
 
 	const selfHosted = `"scrobbling": {
@@ -15,8 +16,9 @@
 
 <h1>Scrobbling</h1>
 <p class="summary">
-	Link your accounts under <strong>Settings → Integrations → Scrobbling</strong>. Every linked
-	service gets every play, and each has its own switch so you can pause one without unlinking it.
+	Link your accounts under <MenuPath steps={['Settings', 'Integrations', 'Scrobbling']} />. Every
+	linked service gets every play, and each has its own switch so you can pause one without unlinking
+	it.
 </p>
 
 <h2 id="services">Linking a service</h2>

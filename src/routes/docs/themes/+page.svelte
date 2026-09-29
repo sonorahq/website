@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MenuPath from '$lib/components/docs/MenuPath.svelte';
 	import Code from '$lib/components/docs/Code.svelte';
 
 	const example = `{
@@ -94,8 +95,8 @@
 
 <h2 id="folder">The themes folder</h2>
 <p>
-	<strong>Settings → Appearance → Theme → Open folder</strong> creates the folder and opens it. It
-	sits next to the <a href="/docs/settings">settings file</a>.
+	<MenuPath steps={['Settings', 'Appearance', 'Theme', 'Open folder']} /> creates the folder and opens
+	it. It sits next to the <a href="/docs/settings">settings file</a>.
 </p>
 <table>
 	<tbody>
