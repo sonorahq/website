@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { onMount, setContext, tick } from 'svelte';
+	import EditLink from '$lib/components/EditLink.svelte';
 	import Code from '$lib/components/docs/Code.svelte';
 	import MenuPath from '$lib/components/docs/MenuPath.svelte';
 	import Search from '$lib/components/docs/Search.svelte';
@@ -179,6 +180,10 @@
 				Still stuck? See <a href="/docs/help">Getting help</a>.
 			</p>
 		</article>
+
+		<div class="source">
+			<EditLink path="src/routes/faq/+page.svelte" />
+		</div>
 	</div>
 </section>
 
@@ -202,6 +207,10 @@
 
 	.more {
 		margin-top: 24px;
+	}
+
+	.source {
+		margin-top: 48px;
 	}
 
 	@media (max-width: 900px) {

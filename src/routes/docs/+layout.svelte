@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
+	import EditLink from '$lib/components/EditLink.svelte';
 	import Outline from '$lib/components/docs/Outline.svelte';
 	import Search from '$lib/components/docs/Search.svelte';
 	import '$lib/prose.css';
@@ -69,6 +70,12 @@
 			<article class="prose" bind:this={article}>
 				{@render children()}
 			</article>
+
+			{#if current}
+				<div class="source">
+					<EditLink path="src/routes/docs/{current.slug}/+page.svelte" />
+				</div>
+			{/if}
 
 			{#if previous || next}
 				<div class="pager">
@@ -239,11 +246,15 @@
 		max-width: 720px;
 	}
 
+	.source {
+		margin-top: 48px;
+	}
+
 	.pager {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 12px;
-		margin-top: 64px;
+		margin-top: 24px;
 	}
 
 	.pager a {
