@@ -3,6 +3,7 @@
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
+	"packageManager": "bun@1.4.2",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
@@ -10,7 +11,7 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"format": "prettier --write .",
 		"lint": "prettier --check .",
-		"deploy": "npm run build && wrangler deploy"
+		"deploy": "bun run build && wrangler deploy"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^3.0.0",
