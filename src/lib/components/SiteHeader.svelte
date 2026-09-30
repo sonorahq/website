@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { fade, fly } from 'svelte/transition';
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { repo } from '$lib/data/links';
 	import Logo from './Logo.svelte';
@@ -9,9 +11,22 @@
 	let { stars = null }: { stars?: number | null } = $props();
 
 	let live = $state(null);
+	let open = $state(false);
+	let header = $state<HTMLElement | null>(null);
+	let duration = $state(200);
 
 	/** Prefix for the home page anchors, so they still resolve from other routes. */
 	const home = $derived(page.url.pathname === '/' ? '' : '/');
+
+	/** Site links shared by the inline nav and the narrow screen menu. */
+	const links = $derived([
+		{ href: `${home}#steps`, label: 'Install' },
+		{ href: `${home}#about`, label: 'What it does' },
+		{ href: `${home}#community`, label: 'Community' },
+		{ href: '/docs', label: 'Docs' },
+		{ href: '/faq', label: 'FAQ' },
+		{ href: `${repo}/blob/main/CHANGELOG.md`, label: 'Changelog' }
+	]);
 
 	const label = $derived.by(() => {
 		const count = live ?? stars;
@@ -20,7 +35,11 @@
 		return (count / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
 	});
 
+	afterNavigate(() => (open = false));
+
 	onMount(async () => {
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) duration = 0;
+
 		try {
 			const res = await fetch('https://api.github.com/repos/sonorahq/sonora');
 			if (res.ok) live = (await res.json()).stargazers_count;
@@ -30,7 +49,18 @@
 	});
 </script>
 
-<header>
+<svelte:window
+	onkeydown={(event) => {
+		if (open && event.key === 'Escape') open = false;
+	}}
+	onclick={(event) => {
+		if (open && header && !event.composedPath().includes(header)) open = false;
+	}}
+/>
+
+<div class="slot"></div>
+
+<header bind:this={header}>
 	<div class="bar">
 		<div class="left">
 			<a href="{home}#top" class="brand">
@@ -38,12 +68,9 @@
 				<span>Sonora</span>
 			</a>
 			<nav>
-				<a href="{home}#steps">Install</a>
-				<a href="{home}#about">What it does</a>
-				<a href="{home}#community">Community</a>
-				<a href="/docs">Docs</a>
-				<a href="/faq">FAQ</a>
-				<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
+				{#each links as link (link.label)}
+					<a href={link.href}>{link.label}</a>
+				{/each}
 			</nav>
 		</div>
 
@@ -57,14 +84,59 @@
 				{/if}
 			</a>
 			<a href="{home}#steps" class="download">Install</a>
+			<button
+				type="button"
+				class="toggle"
+				aria-label={open ? 'Close menu' : 'Open menu'}
+				aria-expanded={open}
+				aria-controls="menu"
+				onclick={() => (open = !open)}
+			>
+				<svg viewBox="0 0 24 24" aria-hidden="true">
+					{#if open}
+						<path d="M6 6l12 12" />
+						<path d="M18 6L6 18" />
+					{:else}
+						<path d="M4 7h16" />
+						<path d="M4 12h16" />
+						<path d="M4 17h16" />
+					{/if}
+				</svg>
+			</button>
 		</div>
 	</div>
+
+	{#if open}
+		<nav id="menu" class="menu" aria-label="Menu" transition:fly={{ y: -8, duration }}>
+			{#each links as link (link.label)}
+				<a href={link.href} onclick={() => (open = false)}>{link.label}</a>
+			{/each}
+			<a href={repo} class="repo" onclick={() => (open = false)}>
+				<Mark name="github" />
+				GitHub
+				{#if label}
+					<span class="count">{label}</span>
+				{/if}
+			</a>
+		</nav>
+	{/if}
 </header>
 
+{#if open}
+	<div class="scrim" transition:fade={{ duration }}></div>
+{/if}
+
 <style>
+	/* Holds the header's place in the flow, since a fixed header stays pinned when the page overscrolls. */
+	.slot {
+		height: var(--header);
+	}
+
 	header {
-		position: sticky;
+		position: fixed;
 		top: 0;
+		left: 0;
+		right: 0;
 		z-index: 10;
 		height: var(--header);
 		border-bottom: 1px solid var(--line);
@@ -103,7 +175,7 @@
 		letter-spacing: -0.02em;
 	}
 
-	nav {
+	.left nav {
 		display: flex;
 		gap: 22px;
 		font-size: 13px;
@@ -153,10 +225,89 @@
 		background: var(--primary-hover);
 	}
 
+	.toggle {
+		width: 36px;
+		height: 36px;
+		display: none;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		color: var(--muted-fg);
+	}
+
+	.toggle:hover,
+	.toggle[aria-expanded='true'] {
+		background: var(--secondary);
+		color: var(--fg);
+	}
+
+	.toggle svg {
+		width: 16px;
+		height: 16px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+	}
+
+	.menu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		right: 0;
+		display: none;
+		flex-direction: column;
+		padding: 8px var(--gutter) 16px;
+		border-bottom: 1px solid var(--line);
+		background: var(--bg);
+		box-shadow: var(--shadow);
+		max-height: calc(100dvh - var(--header));
+		overflow-y: auto;
+	}
+
+	.menu a {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		padding: 12px 0;
+		border-bottom: 1px solid var(--line);
+		font-size: 15px;
+		color: var(--muted-fg);
+	}
+
+	.menu a:last-child {
+		border-bottom: none;
+	}
+
+	.menu .count {
+		margin-left: auto;
+		padding-left: 0;
+		border-left: none;
+	}
+
+	.scrim {
+		position: fixed;
+		inset: var(--header) 0 0;
+		z-index: 9;
+		display: none;
+		background: rgb(0 0 0 / 0.4);
+		backdrop-filter: blur(8px);
+	}
+
 	@media (max-width: 900px) {
-		nav,
+		.scrim {
+			display: block;
+		}
+
+		.left nav,
 		.star {
 			display: none;
+		}
+
+		.toggle,
+		.menu {
+			display: flex;
 		}
 	}
 </style>
