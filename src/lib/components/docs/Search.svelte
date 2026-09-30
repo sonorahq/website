@@ -201,6 +201,13 @@
 		color: var(--dim);
 	}
 
+	@media (hover: none) and (pointer: coarse) {
+		.trigger kbd,
+		.field kbd {
+			display: none;
+		}
+	}
+
 	dialog {
 		width: min(620px, calc(100vw - 32px));
 		max-height: min(560px, calc(100vh - 120px));
