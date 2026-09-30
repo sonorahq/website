@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { afterNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import Outline from '$lib/components/docs/Outline.svelte';
 	import Search from '$lib/components/docs/Search.svelte';
@@ -9,10 +10,32 @@
 
 	let article = $state<HTMLElement | null>(null);
 
+	/** Whether the page list is expanded on narrow screens. */
+	let picking = $state(false);
+
 	const index = $derived(pages.findIndex((entry) => page.url.pathname === `/docs/${entry.slug}`));
+	const current = $derived(index >= 0 ? pages[index] : null);
+	const group = $derived(groups.find((entry) => current && entry.pages.includes(current)));
 	const previous = $derived(index > 0 ? pages[index - 1] : null);
 	const next = $derived(index >= 0 && index < pages.length - 1 ? pages[index + 1] : null);
+
+	afterNavigate(() => (picking = false));
 </script>
+
+{#snippet list()}
+	{#each groups as group (group.label)}
+		<div class="group">
+			<span class="kicker">{group.label}</span>
+			{#each group.pages as entry (entry.slug)}
+				<a
+					href="/docs/{entry.slug}"
+					class:on={current?.slug === entry.slug}
+					aria-current={current?.slug === entry.slug ? 'page' : undefined}>{entry.title}</a
+				>
+			{/each}
+		</div>
+	{/each}
+{/snippet}
 
 <section class="section">
 	<span class="cross start"></span>
@@ -22,21 +45,23 @@
 		<aside class="pages">
 			<div class="rail">
 				<Search />
-				<nav aria-label="Docs">
-					{#each groups as group (group.label)}
-						<div class="group">
-							<span class="kicker">{group.label}</span>
-							{#each group.pages as entry (entry.slug)}
-								<a
-									href="/docs/{entry.slug}"
-									class:on={index >= 0 && pages[index].slug === entry.slug}
-									aria-current={index >= 0 && pages[index].slug === entry.slug ? 'page' : undefined}
-									>{entry.title}</a
-								>
-							{/each}
-						</div>
-					{/each}
+				<nav class="sidebar" aria-label="Docs">
+					{@render list()}
 				</nav>
+				<details class="picker" bind:open={picking}>
+					<summary>
+						<span class="where">
+							{#if group}<span class="crumb">{group.label}</span>{/if}
+							<span>{current?.title ?? 'Docs'}</span>
+						</span>
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M6 9l6 6 6-6" />
+						</svg>
+					</summary>
+					<nav aria-label="Docs">
+						{@render list()}
+					</nav>
+				</details>
 			</div>
 		</aside>
 
@@ -92,10 +117,94 @@
 		gap: 28px;
 	}
 
-	.pages nav {
+	.sidebar {
 		display: flex;
 		flex-direction: column;
 		gap: 28px;
+	}
+
+	.picker {
+		display: none;
+		border: 1px solid var(--border);
+		border-radius: var(--radius);
+		background: var(--card);
+		overflow: hidden;
+	}
+
+	.picker summary {
+		height: 46px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px;
+		padding: 0 14px;
+		font-size: 14px;
+		font-weight: 500;
+		list-style: none;
+		cursor: pointer;
+	}
+
+	.picker summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.where {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		min-width: 0;
+	}
+
+	.crumb {
+		color: var(--dim);
+		font-weight: 400;
+	}
+
+	.crumb::after {
+		content: '/';
+		margin-left: 8px;
+		color: var(--faint);
+	}
+
+	.picker svg {
+		width: 16px;
+		height: 16px;
+		flex-shrink: 0;
+		fill: none;
+		stroke: var(--dim);
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		transition: transform 0.2s;
+	}
+
+	.picker[open] svg {
+		transform: rotate(180deg);
+	}
+
+	.picker[open] summary {
+		border-bottom: 1px solid var(--line);
+	}
+
+	.picker nav {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+		padding: 18px 14px 14px;
+		animation: drop 0.2s ease-out;
+	}
+
+	@keyframes drop {
+		from {
+			opacity: 0;
+			transform: translateY(-6px);
+		}
+	}
+
+	.picker .group a {
+		margin-inline: -8px;
+		padding: 10px 8px;
+		font-size: 15px;
 	}
 
 	.group {
@@ -185,15 +294,12 @@
 			gap: 20px;
 		}
 
-		.pages nav {
-			flex-direction: row;
-			gap: 20px;
-			overflow-x: auto;
-			scrollbar-width: none;
+		.sidebar {
+			display: none;
 		}
 
-		.group {
-			flex-shrink: 0;
+		.picker {
+			display: block;
 		}
 	}
 </style>
