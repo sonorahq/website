@@ -38,8 +38,8 @@
 
 <h1>Settings file</h1>
 <p class="summary">
-	Everything on the settings page is one JSON file. Just like <a href="/docs/themes">themes</a>,
-	it's picked up on the fly.
+	Your preferences live in one JSON file. Just like <a href="/docs/themes">themes</a>, it's picked
+	up on the fly.
 </p>
 
 <h2 id="location">Location</h2>
@@ -60,8 +60,8 @@
 
 <h2 id="editing">Editing by hand</h2>
 <p>
-	Unknown keys are ignored, and they disappear the next time Sonora saves, because it rewrites the
-	whole file. Here is an example of a valid settings.json:
+	Missing keys use their defaults. Unknown keys are ignored, and they disappear the next time Sonora
+	saves, because it rewrites the whole file. Here is an example of a valid settings.json:
 </p>
 <Code label="settings.json" lang="json" text={example} />
 <p>
@@ -70,11 +70,16 @@
 	it since Sonora last read it.
 </p>
 
+<p>
+	Save as UTF-8. Since v0.42.0, a UTF-8 byte order mark, which some Windows editors add, is accepted
+	too.
+</p>
 <h2 id="not-here">What isn't in the file</h2>
 <p>
-	Providers and application state are saved into a local SQLite database. Scrobbling services are
-	not, so their secrets may appear in settings.json. This will most likely change in the coming
-	releases.
+	The selected provider, volume, queue resume position, window layout and other runtime state are
+	saved in <code>state.sqlite</code>. Provider sign-in credentials live in separate files in the
+	cache folder. Linked scrobbling accounts, including their tokens and secrets, are stored in
+	<code>settings.json</code>.
 </p>
 
 <h2 id="other-files">Other files</h2>
@@ -93,13 +98,20 @@
 		<tr>
 			<td>Cache</td>
 			<td>
-				Sign-in sessions, the Widevine module, cached lyrics and artwork, in
+				Sign-in credentials, the Widevine module, cached lyrics and artwork, and the local scan
+				index, in
 				<code>~/.cache/sonora</code>, <code>~/Library/Caches/sonora</code> or
-				<code>%LOCALAPPDATA%\sonora</code>. Delete it and you're signed out everywhere.
+				<code>%LOCALAPPDATA%\sonora</code>. Removing provider credential files signs you out of
+				those providers.
 			</td>
 		</tr>
 	</tbody>
 </table>
+
+<p class="note">
+	On Windows, data and cache share the same folder. Deleting the whole folder also removes
+	<code>state.sqlite</code>, including local playlists and favorites.
+</p>
 
 <h2 id="home-manager">Home Manager</h2>
 <p>
@@ -107,3 +119,7 @@
 	on every switch and every launch. Keys you don't set keep whatever you picked in the app.
 </p>
 <Code label="home.nix" text={homeManager} />
+<p>
+	Use the same preference keys as settings.json. A <code>provider</code> key does not switch services,
+	because the selected provider belongs to runtime state.
+</p>

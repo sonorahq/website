@@ -31,13 +31,13 @@
 </table>
 <p>
 	The log is capped at 16 MB. When it fills up it becomes <code>sonora.log.1</code> and a fresh file starts,
-	so you never have more than 32 MB of logs. The first line tells you which version wrote it.
+	so you never have more than 32 MB of logs. The startup message names the version that wrote it.
 </p>
 
 <h2 id="verbose">More detail</h2>
 <p>
-	By default you get warnings plus debug output from Sonora's own code. If a bug is hard to pin
-	down, start Sonora with <code>SONORA_LOG=debug</code> and it logs everything.
+	By default you get warnings and selected debug output. If a bug is hard to pin down, start Sonora
+	with <code>SONORA_LOG=debug</code> and it logs everything.
 </p>
 <Code label="Linux" text="SONORA_LOG=debug sonora" />
 <Code label="Flatpak" text="flatpak run --env=SONORA_LOG=debug io.github.nolight132.sonora" />

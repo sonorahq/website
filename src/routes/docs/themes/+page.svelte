@@ -128,6 +128,13 @@
 	future.
 </p>
 
+<p>
+	Save as UTF-8; a UTF-8 byte order mark is accepted since v0.42.0. Only the four top-level keys and
+	the color tokens below are allowed. An unknown key or invalid color rejects the file. If a
+	previously loaded theme is edited into an invalid file, Sonora keeps its last valid version and
+	reports the error in the <a href="/docs/logs">log</a>.
+</p>
+
 <h2 id="tokens">Color tokens</h2>
 <table>
 	<tbody>

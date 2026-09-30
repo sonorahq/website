@@ -33,7 +33,7 @@ export const platforms: {
 				hint: 'The app is not signed yet, so macOS quarantines it on the first install.'
 			}
 		],
-		note: 'Code signing through SignPath Foundation is applied for. Until it lands, the second command is needed once.'
+		note: 'The app is not signed with an Apple developer certificate yet. Clear the quarantine flag after installing, and again if macOS blocks it after an update.'
 	},
 	{
 		id: 'arch',
@@ -81,7 +81,6 @@ export const platforms: {
   programs.sonora = {
     enable = true;
     settings = {
-      provider = "youtube";
       appearance.theme = "dark";
     };
   };
@@ -111,7 +110,7 @@ export const platforms: {
 			{
 				caption: 'Portable build',
 				link: 'https://github.com/sonorahq/sonora/releases/latest',
-				command: 'windows-msvc.exe',
+				command: 'sonora-<version>-x86_64-pc-windows-msvc.exe',
 				hint: 'Pick the file for your architecture on the releases page and run it as-is.'
 			}
 		],

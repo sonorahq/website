@@ -59,6 +59,11 @@
 </p>
 
 <p class="note">You can't rebind anything yet. Custom shortcuts are on the way.</p>
+<p>
+	Playback shortcuts work while the app has focus and you aren't typing in a text field. In a text
+	field, <kbd>Space</kbd> types a space and <kbd>Ctrl</kbd> with the arrow keys moves through words. List
+	shortcuts act on the focused list or table.
+</p>
 
 {#each sections as section (section.id)}
 	<h2 id={section.id}>{section.title}</h2>

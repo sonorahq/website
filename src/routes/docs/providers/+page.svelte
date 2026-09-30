@@ -55,18 +55,44 @@
 
 <h2 id="local-files">Local files</h2>
 <p>
-	Add folders in settings. Sonora scans them, subfolders and symlinks included. After the first read
-	it only checks files whose size or date changed, so later scans are quick. It doesn't watch the
-	folders while it runs, though. Hit <AppButton>Rescan</AppButton> after you add music.
+	Add folders under <MenuPath steps={['Settings', 'General', 'Music folders']} />. Sonora scans
+	them, subfolders and symlinks included. After the first read it only checks files whose size or
+	date changed, so later scans are quick. It doesn't watch the folders while it runs, though. Hit <AppButton
+		>Rescan</AppButton
+	> after you add music.
 </p>
 <ul>
 	<li>MP3, FLAC, M4A, MP4, AAC, OGG, Opus, WAV, WavPack, APE, WebM and MKA are supported.</li>
 	<li>
 		Covers are loaded from the embedded art, or from <code>cover.*</code> or <code>folder.*</code>
-		in the same folder. Artist pictures come from <code>artist.jpg</code>.
+		in the same folder. Use JPG, JPEG, PNG or WebP. Artist pictures come from a scanned folder whose name
+		matches the artist, using <code>artist.*</code>, <code>folder.*</code> or
+		<code>cover.*</code> in those formats.
 	</li>
 	<li>Lyrics come from a <code>.lrc</code> file next to the track, or from the tags.</li>
 </ul>
+
+<h3 id="local-tags">Editing tags</h3>
+<p>
+	Right-click one local track and choose <strong>Edit tags</strong>. Saving writes the changes to
+	the audio file and updates the library. The album artist tag controls album grouping. If it is
+	missing, tracks with the same album name in the same folder stay together even when their track
+	artists differ.
+</p>
+
+<h3 id="local-lyrics">Local lyrics</h3>
+<p>
+	Enable <strong>Local</strong> under <MenuPath
+		steps={['Settings', 'Playback', 'Lyrics providers']}
+	/>
+	to use lyrics from a track's tags or a matching <code>.lrc</code> file. Turn on
+	<strong>Prefer local lyrics</strong> to use them before asking online services. Otherwise, Sonora compares
+	them with the online results and picks the best match.
+</p>
+<p>
+	To keep your local track metadata off online lyrics services, turn off
+	<strong>Lyrics for local files</strong> in Privacy settings. Lyrics from your files still work.
+</p>
 
 <h2 id="quality">Audio quality</h2>
 <table>
@@ -75,7 +101,7 @@
 	</thead>
 	<tbody>
 		<tr><td>Spotify</td><td>320 kbps, always</td></tr>
-		<tr><td>YouTube Music</td><td>Around 256 kbps signed in, around 128 kbps as a guest</td></tr>
+		<tr><td>YouTube Music</td><td>Varies by track and the available stream</td></tr>
 		<tr><td>Apple Music</td><td>AAC at 256 kbps</td></tr>
 		<tr><td>Deezer</td><td>FLAC, 320 kbps MP3 or 128 kbps MP3, whichever your plan allows</td></tr>
 		<tr><td>Subsonic and Navidrome</td><td>Whatever your server sends by default</td></tr>
@@ -83,9 +109,8 @@
 	</tbody>
 </table>
 <p>
-	You can't choose a specific quality (yet). The app always asks for the best stream it can get. A
-	quality setting might be added in the future, mostly for people on metered connections, as
-	lossless is currently out of reach for most providers that don't already support it.
+	You can't choose a specific quality yet. Sonora selects the stream automatically. Signing in to
+	YouTube Music unlocks your library, but does not guarantee a higher bitrate.
 </p>
 
 <h2 id="widevine">Widevine</h2>

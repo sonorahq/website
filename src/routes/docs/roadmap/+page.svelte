@@ -41,7 +41,8 @@
 				{ text: 'Glow and wave animation for lyrics', issue: 423 },
 				{ text: 'Synced lyrics', done: '0.9' },
 				{ text: 'Word-by-word karaoke lyrics and romanization', done: '0.17' },
-				{ text: 'A timing offset for synced lyrics', issue: 428, done: true }
+				{ text: 'A timing offset control for synced lyrics', issue: 428 },
+				{ text: 'Timing offsets stored in LRC files', done: '0.40' }
 			]
 		},
 		{

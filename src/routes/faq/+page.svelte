@@ -74,8 +74,9 @@
 
 				<Question id="blank-window" question="Why is the window blank, or why won't Sonora start?">
 					<p>
-						Sonora draws with Vulkan, and the Vulkan loader alone isn't enough. You need a driver
-						for your GPU, such as <code>mesa-vulkan-drivers</code>, <code>vulkan-radeon</code>,
+						On Linux, Sonora draws with Vulkan, and the Vulkan loader alone isn't enough. You need a
+						driver for your GPU, such as <code>mesa-vulkan-drivers</code>,
+						<code>vulkan-radeon</code>,
 						<code>vulkan-intel</code> or the proprietary NVIDIA driver. Run
 						<code>vulkaninfo --summary</code> to see whether one works.
 					</p>
@@ -121,7 +122,8 @@
 				<Question id="lastfm" question="Why won't Last.fm link?">
 					<p>
 						Sonora waits five minutes for Last.fm on <code>127.0.0.1:8990</code>. Make sure that
-						port is free, then approve Sonora in the browser before the time runs out.
+						port is free, then approve Sonora in the browser before the time runs out. Last.fm also
+						needs your own API key and secret; see <a href="/docs/scrobbling">Scrobbling</a>.
 					</p>
 				</Question>
 			</div>
@@ -149,7 +151,7 @@
 
 				<Question id="skipping" question="Why did playback stop after a few tracks?">
 					<p>
-						When several tracks in a row fail, Sonora stops instead of burning through your whole
+						When three tracks in a row fail, Sonora stops instead of burning through your whole
 						queue. The log has the reason.
 					</p>
 				</Question>
