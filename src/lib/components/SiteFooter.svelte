@@ -33,7 +33,7 @@
 				<div>
 					<h3>Project</h3>
 					<a href={repo}>GitHub</a>
-					<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
+					<a href="/changelog">Changelog</a>
 					<a href="{repo}/blob/main/CONTRIBUTING.md">Contributing</a>
 					<a href="{repo}/blob/main/README.md#translations">Translations</a>
 				</div>

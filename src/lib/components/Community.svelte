@@ -40,7 +40,7 @@
 					<div class="plain">
 						<a href="{repo}/issues">Issues</a>
 						<a href="{repo}/blob/main/CONTRIBUTING.md">Contributing</a>
-						<a href="{repo}/blob/main/CHANGELOG.md">Changelog</a>
+						<a href="/changelog">Changelog</a>
 					</div>
 				</div>
 

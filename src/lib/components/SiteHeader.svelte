@@ -25,7 +25,7 @@
 		{ href: `${home}#community`, label: 'Community' },
 		{ href: '/docs', label: 'Docs' },
 		{ href: '/faq', label: 'FAQ' },
-		{ href: `${repo}/blob/main/CHANGELOG.md`, label: 'Changelog' }
+		{ href: '/changelog', label: 'Changelog' }
 	]);
 
 	const label = $derived.by(() => {

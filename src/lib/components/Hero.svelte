@@ -42,7 +42,7 @@
 
 		<p class="fine" data-enter style="--enter: 0.19s">
 			{#if version}
-				<span class="mono">{version}</span>
+				<a class="mono" href="/changelog#{version}">{version}</a>
 				<span class="dot">·</span>
 			{/if}
 			Free and open source
@@ -115,6 +115,10 @@
 
 	.fine .mono {
 		color: var(--muted-fg);
+	}
+
+	.fine a.mono:hover {
+		color: var(--fg);
 	}
 
 	.dot {
