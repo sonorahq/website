@@ -46,18 +46,19 @@
 		display: flex;
 		align-items: center;
 		gap: 2px;
-		padding: 0 2px;
+		padding: 0 3px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 	}
 
 	button {
-		width: 26px;
-		height: 26px;
+		width: 24px;
+		height: 24px;
+		padding: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-radius: calc(var(--radius) - 3px);
+		border-radius: calc(var(--radius) - 4px);
 		color: var(--dim);
 	}
 
@@ -86,8 +87,8 @@
 		}
 
 		button {
-			width: 30px;
-			height: 30px;
+			width: 28px;
+			height: 28px;
 		}
 	}
 </style>
