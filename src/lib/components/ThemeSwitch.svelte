@@ -41,19 +41,18 @@
 </div>
 
 <style>
+	/* The inset comes from padding on all four sides so it stays even when the browser rounds the border to a device pixel. */
 	.switch {
 		height: var(--control);
 		display: flex;
-		align-items: center;
 		gap: 2px;
-		padding: 0 3px;
+		padding: 3px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 	}
 
 	button {
 		width: 24px;
-		height: 24px;
 		padding: 0;
 		display: flex;
 		align-items: center;
@@ -88,7 +87,6 @@
 
 		button {
 			width: 28px;
-			height: 28px;
 		}
 	}
 </style>
