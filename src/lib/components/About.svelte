@@ -7,6 +7,7 @@
 			label: 'Providers',
 			items: [
 				{ glyph: 'spotify', text: 'Spotify' },
+				{ glyph: 'applemusic', text: 'Apple Music' },
 				{ glyph: 'youtubemusic', text: 'YouTube Music' },
 				{ glyph: 'subsonic', text: 'Subsonic' },
 				{ glyph: 'file-music', text: 'Local files' }
@@ -17,6 +18,7 @@
 			items: [
 				{ glyph: 'audio-lines', text: 'Gapless' },
 				{ glyph: 'volume-2', text: 'Normalization' },
+				{ glyph: 'sliders-vertical', text: 'Equalizer' },
 				{ glyph: 'shuffle', text: 'Shuffle' },
 				{ glyph: 'moon', text: 'Sleep timer' }
 			]
@@ -27,7 +29,8 @@
 				{ glyph: 'list-music', text: 'Synced' },
 				{ glyph: 'mic-vocal', text: 'Karaoke' },
 				{ glyph: 'music-2', text: 'Background vocals' },
-				{ glyph: 'languages', text: 'Romanization' }
+				{ glyph: 'languages', text: 'Romanization' },
+				{ glyph: 'file-text', text: 'Local lyrics' }
 			]
 		},
 		{
@@ -44,6 +47,10 @@
 			label: 'Integration',
 			items: [
 				{ glyph: 'discord', text: 'Discord Rich Presence' },
+				{ glyph: 'lastfm', text: 'Last.fm' },
+				{ glyph: 'librefm', text: 'Libre.fm' },
+				{ glyph: 'listenbrainz', text: 'ListenBrainz' },
+				{ glyph: 'maloja', text: 'Maloja' },
 				{ glyph: 'folder-open', text: 'Opens files from the system' }
 			]
 		},

@@ -36,6 +36,14 @@
 			'folder-open',
 			'<path d="M6 14.5 7.4 11.6A2 2 0 0 1 9.2 10.5H21a1 1 0 0 1 .95 1.3l-1.7 5.7a2 2 0 0 1-1.9 1.5H4a2 2 0 0 1-2-2V5.5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.7.9l.8 1.2a2 2 0 0 0 1.6.9H18a2 2 0 0 1 2 2v2"/>'
 		],
+		[
+			'file-text',
+			'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>'
+		],
+		[
+			'sliders-vertical',
+			'<path d="M5 21v-7"/><path d="M5 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M19 21v-5"/><path d="M19 12V3"/><path d="M3 14h4"/><path d="M10 8h4"/><path d="M17 16h4"/>'
+		],
 		['terminal', '<path d="m4 17 6-6-6-6"/><path d="M12 19h8"/>'],
 		['circle-plus', '<circle cx="12" cy="12" r="10"/><path d="M8 12h8"/><path d="M12 8v8"/>'],
 		['circle-minus', '<circle cx="12" cy="12" r="10"/><path d="M8 12h8"/>'],
@@ -50,8 +58,18 @@
 		]
 	]);
 
-	const brands = new Set(['apple', 'windows', 'linux', 'discord', 'subsonic']);
-	const solid = new Set(['spotify', 'youtubemusic']);
+	const brands = new Set([
+		'apple',
+		'windows',
+		'linux',
+		'discord',
+		'subsonic',
+		'lastfm',
+		'librefm',
+		'listenbrainz',
+		'maloja'
+	]);
+	const solid = new Set(['spotify', 'youtubemusic', 'applemusic']);
 	const markup = $derived(extra.get(name) ?? icons.get(name) ?? '');
 </script>
 
