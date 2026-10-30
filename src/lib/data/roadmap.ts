@@ -35,7 +35,8 @@ export const areas: Area[] = [
 		title: 'Library and playlists',
 		entries: [
 			{ text: 'Reorder playlists and give them custom covers', issue: 806 },
-			{ text: 'Import and export playlists in a standard format', issue: 642 }
+			{ text: 'Import and export playlists in a standard format', issue: 642 },
+			{ text: 'A stats page with your top tracks, artists and listening time', issue: 1168 }
 		]
 	},
 	{
