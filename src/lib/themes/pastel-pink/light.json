@@ -1,0 +1,29 @@
+{
+	"name": "Pastel Pink Light",
+	"author": "Lbronjims",
+	"version": 1,
+	"theme": {
+		"background": "#faf4f7",
+		"foreground": "#362631",
+		"sidebar": "#f0e6ec",
+		"sidebar_accent": "#e3d1dd",
+		"sidebar_border": "#d5bcd0",
+		"popover": "#ffffff",
+		"popover_foreground": "#362631",
+		"secondary": "#e8d8e2",
+		"secondary_hover": "#dac7d4",
+		"secondary_active": "#ccb5c5",
+		"muted": "#eadef0",
+		"muted_foreground": "#786270",
+		"border": "#d5bcd0",
+		"primary": "#d97b9c",
+		"primary_foreground": "#ffffff",
+		"primary_hover": "#c96587",
+		"progress_bar": "#d97b9c",
+		"selection": "#d97b9c33",
+		"danger": "#d32f2f",
+		"danger_foreground": "#ffffff",
+		"table_active": "#ebd7e3",
+		"table_active_border": "#d97b9c"
+	}
+}
