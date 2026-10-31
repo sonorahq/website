@@ -52,16 +52,22 @@
 							<div class="title">
 								<h2>{theme.name}</h2>
 								{#if theme.variants.length > 1}
-									<ul class="variants" aria-label="Variants">
+									<ul
+										class="variants"
+										aria-label="Variants"
+										onpointerleave={() => delete previewed[theme.id]}
+									>
 										{#each theme.variants as variant (variant.id)}
 											<li
-												class="swatch"
 												aria-label={variant.name}
-												style:--page={variant.colors.background}
-												style:--accent={variant.colors.primary}
 												onpointerenter={() => (previewed[theme.id] = variant.id)}
-												onpointerleave={() => delete previewed[theme.id]}
-											></li>
+											>
+												<span
+													class="swatch"
+													style:--page={variant.colors.background}
+													style:--accent={variant.colors.primary}
+												></span>
+											</li>
 										{/each}
 									</ul>
 								{/if}
@@ -194,13 +200,18 @@
 		min-width: 0;
 	}
 
+	/* the dots touch through their padding, so the pointer never falls between two of them */
 	.variants {
 		display: flex;
 		flex: none;
-		gap: 4px;
-		margin: 0;
+		margin: 0 -2px;
 		padding: 0;
 		list-style: none;
+	}
+
+	.variants li {
+		display: flex;
+		padding: 2px;
 	}
 
 	/* the page colour at the top left and the accent at the bottom right, like the app's menu */
@@ -213,7 +224,7 @@
 		transition: transform 0.12s ease;
 	}
 
-	.swatch:hover {
+	.variants li:hover .swatch {
 		transform: scale(1.2);
 	}
 
