@@ -3,9 +3,41 @@
 	import Glyph from '$lib/components/Glyph.svelte';
 	import ThemeMiniature from '$lib/components/ThemeMiniature.svelte';
 	import { submit, themes } from '$lib/data/themes';
+	import { onMount, untrack } from 'svelte';
+	import { flip } from 'svelte/animate';
+	import type { PageProps } from './$types';
 
-	/** The variant whose name the pointer is on, by theme id, shown alone in its card. */
+	let { data }: PageProps = $props();
+
+	/** The variant whose dot the pointer is on, by theme id, shown in its card's preview. */
 	let previewed: Record<string, string> = $state({});
+	/** The counts each card shows, which go up as soon as someone here takes a theme. */
+	let downloads = $state(untrack(() => data.downloads));
+	/**
+	 * The counts the gallery is sorted by, fixed once the page has its latest numbers so a card
+	 * never moves away from the button just pressed.
+	 */
+	let ranking = $state(untrack(() => data.downloads));
+
+	const sorted = $derived(
+		themes.toSorted((a, b) => (ranking?.[b.id] ?? 0) - (ranking?.[a.id] ?? 0))
+	);
+	const compact = new Intl.NumberFormat('en', { notation: 'compact' });
+
+	onMount(async () => {
+		try {
+			const res = await fetch('/api/themes/downloads');
+			if (res.ok) downloads = ranking = await res.json();
+		} catch {}
+	});
+
+	/** Counts an install or download of theme `id` and shows the new count. */
+	async function record(id: string) {
+		try {
+			const res = await fetch(`/api/themes/${id}/download`, { method: 'POST', keepalive: true });
+			if (res.ok) downloads = { ...downloads, [id]: (await res.json()).count };
+		} catch {}
+	}
 
 	/** Everyone who wrote a theme, as "A", "A and B" or "A, B and C". */
 	function credit(authors: string[]): string {
@@ -38,13 +70,14 @@
 		</header>
 
 		<ul class="grid">
-			{#each themes as theme (theme.id)}
-				<li class="card">
+			{#each sorted as theme (theme.id)}
+				<li class="card" animate:flip={{ duration: 300 }}>
 					<div class="preview">
 						<ThemeMiniature
-							palettes={theme.variants
-								.filter((variant) => !previewed[theme.id] || variant.id === previewed[theme.id])
-								.map((variant) => variant.colors)}
+							colors={(
+								theme.variants.find((variant) => variant.id === previewed[theme.id]) ??
+								theme.variants[0]
+							).colors}
 						/>
 					</div>
 					<div class="body">
@@ -72,10 +105,19 @@
 									</ul>
 								{/if}
 							</div>
-							<span class="author">by {credit(theme.authors)}</span>
+							<div class="byline">
+								<span class="author">by {credit(theme.authors)}</span>
+								{#if downloads}
+									{@const count = downloads[theme.id] ?? 0}
+									<span class="downloads" title="{count} {count === 1 ? 'download' : 'downloads'}">
+										<Glyph name="arrow-down" size={12} />
+										{compact.format(count)}
+									</span>
+								{/if}
+							</div>
 						</div>
 						<div class="actions">
-							<a class="btn btn-primary" href={theme.link}>
+							<a class="btn btn-primary" href={theme.link} onclick={() => record(theme.id)}>
 								Install
 								<Glyph name="arrow-right" />
 							</a>
@@ -83,6 +125,7 @@
 								class="btn btn-secondary"
 								href={theme.download.href}
 								download={theme.download.name}
+								onclick={() => record(theme.id)}
 							>
 								Download
 								<Glyph name="arrow-down" />
@@ -180,12 +223,31 @@
 		white-space: nowrap;
 	}
 
+	.byline {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		min-width: 0;
+	}
+
 	.author {
+		flex: 1;
+		min-width: 0;
 		font-size: 13px;
 		color: var(--muted-fg);
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
+	}
+
+	.downloads {
+		display: flex;
+		flex: none;
+		align-items: center;
+		gap: 3px;
+		font-size: 12px;
+		font-variant-numeric: tabular-nums;
+		color: var(--muted-fg);
 	}
 
 	.title {
