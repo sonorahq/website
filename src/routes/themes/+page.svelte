@@ -3,6 +3,16 @@
 	import Glyph from '$lib/components/Glyph.svelte';
 	import ThemeMiniature from '$lib/components/ThemeMiniature.svelte';
 	import { submit, themes } from '$lib/data/themes';
+
+	/** The variant whose name the pointer is on, by theme id, shown alone in its card. */
+	let previewed: Record<string, string> = $state({});
+
+	/** Everyone who wrote a theme, as "A", "A and B" or "A, B and C". */
+	function credit(authors: string[]): string {
+		return authors.length < 2
+			? authors.join('')
+			: `${authors.slice(0, -1).join(', ')} and ${authors.at(-1)}`;
+	}
 </script>
 
 <svelte:head>
@@ -31,12 +41,32 @@
 			{#each themes as theme (theme.id)}
 				<li class="card">
 					<div class="preview">
-						<ThemeMiniature colors={theme.colors} />
+						<ThemeMiniature
+							palettes={theme.variants
+								.filter((variant) => !previewed[theme.id] || variant.id === previewed[theme.id])
+								.map((variant) => variant.colors)}
+						/>
 					</div>
 					<div class="body">
 						<div class="names">
-							<h2>{theme.name}</h2>
-							<span class="author">by {theme.author}</span>
+							<div class="title">
+								<h2>{theme.name}</h2>
+								{#if theme.variants.length > 1}
+									<ul class="variants" aria-label="Variants">
+										{#each theme.variants as variant (variant.id)}
+											<li
+												class="swatch"
+												aria-label={variant.name}
+												style:--page={variant.colors.background}
+												style:--accent={variant.colors.primary}
+												onpointerenter={() => (previewed[theme.id] = variant.id)}
+												onpointerleave={() => delete previewed[theme.id]}
+											></li>
+										{/each}
+									</ul>
+								{/if}
+							</div>
+							<span class="author">by {credit(theme.authors)}</span>
 						</div>
 						<div class="actions">
 							<a class="btn btn-primary" href={theme.link}>
@@ -45,8 +75,8 @@
 							</a>
 							<a
 								class="btn btn-secondary"
-								href="data:application/json;charset=utf-8,{encodeURIComponent(theme.file)}"
-								download="{theme.id}.json"
+								href={theme.download.href}
+								download={theme.download.name}
 							>
 								Download
 								<Glyph name="arrow-down" />
@@ -124,6 +154,7 @@
 
 	.body {
 		display: flex;
+		flex: 1;
 		flex-direction: column;
 		gap: 14px;
 		padding: 14px 16px 16px;
@@ -151,8 +182,44 @@
 		white-space: nowrap;
 	}
 
+	.title {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		min-width: 0;
+	}
+
+	.title h2 {
+		flex: 1;
+		min-width: 0;
+	}
+
+	.variants {
+		display: flex;
+		flex: none;
+		gap: 4px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	/* the page colour at the top left and the accent at the bottom right, like the app's menu */
+	.swatch {
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, var(--page) 50%, var(--accent) 50%);
+		box-shadow: inset 0 0 0 1px rgb(127 127 127 / 0.3);
+		transition: transform 0.12s ease;
+	}
+
+	.swatch:hover {
+		transform: scale(1.2);
+	}
+
 	.actions {
 		display: flex;
+		margin-top: auto;
 		gap: 8px;
 	}
 
