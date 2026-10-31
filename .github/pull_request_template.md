@@ -23,7 +23,7 @@
 <!-- Every box must be checked before review. -->
 
 - [ ] This pull request only changes files in `src/lib/themes`.
-- [ ] It adds or changes exactly one theme file.
-- [ ] The file is named after the theme in lowercase with hyphens, such as `night-owl.json`.
+- [ ] It adds or changes exactly one theme: a single file, or one folder with a file per variant.
+- [ ] Files and folders are named in lowercase with hyphens, such as `night-owl.json` or `night-owl/dark.json`.
 - [ ] I installed the theme in Sonora and text stays readable on every screen I opened.
 - [ ] I made this theme, or I have the right to share it.

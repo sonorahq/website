@@ -50,14 +50,20 @@ jobs:
             if (outside.length) {
               problems.push(`Only files in \`${FOLDER}\` may change. This pull request also changes ${outside.map((file) => `\`${file.filename}\``).join(', ')}.`);
             }
+            // a theme is one file directly in the folder, or a folder of variants one level down
             const themes = files.filter((file) => file.filename.startsWith(FOLDER));
-            if (themes.length !== 1) {
-              problems.push(`A pull request adds or changes exactly one theme file. This one changes ${themes.length}.`);
-            }
+            const NAME = '[a-z0-9]+(?:-[a-z0-9]+)*';
+            const SHAPE = new RegExp(`^${NAME}(?:/${NAME})?\\.json$`);
             for (const file of themes) {
-              if (!/^src\/lib\/themes\/[a-z0-9]+(?:-[a-z0-9]+)*\.json$/.test(file.filename)) {
-                problems.push(`\`${file.filename}\` must be a \`.json\` file named in lowercase with hyphens, directly in \`${FOLDER}\`.`);
+              if (!SHAPE.test(file.filename.slice(FOLDER.length))) {
+                problems.push(`\`${file.filename}\` must be a \`.json\` file named in lowercase with hyphens, directly in \`${FOLDER}\` or in one folder inside it.`);
               }
+            }
+            const touched = [
+              ...new Set(themes.map((file) => file.filename.slice(FOLDER.length).split('/')[0].replace(/\.json$/, '')))
+            ];
+            if (touched.length !== 1) {
+              problems.push(`A pull request adds or changes exactly one theme, a single file or one folder of variants. This one changes ${touched.length}${touched.length ? `: ${touched.map((name) => `\`${name}\``).join(', ')}` : ''}.`);
             }
 
             const section = (title) => {
