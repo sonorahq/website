@@ -4,7 +4,6 @@
 	import ThemeMiniature from '$lib/components/ThemeMiniature.svelte';
 	import { submit, themes } from '$lib/data/themes';
 	import { onMount, untrack } from 'svelte';
-	import { flip } from 'svelte/animate';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
@@ -14,20 +13,18 @@
 	/** The counts each card shows, which go up as soon as someone here takes a theme. */
 	let downloads = $state(untrack(() => data.downloads));
 	/**
-	 * The counts the gallery is sorted by, fixed once the page has its latest numbers so a card
-	 * never moves away from the button just pressed.
+	 * The gallery in order of the counts the build saw. Live counts never reorder it, so the cards
+	 * stay where the prerendered page put them.
 	 */
-	let ranking = $state(untrack(() => data.downloads));
-
-	const sorted = $derived(
-		themes.toSorted((a, b) => (ranking?.[b.id] ?? 0) - (ranking?.[a.id] ?? 0))
+	const sorted = themes.toSorted(
+		(a, b) => (data.downloads?.[b.id] ?? 0) - (data.downloads?.[a.id] ?? 0)
 	);
 	const compact = new Intl.NumberFormat('en', { notation: 'compact' });
 
 	onMount(async () => {
 		try {
 			const res = await fetch('/api/themes/downloads');
-			if (res.ok) downloads = ranking = await res.json();
+			if (res.ok) downloads = await res.json();
 		} catch {}
 	});
 
@@ -71,7 +68,7 @@
 
 		<ul class="grid">
 			{#each sorted as theme (theme.id)}
-				<li class="card" animate:flip={{ duration: 300 }}>
+				<li class="card">
 					<div class="preview">
 						<ThemeMiniature
 							colors={(
