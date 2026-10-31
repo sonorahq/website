@@ -1,0 +1,29 @@
+{
+	"name": "Pastel Pink Dark",
+	"author": "Gemini",
+	"version": 1,
+	"theme": {
+		"background": "#080609",
+		"foreground": "#eedee7",
+		"sidebar": "#100d14",
+		"sidebar_accent": "#1a1421",
+		"sidebar_border": "#24192b",
+		"popover": "#14101a",
+		"popover_foreground": "#eedee7",
+		"secondary": "#1c1524",
+		"secondary_hover": "#291e36",
+		"secondary_active": "#372747",
+		"muted": "#201829",
+		"muted_foreground": "#9c8aa8",
+		"border": "#2e2038",
+		"primary": "#f4a7c2",
+		"primary_foreground": "#1a0812",
+		"primary_hover": "#f7bcce",
+		"progress_bar": "#f4a7c2",
+		"selection": "#f4a7c233",
+		"danger": "#e57373",
+		"danger_foreground": "#ffffff",
+		"table_active": "#24172e",
+		"table_active_border": "#f4a7c2"
+	}
+}
