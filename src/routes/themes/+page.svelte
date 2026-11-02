@@ -1,15 +1,13 @@
 <script lang="ts">
 	import EditLink from '$lib/components/EditLink.svelte';
 	import Glyph from '$lib/components/Glyph.svelte';
-	import ThemeMiniature from '$lib/components/ThemeMiniature.svelte';
-	import { submit, themes } from '$lib/data/themes';
+	import ThemeCard from '$lib/components/ThemeCard.svelte';
+	import { themes } from '$lib/data/themes';
 	import { onMount, untrack } from 'svelte';
 	import type { PageProps } from './$types';
 
 	let { data }: PageProps = $props();
 
-	/** The variant whose dot the pointer is on, by theme id, shown in its card's preview. */
-	let previewed: Record<string, string> = $state({});
 	/** The counts each card shows, which go up as soon as someone here takes a theme. */
 	let downloads = $state(untrack(() => data.downloads));
 	/**
@@ -35,13 +33,6 @@
 			if (res.ok) downloads = { ...downloads, [id]: (await res.json()).count };
 		} catch {}
 	}
-
-	/** Everyone who wrote a theme, as "A", "A and B" or "A, B and C". */
-	function credit(authors: string[]): string {
-		return authors.length < 2
-			? authors.join('')
-			: `${authors.slice(0, -1).join(', ')} and ${authors.at(-1)}`;
-	}
 </script>
 
 <svelte:head>
@@ -62,74 +53,38 @@
 			<h1>Community themes</h1>
 			<p class="summary">
 				Want to contribute? <a href="/docs/themes#format">Write a theme</a>, then
-				<a href={submit}>open a pull request</a> that adds it.
+				<a href="/themes/submit">submit it</a>.
 			</p>
 		</header>
 
 		<ul class="grid">
 			{#each sorted as theme (theme.id)}
-				<li class="card">
-					<div class="preview">
-						<ThemeMiniature
-							colors={(
-								theme.variants.find((variant) => variant.id === previewed[theme.id]) ??
-								theme.variants[0]
-							).colors}
-						/>
-					</div>
-					<div class="body">
-						<div class="names">
-							<div class="title">
-								<h2>{theme.name}</h2>
-								{#if theme.variants.length > 1}
-									<ul
-										class="variants"
-										aria-label="Variants"
-										onpointerleave={() => delete previewed[theme.id]}
-									>
-										{#each theme.variants as variant (variant.id)}
-											<li
-												aria-label={variant.name}
-												onpointerenter={() => (previewed[theme.id] = variant.id)}
-											>
-												<span
-													class="swatch"
-													style:--page={variant.colors.background}
-													style:--accent={variant.colors.primary}
-												></span>
-											</li>
-										{/each}
-									</ul>
-								{/if}
-							</div>
-							<div class="byline">
-								<span class="author">by {credit(theme.authors)}</span>
-								{#if downloads}
-									{@const count = downloads[theme.id] ?? 0}
-									<span class="downloads" title="{count} {count === 1 ? 'download' : 'downloads'}">
-										<Glyph name="arrow-down" size={12} />
-										{compact.format(count)}
-									</span>
-								{/if}
-							</div>
-						</div>
-						<div class="actions">
-							<a class="btn btn-primary" href={theme.link} onclick={() => record(theme.id)}>
-								Install
-								<Glyph name="arrow-right" />
-							</a>
-							<a
-								class="btn btn-secondary"
-								href={theme.download.href}
-								download={theme.download.name}
-								onclick={() => record(theme.id)}
-							>
-								Download
-								<Glyph name="arrow-down" />
-							</a>
-						</div>
-					</div>
-				</li>
+				<ThemeCard tag="li" name={theme.name} authors={theme.authors} variants={theme.variants}>
+					{#snippet meta()}
+						{#if downloads}
+							{@const count = downloads[theme.id] ?? 0}
+							<span class="downloads" title="{count} {count === 1 ? 'download' : 'downloads'}">
+								<Glyph name="arrow-down" size={12} />
+								{compact.format(count)}
+							</span>
+						{/if}
+					{/snippet}
+					{#snippet actions()}
+						<a class="btn btn-primary" href={theme.link} onclick={() => record(theme.id)}>
+							Install
+							<Glyph name="arrow-right" />
+						</a>
+						<a
+							class="btn btn-secondary"
+							href={theme.download.href}
+							download={theme.download.name}
+							onclick={() => record(theme.id)}
+						>
+							Download
+							<Glyph name="arrow-down" />
+						</a>
+					{/snippet}
+				</ThemeCard>
 			{/each}
 		</ul>
 
@@ -179,64 +134,6 @@
 		list-style: none;
 	}
 
-	.card {
-		display: flex;
-		flex-direction: column;
-		border: 1px solid var(--line);
-		border-radius: var(--radius-lg);
-		background: var(--card);
-		overflow: hidden;
-	}
-
-	.preview {
-		padding: 16px;
-		border-bottom: 1px solid var(--line);
-	}
-
-	.preview :global(svg) {
-		border-radius: var(--radius);
-		overflow: hidden;
-	}
-
-	.body {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		gap: 14px;
-		padding: 14px 16px 16px;
-	}
-
-	.names {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-		min-width: 0;
-	}
-
-	h2 {
-		font-size: 15px;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	.byline {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		min-width: 0;
-	}
-
-	.author {
-		flex: 1;
-		min-width: 0;
-		font-size: 13px;
-		color: var(--muted-fg);
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
 	.downloads {
 		display: flex;
 		flex: none;
@@ -245,59 +142,6 @@
 		font-size: 12px;
 		font-variant-numeric: tabular-nums;
 		color: var(--muted-fg);
-	}
-
-	.title {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		min-width: 0;
-	}
-
-	.title h2 {
-		flex: 1;
-		min-width: 0;
-	}
-
-	/* the dots touch through their padding, so the pointer never falls between two of them */
-	.variants {
-		display: flex;
-		flex: none;
-		margin: 0 -2px;
-		padding: 0;
-		list-style: none;
-	}
-
-	.variants li {
-		display: flex;
-		padding: 2px;
-	}
-
-	/* the page colour at the top left and the accent at the bottom right, like the app's menu */
-	.swatch {
-		width: 14px;
-		height: 14px;
-		border-radius: 50%;
-		background: linear-gradient(135deg, var(--page) 50%, var(--accent) 50%);
-		box-shadow: inset 0 0 0 1px rgb(127 127 127 / 0.3);
-		transition: transform 0.12s ease;
-	}
-
-	.variants li:hover .swatch {
-		transform: scale(1.2);
-	}
-
-	.actions {
-		display: flex;
-		margin-top: auto;
-		gap: 8px;
-	}
-
-	.actions .btn {
-		flex: 1;
-		height: 34px;
-		padding: 0 14px;
-		font-size: 13px;
 	}
 
 	.source {

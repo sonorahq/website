@@ -1,0 +1,4 @@
+interface:
+  display_name: 'Update Sonora Docs'
+  short_description: 'Sync Sonora docs with published stable releases'
+  default_prompt: 'Use $update-sonora-docs to update the website documentation for published stable Sonora releases since the last successful sync.'

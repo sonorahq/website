@@ -1,5 +1,6 @@
 import { website } from '$lib/data/links';
-import { FIELDS, darkColors } from '$lib/mock/theme';
+import { darkColors, FIELDS } from '$lib/mock/theme';
+import { base64, bytes, check, family, link, type Canonical } from '$lib/theme-file';
 
 /** One theme file of a community theme. */
 export type ThemeVariant = {
@@ -30,33 +31,6 @@ export type CommunityTheme = {
 	/** The file to save: the theme file itself, or a zip of the folder for a family. */
 	download: { name: string; href: string };
 };
-
-/** What every theme link starts with. Sonora reads the rest as the theme in base64url. */
-const LINK = 'sonora://theme/';
-/** The longest link Sonora reads. */
-const LINK_LIMIT = 16 * 1024;
-/** How many characters a theme's name or author may have before Sonora refuses the link. */
-const LABEL_LIMIT = 64;
-/** How many variants a family may have before Sonora refuses the link. */
-const VARIANT_LIMIT = 8;
-/** The longest folder or file name Sonora gives a theme. */
-const SLUG_LIMIT = 40;
-/** Names Sonora never gives a theme folder or file, since Windows keeps them for devices. */
-const DEVICE_NAMES = new Set([
-	'con',
-	'prn',
-	'aux',
-	'nul',
-	...Array.from({ length: 9 }, (_, index) => `com${index + 1}`),
-	...Array.from({ length: 9 }, (_, index) => `lpt${index + 1}`)
-]);
-/** The built-in themes' ids, which no theme folder may take. */
-const RESERVED = new Set(['system', 'dark', 'light']);
-const COLOR = /^#?(?:[0-9a-f]{6}|[0-9a-f]{8})$/i;
-/** Controls, direction marks and invisible characters, which Sonora refuses in a name. */
-const HIDDEN = /[\p{Cc}​-‏‪-‮⁠-⁯﻿]/u;
-const KEYS = new Set(['name', 'author', 'version', 'theme']);
-const TOKENS = new Set(FIELDS);
 
 const files = import.meta.glob(['../themes/*.json', '../themes/*/*.json'], {
 	eager: true,
@@ -92,9 +66,6 @@ export const themes: CommunityTheme[] = collect()
 	.map(([id, entries]) => build(id, entries))
 	.sort((a, b) => a.name.localeCompare(b.name));
 
-/** A theme file as Sonora rebuilds it after checking it. */
-type Canonical = { name: string; author: string; version: 1; theme: Record<string, string> };
-
 /**
  * Groups the files by theme id, each with its file name inside the folder and its text. A loose
  * file is a theme of one with no file name there.
@@ -115,41 +86,28 @@ function collect(): [string, [string | null, string][]][] {
 
 /** Checks a theme's files the way Sonora checks a theme link, and builds its link. */
 function build(id: string, entries: [string | null, string][]): CommunityTheme {
-	const folder = entries[0][0] !== null;
-	const where = folder ? `src/lib/themes/${id}/` : `src/lib/themes/${id}.json`;
+	const where = entries[0][0] !== null ? `src/lib/themes/${id}/` : `src/lib/themes/${id}.json`;
 	const fail = (reason: string): never => {
 		throw new Error(`${where}: ${reason}`);
 	};
-	if (!slugged(id)) fail('the name must be lowercase-kebab-case of at most 40 characters');
+	const checked = check(id, entries, fail);
 
-	if (!folder) {
-		const file = read(entries[0][1], fail);
+	if (checked[0][0] === null) {
+		const file = checked[0][1];
 		const text = JSON.stringify(file, null, 2) + '\n';
 		return {
 			id,
 			name: file.name,
 			authors: [file.author],
 			variants: [variant(id, file)],
-			link: link(JSON.stringify(file), fail),
+			link: link(id, checked, fail),
 			download: { name: `${id}.json`, href: `data:application/json;base64,${base64(bytes(text))}` }
 		};
 	}
 
-	if (RESERVED.has(id)) fail(`"${id}" is the id of a built-in theme`);
-	if (entries.length < 2)
-		fail(`a folder holds 2 or more variants, put a single theme in ${id}.json`);
-	if (entries.length > VARIANT_LIMIT) fail(`a theme has at most ${VARIANT_LIMIT} variants`);
-	const sorted = entries
-		.map(([stem, text]) => {
-			const at = (reason: string): never => fail(`${stem}.json: ${reason}`);
-			if (!slugged(stem!)) at('the file name must be lowercase-kebab-case');
-			return [stem!, read(text, at)] as const;
-		})
-		.sort(([a], [b]) => (`${a}.json` < `${b}.json` ? -1 : 1));
-
+	const sorted = checked as [string, Canonical][];
 	const variants = sorted.map(([stem, file]) => variant(stem, file));
 	const name = names(id, variants);
-	const payload = { family: id, variants: Object.fromEntries(sorted) };
 	const archive = zip(
 		sorted.map(([stem, file]) => [`${id}/${stem}.json`, JSON.stringify(file, null, 2) + '\n'])
 	);
@@ -158,83 +116,26 @@ function build(id: string, entries: [string | null, string][]): CommunityTheme {
 		name,
 		authors: [...new Set(variants.map((variant) => variant.author))],
 		variants,
-		link: link(JSON.stringify(payload), fail),
+		link: link(id, checked, fail),
 		download: { name: `${id}.zip`, href: `data:application/zip;base64,${base64(archive)}` }
 	};
 }
 
-/** Checks one theme file and returns it as Sonora would write it. */
-function read(text: string, fail: (reason: string) => never): Canonical {
-	const parsed: unknown = JSON.parse(text);
-	if (!isObject(parsed)) return fail('the file must contain an object');
-	for (const key of Object.keys(parsed)) {
-		if (!KEYS.has(key)) fail(`unknown field "${key}"`);
-	}
-	if (parsed.version !== 1) fail('version must be 1');
-
-	const name = label(parsed.name, 'name', fail);
-	const author = label(parsed.author, 'author', fail);
-
-	if (!isObject(parsed.theme)) return fail('theme must contain an object');
-	const theme: Record<string, string> = {};
-	for (const [token, value] of Object.entries(parsed.theme)) {
-		if (!TOKENS.has(token)) fail(`"${token}" is not a theme color`);
-		if (typeof value !== 'string' || !COLOR.test(value.trim())) {
-			fail(`theme.${token} is not a valid color`);
-		}
-		theme[token] = (value as string).trim();
-	}
-	return { name, author, version: 1, theme };
-}
-
-function variant(id: string, file: Canonical): ThemeVariant {
+/** The colours a theme file paints, every token it leaves out taken from the Dark theme. */
+export function variant(id: string, file: Canonical): ThemeVariant {
 	const colors: Record<string, string> = {};
 	for (const token of FIELDS) colors[token] = css(file.theme[token] ?? darkColors[token]);
 	return { id, name: file.name, title: file.name, author: file.author, colors };
 }
 
-/**
- * Names a family after the words all its variant titles share and each variant after the rest
- * of its title, the way Sonora names them. Titles that share nothing leave the family named
- * after its folder and every variant after its whole title.
- */
-function names(id: string, variants: ThemeVariant[]): string {
-	const titles = variants.map((variant) => variant.title.split(/\s+/).filter(Boolean));
-	const [first, ...rest] = titles;
-	let shared = 0;
-	while (shared < first.length && rest.every((title) => title[shared] === first[shared])) shared++;
-	variants.forEach((variant, index) => {
-		const words = titles[index].slice(shared);
-		if (words.length) variant.name = words.join(' ');
-	});
-	return shared ? first.slice(0, shared).join(' ') : id;
-}
-
-/** Wraps a payload in a theme link, or fails when Sonora would refuse it for its length. */
-function link(payload: string, fail: (reason: string) => never): string {
-	const link =
-		LINK + base64(bytes(payload)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-	if (link.length > LINK_LIMIT) fail('the theme is too large for a link');
-	return link;
-}
-
-function label(value: unknown, field: string, fail: (reason: string) => never): string {
-	if (typeof value !== 'string' || !value.trim()) return fail(`${field} must not be empty`);
-	const text = value.trim();
-	if ([...text].length > LABEL_LIMIT) fail(`${field} is longer than ${LABEL_LIMIT} characters`);
-	if (HIDDEN.test(text)) fail(`${field} has control or invisible characters`);
-	return text;
-}
-
-/** Whether `name` is a folder or file name Sonora accepts from a link. */
-function slugged(name: string): boolean {
-	return (
-		/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name) && name.length <= SLUG_LIMIT && !DEVICE_NAMES.has(name)
+/** Names a family and each of its variants from their titles, the way Sonora names them. */
+export function names(id: string, variants: ThemeVariant[]): string {
+	const named = family(
+		id,
+		variants.map((variant) => variant.title)
 	);
-}
-
-function isObject(value: unknown): value is Record<string, unknown> {
-	return typeof value === 'object' && value !== null && !Array.isArray(value);
+	variants.forEach((variant, index) => (variant.name = named.variants[index]));
+	return named.name;
 }
 
 /** A hex colour, with or without `#` and with an optional alpha byte, as CSS `rgb()`. */
@@ -244,17 +145,6 @@ function css(hex: string): string {
 		parseInt(pair, 16)
 	);
 	return `rgb(${red} ${green} ${blue} / ${Math.round((alpha / 255) * 1000) / 1000})`;
-}
-
-function bytes(text: string): Uint8Array {
-	return new TextEncoder().encode(text);
-}
-
-/** Padded standard base64 of `data`. */
-function base64(data: Uint8Array): string {
-	let binary = '';
-	for (const byte of data) binary += String.fromCharCode(byte);
-	return btoa(binary);
 }
 
 /** A zip archive that stores `entries`, each a path and its text, without compressing them. */
