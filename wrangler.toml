@@ -16,3 +16,11 @@ class_name = "Downloads"
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["Downloads"]
+
+[[durable_objects.bindings]]
+name = "SUBMISSIONS"
+class_name = "Submissions"
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["Submissions"]

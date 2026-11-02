@@ -1,7 +1,10 @@
 import { DurableObject } from 'cloudflare:workers';
+import { submit, type SubmitEnv } from './submit';
+
+export { Submissions } from './submit';
 
 /** The parts of the runtime's types this worker uses, since the site does not install them. */
-type Env = {
+type Env = SubmitEnv & {
 	ASSETS: { fetch(request: Request): Promise<Response> };
 	DOWNLOADS: { getByName(name: string): Pick<Downloads, 'all' | 'count'> };
 };
@@ -17,12 +20,16 @@ const RECORD = /^\/api\/themes\/([^/]+)\/download$/;
 const THEME_LIMIT = 256;
 
 /**
- * Counts the times each community theme was installed or downloaded. The site's pages are static
- * assets, and only `/api/*` reaches this worker.
+ * Counts the times each community theme was installed or downloaded, and files themes sent
+ * through the submission form as pull requests. The site's pages are static assets, and only `/api/*` reaches this worker.
  */
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const url = new URL(request.url);
+		if (url.pathname === '/api/themes/submit' && request.method === 'POST') {
+			return submit(request, env);
+		}
+
 		const counter = env.DOWNLOADS.getByName('themes');
 
 		if (url.pathname === '/api/themes/downloads' && request.method === 'GET') {
