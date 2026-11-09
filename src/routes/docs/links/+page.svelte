@@ -20,15 +20,17 @@
 
 <h2 id="search">From search</h2>
 <p>
-	Paste a supported music link into Sonora's search field and press <kbd>Enter</kbd> or click Search.
-	Sonora opens the linked page and switches to its provider if you have an account saved. Without a saved
+	Paste a supported music link into Sonora's search field. Choose <strong
+		>Open link in Sonora</strong
+	>
+	to open the linked page. Sonora switches to its provider if you have an account saved. Without a saved
 	account, Sonora asks you to sign in first.
 </p>
 <p>
 	For links to your active provider, suggestions show the linked item and matches for its title or
-	artist name. While metadata loads, or for a different provider, choose <strong
-		>Open link in Sonora</strong
-	> to open the URL.
+	artist name. Press <kbd>Enter</kbd>, click Search, or choose <strong>Search for …</strong> to see
+	full results for that name. The <strong>Open link in Sonora</strong> action appears before the name
+	search and remains available while metadata loads or for a different provider.
 </p>
 <p>
 	YouTube Music links such as <code>https://music.youtube.com/channel/UC…</code> open an artist
