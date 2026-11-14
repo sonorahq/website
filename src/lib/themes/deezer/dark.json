@@ -1,0 +1,29 @@
+{
+	"name": "Deezer Dark",
+	"author": "leanne_purple",
+	"version": 1,
+	"theme": {
+		"background": "#000000",
+		"foreground": "#ffffff",
+		"sidebar": "#141216",
+		"sidebar_accent": "#242326",
+		"sidebar_border": "#00000000",
+		"popover": "#141216",
+		"popover_foreground": "#ffffff",
+		"secondary": "#242326",
+		"secondary_hover": "#2e2c30",
+		"secondary_active": "#2e2c30",
+		"muted": "#282828",
+		"muted_foreground": "#b3b3b3",
+		"border": "#323232",
+		"primary": "#ad47ff",
+		"primary_foreground": "#000000",
+		"primary_hover": "#bb73ff",
+		"progress_bar": "#ad47ff",
+		"selection": "#A31ED733",
+		"danger": "#e91429",
+		"danger_foreground": "#ffffff",
+		"table_active": "#2a2a2a",
+		"table_active_border": "#ad47ff"
+	}
+}
