@@ -81,6 +81,21 @@ export const platforms: {
 		note: 'Standalone .flatpak bundles are attached to every release.'
 	},
 	{
+		id: 'snap',
+		mark: 'snapcraft',
+		label: 'Snap',
+		prompt: '$',
+		hero: 'sudo snap install sonora',
+		steps: [
+			{
+				caption: 'Install from the Snap Store',
+				command: 'sudo snap install sonora',
+				hint: 'Updates arrive automatically or manually with snap refresh.'
+			}
+		],
+		note: ""
+	},
+	{
 		id: 'nix',
 		mark: 'nix',
 		label: 'Nix',
