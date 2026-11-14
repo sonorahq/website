@@ -1,0 +1,29 @@
+{
+	"name": "Deezer Midnight Orchid",
+	"author": "leanne_purple",
+	"version": 1,
+	"theme": {
+		"background": "#1f001f",
+		"foreground": "#ffffff",
+		"sidebar": "#2c042c",
+		"sidebar_accent": "#3d143c",
+		"sidebar_border": "#00000000",
+		"popover": "#2c042c",
+		"popover_foreground": "#ffffff",
+		"secondary": "#3d143c",
+		"secondary_hover": "#482047",
+		"secondary_active": "#482047",
+		"muted": "#282828",
+		"muted_foreground": "#b3b3b3",
+		"border": "#4F2D4D",
+		"primary": "#f383fb",
+		"primary_foreground": "#000000",
+		"primary_hover": "#fb91ff",
+		"progress_bar": "#f383fb",
+		"selection": "#A31ED733",
+		"danger": "#e91429",
+		"danger_foreground": "#ffffff",
+		"table_active": "#2a2a2a",
+		"table_active_border": "#f383fb"
+	}
+}
