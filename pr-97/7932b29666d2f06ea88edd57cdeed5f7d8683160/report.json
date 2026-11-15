@@ -1,0 +1,203 @@
+{
+  "themes": [
+    {
+      "id": "deezer",
+      "variants": [
+        {
+          "title": "Deezer Dark",
+          "dir": "deezer/dark",
+          "shots": {
+            "album": "deezer/dark/album.png",
+            "menu": "deezer/dark/menu.png",
+            "home": "deezer/dark/home.png",
+            "queue": "deezer/dark/queue.png",
+            "settings": "deezer/dark/settings.png"
+          },
+          "zooms": {
+            "table": "deezer/dark/zoom-table.png",
+            "hero": "deezer/dark/zoom-hero.png",
+            "player": "deezer/dark/zoom-player.png",
+            "lyrics": "deezer/dark/zoom-lyrics.png",
+            "menu": "deezer/dark/zoom-menu.png",
+            "sidebar": "deezer/dark/zoom-sidebar.png",
+            "queue": "deezer/dark/zoom-queue.png",
+            "settings": "deezer/dark/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Deezer Light",
+          "dir": "deezer/light",
+          "shots": {
+            "album": "deezer/light/album.png",
+            "menu": "deezer/light/menu.png",
+            "home": "deezer/light/home.png",
+            "queue": "deezer/light/queue.png",
+            "settings": "deezer/light/settings.png"
+          },
+          "zooms": {
+            "table": "deezer/light/zoom-table.png",
+            "hero": "deezer/light/zoom-hero.png",
+            "player": "deezer/light/zoom-player.png",
+            "lyrics": "deezer/light/zoom-lyrics.png",
+            "menu": "deezer/light/zoom-menu.png",
+            "sidebar": "deezer/light/zoom-sidebar.png",
+            "queue": "deezer/light/zoom-queue.png",
+            "settings": "deezer/light/zoom-settings.png"
+          },
+          "unreadable": 8,
+          "low": 1,
+          "spots": [
+            {
+              "text": "#",
+              "ratio": 2.91,
+              "fg": "#8a8a8a",
+              "bg": "#424242",
+              "box": {
+                "x": 267.5,
+                "y": 308.171875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "deezer/light/zoom-worst-1.png"
+            },
+            {
+              "text": "Title",
+              "ratio": 2.91,
+              "fg": "#8a8a8a",
+              "bg": "#424242",
+              "box": {
+                "x": 302,
+                "y": 308.171875,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "deezer/light/zoom-worst-2.png"
+            },
+            {
+              "text": "Artist",
+              "ratio": 2.91,
+              "fg": "#8a8a8a",
+              "bg": "#424242",
+              "box": {
+                "x": 600.578125,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "deezer/light/zoom-worst-3.png"
+            },
+            {
+              "text": "Plays",
+              "ratio": 2.91,
+              "fg": "#8a8a8a",
+              "bg": "#424242",
+              "box": {
+                "x": 751,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Length",
+              "ratio": 2.91,
+              "fg": "#8a8a8a",
+              "bg": "#424242",
+              "box": {
+                "x": 901.5,
+                "y": 308.171875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 2.94,
+              "fg": "#5a5a5a",
+              "bg": "#a9a9a9",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 2.94,
+              "fg": "#5a5a5a",
+              "bg": "#a9a9a9",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:27",
+              "ratio": 2.94,
+              "fg": "#5a5a5a",
+              "bg": "#a9a9a9",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 4.13,
+              "fg": "#a238ff",
+              "bg": "#f2f2f2",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            }
+          ]
+        },
+        {
+          "title": "Deezer Midnight Orchid",
+          "dir": "deezer/modnight-orchid",
+          "shots": {
+            "album": "deezer/modnight-orchid/album.png",
+            "menu": "deezer/modnight-orchid/menu.png",
+            "home": "deezer/modnight-orchid/home.png",
+            "queue": "deezer/modnight-orchid/queue.png",
+            "settings": "deezer/modnight-orchid/settings.png"
+          },
+          "zooms": {
+            "table": "deezer/modnight-orchid/zoom-table.png",
+            "hero": "deezer/modnight-orchid/zoom-hero.png",
+            "player": "deezer/modnight-orchid/zoom-player.png",
+            "lyrics": "deezer/modnight-orchid/zoom-lyrics.png",
+            "menu": "deezer/modnight-orchid/zoom-menu.png",
+            "sidebar": "deezer/modnight-orchid/zoom-sidebar.png",
+            "queue": "deezer/modnight-orchid/zoom-queue.png",
+            "settings": "deezer/modnight-orchid/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
