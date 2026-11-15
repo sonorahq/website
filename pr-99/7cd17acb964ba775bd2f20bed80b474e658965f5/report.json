@@ -1,0 +1,1055 @@
+{
+  "themes": [
+    {
+      "id": "aurorax",
+      "variants": [
+        {
+          "title": "Neon Afterglow",
+          "dir": "aurorax/neon-dark-sonora-theme",
+          "shots": {
+            "album": "aurorax/neon-dark-sonora-theme/album.png",
+            "menu": "aurorax/neon-dark-sonora-theme/menu.png",
+            "home": "aurorax/neon-dark-sonora-theme/home.png",
+            "queue": "aurorax/neon-dark-sonora-theme/queue.png",
+            "settings": "aurorax/neon-dark-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "aurorax/neon-dark-sonora-theme/zoom-table.png",
+            "hero": "aurorax/neon-dark-sonora-theme/zoom-hero.png",
+            "player": "aurorax/neon-dark-sonora-theme/zoom-player.png",
+            "lyrics": "aurorax/neon-dark-sonora-theme/zoom-lyrics.png",
+            "menu": "aurorax/neon-dark-sonora-theme/zoom-menu.png",
+            "sidebar": "aurorax/neon-dark-sonora-theme/zoom-sidebar.png",
+            "queue": "aurorax/neon-dark-sonora-theme/zoom-queue.png",
+            "settings": "aurorax/neon-dark-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Neon OLED",
+          "dir": "aurorax/neon-oled-sonora-theme",
+          "shots": {
+            "album": "aurorax/neon-oled-sonora-theme/album.png",
+            "menu": "aurorax/neon-oled-sonora-theme/menu.png",
+            "home": "aurorax/neon-oled-sonora-theme/home.png",
+            "queue": "aurorax/neon-oled-sonora-theme/queue.png",
+            "settings": "aurorax/neon-oled-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "aurorax/neon-oled-sonora-theme/zoom-table.png",
+            "hero": "aurorax/neon-oled-sonora-theme/zoom-hero.png",
+            "player": "aurorax/neon-oled-sonora-theme/zoom-player.png",
+            "lyrics": "aurorax/neon-oled-sonora-theme/zoom-lyrics.png",
+            "menu": "aurorax/neon-oled-sonora-theme/zoom-menu.png",
+            "sidebar": "aurorax/neon-oled-sonora-theme/zoom-sidebar.png",
+            "queue": "aurorax/neon-oled-sonora-theme/zoom-queue.png",
+            "settings": "aurorax/neon-oled-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Neon White",
+          "dir": "aurorax/neon-white-sonora-theme",
+          "shots": {
+            "album": "aurorax/neon-white-sonora-theme/album.png",
+            "menu": "aurorax/neon-white-sonora-theme/menu.png",
+            "home": "aurorax/neon-white-sonora-theme/home.png",
+            "queue": "aurorax/neon-white-sonora-theme/queue.png",
+            "settings": "aurorax/neon-white-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "aurorax/neon-white-sonora-theme/zoom-table.png",
+            "hero": "aurorax/neon-white-sonora-theme/zoom-hero.png",
+            "player": "aurorax/neon-white-sonora-theme/zoom-player.png",
+            "lyrics": "aurorax/neon-white-sonora-theme/zoom-lyrics.png",
+            "menu": "aurorax/neon-white-sonora-theme/zoom-menu.png",
+            "sidebar": "aurorax/neon-white-sonora-theme/zoom-sidebar.png",
+            "queue": "aurorax/neon-white-sonora-theme/zoom-queue.png",
+            "settings": "aurorax/neon-white-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 6,
+          "spots": [
+            {
+              "text": "Traditional",
+              "ratio": 4.06,
+              "fg": "#676b82",
+              "bg": "#dfe2ee",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "aurorax/neon-white-sonora-theme/zoom-worst-1.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 4.06,
+              "fg": "#676b82",
+              "bg": "#dfe2ee",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "aurorax/neon-white-sonora-theme/zoom-worst-2.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.06,
+              "fg": "#676b82",
+              "bg": "#dfe2ee",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "aurorax/neon-white-sonora-theme/zoom-worst-3.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 4.14,
+              "fg": "#676b82",
+              "bg": "#e1e4f2",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 4.37,
+              "fg": "#676b82",
+              "bg": "#e8eaf4",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 4.37,
+              "fg": "#676b82",
+              "bg": "#e8eaf4",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "forest-night",
+      "variants": [
+        {
+          "title": "Forest Night",
+          "dir": "forest-night/forest-night-sonora-theme",
+          "shots": {
+            "album": "forest-night/forest-night-sonora-theme/album.png",
+            "menu": "forest-night/forest-night-sonora-theme/menu.png",
+            "home": "forest-night/forest-night-sonora-theme/home.png",
+            "queue": "forest-night/forest-night-sonora-theme/queue.png",
+            "settings": "forest-night/forest-night-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "forest-night/forest-night-sonora-theme/zoom-table.png",
+            "hero": "forest-night/forest-night-sonora-theme/zoom-hero.png",
+            "player": "forest-night/forest-night-sonora-theme/zoom-player.png",
+            "lyrics": "forest-night/forest-night-sonora-theme/zoom-lyrics.png",
+            "menu": "forest-night/forest-night-sonora-theme/zoom-menu.png",
+            "sidebar": "forest-night/forest-night-sonora-theme/zoom-sidebar.png",
+            "queue": "forest-night/forest-night-sonora-theme/zoom-queue.png",
+            "settings": "forest-night/forest-night-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Silver Grove",
+          "dir": "forest-night/silver-grove-sonora-theme",
+          "shots": {
+            "album": "forest-night/silver-grove-sonora-theme/album.png",
+            "menu": "forest-night/silver-grove-sonora-theme/menu.png",
+            "home": "forest-night/silver-grove-sonora-theme/home.png",
+            "queue": "forest-night/silver-grove-sonora-theme/queue.png",
+            "settings": "forest-night/silver-grove-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "forest-night/silver-grove-sonora-theme/zoom-table.png",
+            "hero": "forest-night/silver-grove-sonora-theme/zoom-hero.png",
+            "player": "forest-night/silver-grove-sonora-theme/zoom-player.png",
+            "lyrics": "forest-night/silver-grove-sonora-theme/zoom-lyrics.png",
+            "menu": "forest-night/silver-grove-sonora-theme/zoom-menu.png",
+            "sidebar": "forest-night/silver-grove-sonora-theme/zoom-sidebar.png",
+            "queue": "forest-night/silver-grove-sonora-theme/zoom-queue.png",
+            "settings": "forest-night/silver-grove-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 30,
+          "spots": [
+            {
+              "text": "Traditional",
+              "ratio": 3.63,
+              "fg": "#64736a",
+              "bg": "#d5ded7",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "forest-night/silver-grove-sonora-theme/zoom-worst-1.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 3.63,
+              "fg": "#64736a",
+              "bg": "#d5ded7",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "forest-night/silver-grove-sonora-theme/zoom-worst-2.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 3.63,
+              "fg": "#64736a",
+              "bg": "#d5ded7",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "forest-night/silver-grove-sonora-theme/zoom-worst-3.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 3.71,
+              "fg": "#64736a",
+              "bg": "#d8e0da",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 4.05,
+              "fg": "#64736a",
+              "bg": "#e2e9e3",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 4.05,
+              "fg": "#64736a",
+              "bg": "#e2e9e3",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Home",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Search",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Your Library",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 102.25,
+                "y": 205.171875,
+                "width": 80,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Songs",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 104,
+                "y": 240.671875,
+                "width": 41,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Albums",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 104,
+                "y": 276.171875,
+                "width": 49,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artists",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 104,
+                "y": 311.671875,
+                "width": 42,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlists",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 104,
+                "y": 347.171875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Local Music",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 102.25,
+                "y": 382.671875,
+                "width": 78,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "History",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 102.25,
+                "y": 418.171875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Settings",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 102.25,
+                "y": 453.671875,
+                "width": 54,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Pinned",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 88,
+                "y": 495.796875,
+                "width": 45,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 120,
+                "y": 530.75,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlist",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 120,
+                "y": 550.25,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Suite bergamasque",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 120,
+                "y": 586.25,
+                "width": 128,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 120,
+                "y": 605.75,
+                "width": 36,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 120,
+                "y": 641.75,
+                "width": 104,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artist",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 120,
+                "y": 661.25,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Four Seasons",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 120,
+                "y": 697.25,
+                "width": 116,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:27",
+              "ratio": 4.13,
+              "fg": "#64736a",
+              "bg": "#e5ebe6",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.17,
+              "fg": "#64736a",
+              "bg": "#e6ece7",
+              "box": {
+                "x": 125,
+                "y": 778.796875,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "0:56",
+              "ratio": 4.17,
+              "fg": "#64736a",
+              "bg": "#e6ece7",
+              "box": {
+                "x": 468.890625,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.17,
+              "fg": "#64736a",
+              "bg": "#e6ece7",
+              "box": {
+                "x": 787.109375,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            }
+          ]
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "nordic-dusk",
+      "variants": [
+        {
+          "title": "Nordic Dusk Dark",
+          "dir": "nordic-dusk/dark",
+          "shots": {
+            "album": "nordic-dusk/dark/album.png",
+            "menu": "nordic-dusk/dark/menu.png",
+            "home": "nordic-dusk/dark/home.png",
+            "queue": "nordic-dusk/dark/queue.png",
+            "settings": "nordic-dusk/dark/settings.png"
+          },
+          "zooms": {
+            "table": "nordic-dusk/dark/zoom-table.png",
+            "hero": "nordic-dusk/dark/zoom-hero.png",
+            "player": "nordic-dusk/dark/zoom-player.png",
+            "lyrics": "nordic-dusk/dark/zoom-lyrics.png",
+            "menu": "nordic-dusk/dark/zoom-menu.png",
+            "sidebar": "nordic-dusk/dark/zoom-sidebar.png",
+            "queue": "nordic-dusk/dark/zoom-queue.png",
+            "settings": "nordic-dusk/dark/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 7,
+          "spots": [
+            {
+              "text": "Play",
+              "ratio": 4.39,
+              "fg": "#2e3440",
+              "bg": "#d08770",
+              "box": {
+                "x": 476.5,
+                "y": 256.25,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "nordic-dusk/dark/zoom-worst-1.png"
+            },
+            {
+              "text": "#",
+              "ratio": 4.39,
+              "fg": "#d08770",
+              "bg": "#2e3440",
+              "box": {
+                "x": 267.5,
+                "y": 308.171875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "nordic-dusk/dark/zoom-worst-2.png"
+            },
+            {
+              "text": "Title",
+              "ratio": 4.39,
+              "fg": "#d08770",
+              "bg": "#2e3440",
+              "box": {
+                "x": 302,
+                "y": 308.171875,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "nordic-dusk/dark/zoom-worst-3.png"
+            },
+            {
+              "text": "Artist",
+              "ratio": 4.39,
+              "fg": "#d08770",
+              "bg": "#2e3440",
+              "box": {
+                "x": 600.578125,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Plays",
+              "ratio": 4.39,
+              "fg": "#d08770",
+              "bg": "#2e3440",
+              "box": {
+                "x": 751,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Length",
+              "ratio": 4.39,
+              "fg": "#d08770",
+              "bg": "#2e3440",
+              "box": {
+                "x": 901.5,
+                "y": 308.171875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 4.39,
+              "fg": "#d08770",
+              "bg": "#2e3440",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            }
+          ]
+        },
+        {
+          "title": "Nordic Dusk Light",
+          "dir": "nordic-dusk/light",
+          "shots": {
+            "album": "nordic-dusk/light/album.png",
+            "menu": "nordic-dusk/light/menu.png",
+            "home": "nordic-dusk/light/home.png",
+            "queue": "nordic-dusk/light/queue.png",
+            "settings": "nordic-dusk/light/settings.png"
+          },
+          "zooms": {
+            "table": "nordic-dusk/light/zoom-table.png",
+            "hero": "nordic-dusk/light/zoom-hero.png",
+            "player": "nordic-dusk/light/zoom-player.png",
+            "lyrics": "nordic-dusk/light/zoom-lyrics.png",
+            "menu": "nordic-dusk/light/zoom-menu.png",
+            "sidebar": "nordic-dusk/light/zoom-sidebar.png",
+            "queue": "nordic-dusk/light/zoom-queue.png",
+            "settings": "nordic-dusk/light/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 7,
+          "spots": [
+            {
+              "text": "Play",
+              "ratio": 3.58,
+              "fg": "#eceff4",
+              "bg": "#c1623e",
+              "box": {
+                "x": 476.5,
+                "y": 256.25,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "nordic-dusk/light/zoom-worst-1.png"
+            },
+            {
+              "text": "#",
+              "ratio": 3.58,
+              "fg": "#c1623e",
+              "bg": "#eceff4",
+              "box": {
+                "x": 267.5,
+                "y": 308.171875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "nordic-dusk/light/zoom-worst-2.png"
+            },
+            {
+              "text": "Title",
+              "ratio": 3.58,
+              "fg": "#c1623e",
+              "bg": "#eceff4",
+              "box": {
+                "x": 302,
+                "y": 308.171875,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "nordic-dusk/light/zoom-worst-3.png"
+            },
+            {
+              "text": "Artist",
+              "ratio": 3.58,
+              "fg": "#c1623e",
+              "bg": "#eceff4",
+              "box": {
+                "x": 600.578125,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Plays",
+              "ratio": 3.58,
+              "fg": "#c1623e",
+              "bg": "#eceff4",
+              "box": {
+                "x": 751,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Length",
+              "ratio": 3.58,
+              "fg": "#c1623e",
+              "bg": "#eceff4",
+              "box": {
+                "x": 901.5,
+                "y": 308.171875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 3.58,
+              "fg": "#c1623e",
+              "bg": "#eceff4",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            }
+          ]
+        },
+        {
+          "title": "Nordic Dusk OLED",
+          "dir": "nordic-dusk/oled",
+          "shots": {
+            "album": "nordic-dusk/oled/album.png",
+            "menu": "nordic-dusk/oled/menu.png",
+            "home": "nordic-dusk/oled/home.png",
+            "queue": "nordic-dusk/oled/queue.png",
+            "settings": "nordic-dusk/oled/settings.png"
+          },
+          "zooms": {
+            "table": "nordic-dusk/oled/zoom-table.png",
+            "hero": "nordic-dusk/oled/zoom-hero.png",
+            "player": "nordic-dusk/oled/zoom-player.png",
+            "lyrics": "nordic-dusk/oled/zoom-lyrics.png",
+            "menu": "nordic-dusk/oled/zoom-menu.png",
+            "sidebar": "nordic-dusk/oled/zoom-sidebar.png",
+            "queue": "nordic-dusk/oled/zoom-queue.png",
+            "settings": "nordic-dusk/oled/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "pastel-pink",
+      "variants": [
+        {
+          "title": "Pastel Pink Dark",
+          "dir": "pastel-pink/dark",
+          "shots": {
+            "album": "pastel-pink/dark/album.png",
+            "menu": "pastel-pink/dark/menu.png",
+            "home": "pastel-pink/dark/home.png",
+            "queue": "pastel-pink/dark/queue.png",
+            "settings": "pastel-pink/dark/settings.png"
+          },
+          "zooms": {
+            "table": "pastel-pink/dark/zoom-table.png",
+            "hero": "pastel-pink/dark/zoom-hero.png",
+            "player": "pastel-pink/dark/zoom-player.png",
+            "lyrics": "pastel-pink/dark/zoom-lyrics.png",
+            "menu": "pastel-pink/dark/zoom-menu.png",
+            "sidebar": "pastel-pink/dark/zoom-sidebar.png",
+            "queue": "pastel-pink/dark/zoom-queue.png",
+            "settings": "pastel-pink/dark/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Pastel Pink Light",
+          "dir": "pastel-pink/light",
+          "shots": {
+            "album": "pastel-pink/light/album.png",
+            "menu": "pastel-pink/light/menu.png",
+            "home": "pastel-pink/light/home.png",
+            "queue": "pastel-pink/light/queue.png",
+            "settings": "pastel-pink/light/settings.png"
+          },
+          "zooms": {
+            "table": "pastel-pink/light/zoom-table.png",
+            "hero": "pastel-pink/light/zoom-hero.png",
+            "player": "pastel-pink/light/zoom-player.png",
+            "lyrics": "pastel-pink/light/zoom-lyrics.png",
+            "menu": "pastel-pink/light/zoom-menu.png",
+            "sidebar": "pastel-pink/light/zoom-sidebar.png",
+            "queue": "pastel-pink/light/zoom-queue.png",
+            "settings": "pastel-pink/light/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 9,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 3.82,
+              "fg": "#786270",
+              "bg": "#e3d1dd",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 4.06,
+              "fg": "#786270",
+              "bg": "#e8d8e2",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 4.06,
+              "fg": "#786270",
+              "bg": "#e8d8e2",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.29,
+              "fg": "#786270",
+              "bg": "#eadef0",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "pastel-pink/light/zoom-worst-1.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 4.29,
+              "fg": "#786270",
+              "bg": "#eadef0",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "pastel-pink/light/zoom-worst-2.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.29,
+              "fg": "#786270",
+              "bg": "#eadef0",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "pastel-pink/light/zoom-worst-3.png"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.33,
+              "fg": "#786270",
+              "bg": "#ece0e8",
+              "box": {
+                "x": 125,
+                "y": 778.796875,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "0:56",
+              "ratio": 4.33,
+              "fg": "#786270",
+              "bg": "#ece0e8",
+              "box": {
+                "x": 468.890625,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.33,
+              "fg": "#786270",
+              "bg": "#ece0e8",
+              "box": {
+                "x": 787.109375,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            }
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}
