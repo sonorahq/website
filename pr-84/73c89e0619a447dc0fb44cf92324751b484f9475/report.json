@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "id": "spectrum-night",
+      "variants": [
+        {
+          "title": "Spectrum Night",
+          "dir": "spectrum-night/spectrum-night",
+          "shots": {
+            "album": "spectrum-night/spectrum-night/album.png",
+            "menu": "spectrum-night/spectrum-night/menu.png",
+            "home": "spectrum-night/spectrum-night/home.png",
+            "queue": "spectrum-night/spectrum-night/queue.png",
+            "settings": "spectrum-night/spectrum-night/settings.png"
+          },
+          "zooms": {
+            "table": "spectrum-night/spectrum-night/zoom-table.png",
+            "hero": "spectrum-night/spectrum-night/zoom-hero.png",
+            "player": "spectrum-night/spectrum-night/zoom-player.png",
+            "lyrics": "spectrum-night/spectrum-night/zoom-lyrics.png",
+            "menu": "spectrum-night/spectrum-night/zoom-menu.png",
+            "sidebar": "spectrum-night/spectrum-night/zoom-sidebar.png",
+            "queue": "spectrum-night/spectrum-night/zoom-queue.png",
+            "settings": "spectrum-night/spectrum-night/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
