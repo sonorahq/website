@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "id": "phantom-glow",
+      "variants": [
+        {
+          "title": "Phantom Glow",
+          "dir": "phantom-glow/phantom-glow",
+          "shots": {
+            "album": "phantom-glow/phantom-glow/album.png",
+            "menu": "phantom-glow/phantom-glow/menu.png",
+            "home": "phantom-glow/phantom-glow/home.png",
+            "queue": "phantom-glow/phantom-glow/queue.png",
+            "settings": "phantom-glow/phantom-glow/settings.png"
+          },
+          "zooms": {
+            "table": "phantom-glow/phantom-glow/zoom-table.png",
+            "hero": "phantom-glow/phantom-glow/zoom-hero.png",
+            "player": "phantom-glow/phantom-glow/zoom-player.png",
+            "lyrics": "phantom-glow/phantom-glow/zoom-lyrics.png",
+            "menu": "phantom-glow/phantom-glow/zoom-menu.png",
+            "sidebar": "phantom-glow/phantom-glow/zoom-sidebar.png",
+            "queue": "phantom-glow/phantom-glow/zoom-queue.png",
+            "settings": "phantom-glow/phantom-glow/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
