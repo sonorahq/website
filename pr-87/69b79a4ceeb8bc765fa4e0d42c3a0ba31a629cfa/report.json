@@ -1,0 +1,701 @@
+{
+  "themes": [
+    {
+      "id": "prism",
+      "variants": [
+        {
+          "title": "Prism Dark Hard",
+          "dir": "prism/prism-dark-hard-sonora-theme",
+          "shots": {
+            "album": "prism/prism-dark-hard-sonora-theme/album.png",
+            "menu": "prism/prism-dark-hard-sonora-theme/menu.png",
+            "home": "prism/prism-dark-hard-sonora-theme/home.png",
+            "queue": "prism/prism-dark-hard-sonora-theme/queue.png",
+            "settings": "prism/prism-dark-hard-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "prism/prism-dark-hard-sonora-theme/zoom-table.png",
+            "hero": "prism/prism-dark-hard-sonora-theme/zoom-hero.png",
+            "player": "prism/prism-dark-hard-sonora-theme/zoom-player.png",
+            "lyrics": "prism/prism-dark-hard-sonora-theme/zoom-lyrics.png",
+            "menu": "prism/prism-dark-hard-sonora-theme/zoom-menu.png",
+            "sidebar": "prism/prism-dark-hard-sonora-theme/zoom-sidebar.png",
+            "queue": "prism/prism-dark-hard-sonora-theme/zoom-queue.png",
+            "settings": "prism/prism-dark-hard-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Prism Dark",
+          "dir": "prism/prism-dark-sonora-theme",
+          "shots": {
+            "album": "prism/prism-dark-sonora-theme/album.png",
+            "menu": "prism/prism-dark-sonora-theme/menu.png",
+            "home": "prism/prism-dark-sonora-theme/home.png",
+            "queue": "prism/prism-dark-sonora-theme/queue.png",
+            "settings": "prism/prism-dark-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "prism/prism-dark-sonora-theme/zoom-table.png",
+            "hero": "prism/prism-dark-sonora-theme/zoom-hero.png",
+            "player": "prism/prism-dark-sonora-theme/zoom-player.png",
+            "lyrics": "prism/prism-dark-sonora-theme/zoom-lyrics.png",
+            "menu": "prism/prism-dark-sonora-theme/zoom-menu.png",
+            "sidebar": "prism/prism-dark-sonora-theme/zoom-sidebar.png",
+            "queue": "prism/prism-dark-sonora-theme/zoom-queue.png",
+            "settings": "prism/prism-dark-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 3,
+          "spots": [
+            {
+              "text": "Traditional",
+              "ratio": 4.43,
+              "fg": "#b7b7cc",
+              "bg": "#494960",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-dark-sonora-theme/zoom-worst-1.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 4.43,
+              "fg": "#b7b7cc",
+              "bg": "#494960",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-dark-sonora-theme/zoom-worst-2.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.43,
+              "fg": "#b7b7cc",
+              "bg": "#494960",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-dark-sonora-theme/zoom-worst-3.png"
+            }
+          ]
+        },
+        {
+          "title": "Prism Light Hard",
+          "dir": "prism/prism-light-hard-sonora-theme",
+          "shots": {
+            "album": "prism/prism-light-hard-sonora-theme/album.png",
+            "menu": "prism/prism-light-hard-sonora-theme/menu.png",
+            "home": "prism/prism-light-hard-sonora-theme/home.png",
+            "queue": "prism/prism-light-hard-sonora-theme/queue.png",
+            "settings": "prism/prism-light-hard-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "prism/prism-light-hard-sonora-theme/zoom-table.png",
+            "hero": "prism/prism-light-hard-sonora-theme/zoom-hero.png",
+            "player": "prism/prism-light-hard-sonora-theme/zoom-player.png",
+            "lyrics": "prism/prism-light-hard-sonora-theme/zoom-lyrics.png",
+            "menu": "prism/prism-light-hard-sonora-theme/zoom-menu.png",
+            "sidebar": "prism/prism-light-hard-sonora-theme/zoom-sidebar.png",
+            "queue": "prism/prism-light-hard-sonora-theme/zoom-queue.png",
+            "settings": "prism/prism-light-hard-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 12,
+          "low": 7,
+          "spots": [
+            {
+              "text": "Add to playlist",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 569.5,
+                "width": 95,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "›",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 620,
+                "y": 569.5,
+                "width": 5,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Add to queue",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 637,
+                "width": 90,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Play last",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 665,
+                "width": 55,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Go to",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 704.5,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Copy link",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 732.5,
+                "width": 61,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Play next",
+              "ratio": 2.1,
+              "fg": "#fafafa",
+              "bg": "#afafaf",
+              "box": {
+                "x": 480,
+                "y": 609,
+                "width": 61,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "#",
+              "ratio": 2.79,
+              "fg": "#8a8a8a",
+              "bg": "#454545",
+              "box": {
+                "x": 267.5,
+                "y": 308.171875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-light-hard-sonora-theme/zoom-worst-1.png"
+            },
+            {
+              "text": "Title",
+              "ratio": 2.79,
+              "fg": "#8a8a8a",
+              "bg": "#454545",
+              "box": {
+                "x": 302,
+                "y": 308.171875,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-light-hard-sonora-theme/zoom-worst-2.png"
+            },
+            {
+              "text": "Artist",
+              "ratio": 2.79,
+              "fg": "#8a8a8a",
+              "bg": "#454545",
+              "box": {
+                "x": 600.578125,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-light-hard-sonora-theme/zoom-worst-3.png"
+            },
+            {
+              "text": "Plays",
+              "ratio": 2.79,
+              "fg": "#8a8a8a",
+              "bg": "#454545",
+              "box": {
+                "x": 751,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Length",
+              "ratio": 2.79,
+              "fg": "#8a8a8a",
+              "bg": "#454545",
+              "box": {
+                "x": 901.5,
+                "y": 308.171875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Search",
+              "ratio": 3.13,
+              "fg": "#535b75",
+              "bg": "#b0b1b6",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.14,
+              "fg": "#535b75",
+              "bg": "#b1b1b1",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 3.14,
+              "fg": "#535b75",
+              "bg": "#b1b1b1",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:27",
+              "ratio": 3.14,
+              "fg": "#535b75",
+              "bg": "#b1b1b1",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.38,
+              "fg": "#535b75",
+              "bg": "#cbd0e3",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 4.38,
+              "fg": "#535b75",
+              "bg": "#cbd0e3",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.38,
+              "fg": "#535b75",
+              "bg": "#cbd0e3",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            }
+          ]
+        },
+        {
+          "title": "Prism Light",
+          "dir": "prism/prism-light-sonora-theme",
+          "shots": {
+            "album": "prism/prism-light-sonora-theme/album.png",
+            "menu": "prism/prism-light-sonora-theme/menu.png",
+            "home": "prism/prism-light-sonora-theme/home.png",
+            "queue": "prism/prism-light-sonora-theme/queue.png",
+            "settings": "prism/prism-light-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "prism/prism-light-sonora-theme/zoom-table.png",
+            "hero": "prism/prism-light-sonora-theme/zoom-hero.png",
+            "player": "prism/prism-light-sonora-theme/zoom-player.png",
+            "lyrics": "prism/prism-light-sonora-theme/zoom-lyrics.png",
+            "menu": "prism/prism-light-sonora-theme/zoom-menu.png",
+            "sidebar": "prism/prism-light-sonora-theme/zoom-sidebar.png",
+            "queue": "prism/prism-light-sonora-theme/zoom-queue.png",
+            "settings": "prism/prism-light-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 16,
+          "low": 5,
+          "spots": [
+            {
+              "text": "Add to playlist",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 569.5,
+                "width": 95,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "›",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 620,
+                "y": 569.5,
+                "width": 5,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Add to queue",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 637,
+                "width": 90,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Play last",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 665,
+                "width": 55,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Go to",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 704.5,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Copy link",
+              "ratio": 1.04,
+              "fg": "#fafafa",
+              "bg": "#ffffff",
+              "box": {
+                "x": 480,
+                "y": 732.5,
+                "width": 61,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Play next",
+              "ratio": 2.1,
+              "fg": "#fafafa",
+              "bg": "#afafaf",
+              "box": {
+                "x": 480,
+                "y": 609,
+                "width": 61,
+                "height": 17
+              },
+              "scene": "menu"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 2.34,
+              "fg": "#626b86",
+              "bg": "#abacb1",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-light-sonora-theme/zoom-worst-1.png"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 2.34,
+              "fg": "#626b86",
+              "bg": "#abacb1",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-light-sonora-theme/zoom-worst-2.png"
+            },
+            {
+              "text": "4:27",
+              "ratio": 2.34,
+              "fg": "#626b86",
+              "bg": "#abacb1",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "prism/prism-light-sonora-theme/zoom-worst-3.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 2.39,
+              "fg": "#626b86",
+              "bg": "#acaeb6",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "#",
+              "ratio": 2.86,
+              "fg": "#8a8a8a",
+              "bg": "#434345",
+              "box": {
+                "x": 267.5,
+                "y": 308.171875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Title",
+              "ratio": 2.86,
+              "fg": "#8a8a8a",
+              "bg": "#434345",
+              "box": {
+                "x": 302,
+                "y": 308.171875,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artist",
+              "ratio": 2.86,
+              "fg": "#8a8a8a",
+              "bg": "#434345",
+              "box": {
+                "x": 600.578125,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Plays",
+              "ratio": 2.86,
+              "fg": "#8a8a8a",
+              "bg": "#434345",
+              "box": {
+                "x": 751,
+                "y": 308.171875,
+                "width": 35,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Length",
+              "ratio": 2.86,
+              "fg": "#8a8a8a",
+              "bg": "#434345",
+              "box": {
+                "x": 901.5,
+                "y": 308.171875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.89,
+              "fg": "#626b86",
+              "bg": "#d5ddef",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 3.89,
+              "fg": "#626b86",
+              "bg": "#d5ddef",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 3.89,
+              "fg": "#626b86",
+              "bg": "#d5ddef",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 4.41,
+              "fg": "#626b86",
+              "bg": "#e5eafa",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 4.41,
+              "fg": "#626b86",
+              "bg": "#e5eafa",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            }
+          ]
+        },
+        {
+          "title": "Prism OLED",
+          "dir": "prism/prism-oled-sonora-theme",
+          "shots": {
+            "album": "prism/prism-oled-sonora-theme/album.png",
+            "menu": "prism/prism-oled-sonora-theme/menu.png",
+            "home": "prism/prism-oled-sonora-theme/home.png",
+            "queue": "prism/prism-oled-sonora-theme/queue.png",
+            "settings": "prism/prism-oled-sonora-theme/settings.png"
+          },
+          "zooms": {
+            "table": "prism/prism-oled-sonora-theme/zoom-table.png",
+            "hero": "prism/prism-oled-sonora-theme/zoom-hero.png",
+            "player": "prism/prism-oled-sonora-theme/zoom-player.png",
+            "lyrics": "prism/prism-oled-sonora-theme/zoom-lyrics.png",
+            "menu": "prism/prism-oled-sonora-theme/zoom-menu.png",
+            "sidebar": "prism/prism-oled-sonora-theme/zoom-sidebar.png",
+            "queue": "prism/prism-oled-sonora-theme/zoom-queue.png",
+            "settings": "prism/prism-oled-sonora-theme/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
