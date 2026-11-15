@@ -1,0 +1,49 @@
+{
+  "themes": [
+    {
+      "id": "dark-blue",
+      "variants": [
+        {
+          "title": "Dark Blue",
+          "dir": "dark-blue/dark-blue",
+          "shots": {
+            "album": "dark-blue/dark-blue/album.png",
+            "menu": "dark-blue/dark-blue/menu.png",
+            "home": "dark-blue/dark-blue/home.png",
+            "queue": "dark-blue/dark-blue/queue.png",
+            "settings": "dark-blue/dark-blue/settings.png"
+          },
+          "zooms": {
+            "table": "dark-blue/dark-blue/zoom-table.png",
+            "hero": "dark-blue/dark-blue/zoom-hero.png",
+            "player": "dark-blue/dark-blue/zoom-player.png",
+            "lyrics": "dark-blue/dark-blue/zoom-lyrics.png",
+            "menu": "dark-blue/dark-blue/zoom-menu.png",
+            "sidebar": "dark-blue/dark-blue/zoom-sidebar.png",
+            "queue": "dark-blue/dark-blue/zoom-queue.png",
+            "settings": "dark-blue/dark-blue/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 1,
+          "spots": [
+            {
+              "text": "Play",
+              "ratio": 4.23,
+              "fg": "#ffffff",
+              "bg": "#1877f2",
+              "box": {
+                "x": 476.5,
+                "y": 256.25,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "dark-blue/dark-blue/zoom-worst-1.png"
+            }
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}
