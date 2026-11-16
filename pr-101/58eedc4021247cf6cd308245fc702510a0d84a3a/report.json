@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "id": "obsidian-green",
+      "variants": [
+        {
+          "title": "Obsidian Green",
+          "dir": "obsidian-green/obsidian-green",
+          "shots": {
+            "album": "obsidian-green/obsidian-green/album.png",
+            "menu": "obsidian-green/obsidian-green/menu.png",
+            "home": "obsidian-green/obsidian-green/home.png",
+            "queue": "obsidian-green/obsidian-green/queue.png",
+            "settings": "obsidian-green/obsidian-green/settings.png"
+          },
+          "zooms": {
+            "table": "obsidian-green/obsidian-green/zoom-table.png",
+            "hero": "obsidian-green/obsidian-green/zoom-hero.png",
+            "player": "obsidian-green/obsidian-green/zoom-player.png",
+            "lyrics": "obsidian-green/obsidian-green/zoom-lyrics.png",
+            "menu": "obsidian-green/obsidian-green/zoom-menu.png",
+            "sidebar": "obsidian-green/obsidian-green/zoom-sidebar.png",
+            "queue": "obsidian-green/obsidian-green/zoom-queue.png",
+            "settings": "obsidian-green/obsidian-green/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
