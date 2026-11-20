@@ -66,6 +66,21 @@ export const platforms: {
 		note: 'sonora-bin ships the prebuilt release. The sonora package builds the same version from source against your own system libraries, which takes a while.'
 	},
 	{
+		id: 'vylen',
+		mark: 'linux',
+		label: 'Vylen Linux',
+		prompt: '$',
+		hero: 'sudo emerald install sonora',
+		steps: [
+			{
+				caption: 'Install from the official repository',
+				command: 'sudo emerald install sonora',
+				hint: 'Updates arrive with emerald sysup.'
+			}
+		],
+		note: ''
+	},
+	{
 		id: 'flatpak',
 		mark: 'flatpak',
 		label: 'Flatpak',
