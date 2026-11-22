@@ -129,10 +129,13 @@ export const platforms: {
 		label: 'Windows',
 		prompt: '>',
 		hero: '',
-		pending: 'winget install sonora',
-		steps: [
+    steps: [
+      {
+        caption: 'Install via WinGet',
+        command: 'winget install SonoraHQ.Sonora'
+      },
 			{
-				caption: 'Download and run the installer',
+				caption: 'Or manually download and run the installer',
 				link: installer,
 				command: 'Sonora-Setup.exe'
 			},
@@ -154,7 +157,7 @@ export const platforms: {
 				hint: 'Rebuilt every night and untested, so expect rough edges.'
 			}
 		],
-		note: 'A winget package is coming soon. For now, download the installer.'
+		note: 'Sonora will prompt you to install the latest update on startup.'
 	}
 ];
 
