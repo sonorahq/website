@@ -39,9 +39,6 @@
 {/snippet}
 
 <section class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page layout">
 		<aside class="pages">
 			<div class="rail">
@@ -115,7 +112,7 @@
 	.rail,
 	.sticky {
 		position: sticky;
-		top: calc(var(--header) + 32px);
+		top: 32px;
 	}
 
 	.rail {

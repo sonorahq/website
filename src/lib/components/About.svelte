@@ -11,6 +11,7 @@
 				{ glyph: 'youtubemusic', text: 'YouTube Music' },
 				{ glyph: 'deezer', text: 'Deezer' },
 				{ glyph: 'tidal', text: 'Tidal' },
+				{ glyph: 'jellyfin', text: 'Jellyfin' },
 				{ glyph: 'subsonic', text: 'Subsonic' },
 				{ glyph: 'file-music', text: 'Local files' }
 			]
@@ -68,13 +69,9 @@
 </script>
 
 <section id="about" class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page">
 		<div class="section-head" use:reveal>
-			<span class="kicker">Features</span>
-			<h2>What it does</h2>
+			<h2>Features</h2>
 		</div>
 
 		<div class="wire cells" use:reveal={{ stagger: true }}>

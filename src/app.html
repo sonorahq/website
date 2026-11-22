@@ -15,9 +15,23 @@
 			root.classList.add('js');
 
 			try {
-				const stored = localStorage.getItem('theme');
-				if (stored === 'light' || stored === 'dark') {
-					root.dataset.theme = stored;
+				const scheme = localStorage.getItem('scheme');
+				if (scheme) {
+					const slug = scheme
+						.toLowerCase()
+						.normalize('NFD')
+						.replace(/[\u0300-\u036f]/g, '')
+						.replace(/[^a-z0-9]+/g, '-');
+					const light = [
+						'light',
+						'catppuccin-latte',
+						'gruvbox-light',
+						'gruvbox-light-hard',
+						'rose-pine-dawn',
+						'solarized-light'
+					];
+					root.dataset.scheme = slug;
+					root.dataset.theme = light.includes(slug) ? 'light' : 'dark';
 				}
 			} catch {}
 

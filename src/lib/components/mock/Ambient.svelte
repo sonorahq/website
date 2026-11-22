@@ -3,10 +3,38 @@
 
 	type Tint = { hue: number; saturation: number; second?: { hue: number; saturation: number } };
 
-	let { tint, moving = true }: { tint?: Tint; moving?: boolean } = $props();
+	let {
+		tint,
+		moving = true,
+		downscale,
+		fps = 0,
+		drift = 0,
+		soften = 0,
+		paused = false,
+		upscale = false
+	}: {
+		tint?: Tint;
+		moving?: boolean;
+		/** How many screen pixels one drawn pixel covers. A larger one costs less and blurs more. */
+		downscale?: number;
+		/** The most frames drawn in a second, or 0 for every display frame. */
+		fps?: number;
+		/** Seconds added to the clock, which the page eases toward so scrolling stirs the waves. */
+		drift?: number;
+		/** From 0 to 1, how far past the desktop's softness the pools blur out. */
+		soften?: number;
+		/** Stops drawing while nothing of the field shows. */
+		paused?: boolean;
+		/** Draws the field small and stretches it in a second pass at full size, which costs little more and leaves no banding at a large `downscale`. */
+		upscale?: boolean;
+	} = $props();
 
 	/** The field is a heavy blur, so it is drawn at a fraction of the size and stretched. */
 	const DOWNSCALE = 3;
+	/** Seconds the scroll offset takes to catch up, so a flick of the wheel glides. */
+	const GLIDE = 0.45;
+	/** How many times the desktop's softness the pools reach at full `soften`. */
+	const SOFTEST = 3.5;
 	/** How much the dark sheet over the field cuts each colour, as the desktop's `SHADE`. */
 	const SHADE = 0.55;
 	const BACKGROUND = 10 / 255;
@@ -32,6 +60,7 @@ uniform vec3 stage;
 uniform vec3 colors[5];
 uniform vec4 shape;
 uniform vec4 field;
+uniform float dither;
 
 vec2 hash(vec2 p) {
 	p = vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)));
@@ -98,7 +127,7 @@ void main() {
 	}
 
 	float grain = fract(sin(dot(gl_FragCoord.xy, vec2(12.9898, 78.233))) * 43758.5453) - 0.5;
-	gl_FragColor = vec4(color + grain / 255.0, 1.0);
+	gl_FragColor = vec4(color + dither * grain / 255.0, 1.0);
 }`;
 
 	const VERTEX = `
@@ -159,11 +188,32 @@ void main() {
 
 	let painted: number[][] | null = null;
 
+	/** The upscale pass: samples the field drawn at a fraction of the size and dithers every screen pixel, so the stretch leaves no steps. */
+	const BLIT = `
+precision highp float;
+uniform sampler2D field;
+uniform vec2 size;
+uniform float dither;
+
+float noise(vec2 p) {
+	return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+void main() {
+	vec3 color = texture2D(field, gl_FragCoord.xy / size).rgb;
+	float grain = noise(gl_FragCoord.xy) + noise(gl_FragCoord.xy + 71.3) - 1.0;
+	gl_FragColor = vec4(color + dither * grain / 255.0, 1.0);
+}`;
+
 	onMount(() => {
 		if (!canvas) return;
 		const host = canvas;
-		const gl = host.getContext('webgl', { antialias: false, alpha: false });
+		const modern = upscale ? host.getContext('webgl2', { antialias: false, alpha: false }) : null;
+		const gl: WebGLRenderingContext | WebGL2RenderingContext | null =
+			modern ?? host.getContext('webgl', { antialias: false, alpha: false });
 		if (!gl) return;
+		// a half-float field keeps the steps between shades finer than the screen can show, so the dither has something to smooth
+		const deep = !!modern && !!modern.getExtension('EXT_color_buffer_float');
 
 		const compile = (kind: number, source: string) => {
 			const shader = gl.createShader(kind);
@@ -172,62 +222,151 @@ void main() {
 			gl.compileShader(shader);
 			return gl.getShaderParameter(shader, gl.COMPILE_STATUS) ? shader : null;
 		};
-		const vertex = compile(gl.VERTEX_SHADER, VERTEX);
-		const fragment = compile(gl.FRAGMENT_SHADER, FRAGMENT);
-		const program = gl.createProgram();
-		if (!vertex || !fragment || !program) return;
-		gl.attachShader(program, vertex);
-		gl.attachShader(program, fragment);
-		gl.linkProgram(program);
-		if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
-		gl.useProgram(program);
+		const link = (source: string) => {
+			const vertex = compile(gl.VERTEX_SHADER, VERTEX);
+			const fragment = compile(gl.FRAGMENT_SHADER, source);
+			const linked = gl.createProgram();
+			if (!vertex || !fragment || !linked) return null;
+			gl.attachShader(linked, vertex);
+			gl.attachShader(linked, fragment);
+			gl.bindAttribLocation(linked, 0, 'corner');
+			gl.linkProgram(linked);
+			return gl.getProgramParameter(linked, gl.LINK_STATUS) ? linked : null;
+		};
+
+		const program = link(FRAGMENT);
+		if (!program) return;
+		const blit = upscale ? link(BLIT) : null;
 
 		const buffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
-		const corner = gl.getAttribLocation(program, 'corner');
-		gl.enableVertexAttribArray(corner);
-		gl.vertexAttribPointer(corner, 2, gl.FLOAT, false, 0, 0);
+		gl.enableVertexAttribArray(0);
+		gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
 
 		const at = (name: string) => gl.getUniformLocation(program, name);
+		gl.useProgram(program);
 		gl.uniform4f(at('shape'), SPEED, SWELL, MORPH, PEAK);
+		// an 8-bit field still needs its own dither under the upscale, a half-float one does not
+		gl.uniform1f(at('dither'), blit && deep ? 0 : 1);
 		gl.uniform4f(at('field'), DENSITY, SOFTNESS, VIGNETTE, CEILING);
 		const [r, g, b] = shaded([BACKGROUND, BACKGROUND, BACKGROUND]);
 		gl.uniform3f(at('stage'), r, g, b);
 
+		let texture: WebGLTexture | null = null;
+		let target: WebGLFramebuffer | null = null;
+		if (blit) {
+			texture = gl.createTexture();
+			gl.bindTexture(gl.TEXTURE_2D, texture);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+			target = gl.createFramebuffer();
+			gl.useProgram(blit);
+			gl.uniform1i(gl.getUniformLocation(blit, 'field'), 0);
+			gl.uniform1f(gl.getUniformLocation(blit, 'dither'), 1);
+		}
+
 		const started = performance.now();
 		let stepped = started;
+		let drawn = 0;
+		let eased = drift;
 		const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let frame = 0;
+		let low = [1, 1];
 
 		const size = () => {
 			const bounds = host.getBoundingClientRect();
-			host.width = Math.max(1, Math.round(bounds.width / DOWNSCALE));
-			host.height = Math.max(1, Math.round(bounds.height / DOWNSCALE));
-			gl.viewport(0, 0, host.width, host.height);
-			gl.uniform2f(at('size'), host.width, host.height);
+			const scale = downscale ?? DOWNSCALE;
+			low = [
+				Math.max(1, Math.round(bounds.width / scale)),
+				Math.max(1, Math.round(bounds.height / scale))
+			];
+			host.width = blit ? Math.max(1, Math.round(bounds.width)) : low[0];
+			host.height = blit ? Math.max(1, Math.round(bounds.height)) : low[1];
+			gl.useProgram(program);
+			gl.uniform2f(at('size'), low[0], low[1]);
+
+			if (!blit || !texture || !target) return;
+			gl.bindTexture(gl.TEXTURE_2D, texture);
+			if (deep && modern) {
+				modern.texImage2D(
+					gl.TEXTURE_2D,
+					0,
+					modern.RGBA16F,
+					low[0],
+					low[1],
+					0,
+					gl.RGBA,
+					modern.HALF_FLOAT,
+					null
+				);
+			} else {
+				gl.texImage2D(
+					gl.TEXTURE_2D,
+					0,
+					gl.RGBA,
+					low[0],
+					low[1],
+					0,
+					gl.RGBA,
+					gl.UNSIGNED_BYTE,
+					null
+				);
+			}
+			gl.bindFramebuffer(gl.FRAMEBUFFER, target);
+			gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+			gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+			gl.useProgram(blit);
+			gl.uniform2f(gl.getUniformLocation(blit, 'size'), host.width, host.height);
 		};
 
 		const draw = (now: number) => {
 			const animates = moving && !still;
-			const target = colors().map(shaded);
+			const goal = colors().map(shaded);
 			const step = (now - stepped) / 1000;
 			stepped = now;
 			const delta = animates && painted ? 1 - Math.exp(-step / WASH) : 1;
-			painted = target.map((color, index) =>
+			painted = goal.map((color, index) =>
 				color.map((channel, at) => {
 					const from = painted?.[index][at] ?? channel;
 					return from + (channel - from) * delta;
 				})
 			);
+			eased = animates ? eased + (drift - eased) * (1 - Math.exp(-step / GLIDE)) : drift;
+
+			gl.useProgram(program);
 			gl.uniform3fv(at('colors'), new Float32Array(painted.flat()));
-			gl.uniform1f(at('time'), animates ? (now - started) / 1000 : 0);
+			gl.uniform4f(
+				at('field'),
+				DENSITY,
+				SOFTNESS * (1 + (SOFTEST - 1) * soften),
+				VIGNETTE,
+				CEILING
+			);
+			gl.uniform1f(at('time'), (animates ? (now - started) / 1000 : 0) + eased);
+			gl.bindFramebuffer(gl.FRAMEBUFFER, target);
+			gl.viewport(0, 0, low[0], low[1]);
+			gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+			if (!blit) return;
+			gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+			gl.viewport(0, 0, host.width, host.height);
+			gl.useProgram(blit);
+			gl.bindTexture(gl.TEXTURE_2D, texture);
 			gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 		};
 
 		const tick = (now: number) => {
-			draw(now);
 			frame = requestAnimationFrame(tick);
+			if (paused || document.hidden) {
+				stepped = now;
+				return;
+			}
+			if (fps && now - drawn < 1000 / fps - 2) return;
+			drawn = now;
+			draw(now);
 		};
 
 		const watch = new ResizeObserver(() => {

@@ -177,9 +177,6 @@
 </svelte:head>
 
 <section class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page submit">
 		<header>
 			<a class="back" href="/themes">Community themes</a>
@@ -394,7 +391,6 @@
 	.back {
 		font-size: 12px;
 		font-weight: 600;
-		text-transform: uppercase;
 		color: var(--muted-fg);
 	}
 
@@ -671,7 +667,7 @@
 
 	.preview-column {
 		position: sticky;
-		top: calc(var(--header) + 24px);
+		top: 24px;
 		display: flex;
 		flex-direction: column;
 	}

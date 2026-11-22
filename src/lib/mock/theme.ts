@@ -62,9 +62,9 @@ const TEXTS = new Set([
 ]);
 
 const palettes: Record<string, string> = {
-	dark: '0a0a0a fafafa 50505066 262626 0000008c fafafa 909090 171717 36363666 4d4d4d66 fafafa 171717 e5e5e5b3 7f1d1d fef2f2 8b2020b3 141414 fafafa f5f5f5 1d4ed8 0a0a0a 50505066 262626 262626 171717cc 8a8a8a 262626b3 3b3b3b66 1e40af33 1d4ed8',
+	dark: '0a0a0a fafafa 50505066 262626 0000008c fafafa 909090 171717 36363666 4d4d4d66 fafafa 171717 e5e5e5b3 7f1d1d fef2f2 8b2020b3 141414 fafafa f5f5f5 1d4ed8 0a0a0a 50505066 262626 262626 171717cc 8a8a8a 262626b3 50505033 1e40af33 1d4ed8',
 	light:
-		'fafafa 171717 9b9b9b66 e5e5e5 0000008c fafafa 606060 f5f5f5 d5d5d566 b7b7b766 171717 fafafa 262626b3 b91c1c fef2f2 991b1bb3 ffffff 171717 262626 2563eb f5f5f5 cdcdcd66 d4d4d4 d4d4d4 f5f5f5e6 666666 d4d4d4b3 e8e8e866 2563eb1f 2563eb',
+		'fafafa 171717 9b9b9b66 e5e5e5 0000008c fafafa 606060 f5f5f5 d5d5d566 b7b7b766 171717 fafafa 262626b3 b91c1c fef2f2 991b1bb3 ffffff 171717 262626 2563eb f5f5f5 cdcdcd66 d4d4d4 d4d4d4 f5f5f5e6 666666 d4d4d4b3 cdcdcd33 2563eb1f 2563eb',
 	'catppuccin-latte':
 		'eff1f5 4c4f69 acb0be66 ccd0da 0000008c eff1f5 6c6f85 e6e9ef ccd0da66 bcc0cc66 8839ef eff1f5 7430cbb3 d20f39 eff1f5 b20d30b3 eff1f5 4c4f69 8839ef 8839ef eff1f5 bcc0cc66 ccd0da ccd0da e6e9efe6 6c6f85 ccd0dab3 ccd0da66 8839ef33 8839ef',
 	'catppuccin-frappe':
@@ -157,7 +157,8 @@ const clamp = (value: number, low: number, high: number) => Math.min(Math.max(va
 
 const round = (value: number) => Math.round(value * 1000) / 1000;
 
-function shade(value: string): Shade {
+/** A hex colour, with or without alpha, as hue in degrees, saturation and lightness from 0 to 1 and 0 to 100, and alpha. */
+export function shade(value: string): Shade {
 	const bits = parseInt(value, 16);
 	const wide = value.length === 8;
 	const red = ((wide ? bits >>> 24 : bits >> 16) & 255) / 255;

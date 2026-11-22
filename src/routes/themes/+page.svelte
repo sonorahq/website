@@ -85,9 +85,6 @@
 </svelte:head>
 
 <section class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page gallery">
 		<header>
 			<span class="kicker">Themes</span>
@@ -226,7 +223,7 @@
 	}
 
 	.search {
-		scroll-margin-top: calc(var(--header) + 24px);
+		scroll-margin-top: 24px;
 		max-width: 360px;
 		height: 40px;
 		display: flex;

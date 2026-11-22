@@ -10,12 +10,8 @@
 </script>
 
 <section id="community" class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page">
 		<div class="section-head" use:reveal>
-			<span class="kicker">Community</span>
 			<h2>Come say hi</h2>
 		</div>
 

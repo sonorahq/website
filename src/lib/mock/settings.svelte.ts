@@ -7,7 +7,7 @@ export const settings = $state({
 	trayIcon: true,
 
 	theme: 'Dark',
-	adaptive: false,
+	adaptive: true,
 	icons: 'Lucide',
 	opacity: 1,
 	blurWindow: false,

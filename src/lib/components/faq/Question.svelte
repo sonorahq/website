@@ -67,7 +67,7 @@
 	.question {
 		position: relative;
 		border-bottom: 1px solid var(--line);
-		scroll-margin-top: calc(var(--header) + 24px);
+		scroll-margin-top: 24px;
 	}
 
 	.question:last-child {

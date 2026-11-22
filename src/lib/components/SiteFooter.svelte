@@ -8,9 +8,6 @@
 </script>
 
 <footer class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page">
 		<div class="cols">
 			<div class="about">
@@ -25,7 +22,7 @@
 				<div>
 					<h3>Site</h3>
 					<a href="{home}#steps">Install</a>
-					<a href="{home}#about">What it does</a>
+					<a href="{home}#about">Features</a>
 					<a href="{home}#community">Community</a>
 					<a href="/docs">Docs</a>
 					<a href="/faq">FAQ</a>
@@ -124,7 +121,6 @@
 		margin: 0 0 4px;
 		font-size: 12px;
 		font-weight: 600;
-		text-transform: uppercase;
 		color: var(--muted-fg);
 	}
 

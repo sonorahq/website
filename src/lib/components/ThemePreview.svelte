@@ -28,7 +28,11 @@
 		before ??= { theme: settings.theme, adaptive: settings.adaptive };
 		for (const variant of shown.variants) addPalette(variant.title, variant.colors);
 		if (!dialog.open) dialog.showModal();
+		// the page behind the modal stays put while the preview is open
+		const root = document.documentElement;
+		root.style.overflow = 'hidden';
 		return () => {
+			root.style.removeProperty('overflow');
 			for (const variant of shown.variants) removePalette(variant.title);
 		};
 	});
