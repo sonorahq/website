@@ -46,9 +46,6 @@
 </script>
 
 <section id="preview" class="preview section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page">
 		<figure class="shot" data-enter style="--enter: 0.35s" bind:this={column}>
 			{#if !mounted}
@@ -60,7 +57,7 @@
 				<Gallery items={shots} />
 			{:else}
 				<div class="frame live">
-					<AppMock />
+					<AppMock hold />
 				</div>
 			{/if}
 		</figure>
@@ -69,6 +66,7 @@
 
 <style>
 	.preview {
+		margin-top: -10vh;
 		padding: 0 0 72px;
 	}
 
@@ -90,14 +88,10 @@
 		width: max-content;
 		max-width: 100%;
 		border: 1px solid var(--border);
-		border-radius: 14px;
+		border-radius: 12px;
 		overflow: hidden;
 		background: var(--bg);
 		box-shadow: var(--shadow);
-	}
-
-	.frame.live {
-		box-shadow: var(--shadow), var(--glow);
 	}
 
 	/* before hydration the server markup holds both views and the viewport picks one, so nothing swaps on screen */
@@ -123,6 +117,7 @@
 
 	@media (max-width: 900px) {
 		.preview {
+			margin-top: 0;
 			padding: 0 0 48px;
 		}
 	}

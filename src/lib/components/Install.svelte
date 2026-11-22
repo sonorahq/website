@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
+	import { fade } from 'svelte/transition';
 	import { detectPlatform, platforms } from '$lib/data/platforms';
 	import { platform } from '$lib/platform.svelte';
 	import { reveal } from '$lib/reveal';
@@ -10,6 +11,7 @@
 
 	let list = $state<HTMLElement | null>(null);
 	let ended = $state(false);
+	/** The height of the platform being shown. The card eases to it while the previous platform fades out, before the new one fades in. */
 	let height = $state(0);
 
 	function settle() {
@@ -34,13 +36,9 @@
 </script>
 
 <section id="steps" class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page">
 		<div class="section-head" use:reveal>
-			<span class="kicker">Install</span>
-			<h2>Step by step</h2>
+			<h2>Install</h2>
 		</div>
 
 		<div class="wire panel" use:reveal>
@@ -64,9 +62,9 @@
 
 			<div class="steps">
 				<div class="clip" style:height={height ? `${height}px` : null}>
-					<div class="stack" bind:clientHeight={height}>
+					<div class="stack">
 						{#key platform.id}
-							<div class="swap">
+							<div class="swap" bind:clientHeight={height} out:fade={{ duration: 200 }}>
 								{#each current.steps as step, index (step.caption)}
 									<div class="step">
 										<span class="mono index">{String(index + 1).padStart(2, '0')}</span>
@@ -168,7 +166,7 @@
 
 	.clip {
 		overflow: hidden;
-		transition: height 0.32s cubic-bezier(0.2, 0.7, 0.2, 1);
+		transition: height 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 	}
 
 	.stack {
@@ -181,7 +179,8 @@
 		flex-direction: column;
 		grid-area: 1 / 1;
 		min-width: 0;
-		animation: swap-in 0.28s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+		/* waits for the previous platform to fade most of the way out, so the two never read over each other */
+		animation: swap-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) 0.16s both;
 	}
 
 	@keyframes swap-in {
@@ -224,7 +223,7 @@
 		padding: 0 6px 0 14px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
-		background: var(--card);
+		background: var(--bg);
 	}
 
 	.text {

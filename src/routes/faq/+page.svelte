@@ -37,9 +37,6 @@
 </svelte:head>
 
 <section class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page faq">
 		<article class="prose">
 			<span class="kicker">FAQ</span>

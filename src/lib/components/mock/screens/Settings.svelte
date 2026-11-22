@@ -1458,7 +1458,6 @@
 		margin-top: 14px;
 		font-size: 11px;
 		font-weight: 600;
-		text-transform: uppercase;
 		color: var(--m-muted-foreground);
 	}
 

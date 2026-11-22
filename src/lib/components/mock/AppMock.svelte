@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
-	import { shelf } from '$lib/mock/album';
+	import { site } from '$lib/tint.svelte';
 	import { player } from '$lib/mock/player.svelte';
 	import { reach } from '$lib/mock/packs.svelte';
 	import { dim, palette } from '$lib/mock/theme';
 	import { route } from '$lib/mock/route.svelte';
 	import { radius, settings } from '$lib/mock/settings.svelte';
-	import { theme } from '$lib/theme.svelte';
+	import { ADAPTIVE, scheme as siteScheme } from '$lib/scheme.svelte';
 	import { downloads } from '$lib/mock/downloads.svelte';
 	import { accounts } from '$lib/mock/accounts.svelte';
 	import { menu } from '$lib/mock/menu.svelte';
@@ -30,6 +30,9 @@
 	import PlayerBar from './PlayerBar.svelte';
 	import Sidebar from './Sidebar.svelte';
 	import TitleBar from './TitleBar.svelte';
+
+	/** Whether the panes stay still under the wheel until the visitor clicks in, for a window laid inline in a page the visitor is scrolling. */
+	let { hold = false }: { hold?: boolean } = $props();
 
 	const WIDTH = 1170;
 	const HEIGHT = 730;
@@ -61,7 +64,8 @@
 
 	const scale = $derived(Math.min(Math.max(room / WIDTH, FLOOR), 1));
 
-	const tint = $derived(shelf.get(player.track.album)?.tint ?? shelf.get('nocturnes')?.tint);
+	/** The adaptive theme wears the site's colour, so the window and the page around it always match. */
+	const tint = $derived(site.tint);
 	const tokens = $derived(palette(tint, settings.adaptive, settings.theme));
 	const scheme = $derived(
 		settings.theme === 'System' ? undefined : dim(settings.theme) ? 'dark' : 'light'
@@ -98,9 +102,11 @@
 	let fading = $state(false);
 	let settle = 0;
 
+	/** The window wears the site's scheme: Sonora's adaptive theme for the adaptive one, the same built-in theme otherwise. */
 	$effect(() => {
-		const choice = theme.choice;
-		settings.theme = choice === 'light' ? 'Light' : choice === 'dark' ? 'Dark' : 'System';
+		const name = siteScheme.current;
+		settings.adaptive = name === ADAPTIVE;
+		settings.theme = name === ADAPTIVE ? 'Dark' : name;
 	});
 
 	$effect(() => {
@@ -120,6 +126,52 @@
 	$effect(() => {
 		menu.bind(app);
 		return () => menu.bind(null);
+	});
+
+	/** Whether the visitor has clicked into the window since the pointer last came in. Until then the wheel scrolls the page, not the panes. */
+	let engaged = $state(false);
+
+	$effect(() => {
+		const root = app;
+		if (!root) return;
+		const engage = () => (engaged = true);
+		const release = () => (engaged = false);
+		root.addEventListener('pointerdown', engage);
+		root.addEventListener('pointerleave', release);
+		return () => {
+			root.removeEventListener('pointerdown', engage);
+			root.removeEventListener('pointerleave', release);
+		};
+	});
+
+	/** Holds every scrollable pane still while the window is not engaged, including panes that mount meanwhile, and lets them go once it is. */
+	$effect(() => {
+		const root = app;
+		if (!root || engaged || !hold) return;
+		const held = new Set<HTMLElement>();
+		const freeze = () => {
+			for (const pane of root.querySelectorAll<HTMLElement>('*')) {
+				if (held.has(pane)) continue;
+				const look = getComputedStyle(pane);
+				if (!/auto|scroll/.test(look.overflowX + look.overflowY)) continue;
+				pane.style.overflow = 'hidden';
+				held.add(pane);
+			}
+		};
+		freeze();
+		let queued = 0;
+		const watch = new MutationObserver(() => {
+			queued ||= requestAnimationFrame(() => {
+				queued = 0;
+				freeze();
+			});
+		});
+		watch.observe(root, { childList: true, subtree: true });
+		return () => {
+			watch.disconnect();
+			cancelAnimationFrame(queued);
+			for (const pane of held) pane.style.removeProperty('overflow');
+		};
 	});
 
 	$effect(() => {

@@ -6,7 +6,7 @@
 	import { repo } from '$lib/data/links';
 	import Logo from './Logo.svelte';
 	import Mark from './Mark.svelte';
-	import ThemeSwitch from './ThemeSwitch.svelte';
+	import SchemePicker from './SchemePicker.svelte';
 
 	let { stars = null }: { stars?: number | null } = $props();
 
@@ -21,7 +21,7 @@
 	/** Site links shared by the inline nav and the narrow screen menu. */
 	const links = $derived([
 		{ href: `${home}#steps`, label: 'Install' },
-		{ href: `${home}#about`, label: 'What it does' },
+		{ href: `${home}#about`, label: 'Features' },
 		{ href: `${home}#community`, label: 'Community' },
 		{ href: '/docs', label: 'Docs' },
 		{ href: '/themes', label: 'Themes' },
@@ -57,6 +57,10 @@
 	onclick={(event) => {
 		if (open && header && !event.composedPath().includes(header)) open = false;
 	}}
+	onscroll={() => {
+		// the menu hangs off the header, which scrolls away with the page
+		if (open && scrollY > 0) open = false;
+	}}
 />
 
 <div class="slot"></div>
@@ -76,7 +80,7 @@
 		</div>
 
 		<div class="right">
-			<ThemeSwitch />
+			<SchemePicker />
 			<a href={repo} class="star">
 				<Mark name="github" />
 				GitHub
@@ -128,21 +132,18 @@
 {/if}
 
 <style>
-	/* Holds the header's place in the flow, since a fixed header stays pinned when the page overscrolls. */
+	/* Holds the header's place in the flow, since the header itself is laid over the top of the page. */
 	.slot {
 		height: var(--header);
 	}
 
 	header {
-		position: fixed;
+		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: 10;
 		height: var(--header);
-		border-bottom: 1px solid var(--line);
-		background: var(--header-bg);
-		backdrop-filter: blur(12px);
 	}
 
 	.bar {

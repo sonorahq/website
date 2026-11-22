@@ -1,9 +1,11 @@
 <script lang="ts">
 	import About from '$lib/components/About.svelte';
+	import Backdrop from '$lib/components/Backdrop.svelte';
 	import Community from '$lib/components/Community.svelte';
 	import Hero from '$lib/components/Hero.svelte';
 	import Install from '$lib/components/Install.svelte';
 	import Preview from '$lib/components/Preview.svelte';
+	import Providers from '$lib/components/Providers.svelte';
 
 	import type { PageProps } from './$types';
 
@@ -18,8 +20,10 @@
 	/>
 </svelte:head>
 
+<Backdrop />
 <Hero version={data.version} />
 <Preview />
+<Providers />
 <Install />
 <About />
 <Community languages={data.languages} strings={data.strings} done={data.done} />

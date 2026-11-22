@@ -8,7 +8,8 @@
 	import { pages } from '$lib/data/docs';
 	import { radius } from '$lib/mock/settings.svelte';
 	import { palette } from '$lib/mock/theme';
-	import { theme } from '$lib/theme.svelte';
+	import { ADAPTIVE, scheme } from '$lib/scheme.svelte';
+	import { site } from '$lib/tint.svelte';
 
 	const status = $derived(page.status);
 	const missing = $derived(status === 404);
@@ -90,15 +91,13 @@
 					: 'volume-2'
 	);
 
-	/** The app's own color tokens for the site's current theme, so the player bar is drawn exactly as Sonora draws it. */
+	/** The app's own color tokens for the site's current scheme, so the player bar is drawn exactly as Sonora draws it. */
 	const chrome = $derived(
 		[
 			...Object.entries(
-				palette(
-					undefined,
-					false,
-					theme.choice === 'light' ? 'Light' : theme.choice === 'dark' ? 'Dark' : 'System'
-				)
+				scheme.current === ADAPTIVE
+					? palette(site.tint, true, 'Dark')
+					: palette(undefined, false, scheme.current)
 			).map(([name, value]) => `${name}:${value}`),
 			`--m-radius:${radius()}px`
 		].join(';')
@@ -174,9 +173,6 @@
 {/snippet}
 
 <section class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page">
 		<div class="section-head">
 			<h1>{title}</h1>

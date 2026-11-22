@@ -36,9 +36,6 @@
 </svelte:head>
 
 <section class="section">
-	<span class="cross start"></span>
-	<span class="cross end"></span>
-
 	<div class="page changelog">
 		<header class="prose">
 			<span class="kicker">Changelog</span>
@@ -122,12 +119,12 @@
 		display: grid;
 		grid-template-columns: 200px minmax(0, 1fr);
 		gap: 40px;
-		scroll-margin-top: var(--header);
+		scroll-margin-top: 24px;
 	}
 
 	.sticky {
 		position: sticky;
-		top: calc(var(--header) + 32px);
+		top: 32px;
 		display: flex;
 		flex-direction: column;
 		gap: 6px;
