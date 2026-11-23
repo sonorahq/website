@@ -1,5 +1,6 @@
 export const readme = 'https://raw.githubusercontent.com/sonorahq/sonora/main/README.md';
 
+/** Maps a README locale code to its flag-icons country code. A locale missing here renders an empty flag. */
 export const flags = new Map([
 	['en-US', 'us'],
 	['de', 'de'],
@@ -13,9 +14,12 @@ export const flags = new Map([
 	['pl', 'pl'],
 	['cs', 'cz'],
 	['pt-BR', 'br'],
+	['pt-PT', 'pt'],
 	['zh-CN', 'cn'],
 	['tr', 'tr'],
-	['sq', 'al']
+	['sq', 'al'],
+	['ko', 'kr'],
+	['vi', 'vn']
 ]);
 
 export type Language = { code: string; name: string; flag: string; share: number; total?: number };
