@@ -1,0 +1,34 @@
+{
+  "themes": [
+    {
+      "id": "purple-oled",
+      "variants": [
+        {
+          "title": "purple OLED",
+          "dir": "purple-oled/purple-oled",
+          "shots": {
+            "album": "purple-oled/purple-oled/album.png",
+            "menu": "purple-oled/purple-oled/menu.png",
+            "home": "purple-oled/purple-oled/home.png",
+            "queue": "purple-oled/purple-oled/queue.png",
+            "settings": "purple-oled/purple-oled/settings.png"
+          },
+          "zooms": {
+            "table": "purple-oled/purple-oled/zoom-table.png",
+            "hero": "purple-oled/purple-oled/zoom-hero.png",
+            "player": "purple-oled/purple-oled/zoom-player.png",
+            "lyrics": "purple-oled/purple-oled/zoom-lyrics.png",
+            "menu": "purple-oled/purple-oled/zoom-menu.png",
+            "sidebar": "purple-oled/purple-oled/zoom-sidebar.png",
+            "queue": "purple-oled/purple-oled/zoom-queue.png",
+            "settings": "purple-oled/purple-oled/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
