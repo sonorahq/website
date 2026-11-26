@@ -31,7 +31,7 @@
 					<h3>Project</h3>
 					<a href={repo}>GitHub</a>
 					<a href="/changelog">Changelog</a>
-					<a href="{repo}/blob/main/CONTRIBUTING.md">Contributing</a>
+					<a href="{repo}/blob/main/.github/CONTRIBUTING.md">Contributing</a>
 					<a href="{repo}/blob/main/README.md#translations">Translations</a>
 				</div>
 				<div>
@@ -43,8 +43,8 @@
 				<div>
 					<h3>Legal</h3>
 					<a href="{repo}/blob/main/COPYING">License</a>
-					<a href="{repo}/blob/main/PRIVACY.md">Privacy</a>
-					<a href="{repo}/blob/main/THIRD-PARTY.md">Third-party notices</a>
+					<a href="{repo}/blob/main/docs/PRIVACY.md">Privacy</a>
+					<a href="{repo}/blob/main/docs/THIRD-PARTY.md">Third-party notices</a>
 				</div>
 			</div>
 		</div>
