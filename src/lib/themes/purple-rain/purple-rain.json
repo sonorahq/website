@@ -1,0 +1,27 @@
+{
+	"name": "Purple Rain Main",
+	"author": "tonesession",
+	"version": 1,
+	"theme": {
+		"background": "#140a3a",
+		"foreground": "#f5ecff",
+		"sidebar": "#100730",
+		"popover": "#1e1050",
+		"secondary": "#1e1050",
+		"muted": "#2a1670",
+		"muted_foreground": "#b9a6e8",
+		"border": "#3d2090",
+		"primary": "#7c2ff0",
+		"primary_foreground": "#ffffff",
+		"progress_bar": "#d946ef",
+		"selection": "#5a1f9e",
+		"table_active": "#d946ef33",
+		"table_active_border": "#d946ef",
+		"table_head": "#140a3a",
+		"table_head_foreground": "#b9a6e8",
+		"table_row_border": "#2a1670",
+		"sidebar_border": "#2a1670",
+		"sidebar_accent": "#d946ef",
+		"title_bar_border": "#2a1670"
+	}
+}
