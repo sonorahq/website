@@ -35,7 +35,7 @@
 					<span class="kicker">Project</span>
 					<div class="plain">
 						<a href="{repo}/issues">Issues</a>
-						<a href="{repo}/blob/main/CONTRIBUTING.md">Contributing</a>
+						<a href="{repo}/blob/main/.github/CONTRIBUTING.md">Contributing</a>
 						<a href="/changelog">Changelog</a>
 					</div>
 				</div>
