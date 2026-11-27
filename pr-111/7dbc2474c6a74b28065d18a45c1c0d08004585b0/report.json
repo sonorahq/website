@@ -1,0 +1,4614 @@
+{
+  "themes": [
+    {
+      "id": "oz",
+      "variants": [
+        {
+          "title": "Oz Blood Light",
+          "dir": "oz/oz-blood-light",
+          "shots": {
+            "album": "oz/oz-blood-light/album.png",
+            "menu": "oz/oz-blood-light/menu.png",
+            "home": "oz/oz-blood-light/home.png",
+            "queue": "oz/oz-blood-light/queue.png",
+            "settings": "oz/oz-blood-light/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-blood-light/zoom-table.png",
+            "hero": "oz/oz-blood-light/zoom-hero.png",
+            "player": "oz/oz-blood-light/zoom-player.png",
+            "lyrics": "oz/oz-blood-light/zoom-lyrics.png",
+            "menu": "oz/oz-blood-light/zoom-menu.png",
+            "sidebar": "oz/oz-blood-light/zoom-sidebar.png",
+            "queue": "oz/oz-blood-light/zoom-queue.png",
+            "settings": "oz/oz-blood-light/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 98,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.79,
+              "fg": "#896b79",
+              "bg": "#00afc7",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.86,
+              "fg": "#896b79",
+              "bg": "#f5e4ea",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-blood-light/zoom-worst-1.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 3.86,
+              "fg": "#896b79",
+              "bg": "#f5e4ea",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-blood-light/zoom-worst-2.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 3.86,
+              "fg": "#896b79",
+              "bg": "#f5e4ea",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-blood-light/zoom-worst-3.png"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 4.03,
+              "fg": "#f01440",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.06,
+              "fg": "#896b79",
+              "bg": "#fce9ef",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 4.06,
+              "fg": "#896b79",
+              "bg": "#fce9ef",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:27",
+              "ratio": 4.06,
+              "fg": "#896b79",
+              "bg": "#fce9ef",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 4.06,
+              "fg": "#896b79",
+              "bg": "#f8eaf0",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 4.06,
+              "fg": "#896b79",
+              "bg": "#f8eaf0",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.16,
+              "fg": "#896b79",
+              "bg": "#faedf2",
+              "box": {
+                "x": 125,
+                "y": 778.796875,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "0:56",
+              "ratio": 4.16,
+              "fg": "#896b79",
+              "bg": "#faedf2",
+              "box": {
+                "x": 468.890625,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.16,
+              "fg": "#896b79",
+              "bg": "#faedf2",
+              "box": {
+                "x": 787.109375,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Home",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Search",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Recents",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 102.25,
+                "y": 205.171875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Library",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 77.5,
+                "y": 247.296875,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Songs",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 102.25,
+                "y": 278.171875,
+                "width": 41,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Albums",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 102.25,
+                "y": 313.671875,
+                "width": 49,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artists",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 102.25,
+                "y": 349.171875,
+                "width": 42,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlists",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 102.25,
+                "y": 384.671875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Pinned",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 88,
+                "y": 434.796875,
+                "width": 39,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 120,
+                "y": 469.75,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlist",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 120,
+                "y": 489.25,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Suite bergamasque",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 120,
+                "y": 525.25,
+                "width": 128,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 120,
+                "y": 544.75,
+                "width": 36,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 120,
+                "y": 580.75,
+                "width": 104,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artist",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 120,
+                "y": 600.25,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Four Seasons",
+              "ratio": 4.28,
+              "fg": "#896b79",
+              "bg": "#fff0f4",
+              "box": {
+                "x": 120,
+                "y": 636.25,
+                "width": 116,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Play",
+              "ratio": 4.3,
+              "fg": "#ffffff",
+              "bg": "#f01440",
+              "box": {
+                "x": 476.5,
+                "y": 256.25,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 431.5,
+                "y": 157,
+                "width": 37,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 431.5,
+                "y": 223.5,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "•",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 495,
+                "y": 223.5,
+                "width": 7,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "1912",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 505.5,
+                "y": 223.5,
+                "width": 24,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "12 songs",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 543.5,
+                "y": 223.5,
+                "width": 48,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "43m 58s",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 605.5,
+                "y": 223.5,
+                "width": 49,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "1",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 269,
+                "y": 345.1875,
+                "width": 6,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "38,914,207",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 345.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:44",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 345.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 267.5,
+                "y": 429.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "21,608,449",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 429.171875,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:01",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 429.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "5",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 268,
+                "y": 513.1875,
+                "width": 8,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "29,447,186",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 513.171875,
+                "width": 73,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:18",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 513.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "6",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 267.5,
+                "y": 555.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "18,905,344",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 555.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:32",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 555.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "7",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 268,
+                "y": 597.1875,
+                "width": 8,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "9,662,801",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 597.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "2:56",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 597.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "8",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 267.5,
+                "y": 639.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "24,118,673",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 639.171875,
+                "width": 72,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:14",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 639.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "9",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 267.5,
+                "y": 681.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "87,504,962",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 681.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:51",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 681.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "10",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 264.5,
+                "y": 723.1875,
+                "width": 15,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "11,236,058",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 723.171875,
+                "width": 73,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:09",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 723.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "12",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 264.5,
+                "y": 807.1875,
+                "width": 15,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "7,491,325",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 807.171875,
+                "width": 64,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:28",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 807.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Lyrics",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 979,
+                "y": 124.796875,
+                "width": 35,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "trusty",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 982.5,
+                "y": 354.04998779296875,
+                "width": 64,
+                "height": 25
+              },
+              "scene": "album"
+            },
+            {
+              "text": "tree",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1046.5,
+                "y": 354.04998779296875,
+                "width": 39,
+                "height": 25
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Alex Rivera",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 285.5,
+                "y": 151,
+                "width": 66,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Traditional",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 336.5,
+                "y": 241,
+                "width": 98,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Frédéric Chopin",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 672.5,
+                "y": 241,
+                "width": 129,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Claude Debussy",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 672.5,
+                "y": 296.5,
+                "width": 130,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Erik Satie",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 672.5,
+                "y": 352,
+                "width": 92,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Edvard Grieg",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 672.5,
+                "y": 407.5,
+                "width": 112,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Antonio Vivaldi",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 672.5,
+                "y": 463,
+                "width": 122,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "4",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 267.5,
+                "y": 471.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "4:27",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Queue",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 979,
+                "y": 124.796875,
+                "width": 37,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Clear",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1177,
+                "y": 123.984375,
+                "width": 33,
+                "height": 16
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "History",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 986,
+                "y": 228.09375,
+                "width": 42,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Loch Lomond",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1033.5,
+                "y": 257.75,
+                "width": 89,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "The Water Is Wide",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1033.5,
+                "y": 309.75,
+                "width": 121,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Now playing",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 986,
+                "y": 384.09375,
+                "width": 71,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "·",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1060.5,
+                "y": 384.09375,
+                "width": 4,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "From",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1068,
+                "y": 384.09375,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1101.5,
+                "y": 384.09375,
+                "width": 68,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Up next",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 986,
+                "y": 488.09375,
+                "width": 44,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1033.5,
+                "y": 537.25,
+                "width": 91,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Claude Debussy",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1033.5,
+                "y": 589.25,
+                "width": 92,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Erik Satie",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1033.5,
+                "y": 641.25,
+                "width": 54,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Edvard Grieg",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 1033.5,
+                "y": 693.25,
+                "width": 74,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Theme",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 309.5,
+                "y": 311,
+                "width": 40,
+                "height": 15
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "System",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 343,
+                "y": 447.65625,
+                "width": 45,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Dark",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 513.5,
+                "y": 447.65625,
+                "width": 28,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Light",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 674.5,
+                "y": 447.65625,
+                "width": 30,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Catppuccin Frappé",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 784.5,
+                "y": 447.65625,
+                "width": 118,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Icon pack",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 309.5,
+                "y": 601.6875,
+                "width": 55,
+                "height": 15
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Iconoir",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 508.1875,
+                "y": 693.84375,
+                "width": 42,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Remix",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 673.3125,
+                "y": 693.84375,
+                "width": 37,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Solar",
+              "ratio": 4.42,
+              "fg": "#896b79",
+              "bg": "#fff5f7",
+              "box": {
+                "x": 838.9375,
+                "y": 693.84375,
+                "width": 31,
+                "height": 16
+              },
+              "scene": "settings"
+            }
+          ]
+        },
+        {
+          "title": "Oz Blood",
+          "dir": "oz/oz-blood",
+          "shots": {
+            "album": "oz/oz-blood/album.png",
+            "menu": "oz/oz-blood/menu.png",
+            "home": "oz/oz-blood/home.png",
+            "queue": "oz/oz-blood/queue.png",
+            "settings": "oz/oz-blood/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-blood/zoom-table.png",
+            "hero": "oz/oz-blood/zoom-hero.png",
+            "player": "oz/oz-blood/zoom-player.png",
+            "lyrics": "oz/oz-blood/zoom-lyrics.png",
+            "menu": "oz/oz-blood/zoom-menu.png",
+            "sidebar": "oz/oz-blood/zoom-sidebar.png",
+            "queue": "oz/oz-blood/zoom-queue.png",
+            "settings": "oz/oz-blood/zoom-settings.png"
+          },
+          "unreadable": 2,
+          "low": 1,
+          "spots": [
+            {
+              "text": "Home",
+              "ratio": 1.4,
+              "fg": "#fff1f5",
+              "bg": "#00e5ff",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-blood/zoom-worst-2.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 1.49,
+              "fg": "#bda5b1",
+              "bg": "#00e5ff",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-blood/zoom-worst-3.png"
+            },
+            {
+              "text": "Play",
+              "ratio": 3.85,
+              "fg": "#ffffff",
+              "bg": "#ff1744",
+              "box": {
+                "x": 476.5,
+                "y": 256.25,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-blood/zoom-worst-1.png"
+            }
+          ]
+        },
+        {
+          "title": "Oz Drive Light",
+          "dir": "oz/oz-drive-light",
+          "shots": {
+            "album": "oz/oz-drive-light/album.png",
+            "menu": "oz/oz-drive-light/menu.png",
+            "home": "oz/oz-drive-light/home.png",
+            "queue": "oz/oz-drive-light/queue.png",
+            "settings": "oz/oz-drive-light/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-drive-light/zoom-table.png",
+            "hero": "oz/oz-drive-light/zoom-hero.png",
+            "player": "oz/oz-drive-light/zoom-player.png",
+            "lyrics": "oz/oz-drive-light/zoom-lyrics.png",
+            "menu": "oz/oz-drive-light/zoom-menu.png",
+            "sidebar": "oz/oz-drive-light/zoom-sidebar.png",
+            "queue": "oz/oz-drive-light/zoom-queue.png",
+            "settings": "oz/oz-drive-light/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 97,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.74,
+              "fg": "#687d9c",
+              "bg": "#76b900",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.51,
+              "fg": "#687d9c",
+              "bg": "#e4ebf8",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-drive-light/zoom-worst-1.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 3.51,
+              "fg": "#687d9c",
+              "bg": "#e4ebf8",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-drive-light/zoom-worst-2.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 3.51,
+              "fg": "#687d9c",
+              "bg": "#e4ebf8",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-drive-light/zoom-worst-3.png"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 3.63,
+              "fg": "#687d9c",
+              "bg": "#e8effb",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 3.63,
+              "fg": "#687d9c",
+              "bg": "#e8effb",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Home",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Search",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Recents",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 102.25,
+                "y": 205.171875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Library",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 77.5,
+                "y": 247.296875,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Songs",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 102.25,
+                "y": 278.171875,
+                "width": 41,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Albums",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 102.25,
+                "y": 313.671875,
+                "width": 49,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artists",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 102.25,
+                "y": 349.171875,
+                "width": 42,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlists",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 102.25,
+                "y": 384.671875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Pinned",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 88,
+                "y": 434.796875,
+                "width": 39,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 120,
+                "y": 469.75,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlist",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 120,
+                "y": 489.25,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Suite bergamasque",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 120,
+                "y": 525.25,
+                "width": 128,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 120,
+                "y": 544.75,
+                "width": 36,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 120,
+                "y": 580.75,
+                "width": 104,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artist",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 120,
+                "y": 600.25,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Four Seasons",
+              "ratio": 3.67,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 120,
+                "y": 636.25,
+                "width": 116,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.68,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 125,
+                "y": 778.796875,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "0:56",
+              "ratio": 3.68,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 468.890625,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 3.68,
+              "fg": "#687d9c",
+              "bg": "#eaf0fc",
+              "box": {
+                "x": 787.109375,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.7,
+              "fg": "#687d9c",
+              "bg": "#eaf1ff",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 3.7,
+              "fg": "#687d9c",
+              "bg": "#eaf1ff",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:27",
+              "ratio": 3.7,
+              "fg": "#687d9c",
+              "bg": "#eaf1ff",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 431.5,
+                "y": 157,
+                "width": 37,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 431.5,
+                "y": 223.5,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "•",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 495,
+                "y": 223.5,
+                "width": 7,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "1912",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 505.5,
+                "y": 223.5,
+                "width": 24,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "12 songs",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 543.5,
+                "y": 223.5,
+                "width": 48,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "43m 58s",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 605.5,
+                "y": 223.5,
+                "width": 49,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "1",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 269,
+                "y": 345.1875,
+                "width": 6,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "38,914,207",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 345.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:44",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 345.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 267.5,
+                "y": 429.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "21,608,449",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 429.171875,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:01",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 429.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "5",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 268,
+                "y": 513.1875,
+                "width": 8,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "29,447,186",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 513.171875,
+                "width": 73,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:18",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 513.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "6",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 267.5,
+                "y": 555.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "18,905,344",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 555.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:32",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 555.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "7",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 268,
+                "y": 597.1875,
+                "width": 8,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "9,662,801",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 597.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "2:56",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 597.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "8",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 267.5,
+                "y": 639.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "24,118,673",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 639.171875,
+                "width": 72,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:14",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 639.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "9",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 267.5,
+                "y": 681.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "87,504,962",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 681.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:51",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 681.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "10",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 264.5,
+                "y": 723.1875,
+                "width": 15,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "11,236,058",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 723.171875,
+                "width": 73,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:09",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 723.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "12",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 264.5,
+                "y": 807.1875,
+                "width": 15,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "7,491,325",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 807.171875,
+                "width": 64,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:28",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 807.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Lyrics",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 979,
+                "y": 124.796875,
+                "width": 35,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "trusty",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 982.5,
+                "y": 354.04998779296875,
+                "width": 64,
+                "height": 25
+              },
+              "scene": "album"
+            },
+            {
+              "text": "tree",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1046.5,
+                "y": 354.04998779296875,
+                "width": 39,
+                "height": 25
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Alex Rivera",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 285.5,
+                "y": 151,
+                "width": 66,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Traditional",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 336.5,
+                "y": 241,
+                "width": 98,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Frédéric Chopin",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 672.5,
+                "y": 241,
+                "width": 129,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Claude Debussy",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 672.5,
+                "y": 296.5,
+                "width": 130,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Erik Satie",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 672.5,
+                "y": 352,
+                "width": 92,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Edvard Grieg",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 672.5,
+                "y": 407.5,
+                "width": 112,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Antonio Vivaldi",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 672.5,
+                "y": 463,
+                "width": 122,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "4",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 267.5,
+                "y": 471.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "4:27",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Queue",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 979,
+                "y": 124.796875,
+                "width": 37,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Clear",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1177,
+                "y": 123.984375,
+                "width": 33,
+                "height": 16
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "History",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 986,
+                "y": 228.09375,
+                "width": 42,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Loch Lomond",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1033.5,
+                "y": 257.75,
+                "width": 89,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "The Water Is Wide",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1033.5,
+                "y": 309.75,
+                "width": 121,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Now playing",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 986,
+                "y": 384.09375,
+                "width": 71,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "·",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1060.5,
+                "y": 384.09375,
+                "width": 4,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "From",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1068,
+                "y": 384.09375,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1101.5,
+                "y": 384.09375,
+                "width": 68,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Up next",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 986,
+                "y": 488.09375,
+                "width": 44,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1033.5,
+                "y": 537.25,
+                "width": 91,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Claude Debussy",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1033.5,
+                "y": 589.25,
+                "width": 92,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Erik Satie",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1033.5,
+                "y": 641.25,
+                "width": 54,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Edvard Grieg",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1033.5,
+                "y": 693.25,
+                "width": 74,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Theme",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 309.5,
+                "y": 311,
+                "width": 40,
+                "height": 15
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "System",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 343,
+                "y": 447.65625,
+                "width": 45,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Dark",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 513.5,
+                "y": 447.65625,
+                "width": 28,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Light",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 674.5,
+                "y": 447.65625,
+                "width": 30,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Catppuccin Frappé",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 784.5,
+                "y": 447.65625,
+                "width": 118,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Icon pack",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 309.5,
+                "y": 601.6875,
+                "width": 55,
+                "height": 15
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Iconoir",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 508.1875,
+                "y": 693.84375,
+                "width": 42,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Remix",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 673.3125,
+                "y": 693.84375,
+                "width": 37,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Solar",
+              "ratio": 3.88,
+              "fg": "#687d9c",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 838.9375,
+                "y": 693.84375,
+                "width": 31,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 4.45,
+              "fg": "#2864ff",
+              "bg": "#f2f6ff",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            }
+          ]
+        },
+        {
+          "title": "Oz Drive",
+          "dir": "oz/oz-drive",
+          "shots": {
+            "album": "oz/oz-drive/album.png",
+            "menu": "oz/oz-drive/menu.png",
+            "home": "oz/oz-drive/home.png",
+            "queue": "oz/oz-drive/queue.png",
+            "settings": "oz/oz-drive/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-drive/zoom-table.png",
+            "hero": "oz/oz-drive/zoom-hero.png",
+            "player": "oz/oz-drive/zoom-player.png",
+            "lyrics": "oz/oz-drive/zoom-lyrics.png",
+            "menu": "oz/oz-drive/zoom-menu.png",
+            "sidebar": "oz/oz-drive/zoom-sidebar.png",
+            "queue": "oz/oz-drive/zoom-queue.png",
+            "settings": "oz/oz-drive/zoom-settings.png"
+          },
+          "unreadable": 2,
+          "low": 1,
+          "spots": [
+            {
+              "text": "Home",
+              "ratio": 1.11,
+              "fg": "#eaf2ff",
+              "bg": "#a3ff12",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-drive/zoom-worst-1.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 1.8,
+              "fg": "#9bafcb",
+              "bg": "#a3ff12",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-drive/zoom-worst-2.png"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 3.88,
+              "fg": "#2864ff",
+              "bg": "#0b1220",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue",
+              "zoom": "oz/oz-drive/zoom-worst-3.png"
+            }
+          ]
+        },
+        {
+          "title": "Oz Neon Light",
+          "dir": "oz/oz-neon-light",
+          "shots": {
+            "album": "oz/oz-neon-light/album.png",
+            "menu": "oz/oz-neon-light/menu.png",
+            "home": "oz/oz-neon-light/home.png",
+            "queue": "oz/oz-neon-light/queue.png",
+            "settings": "oz/oz-neon-light/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-neon-light/zoom-table.png",
+            "hero": "oz/oz-neon-light/zoom-hero.png",
+            "player": "oz/oz-neon-light/zoom-player.png",
+            "lyrics": "oz/oz-neon-light/zoom-lyrics.png",
+            "menu": "oz/oz-neon-light/zoom-menu.png",
+            "sidebar": "oz/oz-neon-light/zoom-sidebar.png",
+            "queue": "oz/oz-neon-light/zoom-queue.png",
+            "settings": "oz/oz-neon-light/zoom-settings.png"
+          },
+          "unreadable": 2,
+          "low": 27,
+          "spots": [
+            {
+              "text": "The Wild Rover",
+              "ratio": 1.58,
+              "fg": "#a0d900",
+              "bg": "#f5f9ee",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Search",
+              "ratio": 2.93,
+              "fg": "#68745c",
+              "bg": "#a0d900",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.16,
+              "fg": "#68745c",
+              "bg": "#e7eedc",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-neon-light/zoom-worst-1.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 4.16,
+              "fg": "#68745c",
+              "bg": "#e7eedc",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-neon-light/zoom-worst-2.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.16,
+              "fg": "#68745c",
+              "bg": "#e7eedc",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-neon-light/zoom-worst-3.png"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 4.28,
+              "fg": "#68745c",
+              "bg": "#eaf1df",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 4.28,
+              "fg": "#68745c",
+              "bg": "#eaf1df",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.38,
+              "fg": "#68745c",
+              "bg": "#edf3e3",
+              "box": {
+                "x": 125,
+                "y": 778.796875,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "0:56",
+              "ratio": 4.38,
+              "fg": "#68745c",
+              "bg": "#edf3e3",
+              "box": {
+                "x": 468.890625,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.38,
+              "fg": "#68745c",
+              "bg": "#edf3e3",
+              "box": {
+                "x": 787.109375,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Home",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Search",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Recents",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 102.25,
+                "y": 205.171875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Library",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 77.5,
+                "y": 247.296875,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Songs",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 102.25,
+                "y": 278.171875,
+                "width": 41,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Albums",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 102.25,
+                "y": 313.671875,
+                "width": 49,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artists",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 102.25,
+                "y": 349.171875,
+                "width": 42,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlists",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 102.25,
+                "y": 384.671875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Pinned",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 88,
+                "y": 434.796875,
+                "width": 39,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 120,
+                "y": 469.75,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlist",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 120,
+                "y": 489.25,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Suite bergamasque",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 120,
+                "y": 525.25,
+                "width": 128,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 120,
+                "y": 544.75,
+                "width": 36,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 120,
+                "y": 580.75,
+                "width": 104,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artist",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 120,
+                "y": 600.25,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Four Seasons",
+              "ratio": 4.4,
+              "fg": "#68745c",
+              "bg": "#edf4e4",
+              "box": {
+                "x": 120,
+                "y": 636.25,
+                "width": 116,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.42,
+              "fg": "#68745c",
+              "bg": "#edf5e2",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 4.42,
+              "fg": "#68745c",
+              "bg": "#edf5e2",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:27",
+              "ratio": 4.42,
+              "fg": "#68745c",
+              "bg": "#edf5e2",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            }
+          ]
+        },
+        {
+          "title": "Oz Neon",
+          "dir": "oz/oz-neon",
+          "shots": {
+            "album": "oz/oz-neon/album.png",
+            "menu": "oz/oz-neon/menu.png",
+            "home": "oz/oz-neon/home.png",
+            "queue": "oz/oz-neon/queue.png",
+            "settings": "oz/oz-neon/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-neon/zoom-table.png",
+            "hero": "oz/oz-neon/zoom-hero.png",
+            "player": "oz/oz-neon/zoom-player.png",
+            "lyrics": "oz/oz-neon/zoom-lyrics.png",
+            "menu": "oz/oz-neon/zoom-menu.png",
+            "sidebar": "oz/oz-neon/zoom-sidebar.png",
+            "queue": "oz/oz-neon/zoom-queue.png",
+            "settings": "oz/oz-neon/zoom-settings.png"
+          },
+          "unreadable": 2,
+          "low": 0,
+          "spots": [
+            {
+              "text": "Home",
+              "ratio": 1.11,
+              "fg": "#f1f7e9",
+              "bg": "#b6ff00",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-neon/zoom-worst-1.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 1.81,
+              "fg": "#a6b39a",
+              "bg": "#b6ff00",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-neon/zoom-worst-2.png"
+            }
+          ]
+        },
+        {
+          "title": "Oz Sunrise Light",
+          "dir": "oz/oz-sunrise-light",
+          "shots": {
+            "album": "oz/oz-sunrise-light/album.png",
+            "menu": "oz/oz-sunrise-light/menu.png",
+            "home": "oz/oz-sunrise-light/home.png",
+            "queue": "oz/oz-sunrise-light/queue.png",
+            "settings": "oz/oz-sunrise-light/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-sunrise-light/zoom-table.png",
+            "hero": "oz/oz-sunrise-light/zoom-hero.png",
+            "player": "oz/oz-sunrise-light/zoom-player.png",
+            "lyrics": "oz/oz-sunrise-light/zoom-lyrics.png",
+            "menu": "oz/oz-sunrise-light/zoom-menu.png",
+            "sidebar": "oz/oz-sunrise-light/zoom-sidebar.png",
+            "queue": "oz/oz-sunrise-light/zoom-queue.png",
+            "settings": "oz/oz-sunrise-light/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 99,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.33,
+              "fg": "#8a7063",
+              "bg": "#ef5900",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 3.27,
+              "fg": "#ef5900",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Play",
+              "ratio": 3.44,
+              "fg": "#ffffff",
+              "bg": "#ef5900",
+              "box": {
+                "x": 476.5,
+                "y": 256.25,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-sunrise-light/zoom-worst-1.png"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 3.84,
+              "fg": "#8a7063",
+              "bg": "#f5e9df",
+              "box": {
+                "x": 603.234375,
+                "y": 387.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-sunrise-light/zoom-worst-2.png"
+            },
+            {
+              "text": "164,772,530",
+              "ratio": 3.84,
+              "fg": "#8a7063",
+              "bg": "#f5e9df",
+              "box": {
+                "x": 755,
+                "y": 387.171875,
+                "width": 83,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-sunrise-light/zoom-worst-3.png"
+            },
+            {
+              "text": "3:12",
+              "ratio": 3.84,
+              "fg": "#8a7063",
+              "bg": "#f5e9df",
+              "box": {
+                "x": 932,
+                "y": 387.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Ctrl",
+              "ratio": 3.98,
+              "fg": "#8a7063",
+              "bg": "#f8ede4",
+              "box": {
+                "x": 872,
+                "y": 150.09375,
+                "width": 19,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "F",
+              "ratio": 3.98,
+              "fg": "#8a7063",
+              "bg": "#f8ede4",
+              "box": {
+                "x": 906,
+                "y": 150.09375,
+                "width": 7,
+                "height": 14
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.09,
+              "fg": "#8a7063",
+              "bg": "#faf0e8",
+              "box": {
+                "x": 125,
+                "y": 778.796875,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "0:56",
+              "ratio": 4.09,
+              "fg": "#8a7063",
+              "bg": "#faf0e8",
+              "box": {
+                "x": 468.890625,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:12",
+              "ratio": 4.09,
+              "fg": "#8a7063",
+              "bg": "#faf0e8",
+              "box": {
+                "x": 787.109375,
+                "y": 780.34375,
+                "width": 24,
+                "height": 14
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.12,
+              "fg": "#8a7063",
+              "bg": "#fff0e5",
+              "box": {
+                "x": 603.234375,
+                "y": 471.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 4.12,
+              "fg": "#8a7063",
+              "bg": "#fff0e5",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:27",
+              "ratio": 4.12,
+              "fg": "#8a7063",
+              "bg": "#fff0e5",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Home",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Search",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Recents",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 102.25,
+                "y": 205.171875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Library",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 77.5,
+                "y": 247.296875,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Songs",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 102.25,
+                "y": 278.171875,
+                "width": 41,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Albums",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 102.25,
+                "y": 313.671875,
+                "width": 49,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artists",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 102.25,
+                "y": 349.171875,
+                "width": 42,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlists",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 102.25,
+                "y": 384.671875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Pinned",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 88,
+                "y": 434.796875,
+                "width": 39,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 120,
+                "y": 469.75,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlist",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 120,
+                "y": 489.25,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Suite bergamasque",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 120,
+                "y": 525.25,
+                "width": 128,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 120,
+                "y": 544.75,
+                "width": 36,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 120,
+                "y": 580.75,
+                "width": 104,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artist",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 120,
+                "y": 600.25,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Four Seasons",
+              "ratio": 4.14,
+              "fg": "#8a7063",
+              "bg": "#fff1e6",
+              "box": {
+                "x": 120,
+                "y": 636.25,
+                "width": 116,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Home",
+              "ratio": 4.2,
+              "fg": "#38251f",
+              "bg": "#ef5900",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Album",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 431.5,
+                "y": 157,
+                "width": 37,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Traditional",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 431.5,
+                "y": 223.5,
+                "width": 60,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "•",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 495,
+                "y": 223.5,
+                "width": 7,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "1912",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 505.5,
+                "y": 223.5,
+                "width": 24,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "12 songs",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 543.5,
+                "y": 223.5,
+                "width": 48,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "43m 58s",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 605.5,
+                "y": 223.5,
+                "width": 49,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "1",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 269,
+                "y": 345.1875,
+                "width": 6,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "38,914,207",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 345.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:44",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 345.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 267.5,
+                "y": 429.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "21,608,449",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 429.171875,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:01",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 429.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "5",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 268,
+                "y": 513.1875,
+                "width": 8,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "29,447,186",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 513.171875,
+                "width": 73,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:18",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 513.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "6",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 267.5,
+                "y": 555.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "18,905,344",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 555.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:32",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 555.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "7",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 268,
+                "y": 597.1875,
+                "width": 8,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "9,662,801",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 597.171875,
+                "width": 68,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "2:56",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 597.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "8",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 267.5,
+                "y": 639.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "24,118,673",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 639.171875,
+                "width": 72,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "4:14",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 639.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "9",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 267.5,
+                "y": 681.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "87,504,962",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 681.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:51",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 681.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "10",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 264.5,
+                "y": 723.1875,
+                "width": 15,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "11,236,058",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 723.171875,
+                "width": 73,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:09",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 723.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "12",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 264.5,
+                "y": 807.1875,
+                "width": 15,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "7,491,325",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 807.171875,
+                "width": 64,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "3:28",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 807.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Lyrics",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 979,
+                "y": 124.796875,
+                "width": 35,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "trusty",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 982.5,
+                "y": 354.04998779296875,
+                "width": 64,
+                "height": 25
+              },
+              "scene": "album"
+            },
+            {
+              "text": "tree",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1046.5,
+                "y": 354.04998779296875,
+                "width": 39,
+                "height": 25
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Alex Rivera",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 285.5,
+                "y": 151,
+                "width": 66,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Traditional",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 336.5,
+                "y": 241,
+                "width": 98,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Frédéric Chopin",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 672.5,
+                "y": 241,
+                "width": 129,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Claude Debussy",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 672.5,
+                "y": 296.5,
+                "width": 130,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Erik Satie",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 672.5,
+                "y": 352,
+                "width": 92,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Edvard Grieg",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 672.5,
+                "y": 407.5,
+                "width": 112,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "Song · Antonio Vivaldi",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 672.5,
+                "y": 463,
+                "width": 122,
+                "height": 15
+              },
+              "scene": "home"
+            },
+            {
+              "text": "4",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 267.5,
+                "y": 471.1875,
+                "width": 9,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "46,330,915",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 755,
+                "y": 471.171875,
+                "width": 76,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "4:27",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 932,
+                "y": 471.171875,
+                "width": 31,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Queue",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 979,
+                "y": 124.796875,
+                "width": 37,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Clear",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1177,
+                "y": 123.984375,
+                "width": 33,
+                "height": 16
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "History",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 986,
+                "y": 228.09375,
+                "width": 42,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Loch Lomond",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1033.5,
+                "y": 257.75,
+                "width": 89,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "The Water Is Wide",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1033.5,
+                "y": 309.75,
+                "width": 121,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Now playing",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 986,
+                "y": 384.09375,
+                "width": 71,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "·",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1060.5,
+                "y": 384.09375,
+                "width": 4,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "From",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1068,
+                "y": 384.09375,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1101.5,
+                "y": 384.09375,
+                "width": 68,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Up next",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 986,
+                "y": 488.09375,
+                "width": 44,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1033.5,
+                "y": 537.25,
+                "width": 91,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Claude Debussy",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1033.5,
+                "y": 589.25,
+                "width": 92,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Erik Satie",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1033.5,
+                "y": 641.25,
+                "width": 54,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Edvard Grieg",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 1033.5,
+                "y": 693.25,
+                "width": 74,
+                "height": 15
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Theme",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 309.5,
+                "y": 311,
+                "width": 40,
+                "height": 15
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "System",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 343,
+                "y": 447.65625,
+                "width": 45,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Dark",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 513.5,
+                "y": 447.65625,
+                "width": 28,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Light",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 674.5,
+                "y": 447.65625,
+                "width": 30,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Catppuccin Frappé",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 784.5,
+                "y": 447.65625,
+                "width": 118,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Icon pack",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 309.5,
+                "y": 601.6875,
+                "width": 55,
+                "height": 15
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Iconoir",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 508.1875,
+                "y": 693.84375,
+                "width": 42,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Remix",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 673.3125,
+                "y": 693.84375,
+                "width": 37,
+                "height": 16
+              },
+              "scene": "settings"
+            },
+            {
+              "text": "Solar",
+              "ratio": 4.36,
+              "fg": "#8a7063",
+              "bg": "#fff8f1",
+              "box": {
+                "x": 838.9375,
+                "y": 693.84375,
+                "width": 31,
+                "height": 16
+              },
+              "scene": "settings"
+            }
+          ]
+        },
+        {
+          "title": "Oz Sunrise",
+          "dir": "oz/oz-sunrise",
+          "shots": {
+            "album": "oz/oz-sunrise/album.png",
+            "menu": "oz/oz-sunrise/menu.png",
+            "home": "oz/oz-sunrise/home.png",
+            "queue": "oz/oz-sunrise/queue.png",
+            "settings": "oz/oz-sunrise/settings.png"
+          },
+          "zooms": {
+            "table": "oz/oz-sunrise/zoom-table.png",
+            "hero": "oz/oz-sunrise/zoom-hero.png",
+            "player": "oz/oz-sunrise/zoom-player.png",
+            "lyrics": "oz/oz-sunrise/zoom-lyrics.png",
+            "menu": "oz/oz-sunrise/zoom-menu.png",
+            "sidebar": "oz/oz-sunrise/zoom-sidebar.png",
+            "queue": "oz/oz-sunrise/zoom-queue.png",
+            "settings": "oz/oz-sunrise/zoom-settings.png"
+          },
+          "unreadable": 2,
+          "low": 1,
+          "spots": [
+            {
+              "text": "Home",
+              "ratio": 1.17,
+              "fg": "#fff4ec",
+              "bg": "#ffe600",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-sunrise/zoom-worst-2.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 1.81,
+              "fg": "#c0a69b",
+              "bg": "#ffe600",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "oz/oz-sunrise/zoom-worst-3.png"
+            },
+            {
+              "text": "Play",
+              "ratio": 3.13,
+              "fg": "#ffffff",
+              "bg": "#ff5a00",
+              "box": {
+                "x": 476.5,
+                "y": 256.25,
+                "width": 28,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "oz/oz-sunrise/zoom-worst-1.png"
+            }
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}
