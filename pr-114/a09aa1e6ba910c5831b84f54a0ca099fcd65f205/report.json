@@ -1,0 +1,168 @@
+{
+  "themes": [
+    {
+      "id": "purple-rain",
+      "variants": [
+        {
+          "title": "Purple Rain Light",
+          "dir": "purple-rain/purple-rain-light",
+          "shots": {
+            "album": "purple-rain/purple-rain-light/album.png",
+            "menu": "purple-rain/purple-rain-light/menu.png",
+            "home": "purple-rain/purple-rain-light/home.png",
+            "queue": "purple-rain/purple-rain-light/queue.png",
+            "settings": "purple-rain/purple-rain-light/settings.png"
+          },
+          "zooms": {
+            "table": "purple-rain/purple-rain-light/zoom-table.png",
+            "hero": "purple-rain/purple-rain-light/zoom-hero.png",
+            "player": "purple-rain/purple-rain-light/zoom-player.png",
+            "lyrics": "purple-rain/purple-rain-light/zoom-lyrics.png",
+            "menu": "purple-rain/purple-rain-light/zoom-menu.png",
+            "sidebar": "purple-rain/purple-rain-light/zoom-sidebar.png",
+            "queue": "purple-rain/purple-rain-light/zoom-queue.png",
+            "settings": "purple-rain/purple-rain-light/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Purple Rain OLED",
+          "dir": "purple-rain/purple-rain-oled",
+          "shots": {
+            "album": "purple-rain/purple-rain-oled/album.png",
+            "menu": "purple-rain/purple-rain-oled/menu.png",
+            "home": "purple-rain/purple-rain-oled/home.png",
+            "queue": "purple-rain/purple-rain-oled/queue.png",
+            "settings": "purple-rain/purple-rain-oled/settings.png"
+          },
+          "zooms": {
+            "table": "purple-rain/purple-rain-oled/zoom-table.png",
+            "hero": "purple-rain/purple-rain-oled/zoom-hero.png",
+            "player": "purple-rain/purple-rain-oled/zoom-player.png",
+            "lyrics": "purple-rain/purple-rain-oled/zoom-lyrics.png",
+            "menu": "purple-rain/purple-rain-oled/zoom-menu.png",
+            "sidebar": "purple-rain/purple-rain-oled/zoom-sidebar.png",
+            "queue": "purple-rain/purple-rain-oled/zoom-queue.png",
+            "settings": "purple-rain/purple-rain-oled/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 2,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.33,
+              "fg": "#a99abf",
+              "bg": "#d946ef",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "purple-rain/purple-rain-oled/zoom-worst-1.png"
+            },
+            {
+              "text": "Home",
+              "ratio": 3.02,
+              "fg": "#f5ecff",
+              "bg": "#d946ef",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "purple-rain/purple-rain-oled/zoom-worst-2.png"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 3.52,
+              "fg": "#7c2ff0",
+              "bg": "#000000",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue",
+              "zoom": "purple-rain/purple-rain-oled/zoom-worst-3.png"
+            }
+          ]
+        },
+        {
+          "title": "Purple Rain Main",
+          "dir": "purple-rain/purple-rain",
+          "shots": {
+            "album": "purple-rain/purple-rain/album.png",
+            "menu": "purple-rain/purple-rain/menu.png",
+            "home": "purple-rain/purple-rain/home.png",
+            "queue": "purple-rain/purple-rain/queue.png",
+            "settings": "purple-rain/purple-rain/settings.png"
+          },
+          "zooms": {
+            "table": "purple-rain/purple-rain/zoom-table.png",
+            "hero": "purple-rain/purple-rain/zoom-hero.png",
+            "player": "purple-rain/purple-rain/zoom-player.png",
+            "lyrics": "purple-rain/purple-rain/zoom-lyrics.png",
+            "menu": "purple-rain/purple-rain/zoom-menu.png",
+            "sidebar": "purple-rain/purple-rain/zoom-sidebar.png",
+            "queue": "purple-rain/purple-rain/zoom-queue.png",
+            "settings": "purple-rain/purple-rain/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 2,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.59,
+              "fg": "#b9a6e8",
+              "bg": "#d946ef",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "purple-rain/purple-rain/zoom-worst-1.png"
+            },
+            {
+              "text": "Home",
+              "ratio": 3.02,
+              "fg": "#f5ecff",
+              "bg": "#d946ef",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "purple-rain/purple-rain/zoom-worst-2.png"
+            },
+            {
+              "text": "The Wild Rover",
+              "ratio": 3.11,
+              "fg": "#7c2ff0",
+              "bg": "#140a3a",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue",
+              "zoom": "purple-rain/purple-rain/zoom-worst-3.png"
+            }
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}
