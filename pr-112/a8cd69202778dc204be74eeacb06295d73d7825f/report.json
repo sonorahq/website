@@ -1,0 +1,77 @@
+{
+  "themes": [
+    {
+      "id": "rolex",
+      "variants": [
+        {
+          "title": "Rolex",
+          "dir": "rolex/rolex",
+          "shots": {
+            "album": "rolex/rolex/album.png",
+            "menu": "rolex/rolex/menu.png",
+            "home": "rolex/rolex/home.png",
+            "queue": "rolex/rolex/queue.png",
+            "settings": "rolex/rolex/settings.png"
+          },
+          "zooms": {
+            "table": "rolex/rolex/zoom-table.png",
+            "hero": "rolex/rolex/zoom-hero.png",
+            "player": "rolex/rolex/zoom-player.png",
+            "lyrics": "rolex/rolex/zoom-lyrics.png",
+            "menu": "rolex/rolex/zoom-menu.png",
+            "sidebar": "rolex/rolex/zoom-sidebar.png",
+            "queue": "rolex/rolex/zoom-queue.png",
+            "settings": "rolex/rolex/zoom-settings.png"
+          },
+          "unreadable": 3,
+          "low": 0,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.05,
+              "fg": "#b5ad8b",
+              "bg": "#c5a45a",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "rolex/rolex/zoom-worst-1.png"
+            },
+            {
+              "text": "Home",
+              "ratio": 1.95,
+              "fg": "#f2e8cd",
+              "bg": "#c5a45a",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "rolex/rolex/zoom-worst-2.png"
+            },
+            {
+              "text": "Appearance",
+              "ratio": 1.95,
+              "fg": "#f2e8cd",
+              "bg": "#c5a45a",
+              "box": {
+                "x": 536.25,
+                "y": 193.984375,
+                "width": 75,
+                "height": 16
+              },
+              "scene": "settings",
+              "zoom": "rolex/rolex/zoom-worst-3.png"
+            }
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}
