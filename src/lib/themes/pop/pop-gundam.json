@@ -1,37 +1,49 @@
 {
-	"name": "Pop Gundam",
-	"author": "tonesession",
-	"version": 1,
-	"theme": {
-		"background": "#cfe3ff",
-		"foreground": "#0a1630",
-		"muted": "#9dc2fb",
-		"muted_foreground": "#274a85",
-		"border": "#0a1630",
-		"secondary": "#b6d3ff",
-		"secondary_hover": "#a5c9fd",
-		"secondary_active": "#ff7a1a",
-		"popover": "#a5c9fd",
-		"popover_foreground": "#0a1630",
-		"overlay": "#eef5ff",
-		"overlay_foreground": "#0a1630",
-		"primary": "#ff7a1a",
-		"primary_foreground": "#0a1630",
-		"primary_hover": "#e8650a",
-		"danger": "#dc3545",
-		"danger_foreground": "#ffffff",
-		"danger_hover": "#b92d3b",
-		"progress_bar": "#ff7a1a",
-		"selection": "#ffc58f",
-		"sidebar": "#eef5ff",
-		"sidebar_accent": "#ff7a1a",
-		"sidebar_border": "#0a1630",
-		"title_bar_border": "#0a1630",
-		"table_head": "#cfe3ff",
-		"table_head_foreground": "#274a85",
-		"table_row_border": "#9dc2fb",
-		"table_hover": "#b6d3ff",
-		"table_active": "#ff7a1a33",
-		"table_active_border": "#ff7a1a"
-	}
+  "name": "Pop Gundam",
+  "author": "tonesession",
+  "version": 1,
+  "theme": {
+    "background": "#cfe3ff",
+    "foreground": "#0a1630",
+
+     "border": "#274a85",
+      "sidebar_border": "#274a85",
+
+    "muted": "#9dc2fb",
+    "muted_foreground": "#274a85",
+ 
+       "sidebar": "#eef5ff",
+    "sidebar_accent": "#ffa660",
+
+    "secondary": "#eef5ff",
+    "secondary_hover": "#8db6f3",
+    "secondary_active": "#ffa660",
+    "popover": "#a5c9fd",
+    "popover_foreground": "#0a1630",
+    "overlay": "#eef5ff",
+    "overlay_foreground": "#0a1630",
+
+    "primary": "#ff7a1a",
+    "primary_foreground": "#0a1630",
+    "primary_hover": "#e8650a",
+    
+    
+    "danger": "#dc3545",
+    "danger_foreground": "#ffffff",
+    "danger_hover": "#b92d3b",
+
+    "progress_bar": "#d45007",
+    "selection": "#ffc58f",
+
+ 
+   
+    "title_bar_border": "#0a1630",
+
+    "table_head": "#cfe3ff",
+    "table_head_foreground": "#274a85",
+    "table_row_border": "#9dc2fb",
+    "table_hover": "#b6d3ff",
+    "table_active": "#ff7a1a33",
+    "table_active_border": "#ff7a1a"
+  }
 }
