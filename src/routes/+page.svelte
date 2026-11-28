@@ -16,7 +16,7 @@
 	<title>Sonora</title>
 	<meta
 		name="description"
-		content="A native, familiar music streaming client for Spotify, Apple Music, YouTube Music, Deezer, Tidal, Subsonic and local files. Written in Rust with GPUI. Free software for macOS, Linux and Windows."
+		content="A native, familiar music streaming client for Spotify, Apple Music, YouTube Music, Deezer, Tidal, Jellyfin, Plex, Subsonic and local files. Written in Rust with GPUI. Free software for macOS, Linux and Windows."
 	/>
 </svelte:head>
 
@@ -24,6 +24,6 @@
 <Hero version={data.version} />
 <Preview />
 <Providers />
-<Install />
+<Install version={data.version} />
 <About />
 <Community languages={data.languages} strings={data.strings} done={data.done} />

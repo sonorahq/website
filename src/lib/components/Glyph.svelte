@@ -6,6 +6,7 @@
 
 	/* line glyphs the app mock does not carry */
 	const extra = new Map([
+		['plex', '<path d="M7.03 1.88h6.19L18.84 12l-5.62 10.13H7.03L12.66 12Z"/>'],
 		[
 			'audio-lines',
 			'<path d="M2 10v3"/><path d="M6 6v11"/><path d="M10 3v18"/><path d="M14 8v7"/><path d="M18 5v13"/><path d="M22 10v3"/>'
@@ -67,7 +68,15 @@
 		'listenbrainz',
 		'maloja'
 	]);
-	const solid = new Set(['spotify', 'youtubemusic', 'applemusic', 'deezer', 'tidal', 'jellyfin']);
+	const solid = new Set([
+		'spotify',
+		'youtubemusic',
+		'applemusic',
+		'deezer',
+		'tidal',
+		'jellyfin',
+		'plex'
+	]);
 	const markup = $derived(extra.get(name) ?? icons.get(name) ?? '');
 </script>
 

@@ -15,8 +15,13 @@
 			command: 'sonora volume [N | +N | -N]',
 			action: 'Print the volume, set it from 0 to 100, or step it'
 		},
+		{ command: 'sonora mute [on | off | toggle]', action: 'Print or switch mute' },
 		{ command: 'sonora shuffle [on | off | toggle]', action: 'Print or switch shuffle' },
-		{ command: 'sonora repeat [off | all | one]', action: 'Print or set repeat' }
+		{ command: 'sonora repeat [off | all | one]', action: 'Print or set repeat' },
+		{
+			command: 'sonora like [on | off | toggle]',
+			action: 'Print whether the current song is liked, or change it'
+		}
 	];
 
 	const queue: Command[] = [
@@ -25,12 +30,34 @@
 		{ command: 'sonora add <file or link>...', action: 'Queue after the songs you queued by hand' },
 		{ command: 'sonora play-next <file or link>...', action: 'Queue right after the current song' },
 		{ command: 'sonora add -s <query>', action: 'Queue the best search hit' },
-		{ command: 'sonora search <query> [-n N]', action: 'Search the current provider' }
+		{ command: 'sonora add --at N ...', action: 'Queue at position N, where 1 plays next' },
+		{ command: 'sonora search <query> [-n N]', action: 'Search the current provider' },
+		{
+			command: 'sonora queue',
+			action: 'Print what played, what plays and what follows, without changing it'
+		},
+		{ command: 'sonora queue remove <uid>', action: 'Take an upcoming song out of the queue' },
+		{ command: 'sonora queue move <uid> <gap>', action: 'Move an upcoming song, 0 being next' },
+		{ command: 'sonora queue clear', action: 'Drop everything after the current song' }
+	];
+
+	const playlists: Command[] = [
+		{ command: 'sonora playlist list', action: 'List your playlists with their ids' },
+		{
+			command: 'sonora playlist create <name> [--tracks ID...] [--local]',
+			action: 'Create a playlist, optionally with songs in it'
+		},
+		{ command: 'sonora playlist rename <id> <name>', action: 'Rename a playlist' },
+		{ command: 'sonora playlist public <id> on | off', action: 'Make a playlist public or not' },
+		{ command: 'sonora playlist add <id> <track>...', action: 'Add songs to a playlist' },
+		{ command: 'sonora playlist remove <id> <track>...', action: 'Take songs out of a playlist' },
+		{ command: 'sonora playlist delete <id>', action: 'Delete a playlist' }
 	];
 
 	const status: Command[] = [
 		{ command: 'sonora current', action: 'Print what plays now as JSON' },
 		{ command: 'sonora watch [--position]', action: 'Print a line of JSON on every change' },
+		{ command: 'sonora lyrics', action: 'Print the lyrics of the current song with their times' },
 		{ command: 'sonora providers', action: 'List the providers and which one is current' },
 		{ command: 'sonora provider [slug]', action: 'Print the current provider, or switch' },
 		{
@@ -44,6 +71,7 @@
 	const sections = [
 		{ id: 'playback', title: 'Playback', rows: playback },
 		{ id: 'queue', title: 'Queue and search', rows: queue },
+		{ id: 'playlists', title: 'Playlists', rows: playlists },
 		{ id: 'status', title: 'Status and the rest', rows: status }
 	];
 
@@ -101,13 +129,40 @@ sonora completions fish > ~/.config/fish/completions/sonora.fish`;
 <h2 id="details">Details</h2>
 <p>
 	<code>-s</code> picks a song. Add <code>-t album</code>, <code>-t artist</code> or
-	<code>-t playlist</code> for another kind. Quote a query only when it has characters your shell
-	reads, such as <code>'</code>, <code>?</code> or <code>&amp;</code>.
+	<code>-t playlist</code> for another kind. Add <code>--local</code> to <code>play -s</code>,
+	<code>add -s</code> or <code>play-next -s</code> to search your local music instead of the current
+	provider. Quote a query only when it has characters your shell reads, such as <code>'</code>,
+	<code>?</code> or <code>&amp;</code>.
 </p>
 <p>
 	Links have to belong to the current provider. Switch first with <code>sonora provider</code>.
 	Relative file paths start from the folder you run the command in. If one item fails, nothing is
 	queued.
+</p>
+<p>
+	<code>mute off</code> brings back the volume you had before muting. <code>like</code> waits for the
+	provider to save the change and exits with code 1 if it fails.
+</p>
+<p>
+	<code>add --at</code> counts only songs ahead in the queue, never recommendations, and a position
+	past the end adds to the end. It works with <code>-s</code> too.
+</p>
+<p>
+	<code>queue</code> marks songs you queued by hand with <code>[queued]</code> and recommendations
+	with <code>[suggested]</code>. It lists at most 100 played and 100 upcoming songs.
+	<code>queue remove</code> and <code>queue move</code> take the <code>uid</code> each row has in
+	<code>queue --json</code>. Keep the <code>uid</code> rather than a row number, since positions change
+	as songs play. While another device plays, the queue can't be edited.
+</p>
+<p>
+	The <code>playlist</code> commands take the <code>id</code> from
+	<code>playlist list --json</code>. Songs are given by their <code>id</code> from
+	<code>search --json</code>. <code>--local</code> creates the playlist in your local library. A command
+	returns once Sonora accepts the change, and the app shows a toast when the service has saved it.
+</p>
+<p>
+	<code>lyrics</code> prints what Sonora already loaded for the current song and never looks lyrics up
+	itself.
 </p>
 <p>While Sonora controls another Spotify device, playback commands go to that device.</p>
 <p>A step with <code>seek</code> fits a key binding, for example in Hyprland:</p>
@@ -125,6 +180,13 @@ sonora completions fish > ~/.config/fish/completions/sonora.fish`;
 	changes. <code>--position</code> adds a line every second while a song plays.
 </p>
 <Code text={watch} />
+<p>
+	<code>queue --json</code> has <code>previous</code>, <code>current</code> and
+	<code>upcoming</code>, and each entry has a <code>kind</code> of <code>context</code>,
+	<code>queued</code> or <code>suggested</code>. <code>lyrics --json</code> adds the line sung now
+	as <code>current</code> and the one after it as <code>next</code>. Both are <code>null</code> for lyrics
+	without times.
+</p>
 <table>
 	<thead>
 		<tr><th>Exit code</th><th>Meaning</th></tr>
@@ -138,5 +200,9 @@ sonora completions fish > ~/.config/fish/completions/sonora.fish`;
 </table>
 
 <h2 id="completions">Shell completions</h2>
-<p>Completions exist for bash, zsh, fish, elvish and PowerShell.</p>
+<p>
+	The AUR, Nix and Homebrew packages install completions for bash, zsh and fish, and Homebrew puts
+	<code>sonora</code> on your PATH. Otherwise, write a script for bash, zsh, fish, elvish or PowerShell
+	yourself.
+</p>
 <Code text={completions} />

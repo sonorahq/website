@@ -1,350 +1,408 @@
 <script lang="ts">
-	import { onMount, tick } from 'svelte';
-	import { fade } from 'svelte/transition';
-	import { detectPlatform, platforms } from '$lib/data/platforms';
-	import { platform } from '$lib/platform.svelte';
+	import { onMount } from 'svelte';
+	import { detectPlatform, platforms, type Platform } from '$lib/data/platforms';
 	import { reveal } from '$lib/reveal';
 	import CopyButton from './CopyButton.svelte';
 	import Mark from './Mark.svelte';
 
-	const current = $derived(platform.current);
+	let { version = null }: { version?: string | null } = $props();
 
-	let list = $state<HTMLElement | null>(null);
-	let ended = $state(false);
-	/** The height of the platform being shown. The card eases to it while the previous platform fades out, before the new one fades in. */
-	let height = $state(0);
+	const all = $derived(platforms(version));
 
-	function settle() {
-		if (!list) return;
-		ended = list.scrollLeft + list.clientWidth >= list.scrollWidth - 1;
-	}
+	let chosen = $state<Platform['id']>('windows');
 
-	/** Scrolls the tab strip so the chosen platform is visible without moving the page itself. */
-	function focusRow() {
-		const row = list?.querySelector<HTMLElement>('.row.on');
-		if (!list || !row) return;
-		const offset = row.getBoundingClientRect().left - list.getBoundingClientRect().left;
-		list.scrollLeft += offset - (list.clientWidth - row.offsetWidth) / 2;
-	}
+	const current = $derived(all.find((entry) => entry.id === chosen) ?? all[0]);
 
-	onMount(async () => {
-		platform.id = detectPlatform();
-		await tick();
-		focusRow();
-		settle();
+	onMount(() => {
+		chosen = detectPlatform();
 	});
+
+	/** Whether the link downloads a release asset rather than opening a page. A page opens in a new tab. */
+	function isFile(href: string) {
+		return href.includes('/releases/download/');
+	}
 </script>
+
+{#snippet icon(href: string)}
+	<svg
+		width="14"
+		height="14"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="2"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		aria-hidden="true"
+	>
+		{#if isFile(href)}
+			<path d="M12 4v12" />
+			<path d="M7 11l5 5 5-5" />
+			<path d="M5 20h14" />
+		{:else}
+			<path d="M7 17 17 7" />
+			<path d="M8 7h9v9" />
+		{/if}
+	</svg>
+{/snippet}
 
 <section id="steps" class="section">
 	<div class="page">
-		<div class="section-head" use:reveal>
-			<h2>Install</h2>
+		<div class="section-head bar" use:reveal>
+			<h2>Download</h2>
+
+			<div class="tabs" role="tablist" aria-label="Systems">
+				{#each all as entry (entry.id)}
+					<button
+						type="button"
+						role="tab"
+						class="tab"
+						class:on={chosen === entry.id}
+						aria-selected={chosen === entry.id}
+						aria-controls="install-{entry.id}"
+						onclick={() => (chosen = entry.id)}
+					>
+						<Mark name={entry.mark} size={16} />
+						{entry.label}
+					</button>
+				{/each}
+			</div>
 		</div>
 
-		<div class="wire panel" use:reveal>
-			<div class="rail" class:ended>
-				<nav class="list" aria-label="Platforms" bind:this={list} onscroll={settle}>
-					{#each platforms as entry (entry.id)}
-						<button
-							type="button"
-							class="row"
-							class:on={platform.id === entry.id}
-							aria-pressed={platform.id === entry.id}
-							onclick={() => (platform.id = entry.id)}
-						>
-							<Mark name={entry.mark} size={14} />
-							<span class="label">{entry.label}</span>
-							<span class="mono hint">{entry.hero ? entry.prompt : 'exe'}</span>
-						</button>
-					{/each}
-				</nav>
-			</div>
-
-			<div class="steps">
-				<div class="clip" style:height={height ? `${height}px` : null}>
-					<div class="stack">
-						{#key platform.id}
-							<div class="swap" bind:clientHeight={height} out:fade={{ duration: 200 }}>
-								{#each current.steps as step, index (step.caption)}
-									<div class="step">
-										<span class="mono index">{String(index + 1).padStart(2, '0')}</span>
-										<div class="body">
-											<p class="caption">{step.caption}</p>
-											{#if step.link}
-												<a class="code link" href={step.link}>
-													<span class="mono text">{step.command}</span>
-													<svg
-														width="14"
-														height="14"
-														viewBox="0 0 24 24"
-														fill="none"
-														stroke="currentColor"
-														stroke-width="2"
-														stroke-linecap="round"
-														stroke-linejoin="round"
-														aria-hidden="true"
-													>
-														<path d="M12 3v13" />
-														<path d="M7 12l5 5 5-5" />
-														<path d="M4 21h16" />
-													</svg>
-												</a>
-											{:else}
-												<div class="code">
-													<pre class="mono text">{step.command}</pre>
-													<CopyButton text={step.command} />
-												</div>
-											{/if}
-											{#if step.hint}
-												<p class="hint-text">{step.hint}</p>
-											{/if}
-										</div>
-									</div>
-								{/each}
-
-								<p class="note">{current.note}</p>
-							</div>
-						{/key}
+		{#key current.id}
+			<div class="body" id="install-{current.id}" role="tabpanel">
+				<div class="main">
+					<span class="logo"><Mark name={current.mark} size={44} /></span>
+					<h3>Sonora for {current.label}</h3>
+					{#if current.main.detail || version}
+						<p class="fine">
+							{#if current.main.detail}<span>{current.main.detail}</span>{/if}
+							{#if current.main.detail && version}<span class="dot">·</span>{/if}
+							{#if version}<span class="mono">{version}</span>{/if}
+						</p>
+					{/if}
+					<div class="actions">
+						<a class="btn btn-primary big" href={current.main.href}>
+							<svg
+								width="18"
+								height="18"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2.2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								aria-hidden="true"
+							>
+								<path d="M12 3v13" />
+								<path d="M7 12l5 5 5-5" />
+								<path d="M4 21h16" />
+							</svg>
+							{current.main.label}
+						</a>
+						{#if current.alternate}
+							<a class="alternate" href={current.alternate.href}>{current.alternate.label}</a>
+						{/if}
 					</div>
 				</div>
+
+				<ul class="wire options">
+					{#each current.options as option (option.title)}
+						<li class="option" class:whole={option.href}>
+							<span class="title">{option.title}</span>
+							{#if option.command}
+								<span class="command">
+									<code class="mono">{option.command}</code>
+									<CopyButton text={option.command} />
+								</span>
+							{:else if option.links}
+								<span class="links">
+									{#each option.links as link (link.label)}
+										<a
+											class="chip"
+											href={link.href}
+											target={isFile(link.href) ? null : '_blank'}
+											rel={isFile(link.href) ? null : 'noopener'}
+											>{link.label}{@render icon(link.href)}</a
+										>
+									{/each}
+								</span>
+							{:else if option.href}
+								<a
+									class="go"
+									href={option.href}
+									target={isFile(option.href) ? null : '_blank'}
+									rel={isFile(option.href) ? null : 'noopener'}
+									aria-label={option.title}>{@render icon(option.href)}</a
+								>
+							{/if}
+						</li>
+					{/each}
+				</ul>
 			</div>
-		</div>
+		{/key}
 	</div>
 </section>
 
 <style>
 	.page {
-		padding-bottom: 72px;
+		padding-bottom: 96px;
 	}
 
-	.panel {
-		grid-template-columns: 220px minmax(0, 1fr);
-	}
-
-	.rail {
-		position: relative;
-	}
-
-	.list {
-		display: flex;
-		flex-direction: column;
-	}
-
-	.row {
-		display: flex;
+	.bar {
+		flex-direction: row;
+		flex-wrap: wrap;
 		align-items: center;
-		gap: 10px;
-		height: 44px;
-		padding: 0 16px;
-		border-bottom: 1px solid var(--line);
-		color: var(--muted-fg);
-		text-align: left;
+		justify-content: space-between;
+		gap: 20px;
 	}
 
-	.row:last-child {
-		border-bottom: none;
-	}
-
-	.row:hover {
-		background: var(--secondary);
-		color: var(--fg);
-	}
-
-	.row.on {
-		background: var(--secondary);
-		color: var(--fg);
-	}
-
-	.label {
-		flex-grow: 1;
-	}
-
-	.hint {
-		font-size: 11px;
-		color: var(--faint);
-	}
-
-	.clip {
-		overflow: hidden;
-		transition: height 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
-	}
-
-	.stack {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr);
-	}
-
-	.swap {
+	.tabs {
 		display: flex;
-		flex-direction: column;
-		grid-area: 1 / 1;
-		min-width: 0;
-		/* waits for the previous platform to fade most of the way out, so the two never read over each other */
-		animation: swap-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) 0.16s both;
+		width: fit-content;
+		padding: 4px;
+		gap: 4px;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		background: var(--card);
+	}
+
+	.tab {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		height: 38px;
+		padding: 0 20px;
+		border-radius: 999px;
+		color: var(--muted-fg);
+		font-weight: 500;
+		transition:
+			background-color 0.18s ease,
+			color 0.18s ease;
+	}
+
+	.tab:hover {
+		color: var(--fg);
+	}
+
+	.tab.on {
+		background: var(--secondary);
+		color: var(--fg);
+	}
+
+	.body {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 64px;
+		align-items: center;
+		animation: swap-in 0.4s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 	}
 
 	@keyframes swap-in {
 		from {
 			opacity: 0;
-			transform: translateY(6px);
+			transform: translateY(8px);
 		}
 	}
 
-	.step {
-		display: grid;
-		grid-template-columns: 56px minmax(0, 1fr);
-		border-bottom: 1px solid var(--line);
-	}
-
-	.index {
-		padding: 22px 0 0 18px;
-		font-size: 11px;
-		color: var(--faint);
-	}
-
-	.body {
+	.main {
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
-		min-width: 0;
-		padding: 20px 20px 20px 0;
+		align-items: flex-start;
 	}
 
-	.caption {
+	.logo {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 84px;
+		height: 84px;
+		border: 1px solid var(--border);
+		border-radius: 20px;
+		background: var(--card);
+	}
+
+	.main h3 {
+		margin-top: 28px;
+		font-size: clamp(28px, 3vw, 36px);
+		line-height: 1.1;
+		letter-spacing: -0.04em;
+	}
+
+	.fine {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 10px;
+		font-size: 14px;
+		color: var(--muted-fg);
+	}
+
+	.dot {
+		color: var(--dim);
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px 24px;
+		margin-top: 32px;
+	}
+
+	.big {
+		height: 54px;
+		padding: 0 30px;
+		font-size: 16px;
+	}
+
+	.alternate {
 		font-size: 14px;
 		font-weight: 500;
+		color: var(--muted-fg);
+		text-decoration: underline;
+		text-decoration-color: var(--faint);
+		text-underline-offset: 3px;
 	}
 
-	.code {
+	.alternate:hover {
+		color: var(--fg);
+		text-decoration-color: currentColor;
+	}
+
+	.options {
+		grid-template-columns: minmax(0, 1fr);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.option {
+		position: relative;
 		display: flex;
-		align-items: flex-start;
-		gap: 10px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		min-height: 56px;
+		padding: 8px 10px 8px 18px;
+	}
+
+	.title {
+		flex: none;
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	/* a command sits at the end of its row, as wide as its text, so the copy button stays beside it */
+	.command {
+		display: flex;
+		align-items: center;
+		gap: 6px;
 		min-width: 0;
-		padding: 0 6px 0 14px;
+		max-width: 72%;
+		padding: 3px 3px 3px 12px;
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		background: var(--bg);
 	}
 
-	.text {
-		flex-grow: 1;
+	.command code {
 		min-width: 0;
-		margin: 0;
-		padding: 13px 0;
-		font-size: 13px;
-		line-height: 1.5;
-		overflow-x: auto;
-		white-space: pre;
+		padding: 6px 0;
+		font-size: 12.5px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
-	.code :global(button) {
-		margin-top: 6px;
+	/* the button sits 3px inside the box, so its corners are rounded 3px less */
+	.command :global(button) {
+		border-radius: calc(var(--radius) - 3px);
 	}
 
-	.link {
+	.links {
+		display: flex;
+		gap: 8px;
+	}
+
+	.chip,
+	.go {
+		display: inline-flex;
 		align-items: center;
-		padding-right: 14px;
+		justify-content: center;
+		gap: 6px;
+		height: 34px;
+		border: 1px solid var(--border);
+		border-radius: 999px;
+		color: var(--muted-fg);
+		font-size: 13px;
+		font-weight: 500;
+		transition:
+			background-color 0.18s ease,
+			color 0.18s ease;
+	}
+
+	.chip {
+		padding: 0 12px 0 14px;
+	}
+
+	.go {
+		width: 34px;
+	}
+
+	.chip:hover,
+	.go:hover {
+		background: var(--secondary);
 		color: var(--fg);
 	}
 
-	.link:hover {
+	/* a row with a single link is that link's target as a whole */
+	.go::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+	}
+
+	.whole:hover {
 		background: var(--secondary);
 	}
 
-	.link svg {
-		flex-shrink: 0;
-		color: var(--dim);
-	}
-
-	.hint-text,
-	.note {
-		font-size: 13px;
-		line-height: 1.55;
-		color: var(--muted-fg);
-	}
-
-	.hint-text {
-		max-width: 60ch;
-	}
-
-	.note {
-		padding: 18px 20px;
-		max-width: 68ch;
-	}
-
 	@media (prefers-reduced-motion: reduce) {
-		.clip {
-			transition: none;
-		}
-
-		.swap {
+		.body {
 			animation: none;
 		}
 	}
 
 	@media (max-width: 900px) {
 		.page {
-			padding-bottom: 48px;
+			padding-bottom: 56px;
 		}
 
-		.panel {
-			grid-template-columns: minmax(0, 1fr);
-		}
-
-		.list {
-			flex-direction: row;
-			overflow-x: auto;
-			scrollbar-width: none;
-		}
-
-		.list::-webkit-scrollbar {
-			display: none;
-		}
-
-		.rail::after {
-			content: '';
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			width: 56px;
-			background: linear-gradient(to right, transparent, var(--bg));
-			pointer-events: none;
-			transition: opacity 0.18s ease;
-		}
-
-		.rail.ended::after {
-			opacity: 0;
-		}
-
-		.row {
-			flex: 1 0 auto;
-			border-bottom: none;
-			border-right: 1px solid var(--line);
-		}
-
-		.row:last-child {
-			border-right: none;
-		}
-
-		.hint {
-			display: none;
-		}
-
-		.step {
-			grid-template-columns: 40px minmax(0, 1fr);
-		}
-
-		.index {
-			padding-left: 12px;
+		.tab {
+			padding: 0 14px;
 		}
 
 		.body {
-			padding-right: 14px;
+			grid-template-columns: minmax(0, 1fr);
+			gap: 36px;
 		}
 
-		.note {
-			padding: 16px 14px;
+		.main {
+			align-items: center;
+			text-align: center;
+		}
+
+		.fine,
+		.actions {
+			justify-content: center;
+		}
+
+		.big {
+			flex-basis: 100%;
+		}
+
+		.option {
+			padding-left: 16px;
 		}
 	}
 </style>

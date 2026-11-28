@@ -41,7 +41,8 @@ export const groups: { label: string; pages: DocPage[] }[] = [
 			{
 				slug: 'shortcuts',
 				title: 'Shortcuts',
-				summary: 'Every keyboard shortcut, including the ones that only exist on macOS.'
+				summary:
+					'Every keyboard shortcut, how to change them, and the ones that only exist on macOS.'
 			},
 			{
 				slug: 'command-line',
@@ -51,7 +52,8 @@ export const groups: { label: string; pages: DocPage[] }[] = [
 			{
 				slug: 'scrobbling',
 				title: 'Scrobbling',
-				summary: 'Linking Last.fm, Libre.fm, ListenBrainz and Maloja, and when a play counts.'
+				summary:
+					'Linking Last.fm, Libre.fm, ListenBrainz, Maloja and teal.fm, and when a play counts.'
 			},
 			{
 				slug: 'links',

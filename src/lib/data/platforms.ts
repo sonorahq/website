@@ -1,168 +1,104 @@
-export const installer =
-	'https://github.com/sonorahq/sonora/releases/latest/download/Sonora-Setup.exe';
-
-export const installerArm =
-	'https://github.com/sonorahq/sonora/releases/latest/download/Sonora-Setup-arm64.exe';
+const releases = 'https://github.com/sonorahq/sonora/releases';
 
 /** Assets of the nightly prerelease, which keep their names from one night to the next. */
-const nightly = 'https://github.com/sonorahq/sonora/releases/download/nightly';
+const nightly = `${releases}/download/nightly-build`;
 
-export type Step = { caption: string; command: string; link?: string; hint?: string };
+/** A file to download. `detail` names the machines it runs on. */
+export type Download = { label: string; href: string; detail?: string };
 
-export const platforms: {
-	id: string;
-	mark: string;
+/** Another way to install: a `command` to copy, several `links` side by side, or one `href` for the whole row. */
+export type Option = {
+	title: string;
+	command?: string;
+	href?: string;
+	links?: { label: string; href: string }[];
+};
+
+export type Platform = {
+	id: 'windows' | 'macos' | 'linux';
 	label: string;
-	prompt: string;
-	hero: string;
-	pending?: string;
-	steps: Step[];
-	note: string;
-}[] = [
-	{
-		id: 'macos',
-		mark: 'apple',
-		label: 'macOS',
-		prompt: '$',
-		hero: 'brew install --cask nolight132/tap/sonora',
-		steps: [
-			{
-				caption: 'Install with Homebrew',
-				command: 'brew install --cask nolight132/tap/sonora'
-			},
-			{
-				caption: 'Clear the quarantine flag',
-				command: 'xattr -dr com.apple.quarantine /Applications/Sonora.app',
-				hint: 'The app is not signed yet, so macOS quarantines it on the first install.'
-			},
-			{
-				caption: 'Or try the nightly build of main',
-				link: `${nightly}/sonora-nightly-macos.dmg`,
-				command: 'sonora-nightly-macos.dmg',
-				hint: 'Rebuilt every night and untested, so expect rough edges.'
-			}
-		],
-		note: 'The app is not signed with an Apple developer certificate yet. Clear the quarantine flag after installing, and again if macOS blocks it after an update.'
-	},
-	{
-		id: 'arch',
-		mark: 'arch',
-		label: 'Arch',
-		prompt: '$',
-		hero: 'yay -S sonora-bin',
-		steps: [
-			{ caption: 'Install from the AUR', command: 'yay -S sonora-bin' },
-			{
-				caption: 'Add the ALSA plugin for your sound server',
-				command: 'pacman -S pipewire-alsa',
-				hint: 'On PulseAudio install pulseaudio-alsa instead.'
-			},
-			{
-				caption: 'Or try the nightly build of main',
-				command: 'yay -S sonora-nightly-bin',
-				hint: 'Rebuilt every night and untested, so expect rough edges.'
-			}
-		],
-		note: 'sonora-bin ships the prebuilt release. The sonora package builds the same version from source against your own system libraries, which takes a while.'
-	},
-	{
-		id: 'flatpak',
-		mark: 'flatpak',
-		label: 'Flatpak',
-		prompt: '$',
-		hero: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref',
-		steps: [
-			{
-				caption: 'Add the repository and install',
-				command: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref',
-				hint: 'Updates arrive with flatpak update.'
-			}
-		],
-		note: 'Standalone .flatpak bundles are attached to every release.'
-	},
-	{
-		id: 'snap',
-		mark: 'snapcraft',
-		label: 'Snap',
-		prompt: '$',
-		hero: 'sudo snap install sonora',
-		steps: [
-			{
-				caption: 'Install from the Snap Store',
-				command: 'sudo snap install sonora',
-				hint: 'Updates arrive automatically or manually with snap refresh.'
-			}
-		],
-		note: ""
-	},
-	{
-		id: 'nix',
-		mark: 'nix',
-		label: 'Nix',
-		prompt: '$',
-		hero: 'nix run github:sonorahq/sonora',
-		steps: [
-			{ caption: 'Run it from the flake', command: 'nix run github:sonorahq/sonora' },
-			{
-				caption: 'Or manage it with Home Manager',
-				command: `{
-  imports = [ inputs.sonora.homeManagerModules.default ];
-  programs.sonora = {
-    enable = true;
-    settings = {
-      appearance.theme = "dark";
-    };
-  };
-}`
-			},
-			{
-				caption: 'Or try the nightly build of main',
-				command: 'nix run github:sonorahq/sonora/nightly',
-				hint: 'Point the flake input at the same ref to keep it.'
-			}
-		],
-		note: 'The flake packages the latest tagged release and exposes programs.sonora for Home Manager.'
-	},
-	{
-		id: 'windows',
-		mark: 'windows',
-		label: 'Windows',
-		prompt: '>',
-		hero: '',
-    steps: [
-      {
-        caption: 'Install via WinGet',
-        command: 'winget install SonoraHQ.Sonora'
-      },
-			{
-				caption: 'Or manually download and run the installer',
-				link: installer,
-				command: 'Sonora-Setup.exe'
-			},
-			{
-				caption: 'On Windows on ARM, take the ARM build',
-				link: installerArm,
-				command: 'Sonora-Setup-arm64.exe'
-			},
-			{
-				caption: 'Portable build',
-				link: 'https://github.com/sonorahq/sonora/releases/latest',
-				command: 'sonora-<version>-x86_64-pc-windows-msvc.exe',
-				hint: 'Pick the file for your architecture on the releases page and run it as-is.'
-			},
-			{
-				caption: 'Or try the nightly build of main',
-				link: `${nightly}/Sonora-Setup.exe`,
-				command: 'nightly/Sonora-Setup.exe',
-				hint: 'Rebuilt every night and untested, so expect rough edges.'
-			}
-		],
-		note: 'Sonora will prompt you to install the latest update on startup.'
-	}
-];
+	mark: string;
+	/** The main button. */
+	main: Download;
+	/** A smaller link under the main button, such as the build for another architecture. */
+	alternate?: Download;
+	options: Option[];
+};
 
-/** Picks the install tab for the visitor's OS, falling back to macOS. Linux lands on Arch because the page cannot see the distro. */
-export function detectPlatform() {
+/**
+ * The install choices for each system, in the order the tabs show them. Release assets with the
+ * version in their name link to the releases page until the latest tag is known.
+ */
+export function platforms(version: string | null): Platform[] {
+	const asset = (name: string) =>
+		version ? `${releases}/download/${version}/sonora-${version}-${name}` : `${releases}/latest`;
+
+	return [
+		{
+			id: 'windows',
+			label: 'Windows',
+			mark: 'windows',
+			main: {
+				label: 'Download for Windows',
+				href: `${releases}/latest/download/Sonora-Setup.exe`,
+				detail: '64-bit'
+			},
+			alternate: {
+				label: 'ARM installer',
+				href: `${releases}/latest/download/Sonora-Setup-arm64.exe`
+			},
+			options: [
+				{ title: 'WinGet', command: 'winget install SonoraHQ.Sonora' },
+				{ title: 'Portable', href: `${releases}/latest` },
+				{ title: 'Nightly', href: `${nightly}/Sonora-Setup.exe` }
+			]
+		},
+		{
+			id: 'macos',
+			label: 'macOS',
+			mark: 'apple',
+			main: {
+				label: 'Download for Mac',
+				href: asset('macos.dmg'),
+				detail: 'Apple silicon and Intel, macOS 11 or later'
+			},
+			options: [
+				{ title: 'Homebrew', command: 'brew install --cask nolight132/tap/sonora' },
+				{ title: 'Nightly', href: `${nightly}/sonora-nightly-macos.dmg` }
+			]
+		},
+		{
+			id: 'linux',
+			label: 'Linux',
+			mark: 'linux',
+			main: {
+				label: 'Install with Flatpak',
+				href: 'https://sonorahq.github.io/sonora/sonora.flatpakref'
+			},
+			options: [
+				{
+					title: 'Flatpak',
+					command: 'flatpak install --user https://sonorahq.github.io/sonora/sonora.flatpakref'
+				},
+				{ title: 'AUR', command: 'yay -S sonora-bin' },
+				{ title: 'Nix', command: 'nix run github:sonorahq/sonora/stable' },
+				{ title: 'Snap', command: 'sudo snap install sonora' },
+				{
+					title: 'AppImage',
+					links: [
+						{ label: '64-bit', href: asset('x86_64.AppImage') },
+						{ label: 'ARM', href: asset('aarch64.AppImage') }
+					]
+				},
+				{ title: 'Other', href: 'https://repology.org/project/sonora/versions' },
+				{ title: 'Nightly', href: `${releases}/tag/nightly-build` }
+			]
+		}
+	];
+}
+
+/** Picks the install tab for the visitor's OS, falling back to Windows. */
+export function detectPlatform(): Platform['id'] {
 	const hint =
 		(navigator as Navigator & { userAgentData?: { platform?: string } }).userAgentData?.platform ??
 		'';
@@ -170,6 +106,6 @@ export function detectPlatform() {
 	if (/Windows/i.test(hint) || /Windows/i.test(ua)) return 'windows';
 	if (/macOS/i.test(hint) || (/Macintosh|Mac OS/i.test(ua) && !/iPhone|iPad|iPod/i.test(ua)))
 		return 'macos';
-	if (/Linux|Chrome OS|X11/i.test(hint) || /Linux|X11/i.test(ua)) return 'arch';
-	return 'macos';
+	if (/Linux|Chrome OS|X11/i.test(hint) || /Linux|X11/i.test(ua)) return 'linux';
+	return 'windows';
 }

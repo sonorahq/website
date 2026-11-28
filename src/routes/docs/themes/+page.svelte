@@ -195,6 +195,10 @@
 		{/each}
 	</tbody>
 </table>
+<p>
+	<code>table_hover</code> is the hover fill of table rows, cards and sidebar entries alike.
+	<code>sidebar_accent</code> fills the sidebar entry of the page that is open.
+</p>
 
 <h2 id="overrides">Changing a single color</h2>
 <p>

@@ -1,5 +1,5 @@
-/** One roadmap line. `issue` and `pull` link the discussion behind it, and the build crosses the line out once that issue closes as completed or that pull request merges. */
-export type Entry = { text: string; issue?: number; pull?: number };
+/** One roadmap line. `issue` and `pull` link the discussion behind it, and the build crosses the line out once that issue closes as completed or that pull request merges. `done` crosses it out regardless and names the release that shipped it, or is `true` when that release is unknown. */
+export type Entry = { text: string; issue?: number; pull?: number; done?: string | true };
 
 export type Area = { id: string; title: string; entries: Entry[] };
 
@@ -8,7 +8,7 @@ export const areas: Area[] = [
 		id: 'providers',
 		title: 'Providers',
 		entries: [
-			{ text: 'Jellyfin', issue: 422 },
+			{ text: 'Jellyfin', issue: 422, done: '0.50.0' },
 			{ text: 'SoundCloud', issue: 474 },
 			{ text: 'NetEase Cloud Music', pull: 801 }
 		]
@@ -18,7 +18,7 @@ export const areas: Area[] = [
 		title: 'Playback',
 		entries: [
 			{ text: 'A quality setting where the provider offers more than one stream', pull: 1004 },
-			{ text: 'SponsorBlock for YouTube Music', issue: 431 }
+			{ text: 'SponsorBlock for YouTube Music', issue: 431, done: '0.50.0' }
 		]
 	},
 	{
@@ -56,10 +56,14 @@ export const areas: Area[] = [
 		id: 'control',
 		title: 'Shortcuts and integrations',
 		entries: [
-			{ text: 'Customizable keyboard shortcuts' },
+			{ text: 'Customizable keyboard shortcuts', done: '0.50.0' },
 			{ text: 'A rethink of global shortcuts', issue: 10 },
 			{ text: 'Vim-style navigation', issue: 263 },
-			{ text: 'Control Sonora from the command line, like sonora next-track', pull: 777 }
+			{
+				text: 'Control Sonora from the command line, like sonora next-track',
+				pull: 777,
+				done: '0.46.0'
+			}
 		]
 	},
 	{

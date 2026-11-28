@@ -8,16 +8,18 @@
 </svelte:head>
 
 <h1>Downloads and offline</h1>
-<p class="summary">
-	Downloads, offline mode and the cache of played tracks. All of it is encrypted and opens only in
-	Sonora on this computer.
-</p>
+<p class="summary">Downloads, offline mode and the cache of played tracks.</p>
 
 <h2 id="downloading">Downloading</h2>
 <p>
-	Press the download button on an album or playlist page, or right-click songs and choose
-	<strong>Download</strong>. Works with Spotify, YouTube Music, Tidal, Deezer, Apple Music and
-	Subsonic.
+	Press the download button on an album or playlist page, or on the row of buttons at the top of a
+	song's right-click menu. Works with Spotify, YouTube Music, Tidal, Deezer, Apple Music, Subsonic,
+	Jellyfin and Plex.
+</p>
+<p>
+	A downloaded playlist stays in step with the service. Songs added to it, in Sonora or anywhere
+	else, download when Sonora starts, right after you add them in Sonora, and every hour. Songs taken
+	out of it lose their download.
 </p>
 <p>
 	While songs download, the title bar shows how many are left. Click the count to see them, grouped
@@ -25,8 +27,14 @@
 	the count cancels every download. A song the service won't serve is skipped.
 </p>
 <p>
-	To delete a download, right-click it and choose <strong>Remove download</strong>. The
+	To delete a download, press the same button again. The
 	<strong>Downloaded</strong> filter on library pages lists only downloaded music.
+</p>
+<p>
+	Subsonic and Jellyfin downloads are ordinary audio files named after the artist and title, which
+	any player opens. Open their folder with
+	<MenuPath steps={['Settings', 'Playback', 'Storage', 'Open downloads']} /> while signed in to that service.
+	Downloads from other services and every played track are encrypted and play only in Sonora on this computer.
 </p>
 <p class="note">Apple Music downloads need an internet connection to play.</p>
 
@@ -75,7 +83,7 @@
 	</tbody>
 </table>
 <p>
-	The encryption key is in your system keychain. On Linux without a keychain service, it's
-	<code>vault.key</code> next to the <code>downloads</code> folder. Without the key, downloads can't be
-	played.
+	The key to encrypted downloads and played tracks is in your system keychain. On Linux without a
+	keychain service, it's <code>vault.key</code> next to the <code>downloads</code> folder. Without the
+	key, they can't be played.
 </p>

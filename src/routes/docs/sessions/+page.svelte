@@ -20,32 +20,51 @@ sonora session leave`;
 <h2 id="sonora-session">Sonora Session</h2>
 <p>
 	Press the Sessions button in the player bar and choose <strong>Start a Session</strong>. Share the
-	six-digit code. Friends join with <strong>Join a Session…</strong> and type it in.
+	six-digit code, which <strong>Show Session code</strong> brings back later. Friends join with
+	<strong>Join a Session…</strong> and type it in.
 </p>
 <p>
-	When anyone in the Session plays a song, pauses or seeks, it happens for everyone. Everyone has to
-	be signed in to the service the Session started on. Local files are never shared.
+	When anyone in the Session plays a song, pauses or seeks, it happens for everyone, and everyone
+	hears the same moment of the song to within a fraction of a second. Everyone has to be signed in
+	to the service the Session started on. Local files are never shared.
 </p>
 <p>
-	<strong>Leave Session</strong> takes you out. When the host leaves, the Session ends for everyone. An
-	accent dot on the Sessions button means you're in one.
+	<strong>Leave Session</strong> takes you out. The host gets <strong>End Session</strong> instead, which
+	ends it for everyone. An accent dot on the Sessions button means you're in one.
 </p>
 
 <h2 id="members">Members</h2>
 <p>
 	Open <strong>Members</strong> from the Sessions button to see who is listening with you, in a Sonora
-	Session or a Spotify Jam. The host can remove people from there.
+	Session or a Spotify Jam. It also copies the Session code or Jam link, and leaves or ends it. The host
+	can remove people from there.
 </p>
+<p>The player shows the face of whoever queued the song playing now, and Members rings them.</p>
 
 <h2 id="spotify-jams">Spotify Jams</h2>
 <p>
 	With Spotify, the <strong>Spotify Jams</strong> submenu of the Sessions button starts, joins,
 	leaves or ends a Jam. Joining takes the Jam link a friend shared. Jams need
-	<MenuPath steps={['Settings', 'Playback', 'Show as a Spotify device']} /> turned on.
+	<MenuPath steps={['Settings', 'Playback', 'Show as a Spotify device']} /> turned on, so they aren't
+	available while Soloist plays Spotify.
 </p>
 <p>
-	The same button switches playback to your other Spotify devices. See
-	<a href="/docs/providers#spotify-connect">Spotify Connect</a>.
+	While you host a Jam, pausing pauses only you, as in Spotify's own apps. Your friends keep
+	listening, and resuming brings you back to where the Jam is.
+</p>
+
+<h2 id="devices">Other devices</h2>
+<p>
+	With Spotify or Jellyfin, the Sessions button also lists your account's other devices, and with
+	YouTube Music the TVs and speakers on your network. Pick one to play there, or
+	<strong>This computer</strong> to bring playback back. For Spotify, see
+	<a href="/docs/providers#spotify-connect">Spotify Connect</a>, and for YouTube Music,
+	<a href="/docs/providers#youtube">YouTube Music</a>.
+</p>
+<p>
+	On Jellyfin, this takes
+	<MenuPath steps={['Settings', 'Playback', 'Let Jellyfin apps control Sonora']} />, which is on by
+	default. It also lets you control Sonora from Jellyfin's apps and dashboard.
 </p>
 
 <h2 id="settings">Settings</h2>

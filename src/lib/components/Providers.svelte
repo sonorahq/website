@@ -9,6 +9,7 @@
 		{ glyph: 'tidal', text: 'Tidal' },
 		{ glyph: 'deezer', text: 'Deezer' },
 		{ glyph: 'jellyfin', text: 'Jellyfin' },
+		{ glyph: 'plex', text: 'Plex' },
 		{ glyph: 'subsonic', text: 'Subsonic' },
 		{ glyph: 'file-music', text: 'Your files' }
 	];
