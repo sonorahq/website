@@ -52,14 +52,11 @@
 			<div class="questions">
 				<Question id="macos-damaged" question="Why does macOS say Sonora is damaged?">
 					<p>
-						It isn't. Sonora isn't signed with an Apple developer certificate yet, so macOS
-						quarantines it. Clear the flag once after installing.
+						It isn't. Sonora 0.51.0 and newer are signed and notarized by Apple and open on the
+						first try. Older versions weren't, so macOS quarantined them. Update, or clear the flag
+						on an older copy.
 					</p>
 					<Code text="xattr -dr com.apple.quarantine /Applications/Sonora.app" />
-					<p>
-						Once in a while, macOS may show this dialog again even after whitelisting the app. Run
-						this command again to get rid of it.
-					</p>
 				</Question>
 
 				<Question id="windows-warning" question="Why does Windows warn about an unknown publisher?">
@@ -101,18 +98,21 @@
 				<Question id="nightly" question="Can I try changes before the next release?">
 					<p>
 						Yes. Every night <code>main</code> is built into the
-						<a href="https://github.com/sonorahq/sonora/releases/tag/nightly">nightly prerelease</a
+						<a href="https://github.com/sonorahq/sonora/releases/tag/nightly-build"
+							>nightly prerelease</a
 						>, with the same installers, AppImages and binaries as a release. On Arch, install
 						<code>sonora-nightly-bin</code>.
 					</p>
 					<Code text="yay -S sonora-nightly-bin" />
-					<p>With Nix, run the flake at its <code>nightly</code> tag.</p>
+					<p>With Nix, run the flake at its <code>nightly</code> branch.</p>
 					<Code text="nix run github:sonorahq/sonora/nightly" />
 					<p>
 						If Sonora updates itself, as the Windows installer, the macOS disk image and the
 						AppImage do, switch between releases and nightlies with
-						<MenuPath steps={['Settings', 'About', 'Release channel']} />. Nightlies skip the
-						testing a release gets, so say you're on one when you report a bug.
+						<MenuPath steps={['Settings', 'General', 'About', 'Release channel']} />. A nightly
+						installed before November 19, 2026 doesn't see newer nightlies, so install the latest
+						one by hand once. Nightlies skip the testing a release gets, so say you're on one when
+						you report a bug.
 					</p>
 				</Question>
 			</div>
@@ -123,8 +123,8 @@
 					<ul>
 						<li>Free accounts don't get in. You need Premium.</li>
 						<li>
-							The sign-in window hands the session back to Sonora on <code>127.0.0.1:8989</code>.
-							Close whatever else holds that port and try again.
+							Your browser hands the session back to Sonora on <code>127.0.0.1:8989</code>. Close
+							whatever else holds that port and try again.
 						</li>
 						<li>
 							A region error means Spotify won't serve your account from where you're connecting.
@@ -147,22 +147,23 @@
 						port is free, then approve Sonora in the browser before the time runs out. Last.fm also
 						needs your own API key and secret; see <a href="/docs/scrobbling">Scrobbling</a>.
 					</p>
+					<p>
+						Since December 1, 2026, Last.fm refuses API keys whose account has no Last.fm Pro.
+						Settings then shows <strong>Key refused, needs Last.fm Pro</strong>.
+					</p>
+				</Question>
+
+				<Question id="proxy" question="How do I use Sonora behind a proxy?">
+					<p>
+						Set <code>HTTPS_PROXY</code>, <code>HTTP_PROXY</code> or <code>ALL_PROXY</code> before starting
+						Sonora. SOCKS addresses work as well as HTTP ones.
+					</p>
+					<Code text="ALL_PROXY=socks5://127.0.0.1:1080 sonora" />
 				</Question>
 			</div>
 
 			<h2>Playback</h2>
 			<div class="questions">
-				<Question id="spotify-playback-keys" question="Why won't Spotify play anything?">
-					<p>
-						If every track fails with <strong
-							>Spotify is not granting this account playback keys</strong
-						>, Spotify won't work for your account in Sonora. Sonora plays Spotify through
-						librespot, and
-						<a href="https://github.com/librespot-org/librespot/issues/1649">librespot issue 1649</a
-						> tracks the problem.
-					</p>
-				</Question>
-
 				<Question id="widevine" question="Why won't Apple Music play?">
 					<p>
 						Apple Music needs the Widevine module. When none of your browsers has a copy, Sonora

@@ -13,8 +13,8 @@
 
 <h1>Roadmap</h1>
 <p class="summary">
-	What we're working toward, grouped by area. A line gets crossed out once its issue closes as done
-	or its pull request merges.
+	What we're working toward, grouped by area. A line gets crossed out once it ships in a release,
+	its issue closes as done or its pull request merges.
 </p>
 
 <p class="note">
@@ -25,13 +25,16 @@
 	<h2 id={area.id}>{area.title}</h2>
 	<ul class="entries">
 		{#each area.entries as entry (entry.text)}
-			{@const shipped = done.has(entry.issue ?? entry.pull ?? 0)}
+			{@const shipped = entry.done != null || done.has(entry.issue ?? entry.pull ?? 0)}
 			<li class:done={shipped}>
 				{#if shipped}<s>{entry.text}</s>{:else}{entry.text}{/if}
 				{#if entry.issue}
 					<a class="ref mono" href="{repo}/issues/{entry.issue}">#{entry.issue}</a>
 				{:else if entry.pull}
 					<a class="ref mono" href="{repo}/pull/{entry.pull}">#{entry.pull}</a>
+				{/if}
+				{#if typeof entry.done === 'string'}
+					<a class="ref mono" href="/changelog#v{entry.done}">v{entry.done}</a>
 				{/if}
 			</li>
 		{/each}

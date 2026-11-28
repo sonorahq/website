@@ -14,9 +14,6 @@
 	Open a song, album, artist or playlist from its music service link, or send the current browser
 	page to Sonora.
 </p>
-<p class="note">
-	Search links, browser handoffs and YouTube handles are coming in the next release.
-</p>
 
 <h2 id="search">From search</h2>
 <p>
@@ -55,7 +52,9 @@
 <h2 id="other-apps">From other apps</h2>
 <p>
 	Apps and websites can link to <code>sonora://open?url=&lt;encoded-url&gt;</code>. Encode the
-	entire music URL with <code>encodeURIComponent</code>, including its query parameters.
+	entire music URL with <code>encodeURIComponent</code>, including its query parameters. A bare
+	<code>sonora://</code> or <code>sonora://open</code> with no URL only opens Sonora or brings it to the
+	front.
 </p>
 <p>
 	You can also pass a music URL directly to the <a href="/docs/command-line">command line</a>. This

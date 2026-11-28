@@ -15,7 +15,7 @@
 
 <h2 id="location">Location</h2>
 <p>
-	<MenuPath steps={['Settings', 'General', 'Log file', 'Open log']} /> opens it in your default text editor.
+	<MenuPath steps={['Settings', 'General', 'About', 'Open log']} /> opens it in your default text editor.
 	On Windows it opens in Notepad. Or find it yourself:
 </p>
 <table>
@@ -34,6 +34,10 @@
 	so you never have more than 32 MB of logs. Sonora also keeps only the last five runs, the current one
 	included, so grab the log soon after something goes wrong. Every run begins with a line naming the version
 	that wrote it.
+</p>
+<p>
+	Sign-in tokens, your Subsonic, Navidrome and YouTube Music account details and the path of your
+	home folder are kept out of the log.
 </p>
 
 <h2 id="verbose">More detail</h2>

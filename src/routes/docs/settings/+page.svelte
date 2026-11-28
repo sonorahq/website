@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Code from '$lib/components/docs/Code.svelte';
+	import MenuPath from '$lib/components/docs/MenuPath.svelte';
 
 	const example = `{
   "gapless": true,
@@ -17,8 +18,9 @@
   }
 }`;
 
-	const homeManager = `{
-  imports = [ inputs.sonora.homeManagerModules.default ];
+	const nixModule = `{
+  imports = [ inputs.sonora.nixosModules.default ];
+  # or inputs.sonora.homeModules.default for Home Manager
   programs.sonora = {
     enable = true;
     settings = {
@@ -83,11 +85,51 @@
 
 <h2 id="not-here">What isn't in the file</h2>
 <p>
-	The selected provider, volume, queue resume position, window layout and other runtime state are
-	saved in <code>state.sqlite</code>. Provider sign-ins live in the <code>accounts</code> folder in
-	the data folder. Linked scrobbling accounts, including their tokens and secrets, are stored in
-	<code>settings.json</code>.
+	The last provider you used, volume, queue resume position, window layout and other runtime state
+	are saved in <code>state.sqlite</code>. To always start on one service, pick it in
+	<MenuPath steps={['Settings', 'General', 'Provider']} /> or set <code>provider</code> in
+	settings.json to <code>spotify</code>, <code>youtube</code>, <code>apple</code>,
+	<code>deezer</code>, <code>tidal</code>, <code>subsonic</code>, <code>jellyfin</code>,
+	<code>plex</code> or <code>local</code>.
 </p>
+<p>
+	Provider sign-ins and linked scrobbling accounts live in the <code>accounts</code> folder in the data
+	folder, so settings.json holds no tokens and is safe to share. Scrobbling accounts that an older version
+	kept in settings.json move there on their own.
+</p>
+
+<h2 id="file-only">Only in the file</h2>
+<p>These keys under <code>appearance</code> have no switch in the app.</p>
+<table>
+	<tbody>
+		<tr>
+			<td><code>page_width</code></td>
+			<td
+				><code>"centered"</code> or <code>"wide"</code>, how far pages stretch on a large window</td
+			>
+		</tr>
+		<tr>
+			<td><code>window_rounding</code></td>
+			<td>
+				The window's own corners: <code>"square"</code>, <code>"subtle"</code>,
+				<code>"rounded"</code> or <code>"round"</code>
+			</td>
+		</tr>
+		<tr>
+			<td><code>traffic_light_controls</code></td>
+			<td>
+				<code>true</code> draws minimize, maximize and close as colored dots. Not on macOS.
+			</td>
+		</tr>
+		<tr>
+			<td><code>traffic_light_reversed</code></td>
+			<td>
+				<code>true</code> swaps minimize and maximize in the dots, so on the right they read minimize,
+				maximize, close like the plain controls. Not on macOS.
+			</td>
+		</tr>
+	</tbody>
+</table>
 
 <h2 id="other-files">Other files</h2>
 <table>
@@ -122,13 +164,11 @@
 	your sign-ins.
 </p>
 
-<h2 id="home-manager">Home Manager</h2>
+<h2 id="home-manager">NixOS and Home Manager</h2>
 <p>
-	The flake has a Home Manager module. Anything under <code>settings</code> gets merged into settings.json
-	on every switch and every launch. Keys you don't set keep whatever you picked in the app.
+	The flake has a NixOS module and a Home Manager module, both under <code>programs.sonora</code>.
+	Anything under <code>settings</code> gets merged into settings.json every time Sonora starts, and with
+	Home Manager on every switch too. Keys you don't set keep whatever you picked in the app.
 </p>
-<Code label="home.nix" text={homeManager} />
-<p>
-	Use the same preference keys as settings.json. A <code>provider</code> key does not switch services,
-	because the selected provider belongs to runtime state.
-</p>
+<Code label="configuration.nix or home.nix" text={nixModule} />
+<p>Use the same keys as settings.json.</p>

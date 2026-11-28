@@ -13,27 +13,46 @@
 <p>
 	Choose a device in <MenuPath steps={['Settings', 'Playback', 'Sound', 'Output device']} />. While
 	it's disconnected, audio plays on the system default. Every track is resampled to the device's
-	sample rate.
+	sample rate unless <strong>Match sample rate</strong> is on.
 </p>
 <table>
 	<tbody>
 		<tr>
+			<td>Direct to hardware</td>
+			<td>
+				Linux and macOS. On Linux, a sound card's own device plays past PipeWire or PulseAudio,
+				bit-perfect. On macOS, every device is listed a second time under
+				<strong>Direct to hardware</strong>, and picking one there keeps every other app off it.
+			</td>
+		</tr>
+		<tr>
 			<td>Sample rate</td>
-			<td>Linux only. 32 to 192 kHz, limited to the rates your device supports.</td>
+			<td>
+				On Linux, pick from 32 to 192 kHz, limited to the rates your device supports. A Direct to
+				hardware device on macOS offers its own rates. Otherwise, <strong>Change</strong> opens Audio
+				MIDI Setup on macOS or the sound settings on Windows.
+			</td>
+		</tr>
+		<tr>
+			<td>Match sample rate</td>
+			<td>
+				Linux and macOS, with a Direct to hardware device. Each track plays at its own sample rate,
+				or the closest one the device supports.
+			</td>
 		</tr>
 		<tr>
 			<td>Buffer size</td>
 			<td>
-				128 to 4096 frames, 1024 by default. Raise it if you hear crackles, lower it if pause feels
-				slow.
+				128 to 4096 frames at 48 kHz, 2048 by default, scaled up for higher sample rates. Raise it
+				if you hear crackles, lower it if pause feels slow.
 			</td>
-		</tr>
-		<tr>
-			<td>Direct to hardware</td>
-			<td>Linux only. Plays to the sound card past PipeWire or PulseAudio, bit-perfect.</td>
 		</tr>
 	</tbody>
 </table>
+<p class="note">
+	While Spotify plays through <a href="/docs/providers#soloist">Soloist</a>, the output settings and
+	the equalizer apply to local files only.
+</p>
 
 <h2 id="equalizer">Equalizer</h2>
 <p>
