@@ -1,0 +1,58 @@
+{
+  "themes": [
+    {
+      "id": "arctic",
+      "variants": [
+        {
+          "title": "Arctic Blue",
+          "dir": "arctic/arctic-blue",
+          "shots": {
+            "album": "arctic/arctic-blue/album.png",
+            "menu": "arctic/arctic-blue/menu.png",
+            "home": "arctic/arctic-blue/home.png",
+            "queue": "arctic/arctic-blue/queue.png",
+            "settings": "arctic/arctic-blue/settings.png"
+          },
+          "zooms": {
+            "table": "arctic/arctic-blue/zoom-table.png",
+            "hero": "arctic/arctic-blue/zoom-hero.png",
+            "player": "arctic/arctic-blue/zoom-player.png",
+            "lyrics": "arctic/arctic-blue/zoom-lyrics.png",
+            "menu": "arctic/arctic-blue/zoom-menu.png",
+            "sidebar": "arctic/arctic-blue/zoom-sidebar.png",
+            "queue": "arctic/arctic-blue/zoom-queue.png",
+            "settings": "arctic/arctic-blue/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Arctic Frost",
+          "dir": "arctic/arctic-frost",
+          "shots": {
+            "album": "arctic/arctic-frost/album.png",
+            "menu": "arctic/arctic-frost/menu.png",
+            "home": "arctic/arctic-frost/home.png",
+            "queue": "arctic/arctic-frost/queue.png",
+            "settings": "arctic/arctic-frost/settings.png"
+          },
+          "zooms": {
+            "table": "arctic/arctic-frost/zoom-table.png",
+            "hero": "arctic/arctic-frost/zoom-hero.png",
+            "player": "arctic/arctic-frost/zoom-player.png",
+            "lyrics": "arctic/arctic-frost/zoom-lyrics.png",
+            "menu": "arctic/arctic-frost/zoom-menu.png",
+            "sidebar": "arctic/arctic-frost/zoom-sidebar.png",
+            "queue": "arctic/arctic-frost/zoom-queue.png",
+            "settings": "arctic/arctic-frost/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
