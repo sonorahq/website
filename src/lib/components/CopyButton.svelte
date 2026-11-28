@@ -3,14 +3,30 @@
 
 	let copied = $state(false);
 
+	/** Copies through a hidden text field. Pages served over plain HTTP have no Clipboard API, so this is the only way there. */
+	function fallback(): boolean {
+		const field = document.createElement('textarea');
+		field.value = text;
+		field.setAttribute('readonly', '');
+		field.style.position = 'fixed';
+		field.style.opacity = '0';
+		document.body.append(field);
+		field.select();
+		const done = document.execCommand('copy');
+		field.remove();
+		return done;
+	}
+
 	async function copy() {
+		let done = false;
 		try {
 			await navigator.clipboard.writeText(text);
-			copied = true;
-			setTimeout(() => (copied = false), 1600);
+			done = true;
 		} catch {
-			copied = false;
+			done = fallback();
 		}
+		copied = done;
+		if (done) setTimeout(() => (copied = false), 1600);
 	}
 </script>
 
