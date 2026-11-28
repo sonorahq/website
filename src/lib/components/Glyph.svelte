@@ -6,6 +6,10 @@
 
 	/* line glyphs the app mock does not carry */
 	const extra = new Map([
+		[
+			'keyboard',
+			'<rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/><path d="M7 16h10"/>'
+		],
 		['plex', '<path d="M7.03 1.88h6.19L18.84 12l-5.62 10.13H7.03L12.66 12Z"/>'],
 		[
 			'audio-lines',
@@ -66,7 +70,8 @@
 		'lastfm',
 		'librefm',
 		'listenbrainz',
-		'maloja'
+		'maloja',
+		'tealfm'
 	]);
 	const solid = new Set([
 		'spotify',
