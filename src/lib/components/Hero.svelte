@@ -13,8 +13,8 @@
 		<h1 data-enter style="--enter: 0.05s">Sonora</h1>
 
 		<p class="sub" data-enter style="--enter: 0.1s">
-			A music player for Spotify, Apple Music, YouTube Music, Tidal, Deezer, Jellyfin, Subsonic and
-			your own files.
+			A music player for Spotify, Apple Music, YouTube Music, Tidal, Deezer, Jellyfin, Plex,
+			Subsonic and your own files.
 		</p>
 
 		<div class="cta" data-enter style="--enter: 0.15s">
