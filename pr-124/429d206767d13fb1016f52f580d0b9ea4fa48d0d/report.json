@@ -1,0 +1,476 @@
+{
+  "themes": [
+    {
+      "id": "pop",
+      "variants": [
+        {
+          "title": "Pop Gundam Dark",
+          "dir": "pop/pop-gundam-dark",
+          "shots": {
+            "album": "pop/pop-gundam-dark/album.png",
+            "menu": "pop/pop-gundam-dark/menu.png",
+            "home": "pop/pop-gundam-dark/home.png",
+            "queue": "pop/pop-gundam-dark/queue.png",
+            "settings": "pop/pop-gundam-dark/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-gundam-dark/zoom-table.png",
+            "hero": "pop/pop-gundam-dark/zoom-hero.png",
+            "player": "pop/pop-gundam-dark/zoom-player.png",
+            "lyrics": "pop/pop-gundam-dark/zoom-lyrics.png",
+            "menu": "pop/pop-gundam-dark/zoom-menu.png",
+            "sidebar": "pop/pop-gundam-dark/zoom-sidebar.png",
+            "queue": "pop/pop-gundam-dark/zoom-queue.png",
+            "settings": "pop/pop-gundam-dark/zoom-settings.png"
+          },
+          "unreadable": 3,
+          "low": 0,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.13,
+              "fg": "#91acd5",
+              "bg": "#ff7a1a",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-gundam-dark/zoom-worst-1.png"
+            },
+            {
+              "text": "Home",
+              "ratio": 2.25,
+              "fg": "#e4efff",
+              "bg": "#ff7a1a",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-gundam-dark/zoom-worst-2.png"
+            },
+            {
+              "text": "Appearance",
+              "ratio": 2.25,
+              "fg": "#e4efff",
+              "bg": "#ff7a1a",
+              "box": {
+                "x": 536.25,
+                "y": 193.984375,
+                "width": 75,
+                "height": 16
+              },
+              "scene": "settings",
+              "zoom": "pop/pop-gundam-dark/zoom-worst-3.png"
+            }
+          ]
+        },
+        {
+          "title": "Pop Gundam",
+          "dir": "pop/pop-gundam",
+          "shots": {
+            "album": "pop/pop-gundam/album.png",
+            "menu": "pop/pop-gundam/menu.png",
+            "home": "pop/pop-gundam/home.png",
+            "queue": "pop/pop-gundam/queue.png",
+            "settings": "pop/pop-gundam/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-gundam/zoom-table.png",
+            "hero": "pop/pop-gundam/zoom-hero.png",
+            "player": "pop/pop-gundam/zoom-player.png",
+            "lyrics": "pop/pop-gundam/zoom-lyrics.png",
+            "menu": "pop/pop-gundam/zoom-menu.png",
+            "sidebar": "pop/pop-gundam/zoom-sidebar.png",
+            "queue": "pop/pop-gundam/zoom-queue.png",
+            "settings": "pop/pop-gundam/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 1,
+          "spots": [
+            {
+              "text": "The Wild Rover",
+              "ratio": 2,
+              "fg": "#ff7a1a",
+              "bg": "#cfe3ff",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue",
+              "zoom": "pop/pop-gundam/zoom-worst-2.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 3.35,
+              "fg": "#274a85",
+              "bg": "#ff7a1a",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-gundam/zoom-worst-1.png"
+            }
+          ]
+        },
+        {
+          "title": "Pop Lime Dark",
+          "dir": "pop/pop-lime-dark",
+          "shots": {
+            "album": "pop/pop-lime-dark/album.png",
+            "menu": "pop/pop-lime-dark/menu.png",
+            "home": "pop/pop-lime-dark/home.png",
+            "queue": "pop/pop-lime-dark/queue.png",
+            "settings": "pop/pop-lime-dark/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-lime-dark/zoom-table.png",
+            "hero": "pop/pop-lime-dark/zoom-hero.png",
+            "player": "pop/pop-lime-dark/zoom-player.png",
+            "lyrics": "pop/pop-lime-dark/zoom-lyrics.png",
+            "menu": "pop/pop-lime-dark/zoom-menu.png",
+            "sidebar": "pop/pop-lime-dark/zoom-sidebar.png",
+            "queue": "pop/pop-lime-dark/zoom-queue.png",
+            "settings": "pop/pop-lime-dark/zoom-settings.png"
+          },
+          "unreadable": 2,
+          "low": 1,
+          "spots": [
+            {
+              "text": "Home",
+              "ratio": 1.36,
+              "fg": "#eaf7c2",
+              "bg": "#9be600",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-lime-dark/zoom-worst-1.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 1.36,
+              "fg": "#a3bd78",
+              "bg": "#9be600",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-lime-dark/zoom-worst-2.png"
+            },
+            {
+              "text": "Appearance",
+              "ratio": 4.22,
+              "fg": "#eaf7c2",
+              "bg": "#527f16",
+              "box": {
+                "x": 536.25,
+                "y": 193.984375,
+                "width": 75,
+                "height": 16
+              },
+              "scene": "settings",
+              "zoom": "pop/pop-lime-dark/zoom-worst-3.png"
+            }
+          ]
+        },
+        {
+          "title": "Pop Lime",
+          "dir": "pop/pop-lime",
+          "shots": {
+            "album": "pop/pop-lime/album.png",
+            "menu": "pop/pop-lime/menu.png",
+            "home": "pop/pop-lime/home.png",
+            "queue": "pop/pop-lime/queue.png",
+            "settings": "pop/pop-lime/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-lime/zoom-table.png",
+            "hero": "pop/pop-lime/zoom-hero.png",
+            "player": "pop/pop-lime/zoom-player.png",
+            "lyrics": "pop/pop-lime/zoom-lyrics.png",
+            "menu": "pop/pop-lime/zoom-menu.png",
+            "sidebar": "pop/pop-lime/zoom-sidebar.png",
+            "queue": "pop/pop-lime/zoom-queue.png",
+            "settings": "pop/pop-lime/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 1,
+          "spots": [
+            {
+              "text": "The Wild Rover",
+              "ratio": 1.84,
+              "fg": "#7cc800",
+              "bg": "#eaf7c2",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue",
+              "zoom": "pop/pop-lime/zoom-worst-2.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 3.49,
+              "fg": "#4a5e12",
+              "bg": "#7cc800",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-lime/zoom-worst-1.png"
+            }
+          ]
+        },
+        {
+          "title": "Pop Ocean Dark",
+          "dir": "pop/pop-ocean-dark",
+          "shots": {
+            "album": "pop/pop-ocean-dark/album.png",
+            "menu": "pop/pop-ocean-dark/menu.png",
+            "home": "pop/pop-ocean-dark/home.png",
+            "queue": "pop/pop-ocean-dark/queue.png",
+            "settings": "pop/pop-ocean-dark/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-ocean-dark/zoom-table.png",
+            "hero": "pop/pop-ocean-dark/zoom-hero.png",
+            "player": "pop/pop-ocean-dark/zoom-player.png",
+            "lyrics": "pop/pop-ocean-dark/zoom-lyrics.png",
+            "menu": "pop/pop-ocean-dark/zoom-menu.png",
+            "sidebar": "pop/pop-ocean-dark/zoom-sidebar.png",
+            "queue": "pop/pop-ocean-dark/zoom-queue.png",
+            "settings": "pop/pop-ocean-dark/zoom-settings.png"
+          },
+          "unreadable": 3,
+          "low": 0,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.34,
+              "fg": "#8bcac0",
+              "bg": "#14b8a6",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-ocean-dark/zoom-worst-1.png"
+            },
+            {
+              "text": "Home",
+              "ratio": 2.27,
+              "fg": "#e0faf5",
+              "bg": "#14b8a6",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-ocean-dark/zoom-worst-2.png"
+            },
+            {
+              "text": "Appearance",
+              "ratio": 2.27,
+              "fg": "#e0faf5",
+              "bg": "#14b8a6",
+              "box": {
+                "x": 536.25,
+                "y": 193.984375,
+                "width": 75,
+                "height": 16
+              },
+              "scene": "settings",
+              "zoom": "pop/pop-ocean-dark/zoom-worst-3.png"
+            }
+          ]
+        },
+        {
+          "title": "Pop Ocean",
+          "dir": "pop/pop-ocean",
+          "shots": {
+            "album": "pop/pop-ocean/album.png",
+            "menu": "pop/pop-ocean/menu.png",
+            "home": "pop/pop-ocean/home.png",
+            "queue": "pop/pop-ocean/queue.png",
+            "settings": "pop/pop-ocean/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-ocean/zoom-table.png",
+            "hero": "pop/pop-ocean/zoom-hero.png",
+            "player": "pop/pop-ocean/zoom-player.png",
+            "lyrics": "pop/pop-ocean/zoom-lyrics.png",
+            "menu": "pop/pop-ocean/zoom-menu.png",
+            "sidebar": "pop/pop-ocean/zoom-sidebar.png",
+            "queue": "pop/pop-ocean/zoom-queue.png",
+            "settings": "pop/pop-ocean/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 1,
+          "spots": [
+            {
+              "text": "The Wild Rover",
+              "ratio": 2.09,
+              "fg": "#14b8a6",
+              "bg": "#cdf3ee",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue",
+              "zoom": "pop/pop-ocean/zoom-worst-2.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 3.1,
+              "fg": "#1f5c55",
+              "bg": "#14b8a6",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-ocean/zoom-worst-1.png"
+            }
+          ]
+        },
+        {
+          "title": "Pop Rosa Dark",
+          "dir": "pop/pop-rosa-dark",
+          "shots": {
+            "album": "pop/pop-rosa-dark/album.png",
+            "menu": "pop/pop-rosa-dark/menu.png",
+            "home": "pop/pop-rosa-dark/home.png",
+            "queue": "pop/pop-rosa-dark/queue.png",
+            "settings": "pop/pop-rosa-dark/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-rosa-dark/zoom-table.png",
+            "hero": "pop/pop-rosa-dark/zoom-hero.png",
+            "player": "pop/pop-rosa-dark/zoom-player.png",
+            "lyrics": "pop/pop-rosa-dark/zoom-lyrics.png",
+            "menu": "pop/pop-rosa-dark/zoom-menu.png",
+            "sidebar": "pop/pop-rosa-dark/zoom-sidebar.png",
+            "queue": "pop/pop-rosa-dark/zoom-queue.png",
+            "settings": "pop/pop-rosa-dark/zoom-settings.png"
+          },
+          "unreadable": 3,
+          "low": 0,
+          "spots": [
+            {
+              "text": "Search",
+              "ratio": 1.2,
+              "fg": "#d39aaa",
+              "bg": "#f2708f",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-rosa-dark/zoom-worst-1.png"
+            },
+            {
+              "text": "Home",
+              "ratio": 2.41,
+              "fg": "#ffe8ee",
+              "bg": "#f2708f",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "home",
+              "zoom": "pop/pop-rosa-dark/zoom-worst-2.png"
+            },
+            {
+              "text": "Appearance",
+              "ratio": 2.41,
+              "fg": "#ffe8ee",
+              "bg": "#f2708f",
+              "box": {
+                "x": 536.25,
+                "y": 193.984375,
+                "width": 75,
+                "height": 16
+              },
+              "scene": "settings",
+              "zoom": "pop/pop-rosa-dark/zoom-worst-3.png"
+            }
+          ]
+        },
+        {
+          "title": "Pop Rosa",
+          "dir": "pop/pop-rosa",
+          "shots": {
+            "album": "pop/pop-rosa/album.png",
+            "menu": "pop/pop-rosa/menu.png",
+            "home": "pop/pop-rosa/home.png",
+            "queue": "pop/pop-rosa/queue.png",
+            "settings": "pop/pop-rosa/settings.png"
+          },
+          "zooms": {
+            "table": "pop/pop-rosa/zoom-table.png",
+            "hero": "pop/pop-rosa/zoom-hero.png",
+            "player": "pop/pop-rosa/zoom-player.png",
+            "lyrics": "pop/pop-rosa/zoom-lyrics.png",
+            "menu": "pop/pop-rosa/zoom-menu.png",
+            "sidebar": "pop/pop-rosa/zoom-sidebar.png",
+            "queue": "pop/pop-rosa/zoom-queue.png",
+            "settings": "pop/pop-rosa/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 0,
+          "spots": [
+            {
+              "text": "The Wild Rover",
+              "ratio": 2.11,
+              "fg": "#f2708f",
+              "bg": "#fcd6de",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue",
+              "zoom": "pop/pop-rosa/zoom-worst-1.png"
+            }
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}
