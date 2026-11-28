@@ -1,0 +1,283 @@
+{
+  "themes": [
+    {
+      "id": "sage",
+      "variants": [
+        {
+          "title": "Sage Dark",
+          "dir": "sage/sage-dark",
+          "shots": {
+            "album": "sage/sage-dark/album.png",
+            "menu": "sage/sage-dark/menu.png",
+            "home": "sage/sage-dark/home.png",
+            "queue": "sage/sage-dark/queue.png",
+            "settings": "sage/sage-dark/settings.png"
+          },
+          "zooms": {
+            "table": "sage/sage-dark/zoom-table.png",
+            "hero": "sage/sage-dark/zoom-hero.png",
+            "player": "sage/sage-dark/zoom-player.png",
+            "lyrics": "sage/sage-dark/zoom-lyrics.png",
+            "menu": "sage/sage-dark/zoom-menu.png",
+            "sidebar": "sage/sage-dark/zoom-sidebar.png",
+            "queue": "sage/sage-dark/zoom-queue.png",
+            "settings": "sage/sage-dark/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Sage Light",
+          "dir": "sage/sage-light",
+          "shots": {
+            "album": "sage/sage-light/album.png",
+            "menu": "sage/sage-light/menu.png",
+            "home": "sage/sage-light/home.png",
+            "queue": "sage/sage-light/queue.png",
+            "settings": "sage/sage-light/settings.png"
+          },
+          "zooms": {
+            "table": "sage/sage-light/zoom-table.png",
+            "hero": "sage/sage-light/zoom-hero.png",
+            "player": "sage/sage-light/zoom-player.png",
+            "lyrics": "sage/sage-light/zoom-lyrics.png",
+            "menu": "sage/sage-light/zoom-menu.png",
+            "sidebar": "sage/sage-light/zoom-sidebar.png",
+            "queue": "sage/sage-light/zoom-queue.png",
+            "settings": "sage/sage-light/zoom-settings.png"
+          },
+          "unreadable": 1,
+          "low": 16,
+          "spots": [
+            {
+              "text": "The Wild Rover",
+              "ratio": 1.62,
+              "fg": "#a7c9b4",
+              "bg": "#edf5f1",
+              "box": {
+                "x": 1033.5,
+                "y": 413.75,
+                "width": 100,
+                "height": 17
+              },
+              "scene": "queue"
+            },
+            {
+              "text": "Home",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 102.25,
+                "y": 134.171875,
+                "width": 38,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "sage/sage-light/zoom-worst-1.png"
+            },
+            {
+              "text": "Search",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 102.25,
+                "y": 169.671875,
+                "width": 46,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "sage/sage-light/zoom-worst-2.png"
+            },
+            {
+              "text": "Recents",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 102.25,
+                "y": 205.171875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album",
+              "zoom": "sage/sage-light/zoom-worst-3.png"
+            },
+            {
+              "text": "Library",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 77.5,
+                "y": 247.296875,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Songs",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 102.25,
+                "y": 278.171875,
+                "width": 41,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Albums",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 102.25,
+                "y": 313.671875,
+                "width": 49,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artists",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 102.25,
+                "y": 349.171875,
+                "width": 42,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlists",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 102.25,
+                "y": 384.671875,
+                "width": 53,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Pinned",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 88,
+                "y": 434.796875,
+                "width": 39,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Quiet Hours",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 120,
+                "y": 469.75,
+                "width": 77,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Playlist",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 120,
+                "y": 489.25,
+                "width": 41,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Suite bergamasque",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 120,
+                "y": 525.25,
+                "width": 128,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Album",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 120,
+                "y": 544.75,
+                "width": 36,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Frédéric Chopin",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 120,
+                "y": 580.75,
+                "width": 104,
+                "height": 17
+              },
+              "scene": "album"
+            },
+            {
+              "text": "Artist",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 120,
+                "y": 600.25,
+                "width": 30,
+                "height": 15
+              },
+              "scene": "album"
+            },
+            {
+              "text": "The Four Seasons",
+              "ratio": 4.05,
+              "fg": "#405c54",
+              "bg": "#a7c9b4",
+              "box": {
+                "x": 120,
+                "y": 636.25,
+                "width": 116,
+                "height": 17
+              },
+              "scene": "album"
+            }
+          ]
+        }
+      ],
+      "error": null
+    }
+  ]
+}
