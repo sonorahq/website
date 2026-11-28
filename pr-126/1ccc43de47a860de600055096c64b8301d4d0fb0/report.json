@@ -1,0 +1,58 @@
+{
+  "themes": [
+    {
+      "id": "matcha",
+      "variants": [
+        {
+          "title": "Matcha Dark",
+          "dir": "matcha/matcha-dark",
+          "shots": {
+            "album": "matcha/matcha-dark/album.png",
+            "menu": "matcha/matcha-dark/menu.png",
+            "home": "matcha/matcha-dark/home.png",
+            "queue": "matcha/matcha-dark/queue.png",
+            "settings": "matcha/matcha-dark/settings.png"
+          },
+          "zooms": {
+            "table": "matcha/matcha-dark/zoom-table.png",
+            "hero": "matcha/matcha-dark/zoom-hero.png",
+            "player": "matcha/matcha-dark/zoom-player.png",
+            "lyrics": "matcha/matcha-dark/zoom-lyrics.png",
+            "menu": "matcha/matcha-dark/zoom-menu.png",
+            "sidebar": "matcha/matcha-dark/zoom-sidebar.png",
+            "queue": "matcha/matcha-dark/zoom-queue.png",
+            "settings": "matcha/matcha-dark/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        },
+        {
+          "title": "Matcha Light",
+          "dir": "matcha/matcha-light",
+          "shots": {
+            "album": "matcha/matcha-light/album.png",
+            "menu": "matcha/matcha-light/menu.png",
+            "home": "matcha/matcha-light/home.png",
+            "queue": "matcha/matcha-light/queue.png",
+            "settings": "matcha/matcha-light/settings.png"
+          },
+          "zooms": {
+            "table": "matcha/matcha-light/zoom-table.png",
+            "hero": "matcha/matcha-light/zoom-hero.png",
+            "player": "matcha/matcha-light/zoom-player.png",
+            "lyrics": "matcha/matcha-light/zoom-lyrics.png",
+            "menu": "matcha/matcha-light/zoom-menu.png",
+            "sidebar": "matcha/matcha-light/zoom-sidebar.png",
+            "queue": "matcha/matcha-light/zoom-queue.png",
+            "settings": "matcha/matcha-light/zoom-settings.png"
+          },
+          "unreadable": 0,
+          "low": 0,
+          "spots": []
+        }
+      ],
+      "error": null
+    }
+  ]
+}
